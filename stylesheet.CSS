@@ -1,50 +1,192 @@
-*/ Alle overskrifterne*/
+/* ---------------------------------------------
+  Overskrifter (h1 - h5)
+  Nedenfor er hver property kommenteret på dansk,
+  så du forstår hvad hver linje gør.
+---------------------------------------------- */
+
+/* H1: hovedoverskrift-styling
+  - color: tekstfarven (her hvid, bruges ofte i hero)
+  - text-align: centrerer overskriften horisontalt
+  - font-family: angiver skrifttypen (Alpino prioriteret)
+  - font-size: størrelse; bruger variabel fallback hvis defineret
+  - font-style: normal/italic
+  - font-weight: tykkelse (700 = fed)
+  - line-height: afstand mellem linjer
+*/
 h1 {
+  /* Tekstfarve for h1 - typisk brugt i hero-sektionen */
   color: #FFF;
-text-align: center;
-font-family: Alpino;
-font-size: 89px;
-font-style: normal;
-font-weight: 700;
-line-height: 72px;
+  /* Centrerer overskriften i sit element */
+  text-align: center;
+  /* Foretrukken font; hvis Alpino ikke findes, vælges fallback */
+  font-family: Alpino;
+  /* Størrelse for h1: bruger variabel hvis den findes, ellers 89px */
+  font-size: var(--h1-size, 89px);
+  /* Ingen kursiv */
+  font-style: normal;
+  /* Fed skrift for at gøre overskriften tydelig */
+  font-weight: 700;
+  /* Line-height kontrollerer vertikal afstand i overskriften */
+  line-height: 72px;
 }
 
+/* H2: sekundær overskrift
+   - ofte brugt som sektionstitel
+*/
 h2 {
-    color: #0A0A0A;
-text-align: center;
-font-family: Alpino;
-font-size: 55px;
-font-style: normal;
-font-weight: 507;
-line-height: 48px; 
-}
-
-
-h3{
+  /* Mørk tekstfarve for god kontrast */
   color: #0A0A0A;
-font-family: Alpino;
-font-size: 34px;
-font-style: normal;
-font-weight: 421;
-line-height: 32px;
+  /* Centreret som standard i dette layout */
+  text-align: center;
+  /* Samme fontfamilie for konsistens */
+  font-family: Alpino;
+  /* Størrelsen styres af variabel (desktop-first) */
+  font-size: var(--h2-size, 55px);
+  /* Normal skriftstil */
+  font-style: normal;
+  /* Vægt 507: lidt tungere end normal, lettere end 700 */
+  font-weight: 507;
+  /* Line-height via variabel for fleksibilitet */
+  line-height: var(--h2-line, 48px);
+}
+
+
+/* H3: underrubrik eller kort titel */
+h3{
+  /* Standard tekstfarve */
+  color: #0A0A0A;
+  /* Font-familie holdes ensartet */
+  font-family: Alpino;
+  /* Størrelse via variabel så vi kan ændre globalt */
+  font-size: var(--h3-size, 34px);
+  /* Normal skriftstil */
+  font-style: normal;
+  /* Vægt 421: tynd-mellem */
+  font-weight: 421;
+  /* Line-height for læsbarhed */
+  line-height: var(--h3-line, 32px);
 
 }
+
+
 
 h4 {
-   color: #4A5565;
-text-align: center;
-font-family: Alpino;
-font-size: 21px;
-font-style: normal;
-font-weight: 421;
-line-height: 28px;
+  /* H4: mindre overskrift eller callout-tekst */
+  /* Farve er en blød grå for mindre visuel vægt */
+  color: #4A5565;
+  /* Centreret i layoutet */
+  text-align: center;
+  /* Konsistent font-familie */
+  font-family: Alpino;
+  /* Brug variabel for at kunne justere globalt */
+  font-size: var(--h4-size, 21px);
+  /* Normal stil */
+  font-style: normal;
+  /* Samme vægt som h3 for konsistens */
+  font-weight: 421;
+  /* Line-height via variabel */
+  line-height: var(--h4-line, 28px);
 }
+/* H5: lille metadata-tekst eller hjælpetekst */
 h5 {
-color: #6A7282;
-font-family: Alpino;
-font-size: 13px;
-font-style: normal;
-font-weight: 421;
-line-height: 20px;
+  /* Dæmpet grå farve som passer til hjælp- eller metadata */
+  color: #6A7282;
+  /* Samme fontfamilie for visuel konsistens */
+  font-family: Alpino;
+  /* Lille skriftstørrelse, styret via variabel */
+  font-size: var(--h5-size, 13px);
+  /* Normal skriftstil */
+  font-style: normal;
+  /* Vægt for læsbarhed */
+  font-weight: 421;
+  /* Line-height for at undgå sammenklumpning */
+  line-height: var(--h5-line, 20px);
 }
 
+/* Desktop-first variabler (standard) */
+:root{
+  --h1-size: 64px;
+  --h2-size: 55px;
+  --h3-size: 34px;
+  --h4-size: 21px;
+  --h5-size: 13px;
+  --h2-line: 48px;
+  --h3-line: 32px;
+  --h4-line: 28px;
+  --h5-line: 20px;
+  --brand-font-size: 16px;
+  --nav-font-size: 16px;
+}
+
+/* Header: overordnet topbar og navigation */
+/* .site-header: wrapper for toppen af siden - typisk indeholder logo og nav */
+.site-header{ 
+  /* Hvid baggrund for ren topbar */
+  background:#fff; 
+}
+
+/* Indre container: layout med flex for at placere elementer på linje */
+.site-header .container.header-inner{
+  display:flex;               /* Brug flexbox til horisontal layout */
+  align-items:center;         /* Vertikal centrerings af elementer */
+  justify-content:space-between; /* Fordel plads mellem venstre og højre */
+  gap:16px;                   /* Mellemrum mellem direkte børn */
+  padding:12px 20px;          /* Indvendig afstand i header */
+}
+
+/* Venstre side i header: logo + evt. brandtekst */
+.site-header .left{ 
+  display:flex; align-items:center; gap:12px; /* Læg logo og tekst ved siden af hinanden */
+}
+
+/* Brand logo dimensioner */
+.brand-logo{ 
+  height:44px;  /* Højde på logo - bredde auto for korrekt aspect ratio */
+  width:auto; 
+}
+
+/* Brand tekst ved siden af logo - bruger variabel for fontstørrelse */
+.brand-text{
+  font-family: Alpino, sans-serif; /* Prioriter Alpino */
+  font-size: var(--brand-font-size); /* Variabel gør den nem at ændre */
+  font-weight:700;                 /* Fed tekst for genkendelighed */
+  color:#111;                      /* Mørk tekstfarve */
+  margin-left:6px;                 /* Lille afstand fra logo */
+}
+
+/* Navigation: liste med links */
+.main-nav .nav-list{
+  display:flex;    /* Horisontal liste */
+  gap:28px;        /* Afstand mellem links */
+  align-items:center;
+  margin:0; padding:0; list-style:none; /* Fjern standard listestil */
+}
+
+/* Link-styling i hovednavigation */
+.main-nav .nav-link{
+  font-size: var(--nav-font-size); /* Brug variabel for enkel responsiv justering */
+  color:#374151;                  /* Mørk blå-grå farve */
+  text-decoration:none;           /* Fjern understregning */
+  font-weight:600;                /* Semi-fed for synlighed */
+}
+
+/* Hover-effekt for navigation */
+.main-nav .nav-link:hover{ 
+  color:#0b6edb; /* Skift farve ved hover for visuel feedback */
+}
+
+/* Tynd blå linje under header for visuelt afgrænsning */
+.header-underline{ 
+  height:4px; 
+  background: linear-gradient(90deg,#0b6edb 0%, #0062b3 100%); /* Gradient for dybde */
+}
+
+/* Media query for små skærme: skjul full nav og juster tekststørrelser */
+@media (max-width:700px){
+  /* Skjul navigation i header for at gøre plads til mobilmenu */
+  .main-nav .nav-list{ display:none; }
+  /* Mindre brand-tekst på mobile */
+  .brand-text{ font-size:14px; }
+  /* Mobile-overskriv af vigtige variabler: opdelt i :root for konsekvens */
+  :root{ --h1-size: 36px; --brand-font-size: 14px; --nav-font-size: 14px; }
+}
