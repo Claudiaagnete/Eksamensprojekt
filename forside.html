@@ -148,7 +148,169 @@
         Tal med en rådgiver
         </a>
 </section>
-      </div>
+<section class="forside 4">
+  <div class="container forside 4">
+    <img src="img2.webp" alt="billede af dreng med røg">
+    <img src="img3.webp" alt="billede af kvinde med lighter">
+  </div>
+</section>
+<div>
+  <div>
+    <img src="kolon.svg" alt="billede af kolon" width="150">
+    <h4>"Jeg troede aldrig jeg kunne stoppe med snus. Men efter et par samtaler føltes det faktisk muligt. Nu har jeg været clean i 4 måneder."</h4>
+    <h4>Mikkel, 20 år</h4>
+    <h6>Stoppede med snus</h6>
+  </div>
+
+  <div>
+    <img src="kolon.svg" alt="billede af kolon" width="150">
+    <h4>"Det fedeste var at jeg ikke følte mig dømt. De forstod bare hvor jeg var, og hjalp mig videre derfra. Det betød alt."</h4>
+    <h4>Sofia, 18 år</h4>
+    <h6>Stoppede med Puff bars</h6>
+  </div>
+
+  <div>
+    <img src="kolon.svg" alt="billede af kolon" width="150">
+    <h4>"Gruppeforløbet var nice. Det hjalp at høre andre havde samme udfordringer. Vi holder stadig kontakt og holder hinanden på sporet."</h4>
+    <h4>Lucas, 22 år</h4>
+    <h6>Stoppede med vapes</h6>
+  </div>
+</div>
+    </div>
+    
+
+
+  </div>
+</section>
+<section class="kontakt formular" id="kontakt">
+  <!-- Sektionens formål:
+       - <section> bruges til en selvstændig del af siden (her: kontakt).
+       - id="kontakt" gør det muligt at linke direkte hertil (fx /#kontakt).
+       - class bruges kun til CSS (styling) — du kan ændre den senere uden at bryde funktioner. -->
+  <div class="container">
+    <!-- .container: almindelig wrapper til at begrænse bredde og centrering via CSS. -->
+    <!-- Hoved-overskrift for sektionen -->
+    <h2 class="overskrift">Tag første skridt</h2>
+    <!-- Underrubrik / hjelpetekst -->
+    <p class="underrubrik">Kontakt os - helt uforpligtende og fortroligt</p>
+    <!-- Grid der deler indhold i to kolonner (venstre: kontaktmetoder, højre: formular).
+         CSS vil senere styre grid/flex-layout via .contact-grid. -->
+    <div class="contact-grid">
+      <!-- VENSTRE KOLONNE - direkte kontaktmetoder og info -->
+      <aside class="kontakt-venstre" aria-label="Kontakt os direkte">
+        <!-- Kort overskrift over kontaktmulighederne -->
+        <h4 class="kontakt-overskrift">Kontakt os direkte</h4>
+
+        <ul class="kontakt-metoder">
+          <li class="kontakt-item">
+            <a href="tel:96284091" class="kontakt-kort" aria-label="Ring til os på 96 28 40 91">
+              <img src="telefon.svg" alt="" class="ikon" width="40" height="40" aria-hidden="true" loading="lazy">
+              <div class="kontakt-tekst">
+                <span class="kontakt-meta">Ring til os</span>
+                <strong class="kontakt-primær">96 28 40 91</strong>
+              </div>
+            </a>
+          </li>
+
+          <li class="kontakt-item">
+            <a href="mailto:rygestop@herning.dk" class="kontakt-kort" aria-label="Send en mail til rygestop@herning.dk">
+              <img src="mail.svg" alt="" class="ikon" width="40" height="40" aria-hidden="true" loading="lazy">
+              <div class="kontakt-tekst">
+                <span class="kontakt-meta">Send en mail</span>
+                <strong class="kontakt-primær">rygestop@herning.dk</strong>
+              </div>
+            </a>
+          </li>
+
+          <li class="kontakt-item">
+            <a href="chat.html" class="kontakt-kort" aria-label="Åbn chat - Man–Fre 10–16">
+              <img src="chat.svg" alt="" class="ikon" width="40" height="40" aria-hidden="true" loading="lazy">
+              <div class="kontakt-tekst">
+                <span class="kontakt-meta">Chat med os</span>
+                <strong class="kontakt-primær">Man–Fre 10–16</strong>
+              </div>
+            </a>
+          </li>
+        </ul>
+
+        <div class="kontakt-info" role="note" aria-label="Hvad sker der når du kontakter os">
+          <h3 class="info-overskrift">Hvad sker der når du kontakter os?</h3>
+          <ul class="info-punkter">
+            <li>Vi ringer eller skriver tilbage inden for 1–2 dage</li>
+            <li>Vi taler om hvad der passer dig bedst</li>
+            <li>Ingen forpligtelser – du bestemmer tempoet</li>
+            <li>Alt er fortroligt og gratis</li>
+          </ul>
         </div>
-  </body>
+      </aside>
+
+      <!-- HØJRE KOLONNE - selve kontaktformularen -->
+      <!--
+        - <form action="#" method="post">:
+          * action: server-url hvor formular data sendes (her "#" som pladsholder).
+          * method: "post" sender data i request-body (typisk til formularer).
+        - id bruges til at finde formularen med JS (fx til validering).
+        - aria-label beskriver formularens formål for skærmlæsere.
+      -->
+      <form class="contact-form" id="contactForm" action="#" method="post" aria-label="Kontaktformular">
+        <!-- FORMROW: hver række indeholder label + input. Labels er vigtige for tilgængelighed. -->
+
+        <div class="form-row">
+          <!-- <label for="cf-name"> forbinder label med input via inputens id -->
+          <label for="cf-name">Dit navn</label>
+          <!-- name attribut er hvad serveren modtager som feltets nøgle -->
+          <!-- required gør feltet påkrævet (browser tvinger bruger til at udfylde) -->
+          <input id="cf-name" name="name" type="text" required placeholder="Fulde navn">
+        </div>
+
+        <!-- Eksempel på to felter på en linje (aldersfelt + "hvad bruger du") -->
+        <div class="form-row form-row--split">
+          <div class="form-field">
+            <label for="cf-age">Din alder</label>
+            <!-- type="number" giver numeric input på mobil; inputmode hjælper virtuelle tastatur -->
+            <input id="cf-age" name="age" type="number" min="0" inputmode="numeric" placeholder="fx 25">
+          </div>
+
+          <div class="form-field">
+            <label for="cf-usage">Hvad bruger du?</label>
+            <input id="cf-usage" name="usage" type="text" placeholder="fx cigaretter / snus / vapes">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <label for="cf-email">Din email</label>
+          <!-- type="email" tjekker grundlæggende email-format i browseren -->
+          <input id="cf-email" name="email" type="email" required placeholder="navn@eksempel.dk">
+        </div>
+
+        <div class="form-row">
+          <label for="cf-phone">Dit telefonnummer (valgfrit)</label>
+          <!-- type="tel" er praktisk til telefon-numre; inputmode="tel" åbner tal-tastatur på mobil -->
+          <input id="cf-phone" name="phone" type="tel" inputmode="tel" placeholder="fx 96 28 40 91">
+        </div>
+
+        <div class="form-row">
+          <label for="cf-message">Fortæl os kort hvad du har brug for (valgfrit)</label>
+          <!-- <textarea> bruger rows for højde; name bruges af backend -->
+          <textarea id="cf-message" name="message" rows="5" placeholder="Skriv en kort besked"></textarea>
+        </div>
+
+        <!-- Formular handlinger: submit-knap og fortrolig-note -->
+        <div class="form-actions">
+          <!-- Brug <button type="submit"> for at sende formularen -->
+          <!-- aria-label beskriver knappen hvis tekst er uklar; her er teksten dog tydelig -->
+          <a href="tak.html" class="send besked" aria-label="send besked, gå til tak-siden">
+        <img src="" alt="Pil der peger nedad" width="20" height="20">
+        Få hjælp nu
+        </a>
+
+          <!-- privacy-note: til at informere brugeren om fortrolig behandling -->
+          <!-- Overvej at give denne paragraf et id og linke til en privacy-politik hvis nødvendigt -->
+          <p class="privacy-note" id="privacy-note">Alle oplysninger behandles fortroligt</p>
+        </div>
+      </form>
+    </div> <!-- /contact-grid -->
+  </div> <!-- /container -->
+</section>
+</body>
 </html>
