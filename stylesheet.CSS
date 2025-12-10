@@ -26,7 +26,7 @@ h1 {
 }
 
 /* H2: sekundær overskrift
-   - ofte brugt som sektionstitel
+   - brugt som sektionstitel
 */
 h2 {
   /* Mørk tekstfarve for god kontrast */
@@ -114,7 +114,7 @@ h5 {
 }
 
 /* Header: overordnet topbar og navigation */
-/* .site-header: wrapper for toppen af siden - typisk indeholder logo og nav */
+/* .site-header: wrapper for toppen af siden -  indeholder logo og nav */
 .site-header{ 
   /* Hvid baggrund for ren topbar */
   background:#fff; 
@@ -175,6 +175,7 @@ h5 {
   height:4px; 
   background: linear-gradient(90deg,#0b6edb 0%, #0062b3 100%); /* Gradient for dybde */
 }
+/* Header slut css */
 
 /* Media query for små skærme: skjul full nav og juster tekststørrelser */
 @media (max-width:700px){
