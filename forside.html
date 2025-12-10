@@ -19,8 +19,10 @@
     <img src="logo.webp" alt="Herning Kommune logo" class="brand-logo" />
    </a>
    </div>
-  <!-- Her laver vi en nav-bar-->
-  <nav class="main-nav" role="navigation" aria-label="Hovednavigation">
+  <!-- Her laver vi en nav-bar med klikbare links til undersiden-->
+  <nav id="mainNavbar" class="main-nav" role="navigation" aria-label="Hovednavigation">
+  <!-- role="navigation": angiver at dette er en navigation-landmark for assistive teknologier -->
+  <!-- aria-label="Hovednavigation": kort beskrivelse, så brugere kan identificere denne navigation -->
     <ul class="nav-list">
       <li class="nav-item"><a class="nav-link" href="dinemuligheder.html">Dine muligheder</a></li>
       <li class="nav-item"><a class="nav-link" href="ungefortæller.html">Unge fortæller</a></li>
@@ -40,18 +42,56 @@
         <!-- Primær CTA med ned-pil ikon.
              Kommentarer er korte, placeret på egne linjer og bruger korrekt HTML-syntaks. -->
         <button type="button" class="hero-button hero-cta" aria-label="Få hjælp nu">
-          <span class="btn-text">Få hjælp nu</span>
-
-          <!-- SVG-ikon: lodret streg + chevron (pil ned)
-               - width/height hjælper layout før CSS loader
-               - viewBox gør ikonet skalerbart
-               - aria-hidden skjuler dekorativ grafik for skærmlæsere -->
-          <svg class="icon icon-down" width="28" height="28" viewBox="0 0 24 24" fill="none"
-               xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
-            <path d="M12 6v7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M8.5 13.5l3.5 3.5 3.5-3.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-          </svg>
         </button>
+        <h4>100% gratis · Ingen dømmerier · Lokalt i Herning</h4>
+      </div>
+    </section>
+    <section class="Forside 1">
+      <div class="container forside 1">
+        <h2>Hvad vil du gerne stoppe med?</h2>
+        <h4>Vælg det der passer på dig - vi dømmer ikke, vi hjælper dig</h4>
+  
+      </div>
+    </section>
+    <section class="bokse-section">
+      <div class="container bokse">
+        <ul class="card-grid">
+          <!-- Cigaretter -->
+          <li class="card-item">
+            <a href="cigaretter.html" class="card" aria-label="Cigaretter">
+              <!-- Ikon som billedfil:
+                   - Brug alt="" og aria-hidden="true" hvis ikonet kun er dekorativt og teksten viser betydningen.
+                   - Angiv width/height for at reducere layout shift (CLS).
+                   - loading="lazy" kan bruges for performance hvis mange billeder. -->
+              <img src="icons/cigaretter.png" alt="" class="card-icon" width="48" height="48" aria-hidden="true" loading="lazy">
+              <span class="card-title">Cigaretter</span>
+            </a>
+          </li>
+
+          <!-- Snus -->
+          <li class="card-item">
+            <a href="snus.html" class="card" aria-label="Snus">
+              <img src="icons/snus.png" alt="" class="card-icon" width="48" height="48" aria-hidden="true" loading="lazy">
+              <span class="card-title">Snus</span>
+            </a>
+          </li>
+
+          <!-- Vapes -->
+          <li class="card-item">
+            <a href="vapes.html" class="card" aria-label="Vapes">
+              <img src="icons/vapes.png" alt="" class="card-icon" width="48" height="48" aria-hidden="true" loading="lazy">
+              <span class="card-title">Vapes</span>
+            </a>
+          </li>
+
+          <!-- Puff bars -->
+          <li class="card-item">
+            <a href="puffbars.html" class="card" aria-label="Puff bars">
+              <img src="icons/puffbars.png" alt="" class="card-icon" width="48" height="48" aria-hidden="true" loading="lazy">
+              <span class="card-title">Puff bars</span>
+            </a>
+          </li>
+        </ul>
       </div>
     </section>
 
