@@ -1,0 +1,49 @@
+*/ Alle overskrifterne*/
+h1 {
+  color: #FFF;
+text-align: center;
+font-family: Alpino;
+font-size: 89px;
+font-style: normal;
+font-weight: 700;
+line-height: 72px;
+}
+
+h2 {
+    color: #0A0A0A;
+text-align: center;
+font-family: Alpino;
+font-size: 55px;
+font-style: normal;
+font-weight: 507;
+line-height: 48px; 
+}
+
+
+h3{
+  color: #0A0A0A;
+font-family: Alpino;
+font-size: 34px;
+font-style: normal;
+font-weight: 421;
+line-height: 32px;
+
+}
+
+h4 {
+   color: #4A5565;
+text-align: center;
+font-family: Alpino;
+font-size: 21px;
+font-style: normal;
+font-weight: 421;
+line-height: 28px;
+}
+h5 {
+color: #6A7282;
+font-family: Alpino;
+font-size: 13px;
+font-style: normal;
+font-weight: 421;
+line-height: 20px;
+}
