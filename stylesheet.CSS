@@ -48,16 +48,3 @@ font-weight: 421;
 line-height: 20px;
 }
 
-/* Målret spans inde i sektionen med klasserne "forside" og "3".
-   Vi bruger attribute-selector [class~="3"] fordi klasse-navne der starter med tal
-   kræver escaping i almindelige class-selectors. Overvej at omdøbe klassen til fx
-   "forside-3" for enklere selectors. */
-.forside[class~="3"] span,
-section.forside[class~="3"] span {
-  color: #6A7282;
-  font-family: Alpino, sans-serif;
-  font-size: 13px;
-  font-style: normal;
-  font-weight: 421;
-  line-height: 20px;
-}
