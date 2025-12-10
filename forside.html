@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" /> <!-- Sikre specialtegn som Æ, Ø, Å, specialtegn og emojis-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- robots.txt betyder at søgemaskiner ikke må indeksere denne side -->
     <meta name="robots" content="noindex" />
     <title>Forside</title>
     <!-- Korrekt link til stylesheet -->
@@ -23,23 +24,28 @@
   <!-- role="navigation": angiver at dette er en navigation-landmark for assistive teknologier -->
   <!-- aria-label="Hovednavigation": kort beskrivelse, så brugere kan identificere denne navigation -->
     <ul class="nav-list">
+    <!-- <ul class="nav-list">: liste over navigationspunkter -->
       <li class="nav-item"><a class="nav-link" href="dinemuligheder.html">Dine muligheder</a></li>
       <li class="nav-item"><a class="nav-link" href="ungefortæller.html">Unge fortæller</a></li>
       <li class="nav-item"><a class="nav-link" href="nikoberegneren.html">Nikoberegneren</a></li>
       <li class="nav-item"><a class="nav-link" href="chatogkontakt.html">Chat & kontakt</a></li>
       <li class="nav-item"><a class="nav-link" href="omnikotin.html">Om nikotin</a></li>
+    <!-- her kan man se alle vores undersider, som er klikkable links, det er de pga. attributet href -->
     </ul>
   </nav>
   </div>
 </header>
-
+<!-- Hero sektion -->
     <section class="hero-section">
       <div class="container hero">
+<!-- Her er der brugt forskellige h-størrelser, som giver visuel hierarki og hjælper brugeren med at forstå indholdets struktur. -->
         <h1>Klar til et liv uden nikotin?</h1>
         <h3>Du behøver ikke at stoppe i morgen... men du kan godt starte i dag. Vi er her i Herning, klar til at hjælpe dig.</h3>
 
         <!-- Primær CTA med ned-pil ikon.-->
         <a href="chatogkontakt.html" class="hero-cta" aria-label="Gå til siden for at få hjælp nu">
+        <!-- Her har vi indsat et billede/ikon for at gøre det mere visuelt -->
+        <!-- width/height for at reducere størrelsesskift -->
         <img src="Pil hero.svg" alt="Pil der peger nedad" width="20" height="20">
         Få hjælp nu
         </a>
@@ -48,16 +54,19 @@
         <h4>100% gratis · Ingen dømmerier · Lokalt i Herning</h4>
       </div>
     </section>
-    <section class="Forside 1">
+    <section class="forside 1">
+    <!-- vi inddeler forsiden i forskellige sektioner, så vi nemt kan finde rundt - også når vi skal arbejde i CSS -->
       <div class="container forside 1">
+    <!-- de forskellige sektioner har hver deres container for bedre struktur div class gør det nemmere at style dem individuelt -->
         <h2>Hvad vil du gerne stoppe med?</h2>
         <h4>Vælg det der passer på dig - vi dømmer ikke, vi hjælper dig</h4>
-  
       </div>
     </section>
     <section class="bokse-section">
+    <!-- vi har lavet en bokse-section for vi nemmere kan style de forskellige bokse -->
       <div class="container bokse">
         <ul class="card-grid">
+        <!-- Her er der brugt en grid-layout for at organisere kortene pænt -->
           <!-- Cigaretter -->
           <li class="card-item">
             <a href="cigaretter.html" class="card" aria-label="Cigaretter">
@@ -66,13 +75,17 @@
                    - Angiv width/height for at reducere layout shift (CLS).
                    - loading="lazy" kan bruges for performance hvis mange billeder. -->
               <img src="Cigaret.svg" alt="Cigaretter">
+              <!-- her er der brugt et billede som ikon for at gøre det mere visuelt, ikonet er svg-format-->
               <span class="card-title">Cigaretter</span>
+              <!-- her er der brugt en span til at give kortet en titel. span-tagget betyder at teksten ikke er semantisk vigtig, men stadig skal vises -->
             </a>
           </li>
 
           <!-- Snus -->
           <li class="card-item">
+          <!-- li class="card-item" betyder at dette er et kort i grid-layoutet-->
             <a href="snus.html" class="card" aria-label="Snus">
+            <!-- a href= betyder at man linker direkte til en anden side-->
               <img src="Snus.svg" alt="Snus">
               <span class="card-title">Snus</span>
             </a>
@@ -83,13 +96,16 @@
             <a href="vapes.html" class="card" aria-label="Vapes">
               <img src="Vape.svg" alt="Vape">
               <span class="card-title">Vapes</span>
+              <!-- span-tagget bruges her til at give kortet en titel - det er ikke semantisk vigtigt, men hjælper med at organisere indholdet -->
             </a>
           </li>
 
           <!-- Puff bars -->
           <li class="card-item">
+          <!-- li class="card-item" betyder at dette er et kort i grid-layoutet, det gør at kortene bliver præsenteret pænt i en gitterstruktur-->
             <a href="puffbars.html" class="card" aria-label="Puff bars">
               <img src="puffbar.svg" alt="Puff bars">
+              <!-- her er der brugt et billede som ikon for at gøre det mere visuelt, ikonet er svg-format-->
               <span class="card-title">Puff bars</span>
             </a>
           </li>
@@ -98,8 +114,10 @@
     </section>
 
   <section class="forside 2">
+    <!-- her har vi indsat en sektion for at organisere indholdet bedre -->
     <div class="container forside 2">
       <h2>Du er ikke alene</h2>
+      <!-- h2-tagget bruges til at give sektionen en overskrift -->
       <h4>Mange unge i Herning har stoppet med nikotin og det kan du også. Det handler ikke om at være perfekt. Det handler om at tage ét skridt ad gangen.</h4>
       <h4>Vi kender alle tricksene. Ja, også dem du troede du var den eneste der brugte. Vi kender udfordringerne, de små panikøjeblikke og de “jeg starter i morgen… måske” dage.
           Og vigtigst af alt: Vi dømmer dig ikke. Overhovedet. Uanset hvor mange gange du har prøvet før, eller hvor mange “sidste gange” du allerede har haft.</h4>
@@ -110,56 +128,70 @@
   <section class="forside 3">
     <h2>Få hjælp her</h2>
     <h4>Vi har forskellige tilbud - find det der passer til dit liv</h4>
+    <!-- h4-tagget bruges til at give sektionen en undertitel/brødtekst -->
     <div class="container forside 3">
     <!-- Liste gør det nemt at lave grid i CSS -->
 
       <!-- Personligt rygestop-forløb -->
-      <class="boks">
+      <div class="boks">
+      <!-- her er der brugt en container for at samle indholdet til dette specifikke tilbud, nemlig class="boks"-->
 <ul class="box-grid 1">
   <li class="box-item"><a class="box"><img class="kalender forside" src="kalender.svg" alt="kalender"></a></li>
+  <!-- li class="box-item" betyder at dette er et kort i grid-layoutet, det gør at kortene bliver præsenteret pænt i en gitterstruktur-->
   <h3>Personligt rygestop-forløb</h3>
   <h4>Et skræddersyet forløb med fast kontaktperson, der følger dig hele vejen. Mødes når det passer dig.</h4>
   <li class="box-item"><a class="box"><img class="kalender sort forside" src="kalendersort.svg" alt="kalender"><span>4-6 samtaler over 3 måneder</span></a></li>
+  <!-- vi har valgt at samle det i en ugrupperet liste, fordi det gør det nemmere at tilføje flere elementer senere hen -->
   <li class="box-item"><a class="box"><img class="lokation sort forside" src="lokationsort.svg" alt="lokation"><span>Sunhedscenter Herning</span></a></li>
 </ul>  
 
       <!-- Drop-in rådgivning-->
-      <class="boks">
+      <div class="boks">
 <ul class="box-grid 2">
+<!-- ul class=box grid 2 betyder at dette er en ny sektion i grid-layoutet, ul gør at man kan tilføje flere elementer uden at skulle ændre på strukturen-->
   <li class="box-item"><a class="box"><img class="talebobel forside" src="talebobel.svg" alt="talebobel"></a></li>
   <h3>Drop-in rådgivning</h3>
   <h4>Kom forbi uden at booke tid. Stil spørgsmål, få råd, eller bare tal om det. Ingen forpligtelser.</h4>
   <li class="box-item"><a class="box"><img class="Kalender sort forside" src="kalendersort.svg" alt="kalender"><span>Hver torsdag 15-18</span></a></li>
+  <!-- alt-teksten beskriver billedet for bedre tilgængelighed -->
   <li class="box-item"><a class="box"><img class="lokation sort forside" src="lokationsort.svg" alt="lokation"><span>Ungdomsskolen, Herning</span></a></li>
 </ul>  
 
       <!-- Gruppeforløb for unge-->
-      <class="boks">
+      <div class="boks">
 <ul class="box-grid 3">
+<!-- box-grid 3 fortæller os at alt i denne class hører sammen-->
   <li class="box-item"><a class="box"><img class="2 mennesker forside" src="2mennesker.svg" alt="2 mennesker"></a></li>
   <h3>Gruppeforløb for unge</h3>
+  <!-- her er der brugt en container for at samle indholdet til dette specifikke tilbud, nemlig class="boks"-->
   <h4>Mød andre i samme situation. I hjælper hinanden og deler tricks til at holde fast. Det er faktisk ret fedt</h4>
   <li class="box-item"><a class="box"><img class="Kalender sort forside" src="kalendersort.svg" alt="kalender"><span>6 uger, 1 gang om ugen</span></a></li>
   <li class="box-item"><a class="box"><img class="lokation sort forside" src="lokationsort.svg" alt="lokation"><span>Online eller fysisk i Herning</span></a></li>
 </ul> 
   </div>
   <h4>Ikke sikker på hvad der passer dig bedst? Det er helt okay.</h4>
+  <!-- h4 er en overskrift-->
         <a href="chatogkontakt.html" class="cta" aria-label="Gå til siden for at få hjælp nu">
+        <!-- a href" linker os direkte videre til undersiden chat&kontakt når man klikker på det-->
         Tal med en rådgiver
         </a>
 </section>
 <section class="forside 4">
+<!-- section class="forside 4" bruges til at definere en ny sektion på forsiden, det har vi gjort for at adskille indholdet visuelt og gøre det nemmere at navigere i-->
   <div class="container forside 4">
     <img src="img2.webp" alt="billede af dreng med røg">
     <img src="img3.webp" alt="billede af kvinde med lighter">
   </div>
 </section>
+<!-- man skal altid huske at tilføje et slut-tag for at lukke tagsene-->
 <div>
   <div>
     <img src="kolon.svg" alt="billede af kolon" width="150">
+    <!-- width 150 antyder at billedet har en fast bredde på 150 pixels -->
     <h4>"Jeg troede aldrig jeg kunne stoppe med snus. Men efter et par samtaler føltes det faktisk muligt. Nu har jeg været clean i 4 måneder."</h4>
     <h4>Mikkel, 20 år</h4>
     <h6>Stoppede med snus</h6>
+    <!-- h6 er den mindste skrift vi har - bruges til at angive mindre vigtige oplysninger eller detaljer -->
   </div>
 
   <div>
@@ -168,6 +200,7 @@
     <h4>Sofia, 18 år</h4>
     <h6>Stoppede med Puff bars</h6>
   </div>
+  <!-- vi har valgt at lave tre forskellige div i denne sektion, da det giver et bedre overblik og gør det nemmere at navigere i og giver os muligheden for at justere layoutet mere fleksibelt og responsivt-->
 
   <div>
     <img src="kolon.svg" alt="billede af kolon" width="150">
@@ -182,6 +215,7 @@
 
   </div>
 </section>
+<!-- Kontaktformular -->
 <section class="kontakt formular" id="kontakt">
   <!-- Sektionens formål:
        - <section> bruges til en selvstændig del af siden (her: kontakt).
@@ -200,7 +234,7 @@
       <aside class="kontakt-venstre" aria-label="Kontakt os direkte">
         <!-- Kort overskrift over kontaktmulighederne -->
         <h4 class="kontakt-overskrift">Kontakt os direkte</h4>
-
+        <!-- vi har lavet en ugrupperet liste for at vise kontaktmulighederne, telefonnummer er klikbar -->
         <ul class="kontakt-metoder">
           <li class="kontakt-item">
             <a href="tel:96284091" class="kontakt-kort" aria-label="Ring til os på 96 28 40 91">
@@ -211,7 +245,7 @@
               </div>
             </a>
           </li>
-
+          <!-- vi har lavet en ugrupperet liste for at vise kontaktmulighederne, mail er klikbar -->
           <li class="kontakt-item">
             <a href="mailto:rygestop@herning.dk" class="kontakt-kort" aria-label="Send en mail til rygestop@herning.dk">
               <img src="mail.svg" alt="" class="ikon" width="40" height="40" aria-hidden="true" loading="lazy">
@@ -221,21 +255,25 @@
               </div>
             </a>
           </li>
-
+          <!-- vi har lavet en ugrupperet liste for at vise kontaktmulighederne, chat er klikbar -->
           <li class="kontakt-item">
             <a href="chat.html" class="kontakt-kort" aria-label="Åbn chat - Man–Fre 10–16">
               <img src="chat.svg" alt="" class="ikon" width="40" height="40" aria-hidden="true" loading="lazy">
               <div class="kontakt-tekst">
                 <span class="kontakt-meta">Chat med os</span>
-                <strong class="kontakt-primær">Man–Fre 10–16</strong>
+                <!-- strong <strong> bruges til at fremhæve vigtig tekst - bold-->
+                <strong class="kontakt-primær">Man - Fre 10 16</strong>
               </div>
             </a>
           </li>
         </ul>
-
+        <!-- Info-boks der forklarer hvad der sker efter kontakt -->
         <div class="kontakt-info" role="note" aria-label="Hvad sker der når du kontakter os">
+        <!-- class info-overskrift bruges fordi den definerer overskriften for info-boksen, så alt under denne class hører sammen -->
           <h3 class="info-overskrift">Hvad sker der når du kontakter os?</h3>
+          <!-- ul bruges til at gruppere relaterede punkter-->
           <ul class="info-punkter">
+            <!-- li bruges til at definere hvert punkt i listen -->
             <li>Vi ringer eller skriver tilbage inden for 1–2 dage</li>
             <li>Vi taler om hvad der passer dig bedst</li>
             <li>Ingen forpligtelser – du bestemmer tempoet</li>
@@ -243,6 +281,7 @@
           </ul>
         </div>
       </aside>
+      <!-- aside betyder en sektion der er relateret til hovedindholdet, men som står lidt for sig selv -->
 
       <!-- HØJRE KOLONNE - selve kontaktformularen -->
       <!--
@@ -290,6 +329,7 @@
         </div>
 
         <div class="form-row">
+          <!-- form-row betyder at indholdet i denne række er relateret-->
           <label for="cf-message">Fortæl os kort hvad du har brug for (valgfrit)</label>
           <!-- <textarea> bruger rows for højde; name bruges af backend -->
           <textarea id="cf-message" name="message" rows="5" placeholder="Skriv en kort besked"></textarea>
@@ -324,6 +364,7 @@
 
       <!-- Sociale links (ikonbilleder er dekorative => alt="") -->
       <ul class="social-liste" aria-label="Følg os">
+        <!-- disse links er klikbare og fører direkte til herning kommunes sociale medier-->
         <li><a href="https://www.facebook.com/herningkommune/?locale=da_DK" class="social-link" aria-label="Facebook"><img src="fb.svg" alt="" class="social-ikon" aria-hidden="true"></a></li>
         <li><a href="https://www.instagram.com/herningkommune/" class="social-link" aria-label="Instagram"><img src="instagram.svg" alt="" class="social-ikon" aria-hidden="true"></a></li>
         <li><a href="https://twitter.com/herningkommune" class="social-link" aria-label="Twitter"><img src="twitter.svg" alt="" class="social-ikon" aria-hidden="true"></a></li>
@@ -342,6 +383,7 @@
           <a href="mailto:rygestop@herning.dk" class="kontakt-link"><img src="mailfooter.svg" alt="" class="kontakt-ikon" aria-hidden="true"> <span class="kontakt-tekst">rygestop@herning.dk</span></a>
         </li>
         <li class="kontakt-element">
+          <!-- her har vi sat et ikon ind ved src.-->
           <div class="kontakt-element-adr"><img src="lokationfooter.svg" alt="" class="kontakt-ikon" aria-hidden="true"> <span class="kontakt-tekst">Sundhedscenter Herning</span></div>
         </li>
       </ul>
@@ -350,6 +392,7 @@
     <!-- KOLONNE 3: Hurtige links -->
     <div class="fod-kolonne fod-links" aria-label="Hurtige links">
       <h3 class="fod-overskrift">Hurtige links</h3>
+      <!-- vi har valgt at lave en ugrupperet liste for at vise hurtige links, ligesom oppe i headeren, for at brugeren nemt kan navigere rundt på sitet i footeren også -->
       <ul class="hurtig-links">
         <li><a href="dinemuligheder.html">Dine muligheder</a></li>
         <li><a href="ungefortaeller.html">Unge fortæller</a></li>
@@ -366,5 +409,6 @@
     <p class="fod-copyright">Lavet med <img src="hjerte.svg" alt="hjerte ikon" class="hjerte-ikon" aria-hidden="true"> af Herning Kommune · 2025</p>
   </div>
 </footer>
+<!-- her slutter footeren -->
 </body>
 </html>
