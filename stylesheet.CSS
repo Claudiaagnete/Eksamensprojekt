@@ -26,7 +26,7 @@ h1 {
 }
 
 /* H2: sekundær overskrift
-   - ofte brugt som sektionstitel
+   - brugt som sektionstitel
 */
 h2 {
   /* Mørk tekstfarve for god kontrast */
@@ -111,10 +111,25 @@ h5 {
   --h5-line: 20px;
   --brand-font-size: 16px;
   --nav-font-size: 16px;
+  /* Base font variable: Alpino er førstevalg, sans-serif som fallback */
+  --base-font-family: 'Alpino', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+}
+
+/* Fjerner browserens default margin så full-bleed elementer kan nå kanten */
+body{
+  margin: 0;
+  /*
+    Kommentar: Browsere tilføjer som standard en lille margin omkring <body>.
+    Den margin forhindrer elementer som bruger 100vw i at ramme kanten af
+    viewporten. Ved at sætte margin:0 sikrer vi, at .hero-section kan
+    være full-bleed og nå helt ud til venstre/højre kant.
+  */
+  /* Sæt global font-family så al tekst bruger Alpino hvis den er tilgængelig */
+  font-family: var(--base-font-family);
 }
 
 /* Header: overordnet topbar og navigation */
-/* .site-header: wrapper for toppen af siden - typisk indeholder logo og nav */
+/* .site-header: wrapper for toppen af siden -  indeholder logo og nav */
 .site-header{ 
   /* Hvid baggrund for ren topbar */
   background:#fff; 
@@ -136,7 +151,7 @@ h5 {
 
 /* Brand logo dimensioner */
 .brand-logo{ 
-  height:44px;  /* Højde på logo - bredde auto for korrekt aspect ratio */
+  height:50px;  /* Højde på logo - bredde auto for korrekt aspect ratio */
   width:auto; 
 }
 
@@ -175,6 +190,7 @@ h5 {
   height:4px; 
   background: linear-gradient(90deg,#0b6edb 0%, #0062b3 100%); /* Gradient for dybde */
 }
+/* Header slut css */
 
 /* Media query for små skærme: skjul full nav og juster tekststørrelser */
 @media (max-width:700px){
@@ -185,3 +201,161 @@ h5 {
   /* Mobile-overskriv af vigtige variabler: opdelt i :root for konsekvens */
   :root{ --h1-size: 36px; --brand-font-size: 14px; --nav-font-size: 14px; }
 }
+
+/* ----------------------- HERO SEKTION ----------------------- */
+/* Styling af den store hero-bjælke: gradient baggrund, centreret indhold,
+   stor overskrift, undertekst, primær CTA-knap og meta-tekst under knappen.
+   Desktop-first: standarder angives her, mobil-tilpasning i media query nedenfor. */
+
+/* Hero container - bruger fixed min-højde så det fylder stort set hele folden */
+.hero-section{
+  /* Fallback gradient hvis der ikke er et baggrundsbillede tilgængeligt */
+  background: linear-gradient(135deg, #0b6edb 0%, #1177f1 45%, #00c97b 100%);
+  color: #ffffff; /* Al tekst i hero er hvid */
+  /* Juster padding og min-height for at matche PNG: desktop-first store hero */
+  padding: 140px 0 120px; /* lidt større top- og bund-paddings for luft */
+  display: grid;
+  place-items: center; /* Centrerer indhold både horisontalt og vertikalt */
+  text-align: center; /* Centrer tekst i hero */
+  min-height: 78vh; /* Øget for at give samme visuelle højde som i PNG */
+  /* Gør sektionen full-bleed: stræk baggrund til hele viewport-bredden
+    uden at påvirke det centrerede .container indhold. */
+  width: 100vw;                /* Tager hele viewport-bredden */
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;          /* Træk elementet ud til venstre kant */
+  margin-right: -50vw;         /* Træk elementet ud til højre kant */
+  box-sizing: border-box;      /* Sørg for padding regnes ind i bredde */
+}
+
+/* Ekstra finjustering for brede desktops: sikr præcis højde på meget brede skærme */
+@media (min-width: 1400px){
+  .hero-section{ padding: 160px 0 140px; min-height: 82vh; }
+}
+
+.hero{
+  max-width: 980px; /* Begrænser tekstens linjebredde for bedre læsbarhed */
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Hovedoverskrift i hero - stor og tydelig */
+.hero h1{
+  /* H1 tilpasser sig viewport: holder sig helst på én linje på store skærme,
+     men tillader wrapping på mindre skærme så teksten ikke bliver afkortet. */
+  color: #FFF;
+  text-align: center;
+  font-family: Alpino, sans-serif;
+  /*
+    Font-størrelsen bruger `clamp()`:
+    - 20px er den absolutte mindste størrelse (for læsbarhed på meget små skærme)
+    - 5.5vw gør at fonten skalerer dynamisk med viewport-bredden
+    - 89px er maksimum (desktop-ønsket)
+    Fordelen: overskriften vokser og skrumper pænt uden brug for mange @media-regler.
+  */
+  font-size: clamp(20px, 5.5vw, 89px);
+  font-style: normal;
+  font-weight: 700;
+
+  line-height: 1.05;   /*line-height tæt på 1 holder overskriften kompakt. Vi sætter 1.05
+    så der er minimal lodret luft hvis overskriften wrapper på små skærme.  */
+  margin: 0 0 12px 0;
+  /*
+    Wrapping og overflow:
+    - white-space: normal tillader at teksten bryder til flere linjer på små skærme
+      så ingen del af teksten bliver afkortet.
+    - overflow: visible & text-overflow: clip sikrer at indhold ikke skjules.
+    - display:block og max-width:100% giver forudsigelig breddestyring i containeren.
+  */
+  white-space: normal;
+  overflow: visible;
+  text-overflow: clip;
+  display: block;
+  max-width: 100%;
+}
+
+/* Bevar single-line på store skærme (desktop) for design-konsistens */
+@media (min-width: 900px) {
+  /*
+    På brede skærme ønsker vi ofte at hovedoverskriften kun fylder én linje
+    for at bevare stærk visuel identitet. Derfor sætter vi nowrap for
+    viewport >= 900px. 900px er et rimeligt desktop-breakpoint, men det kan
+    justeres hvis du vil have single-line tidligere eller senere.
+  */
+  .hero h1{ white-space: nowrap; }
+}
+
+/* Underoverskrift / beskrivende tekst */
+.hero h3{
+  /* Undertekst: bruger de eksakte værdier angivet af brugeren */
+  color: #FFF;
+  text-align: center;
+  font-family: Alpino, sans-serif;
+  font-size: 34px;
+  font-style: normal;
+  font-weight: 421;
+  line-height: 35px;
+  max-width: 760px;
+  margin: 0 auto 28px auto;
+}
+
+/* Primær CTA-knap i hero */
+.hero-button{
+  display: inline-flex; /* Gør knappen centrerbar og indhold justerbart */
+  align-items: center;
+  justify-content: center;
+  background: #ffffff; /* Hvid knap mod farverige baggrund */
+  color: var(--h1-color, #0b6edb); /* Knappens tekstfarve (blå) */
+  padding: 14px 28px; /* Indvendig afstand */
+  border-radius: 999px; /* Helt rund */
+  border: none; /* Ingen ramme */
+  box-shadow: 0 8px 20px rgba(11,110,219,0.12); /* Let skygge for dybde */
+  cursor: pointer;
+  text-decoration: none; /* Hvis link */
+}
+
+.hero-button img{ width:18px; height:18px; margin-left:8px; }
+
+/* Knaptekst - bruger blå farve så teksten står ud mod hvide knap */
+.hero-button .button-text{ color:#0b6edb; font-weight:700; font-size:16px; }
+
+/* Lille meta-tekst under knap (100% gratis · Ingen dømmerier · Lokalt i Herning) */
+.hero .meta{
+  margin-top: 20px;
+  color: #FFF;
+  text-align: center;
+  font-family: Alpino, sans-serif;
+  font-size: 21px;
+  font-style: normal;
+  font-weight: 421;
+  line-height: 20px;
+}
+
+/* Sørg for at eventuelle <h4> i hero-sektionen (fx meta-linje) bruger samme styling */
+.hero-section h4{
+  color: #FFF; /* Samme hvide farve som andre hero-tekster */
+  font-family: Alpino, sans-serif;
+  font-size: 21px; /* Matcher .hero .meta */
+  font-weight: 421;
+  line-height: 20px;
+  text-align: center;
+  margin: 18px 0 0 0;
+}
+
+/* Responsive justeringer: mobil (max-width:899px) - mindre typografi og spacing */
+@media (max-width: 899px){
+  .hero-section{ padding: 64px 0 56px; min-height: 56vh; }
+  .hero h1{ font-size: 40px; }
+  .hero h3{ font-size: 15px; max-width: 92%; }
+  .hero-button{ padding: 12px 20px; }
+  .hero-button .button-text{ font-size:14px; }
+  .hero .meta{ font-size:12px; }
+}
+
+/* Hvis du har et specifikt hero-baggrundsbillede, kan du i stedet bruge:
+   .hero-section { background-image: url('images/hero-bg.webp');
+                    background-size: cover; background-position: center; }
+   Erstat gradienten ovenfor med baggrundsbillede-linjen for 1:1-match.
+*/
+/* Slut Hero*/
