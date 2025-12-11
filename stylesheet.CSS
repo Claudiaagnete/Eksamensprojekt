@@ -481,33 +481,40 @@ footer .container, .site-footer .container{ padding: 0 20px; }
 /* Ny footer layout: tre kolonner */
 .footer-indhold{
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr; /* tre kolonner; kan finjusteres */
-  gap: 28px; /* tættere mellemrum som i billedet */
+  grid-template-columns: 1fr 1fr 1fr; /* tre kolonner på række */
+  gap: 64px; /* større afstand mellem kolonner for mere luft på desktop */
   align-items: start;
-  max-width: 1152px; /* hold indhold centralt */
+  max-width: 1152px; /* hold indhold inden for container */
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 0 20px; /* jævn indvendig margin i hele footeren */
+  /* Center alt indhold i footeren som i designet */
+  justify-items: center; /* centrer hver grid-celle horisontalt */
+  text-align: center;    /* standard for grid-celler — vi overskriver børneindholdet til venstre */
 }
 
-/* Center alt indhold i footeren: placer kolonnerne centralt og centrer tekst i hver kolonne */
-.footer-indhold{
-  justify-items: center; /* centrer hver grid-celle horisontalt */
-  text-align: center;    /* sørg for at teksten i kolonnerne er centreret */
+/* Hjælpeklasse der giver hver kolonne en indvendig gutter så venstre og
+   højre kolonne ikke står for tæt på viewport-kanten. Bruges på direkte
+   children i .footer-indhold (fx .footer-indhold > div). */
+.footer-kolonne{
+  padding: 0 28px; /* indvendig padding for visuel balance i hver kolonne */
+  box-sizing: border-box;
+  width: 100%;
 }
+
+/* Bevar padding på direkte børn hvis markup ikke indeholder .footer-kolonne. Derfor der er tegnet > påvirker kun de tre direkte kolonner (de elementer du har som direkte børn af .footer-indhold).*/
+.footer-indhold > * { padding: 0 28px; box-sizing: border-box; text-align: left; }
 
 .fod-overskrift{
   /* Fod-overskrift: bruger den eksakte, verbatim specifikation brugeren gav */
-  color: #FFF; /* color: #FFF; */
+  color: #FFF; /* farve: hvid */
   font-family: Alpino; /* font-family: Alpino; */
   font-size: var(--footer-heading-size); /* font-size: 21px; */
   font-style: normal; /* font-style: normal; */
   font-weight: 421; /* font-weight: 421; */
   line-height: 28px; /* line-height: 28px; */
   margin: 0 0 12px 0; /* mindre margin for kompakt layout */
+  text-align: left; /* venstre-juster overskrift i hver kolonne */
 }
-
-/* sikre at footer-overskrifter er centreret (arver fra .footer-indhold men sætter eksplicit) */
-.footer-indhold .fod-overskrift{ text-align: center; }
 
 .fod-beskrivelse{
   /* Sekundær footer-tekst: beskrivelser og link-tekst */
@@ -526,7 +533,7 @@ footer .container, .site-footer .container{ padding: 0 20px; }
 .kontakt-liste{ list-style:none; padding:0; margin:8px 0 0 0; }
 /* Kontakt-elementer: gør selve linket til en flexbox så ikoner står ude foran teksten */
 .kontakt-element{ margin-bottom:10px; }
-.kontakt-link{ display:flex; align-items:center; gap:12px; color:inherit; text-decoration:none; justify-content: center; }
+.kontakt-link{ display:flex; align-items:center; gap:12px; color:inherit; text-decoration:none; justify-content: flex-start; }
 .kontakt-ikon{ width:20px; height:20px; display:block; flex:0 0 20px; }
 .kontakt-tekst{ color:#D6DCE4; }
 /* Hvis kontaktoplysningen er en ikke-klikbar wrapper (.kontakt-element-adr),
