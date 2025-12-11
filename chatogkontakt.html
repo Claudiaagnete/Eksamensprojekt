@@ -47,27 +47,155 @@
       <div class="container chatogkontakt-1">
         <h2>Kontakt os</h2>
         <div class="kontaktmetoder-ring">
-        <img src="telefon.svg" alt="Telefon ikon">
+        <img src="telefonblåbaggrund.svg" alt="Telefon ikon">
         <h4>Ring til os</h4>
         <h4>96 28 40 91</h4>
         <p>Man-Fre 9-15</p>
         </div>
         <div class="kontaktmetoder-mail">
-        <img src="mail.svg" alt="Mail ikon">
+        <img src="mailblåbaggrund.svg" alt="Mail ikon">
         <h4>Send en mail</h4>
         <h4>rygestop@herning.dk</h4>
         <p>Vi svarer inden for 24 timer</p>
         </div>
         <div class="kontaktmetoder-chat">
-        <img src="chat.svg" alt="Chat ikon">
+        <img src="beskedblåbaggrund.svg" alt="Chat ikon">
         <h4>Chat med os</h4>
         <h4>Online nu</h4>
         <p>Man-Fre 10-16</p>
         </div>
         <div class="kontaktmetoder-dropin">
-        <img src="lokationsort.svg" alt="Lokation ikon">
-
+        <img src="lokationblåbaggrund.svg" alt="Lokation ikon">
         </div>
       </div>
+      </section>
+    <section class="chatogkontakt-section-2">
+      <div class="container chatogkontakt-2">
+        <h2>Eller send os en besked</h2>
+        <h4>Udfyld formularen, så kontakter vi dig hurtigst muligt</h4>
+        <!-- Kontaktformular: kun HTML (ingen CSS/JS her).
+             Kommentarer forklarer hvad hvert element gør, så du kan lære og tilpasse. -->
+        <form class="kontakt-formular" id="kontaktformular" action="#" method="post" aria-label="Kontaktformular">
+          <!-- Bemærk:
+               - action: hvor formular-data sendes (her '#' som pladsholder)
+               - method: 'post' sender data i request body
+               - id/class bruges senere til CSS eller JavaScript -->
+
+          <!-- Række: Navn (påkrævet) -->
+          <div class="form-række">
+            <!-- label forbinder tekst med input via for="kontakt-navn" -->
+            <label for="kontakt-navn">Dit navn <span aria-hidden="true">*</span></label>
+            <!--
+              - id skal matche labelens for=""
+              - name er nøglen serveren modtager (fx POST['navn'])
+              - required gør feltet nødvendigt før browser tillader submit
+            -->
+            <input id="kontakt-navn" name="navn" type="text" required placeholder="Fulde navn">
+          </div>
+
+          <!-- Række: Alder (påkrævet) -->
+          <div class="form-række">
+            <label for="kontakt-alder">Din alder <span aria-hidden="true">*</span></label>
+            <!--
+              - type="number" viser talkontrol i nogle browsere
+              - min og step sikrer kun gyldige tal (heltal her)
+            -->
+            <input id="kontakt-alder" name="alder" type="number" min="0" step="1" required placeholder="fx 25">
+          </div>
+
+          <!-- Række: Hvad bruger du? (påkrævet) -->
+          <div class="form-række">
+            <label for="kontakt-brug">Hvad bruger du? <span aria-hidden="true">*</span></label>
+            <input id="kontakt-brug" name="brug" type="text" required placeholder="fx cigaretter / snus / vapes">
+          </div>
+
+          <!-- Række: Email (påkrævet) -->
+          <div class="form-række">
+            <label for="kontakt-email">Din email <span aria-hidden="true">*</span></label>
+            <!-- type="email" giver simpel browser-validering af email-format -->
+            <input id="kontakt-email" name="email" type="email" required placeholder="navn@eksempel.dk">
+          </div>
+
+          <!-- Række: Telefon (valgfrit) -->
+          <div class="form-række">
+            <label for="kontakt-telefon">Dit telefonnummer (valgfrit)</label>
+            <!--
+              - type="tel" anbefales til telefonnumre (bruges med inputmode på mobil)
+              - pattern er et simpelt mønster browser kan tjekke ved submit (tillader cifre, mellemrum, + og -)
+              - ikke required, så brugeren kan lade det stå tomt
+            -->
+            <input
+              id="kontakt-telefon"
+              name="telefon"
+              type="tel"
+              inputmode="numeric"
+              pattern="[0-9+\s\-()]*"
+              placeholder="fx 96 28 40 91"
+            >
+            <small class="hjælp-tekst">Indtast kun tal, mellemrum eller bindestreger.</small>
+          </div>
+
+          <!-- Række: Hvordan vil du helst kontaktes? (radio, vælg én) -->
+          <fieldset class="felt-gruppe" aria-required="true">
+            <!-- legend giver en titel til radio-gruppen (vigtigt for skærmlæsere) -->
+            <legend>Hvordan vil du helst kontaktes? <span aria-hidden="true">*</span></legend>
+
+            <!-- radio-knapper: samme name gør dem eksklusive (kun ét valg muligt) -->
+            <div class="valg">
+              <input id="kontakt-valg-email" type="radio" name="kontakt_metode" value="email" required>
+              <label for="kontakt-valg-email">Email</label>
+            </div>
+
+            <div class="valg">
+              <input id="kontakt-valg-telefon" type="radio" name="kontakt_metode" value="telefon">
+              <label for="kontakt-valg-telefon">Telefon</label>
+            </div>
+
+            <!-- Note: hvis I i stedet vil lade brugeren vælge begge, brug checkbox inputs -->
+          </fieldset>
+
+          <!-- Række: Besked (valgfrit) -->
+          <div class="form-række">
+            <label for="kontakt-besked">Fortæl os kort hvad du har brug for (valgfrit)</label>
+            <!-- textarea bruges til længere fritekst; rows angiver højde -->
+            <textarea id="kontakt-besked" name="besked" rows="6" placeholder="Skriv fx: 'Jeg vil gerne vide mere om gruppeforløbet.'"></textarea>
+          </div>
+
+          <!-- Handlingsrække: Send-knap og note -->
+          <div class="form-handlinger">
+            <a href="tak.html" class="cta-blue" aria-label="send besked, gå til tak-siden">
+        <img src="send.svg" alt="send ikon" width="20" height="20">
+        Send besked
+        </a>
+            <!-- Fortroligheds-note: informer brugeren om behandling af data -->
+            <p class="privat-note"><small>* = Påkrævet felt · Alle oplysninger behandles fortroligt</small></p>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <section class="chatogkontakt-section-3">
+      <div class="container chatogkontakt-3">
+       <h2>Hvad sker der når du kontakter os?</h2>
+       <div class="hurtig respons">
+        <img src="urblåbaggrund.svg" alt="ikon ur, for hurtigt respons">
+        <h4>1. Hurtig respons</h4>
+        <p>Vi svarer inden for 1-2 hverdage, ofte hurtigere</p>
+       </div>
+         <div class="afklarende samtale">
+          <img src="beskedblåbaggrund.svg" alt="ikon tekstbobel, for fortrolig samtale">
+          <h4>2. Afklarende samtale</h4>
+          <p>Vi finder ud af hvad der passer dig bedst</p>
+      </div>
+        <div class="du bestemmer">
+          <img src="fluebenblåbaggrund.svg" alt="ikon flueben, for du bestemmer hele vejen">
+          <h4>3. Du bestemmer</h4>
+          <p>Ingen forpligtelser – du vælger selv hvad du vil</p>
+        </div>
+    </div>
+    </section>
+    <section>
+        
+    </section>
   </body>
 </html>
