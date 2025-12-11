@@ -558,17 +558,22 @@ værdi = bund (36px)
 /* Responsive: tilpas grid og kortstørrelser på smallere skærme */
 @media (max-width: 900px){
   /* Stak kolonner til én kolonne for smallere displays */
-  .card-grid{ grid-template-columns: 1fr; }
+  .card-grid{ grid-template-columns: 1fr; } /* Stak kolonner: 1fr = én kolonne på mobil */
+
   /* Mindre padding i container for at passe på små skærme */
-  .forside > .container.forside{ padding: 20px; }
+  .forside > .container.forside{ padding: 20px; } /* Containerpadding: reduceret for mobil */
+
   /* Reducer h2-størrelse for mobil */
-  .forside > .container.forside h2{ font-size: 34px; }
+  .forside > .container.forside h2{ font-size: 34px; } /* H2 mobilstørrelse: 34px for læsbarhed */
+
   /* Mindre korthøjde og padding for pladsbesparelse */
-  .card{ padding: 22px; min-height: 110px; }
+  .card{ padding: 22px; min-height: 110px; } /* Kort padding og min-højde på mobil */
+
   /* Mindre ikonstørrelse */
-  .card img{ width:36px; height:36px; }
+  .card img{ width:36px; height:36px; } /* Ikonstørrelse: 36x36px på mobil */
+  
   /* Mindre titelstørrelse */
-  .card-title{ font-size:22px; }
+  .card-title{ font-size:22px; } /* Korttitel: 22px for kompakt udseende */
 }
 
 /* Footer / site-footer styling: gør footeren full-bleed ligesom header/hero
