@@ -519,6 +519,9 @@ footer .container, .site-footer .container{ padding: 0 20px; }
 .kontakt-link{ display:flex; align-items:center; gap:12px; color:inherit; text-decoration:none; }
 .kontakt-ikon{ width:20px; height:20px; display:block; flex:0 0 20px; }
 .kontakt-tekst{ color:#D6DCE4; }
+/* Hvis kontaktoplysningen er en ikke-klikbar wrapper (.kontakt-element-adr),
+   sørg for samme layout som .kontakt-link så ikonet står ude foran teksten. */
+.kontakt-element-adr{ display:flex; align-items:center; gap:12px; }
 
 .hurtig-links{ list-style:none; padding:0; margin:8px 0 0 0; }
 .hurtig-links li{ margin-bottom:8px; }
