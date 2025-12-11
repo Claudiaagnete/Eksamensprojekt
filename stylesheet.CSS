@@ -415,6 +415,7 @@ body{
 .cta-white:active{ transform: translateY(0); box-shadow: 0 6px 18px rgba(11,110,219,0.10); }
 .cta-white:focus-visible{ outline: 3px solid rgba(11,110,219,0.18); outline-offset: 4px; }
 
+/* Slut Hero*/
 
 /* CTA: blå pille-knap som alternativ til den hvide */
 .cta-blue{
@@ -510,8 +511,8 @@ footer .container, .site-footer .container{ padding: 0 20px; }
 }
 
 .social-liste{ display:flex; gap:18px; padding:0; margin:18px 0 0 0; list-style:none; align-items:center; }
-.social-liste li a{ display:inline-flex; align-items:center; justify-content:center; width:40px; height:40px; border-radius:50%; background: rgba(255,255,255,0.04); }
-.social-liste img{ width:18px; height:18px; filter: invert(100%); opacity:0.95 }
+.social-liste li a{ display:inline-flex; align-items:center; justify-content:center; width:40px; height:40px; border-radius:50%; }
+.social-liste img{ width:25px; height:25px; opacity:0.85}
 
 .kontakt-liste{ list-style:none; padding:0; margin:8px 0 0 0; }
 /* Kontakt-elementer: gør selve linket til en flexbox så ikoner står ude foran teksten */
@@ -551,7 +552,16 @@ footer .hurtig-links a{
 
 /* Divider og bundlinje */
 .fod-bund{ border-top: 1px solid rgba(255,255,255,0.04); margin-top:36px; padding-top:28px; text-align:center; }
-.fod-copyright{ color:#BFC8D2; margin:0; font-size:20px; letter-spacing:0.3px }
+.fod-copyright{
+  color: #99A1AF;
+  text-align: center;
+  font-family: Alpino;
+  font-size: 21px;
+  font-style: normal;
+  font-weight: 421;
+  line-height: 20px;
+  margin: 0;
+}
 
 /* Hjerte-ikon i footer: brug det leverede hjerte.svg uden CSS-filters */
 .hjerte-ikon{
@@ -569,4 +579,3 @@ footer .hurtig-links a{
   .social-liste li a{ width:36px; height:36px; }
 }
 
-/* Slut Hero*/
