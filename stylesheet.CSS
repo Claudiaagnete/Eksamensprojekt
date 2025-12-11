@@ -128,11 +128,31 @@ body{
   font-family: var(--base-font-family);
 }
 
+/* Global container: brugt til at centrere indhold og holde en max-bredde */
+.container{
+  max-width: 1152px; /* Baseret på designets mål i dit billede */
+  margin: 0 auto;    /* Centrer containeren horisontalt */
+  padding: 0 20px;   /* Indvendig luft ved små skærme */
+  box-sizing: border-box;
+}
+
 /* Header: overordnet topbar og navigation */
 /* .site-header: wrapper for toppen af siden -  indeholder logo og nav */
 .site-header{ 
   /* Hvid baggrund for ren topbar */
   background:#fff; 
+}
+
+/* Gør header full-bleed: stræk baggrund til hele viewport-bredden
+   men behold centrering af .container indhold. Samme teknik som hero. */
+.site-header{
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  box-sizing: border-box;
 }
 
 /* Indre container: layout med flex for at placere elementer på linje */
@@ -352,6 +372,24 @@ body{
   .hero-button .button-text{ font-size:14px; }
   .hero .meta{ font-size:12px; }
 }
+
+/* Footer / site-footer styling: gør footeren full-bleed ligesom header/hero
+   .site-footer er en hjælperklasse hvis du ønsker at genbruge styling */
+footer, .site-footer{
+  background: #0b1730; /* mørk baggrund som i dit billede */
+  color: #fff;
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  box-sizing: border-box;
+  padding: 48px 0; /* lodret luft i footeren */
+}
+
+/* Indholdet i footeren holdes centreret via .container */
+footer .container, .site-footer .container{ padding: 0 20px; }
 
 /* Hvis du har et specifikt hero-baggrundsbillede, kan du i stedet bruge:
    .hero-section { background-image: url('images/hero-bg.webp');
