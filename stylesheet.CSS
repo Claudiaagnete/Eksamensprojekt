@@ -20,7 +20,8 @@ h1 {
   /* Ingen kursiv */
   font-style: normal;
   /* Fed skrift for at gøre overskriften tydelig */
-  font-weight: 700;
+  /* Brug en lettere vægt for at matche Alpino Regular/Medium i designet */
+  font-weight: 500;
   /* Line-height kontrollerer vertikal afstand i overskriften */
   line-height: 72px;
 }
@@ -111,6 +112,9 @@ h5 {
   --h5-line: 20px;
   --brand-font-size: 16px;
   --nav-font-size: 16px;
+  /* CTA-typografi: Alpino  fra designet */
+  --cta-font-size: 21px;    /* Alpino Regular 21px */
+  --cta-line-height: 24px;  /* Line-height 24px */
   /* Base font variable: Alpino er førstevalg, sans-serif som fallback */
   --base-font-family: 'Alpino', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
 }
@@ -363,6 +367,42 @@ body{
   margin: 18px 0 0 0;
 }
 
+/* CTA: hvid pille-knap der matcher designet i PNG'en */
+.cta-white{
+  display: inline-flex;               /* gør knappen fleksibel og centrer indhold */
+  align-items: center;                /* centrer ikon + tekst vertikalt */
+  gap: 10px;                          /* afstand mellem ikon og tekst */
+  background: #FFFFFF;                /* hvid baggrund */
+  color: #0b6edb;                     /* blå tekst som i designet */
+  padding: 12px 28px;                 /* størrelse på pille-knappen */
+  border-radius: 999px;               /* pille-form */
+  box-shadow: 0 8px 24px rgba(11,110,219,0.12); /* let skygge for løft */
+  text-decoration: none;              /* fjern understregning for links */
+    font-family: var(--base-font-family);
+    font-weight: 400; /* normal */
+    font-synthesis: none; /* Forhindre browser i at syntetisk gøre skrifttypen fed hvis en vægt mangler */
+  /* Brug Alpino-typografi fra design: 21/24/0 */
+  font-size: var(--cta-font-size, 21px);
+  line-height: var(--cta-line-height, 24px);
+  letter-spacing: var(--cta-letter-spacing, 0px);
+  border: none;                       /* ingen ramme */
+  cursor: pointer;
+}
+
+/* Hvis cta'en bruges som <a> (link) skal den stadig ligne en knap */
+.cta-white[role="button"], .cta-white.button{ display: inline-flex; }
+
+/* Ikon i CTA: gør billedet lille og ikke-forstyrrende */
+.cta-white img{ width:20px; height:20px; display:inline-block; vertical-align:middle; }
+
+/* Hover og fokus: visuel feedback */
+.cta-white:hover{ transform: translateY(-2px); box-shadow: 0 12px 28px rgba(11,110,219,0.14); }
+.cta-white:active{ transform: translateY(0); box-shadow: 0 6px 18px rgba(11,110,219,0.10); }
+.cta-white:focus-visible{ outline: 3px solid rgba(11,110,219,0.18); outline-offset: 4px; }
+
+/* Mørk baggrundsvariant: hvis du bruger CTA i footeren */
+.cta-white.invert{ background: transparent; color: #fff; box-shadow: none; border: 1px solid rgba(255,255,255,0.08); }
+
 /* Responsive justeringer: mobil (max-width:899px) - mindre typografi og spacing */
 @media (max-width: 899px){
   .hero-section{ padding: 64px 0 56px; min-height: 56vh; }
@@ -370,6 +410,8 @@ body{
   .hero h3{ font-size: 15px; max-width: 92%; }
   .hero-button{ padding: 12px 20px; }
   .hero-button .button-text{ font-size:14px; }
+  /* Mobil: mindsk CTA-typografi lidt for bedre pasform */
+  .cta-white{ font-size: 18px; line-height: 20px; padding: 10px 18px; }
   .hero .meta{ font-size:12px; }
 }
 
