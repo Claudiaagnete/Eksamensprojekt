@@ -489,6 +489,12 @@ footer .container, .site-footer .container{ padding: 0 20px; }
   padding: 0 20px;
 }
 
+/* Center alt indhold i footeren: placer kolonnerne centralt og centrer tekst i hver kolonne */
+.footer-indhold{
+  justify-items: center; /* centrer hver grid-celle horisontalt */
+  text-align: center;    /* sørg for at teksten i kolonnerne er centreret */
+}
+
 .fod-overskrift{
   /* Fod-overskrift: bruger den eksakte, verbatim specifikation brugeren gav */
   color: #FFF; /* color: #FFF; */
@@ -499,6 +505,9 @@ footer .container, .site-footer .container{ padding: 0 20px; }
   line-height: 28px; /* line-height: 28px; */
   margin: 0 0 12px 0; /* mindre margin for kompakt layout */
 }
+
+/* sikre at footer-overskrifter er centreret (arver fra .footer-indhold men sætter eksplicit) */
+.footer-indhold .fod-overskrift{ text-align: center; }
 
 .fod-beskrivelse{
   /* Sekundær footer-tekst: beskrivelser og link-tekst */
@@ -517,7 +526,7 @@ footer .container, .site-footer .container{ padding: 0 20px; }
 .kontakt-liste{ list-style:none; padding:0; margin:8px 0 0 0; }
 /* Kontakt-elementer: gør selve linket til en flexbox så ikoner står ude foran teksten */
 .kontakt-element{ margin-bottom:10px; }
-.kontakt-link{ display:flex; align-items:center; gap:12px; color:inherit; text-decoration:none; }
+.kontakt-link{ display:flex; align-items:center; gap:12px; color:inherit; text-decoration:none; justify-content: center; }
 .kontakt-ikon{ width:20px; height:20px; display:block; flex:0 0 20px; }
 .kontakt-tekst{ color:#D6DCE4; }
 /* Hvis kontaktoplysningen er en ikke-klikbar wrapper (.kontakt-element-adr),
