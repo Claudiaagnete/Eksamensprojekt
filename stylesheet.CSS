@@ -117,6 +117,9 @@ h5 {
   --cta-line-height: 24px;  /* Line-height 24px */
   /* Base font variable: Alpino er førstevalg, sans-serif som fallback */
   --base-font-family: 'Alpino', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+  /* Footer specific size tokens (brugerens præcise ønsker) */
+  --footer-heading-size: 21px; /* Overskrift i footer (brugerspecifik) */
+  --footer-body-size: 15px; /* Sekundær størrelse til beskrivelser og links */
 }
 
 /* Fjerner browserens default margin så full-bleed elementer kan nå kanten */
@@ -459,7 +462,7 @@ body{
 /* Footer / site-footer styling: gør footeren full-bleed ligesom header/hero
    .site-footer er en hjælperklasse hvis du ønsker at genbruge styling */
 footer, .site-footer{
-  background: #0b1730; /* mørk baggrund som i dit billede */
+  background: #0b1628; /* justeret mørkere nuance for 1:1-match */
   color: #fff;
   width: 100vw;
   position: relative;
@@ -468,15 +471,76 @@ footer, .site-footer{
   margin-left: -50vw;
   margin-right: -50vw;
   box-sizing: border-box;
-  padding: 48px 0; /* lodret luft i footeren */
+  padding: 60px 0 36px; /* top større, bottom mindre for visuel balance */
 }
 
 /* Indholdet i footeren holdes centreret via .container */
 footer .container, .site-footer .container{ padding: 0 20px; }
 
-/* Hvis du har et specifikt hero-baggrundsbillede, kan du i stedet bruge:
-   .hero-section { background-image: url('images/hero-bg.webp');
-                    background-size: cover; background-position: center; }
-   Erstat gradienten ovenfor med baggrundsbillede-linjen for 1:1-match.
-*/
+/* Ny footer layout: tre kolonner */
+.footer-indhold{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr; /* tre kolonner; kan finjusteres */
+  gap: 28px; /* tættere mellemrum som i billedet */
+  align-items: start;
+  max-width: 1152px; /* hold indhold centralt */
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.fod-overskrift{
+  /* Fod-overskrift: bruger den eksakte, verbatim specifikation brugeren gav */
+  color: #FFF; /* color: #FFF; */
+  font-family: Alpino; /* font-family: Alpino; */
+  font-size: var(--footer-heading-size); /* font-size: 21px; */
+  font-style: normal; /* font-style: normal; */
+  font-weight: 421; /* font-weight: 421; */
+  line-height: 28px; /* line-height: 28px; */
+  margin: 0 0 12px 0; /* mindre margin for kompakt layout */
+}
+
+.fod-beskrivelse{
+  /* Sekundær footer-tekst: beskrivelser og link-tekst */
+  color: #A9B0BD;
+  font-family: Alpino, sans-serif;
+  font-size: var(--footer-body-size); /* 15px som sekundær størrelse */
+  line-height: 1.6;
+  margin: 0 0 18px 0;
+  max-width: 420px;
+}
+
+.social-liste{ display:flex; gap:18px; padding:0; margin:18px 0 0 0; list-style:none; align-items:center; }
+.social-liste li a{ display:inline-flex; align-items:center; justify-content:center; width:40px; height:40px; border-radius:50%; background: rgba(255,255,255,0.04); }
+.social-liste img{ width:18px; height:18px; filter: invert(100%); opacity:0.95 }
+
+.kontakt-liste{ list-style:none; padding:0; margin:8px 0 0 0; }
+.kontakt-element{ margin-bottom:10px; color:#D6DCE4; display:flex; align-items:center; gap:12px }
+.kontakt-ikon{ width:18px; height:18px; display:block; }
+.kontakt-tekst{ color:#D6DCE4; }
+
+.hurtig-links{ list-style:none; padding:0; margin:8px 0 0 0; }
+.hurtig-links li{ margin-bottom:8px; }
+.hurtig-links a{ color:#C8CFD8; text-decoration:none; font-size:15px }
+.hurtig-links a:hover{ color:#FFFFFF; }
+
+/* Divider og bundlinje */
+.fod-bund{ border-top: 1px solid rgba(255,255,255,0.04); margin-top:36px; padding-top:28px; text-align:center; }
+.fod-copyright{ color:#BFC8D2; margin:0; font-size:20px; letter-spacing:0.3px }
+
+/* Hjerte-ikon i footer: brug det leverede hjerte.svg uden CSS-filters */
+.hjerte-ikon{
+  width:18px;
+  height:18px;
+  vertical-align:middle;
+  margin: 0 8px; /* afstand til tekst */
+  filter: none !important; /* fjern invert/filters hvis tidligere regler påvirker ikonet */
+  opacity: 1 !important;
+}
+
+/* Responsiv: stabler kolonner på small screens */
+@media (max-width: 900px){
+  .footer-indhold{ grid-template-columns: 1fr; gap: 24px; }
+  .social-liste li a{ width:36px; height:36px; }
+}
+
 /* Slut Hero*/
