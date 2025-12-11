@@ -42,7 +42,7 @@ h2 {
   font-family: Alpino;
   font-size: 55px;
   font-style: normal;
-  font-weight: 400;
+  font-weight: 500;
   line-height: 48px; /* 87.273% */
 }
 
@@ -253,8 +253,11 @@ body{
   right: 50%;
   margin-left: -50vw;          /* Træk elementet ud til venstre kant */
   margin-right: -50vw;         /* Træk elementet ud til højre kant */
-  box-sizing: border-box;      /* Sørg for padding regnes ind i bredde */
+  box-sizing: border-box;   
+     /* Sørg for padding regnes ind i bredde */
+     margin-bottom: var(--hero-bottom-gap, 80px);
 }
+
 
 /* Ekstra finjustering for brede desktops: sikr præcis højde på meget brede skærme */
 @media (min-width: 1400px){
@@ -458,6 +461,114 @@ body{
   /* Mobil: mindsk CTA-typografi lidt for bedre pasform */
   .cta-white{ font-size: 18px; line-height: 20px; padding: 10px 18px; }
   .hero .meta{ font-size:12px; }
+}
+
+/* ----------------------- FORSIDE SEKTION 1----------------------- */
+/* Sektion: .forside (bruges på flere sektioner; denne blok giver "forside 1" sit visuelle udtryk)
+   Nedenfor står forklarende kommentarer på hver linje, så hver regel er tydelig. */
+.forside{
+  /* background: sætter baggrundsfarven for hele .forside-sektionen. */
+  background: #f6f8fa; /* Lys, næsten hvid baggrund for sektionen - giver luft og kontrast til kortene. */
+  /* padding: top/right/bottom/left (her kun top og bottom defineret) - skaber lodret afstand indeni sektionen. */
+  padding: 40px 0 56px; /* 40px top-luft, 0 horisontalt, 56px bund-luft for balance under kortene. */
+}
+
+
+.forside > .container.forside,
+.forside .container.forside{
+  /* Boksen/containeren er transparent så h2/h4 står direkte på sektionens baggrund. */
+  background: transparent; /* Gør baggrunden gennemsigtig i stedet for hvid boks. */
+  padding: 25px 28px 10px; /* Bevar padding så overskrift og kort har plads omkring sig. 
+værdi = top (32px)
+værdi = højre og venstre (28px)
+værdi = bund (36px)
+*/
+  
+  box-shadow: none; /* Fjern skygge. */
+}
+/* Overskrift og understødende tekst - målrettet containerens h2/h4 */
+.forside > .container.forside h2,
+.forside .container.forside h2{
+  /* font-family: sætter den ønskede skrifttype for overskrift; Alpino prioriteres. */
+  font-family: Alpino, sans-serif;
+  /* font-size: størrelse på overskriften; stor for visuel vægt. */
+  font-size: 48px; /* Stor, tydelig overskrift der matcher billedet. */
+  /* line-height: afstand mellem linjerne i overskriften, tæt for kompakt udtryk. */
+  line-height: 1.05; /* Lidt over 1 for at undgå sammenklumpning hvis overskriften bryder. */
+  /* margin: y-axis top/right/bottom/left - styrer afstand til øvrigt indhold. */
+  margin: 12px 0 6px; /* 12px over, 6px under for passende luft imod meta-tekst og kort. */
+  /* color: mørk tekstfarve for god kontrast mod den lyse boks. */
+  color: #0b0b0b;
+}
+.forside > .container.forside h4,
+.forside .container.forside h4{
+  /* color: sekundær farve til hjælp- eller undertekst. */
+  color: #556772; /* Dæmpet blågrå farve for lavere visuel prioritet end h2. */
+  /* font-size: mindre end h2, men stor nok til læsbarhed. */
+  font-size: 18px;
+  /* margin: afstand under hjælpeteksten så kortene ikke sidder for tæt. */
+  margin: 0 0 22px 0; /* 22px bund-margin for luft før kortene starter. */
+}
+
+/* Card grid: opsætter et grid med to kolonner og gitter-afstand */
+.card-grid{
+  /* list-style: none fjerner bullets fra <ul> så det ser ud som rene kort. */
+  list-style:none;
+  /* padding: fjerner indvendig padding fra ul for at styre layout præcist. */
+  padding:0;
+  /* margin: top/right/bottom/left - her kun top-margin for afstand fra overskriften. */
+  margin: 18px 0 0 0; /* 18px top-margin så kortene starter lidt under hjælpeteksten. */
+  /* display: grid aktiverer CSS Grid for at lave to kolonner. */
+  display:grid;
+  /* grid-template-columns: to lige store kolonner. */
+  grid-template-columns: repeat(2, 1fr);
+  /* gap: afstand mellem rækker og kolonner i gridet. */
+  gap: 22px; /* 22px mellemrum giver luftig fornemmelse uden at være for langt. */
+}
+.card-item{ margin:0; /* Nulstil margin på hvert list-item for forudsigelig layout. */ }
+
+/* Kortet: styling af hver klikbare kortbox */
+.card{
+  /* display:flex: gør det nemt at placere ikon øverst og titel nederst vha. column-flow. */
+  display:flex;
+  /* flex-direction: column - stabl indhold lodret (ikon over, titel under). */
+  flex-direction:column;
+  /* justify-content: space-between - placerer titel i bunden og ikon nær toppen. */
+  justify-content:space-between;
+  /* text-decoration: none - fjerner understregning hvis kortet er et link (<a>). */
+  text-decoration:none;
+  /* color: tekstfarve inde i kortet - hvid for kontrast mod gradientbaggrund. */
+  color: #fff;
+  /* padding: indvendig afstand i kortet for ikon og tekst. */
+  padding: 34px 28px; /* 34px top/bund, 28px sider for generøs klikzone. */
+  /* min-height: sikrer at alle kort har en ensartet højde. */
+  min-height: 140px;
+  /* border-radius: afrundede hjørner på kortet for pille-form look. */
+  border-radius: 14px;
+  /* box-shadow: løfter kortet visuelt fra baggrunden. */
+  box-shadow: 0 12px 30px rgba(12,40,90,0.08);
+}
+.card img{ width:44px; height:44px; display:block; /* Størrelse og blok-display for ikon; undgår baseline-justering */ }
+.card-title{ font-size:32px; font-weight:500; margin-top:12px; /* Titel-styling: stor, let fed og lidt afstand over titlen */ }
+
+/* Alternér gradient for visuelt forskel (ulæseligt: 1.,3. blå; 2.,4. grøn) */
+.card-item:nth-child(2n-1) .card{ background: linear-gradient(135deg,#4aa0ff 0%, #2a6df6 100%); /* Blå gradient på ulige kort */ }
+.card-item:nth-child(2n) .card{ background: linear-gradient(135deg,#00d68f 0%, #00a86b 100%); /* Grøn gradient på lige kort */ }
+
+/* Responsive: tilpas grid og kortstørrelser på smallere skærme */
+@media (max-width: 900px){
+  /* Stak kolonner til én kolonne for smallere displays */
+  .card-grid{ grid-template-columns: 1fr; }
+  /* Mindre padding i container for at passe på små skærme */
+  .forside > .container.forside{ padding: 20px; }
+  /* Reducer h2-størrelse for mobil */
+  .forside > .container.forside h2{ font-size: 34px; }
+  /* Mindre korthøjde og padding for pladsbesparelse */
+  .card{ padding: 22px; min-height: 110px; }
+  /* Mindre ikonstørrelse */
+  .card img{ width:36px; height:36px; }
+  /* Mindre titelstørrelse */
+  .card-title{ font-size:22px; }
 }
 
 /* Footer / site-footer styling: gør footeren full-bleed ligesom header/hero
