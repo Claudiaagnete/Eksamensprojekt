@@ -26,24 +26,35 @@ h1 {
   line-height: 72px;
 }
 
-/* H2: sekundær overskrift
-   - brugt som sektionstitel
+/* ---------------------- FONT-FACE: Alpino ---------------------- */
+/* Tilføj dine Alpino woff/woff2 filer i ./fonts/ med disse navne:
+   - Alpino-Regular.woff2  (og valgfrit Alpino-Regular.woff)
+   - Alpino-Medium.woff2   (og valgfrit Alpino-Medium.woff)
+   Når filerne er uploadet, vil disse @font-face-regler sikre korrekt vægt og
+   at `font-family: 'Alpino'` bruger de rigtige filer.
 */
+
+
+/* H2: Sektionstitel - fra design (Alpino Medium 55px, line-height 48px) */
 h2 {
-  /* Mørk tekstfarve for god kontrast */
+  /* Tekstfarve: mørk for god kontrast på lys baggrund */
   color: #0A0A0A;
-  /* Centreret som standard i dette layout */
+  /* Centrering: H2 er centreret i layoutet */
   text-align: center;
-  /* Samme fontfamilie for konsistens */
-  font-family: Alpino;
-  /* Størrelsen styres af variabel (desktop-first) */
+  /* Font-familie: Alpino prioriteres for match med designet */
+  font-family: Alpino, sans-serif;
+  /* Font-størrelse: Alpino Medium 55px (variabel fallback) */
   font-size: var(--h2-size, 55px);
-  /* Normal skriftstil */
+  /* Ingen kursiv */
   font-style: normal;
-  /* Vægt 507: lidt tungere end normal, lettere end 700 */
-  font-weight: 507;
-  /* Line-height via variabel for fleksibilitet */
+  /* Vægt: bruger 400 for et blødere udtryk */
+  font-weight: 400;
+  /* Line-height: 48px som i vedlagte billede */
   line-height: var(--h2-line, 48px);
+  /* Margin: sikrer luft omkring titlen */
+  margin: 12px 0 18px 0;
+  /* Maksimal bredde: begræns linjelængde for bedre typografi */
+  max-width: 1100px;
 }
 
 
@@ -369,33 +380,43 @@ body{
 
 /* CTA: hvid pille-knap der matcher designet i PNG'en */
 .cta-white{
-  display: inline-flex;               /* gør knappen fleksibel og centrer indhold */
-  align-items: center;                /* centrer ikon + tekst vertikalt */
-  gap: 10px;                          /* afstand mellem ikon og tekst */
-  background: #FFFFFF;                /* hvid baggrund */
-  color: #0b6edb;                     /* blå tekst som i designet */
-  padding: 12px 28px;                 /* størrelse på pille-knappen */
-  border-radius: 999px;               /* pille-form */
-  box-shadow: 0 8px 24px rgba(11,110,219,0.12); /* let skygge for løft */
-  text-decoration: none;              /* fjern understregning for links */
-    font-family: var(--base-font-family);
-    font-weight: 400; /* normal */
-    font-synthesis: none; /* Forhindre browser i at syntetisk gøre skrifttypen fed hvis en vægt mangler */
-  /* Brug Alpino-typografi fra design: 21/24/0 */
-  font-size: var(--cta-font-size, 21px);
-  line-height: var(--cta-line-height, 24px);
-  letter-spacing: var(--cta-letter-spacing, 0px);
-  border: none;                       /* ingen ramme */
-  cursor: pointer;
+  display: inline-flex;               /* display: inline-flex; - gør elementet til en fleksibel boks (flexbox), men lader det opføre sig som inline så det kan stå på samme linje som tekst. Flex gør det let at placere ikon og tekst pænt ved siden af hinanden. */
+  align-items: center;                /* align-items: center; - centrerer indholdet vertikalt i boksen, så ikon og tekst flugter lodret. */
+  gap: 10px;                          /* gap: 10px; - sætter et pænt mellemrum mellem ikon og tekst (10px). */
+  background: #FFFFFF;                /* background: #FFFFFF; - hvid baggrund for knappen. */
+  color: #0b6edb;                     /* color: #0b6edb; - tekstfarven indeni knappen (blå). */
+  padding: 12px 28px;                 /* padding: 12px 28px; - indvendig afstand: 12px top/bund, 28px venstre/højre, giver god klikzone. */
+  border-radius: 999px;               /* border-radius: 999px; - stor radius giver pille-form (meget rund). */
+  box-shadow: 0 8px 24px rgba(11,110,219,0.12); /* box-shadow: ... - let skygge under knappen for dybde/kontrast. */
+  text-decoration: none;              /* text-decoration: none; - fjerner understregning fra links, så det ligner en knap. */
+  font-family: var(--base-font-family); /* font-family: var(--base-font-family); - brug den globale font-variabel (Alpino hvis tilgængelig). */
+  font-weight: 400;                   /* font-weight: 400; - normal vægt (ikke fed). */
+  font-synthesis: none;               /* font-synthesis: none; - forhindrer browser i at lave en kunstig fed vægt hvis den præcise vægt mangler. */
+  /* Typografi - brug variabler så det er nemt at ændre senere */
+  font-size: var(--cta-font-size, 21px); /* font-size: var(..., fallback) - sætter skriftstørrelse (21px hvis variablen ikke findes). */
+  line-height: var(--cta-line-height, 24px); /* line-height: var(..., fallback) - kontrollerer lodret afstand i teksten. */
+  letter-spacing: var(--cta-letter-spacing, 0px); /* letter-spacing: var(..., fallback) - afstand mellem bogstaver. */
+  border: none;                       /* border: none; - fjern ramme rundt om knappen. */
+  cursor: pointer;                    /* cursor: pointer; - skifter musepekeren til en klik-hånd, signalerer klikbarhed. */
 }
 
 /* Hvis cta'en bruges som <a> (link) skal den stadig ligne en knap */
 .cta-white[role="button"], .cta-white.button{ display: inline-flex; }
 
 /* Ikon i CTA: gør billedet lille og ikke-forstyrrende */
-.cta-white img{ width:20px; height:20px; display:inline-block; vertical-align:middle; /* placer ikon til højre */ order: 2; margin-left: 8px; margin-right: 0; }
+.cta-white img{
+  width:20px; /* width: 20px - fast bredde for ikonet, så det ikke ændrer knappens højde uventet. */
+  height:20px; /* height: 20px - fast højde. */
+  display:inline-block; /* display: inline-block - gør billedet kompatibelt med tekst-layout. */
+  vertical-align:middle; /* vertical-align: middle - hjælper med at centrere ikonet i forhold til teksten. */
+  order: 2; /* order: 2 - i flex-layout viser vi ikonet som det andet element, så det kommer efter teksten visuelt. */
+  margin-left: 8px; /* margin-left: 8px - lidt afstand fra teksten når ikonet er til højre. */
+  margin-right: 0; /* margin-right: 0 - ingen ekstra afstand på højre side. */
+}
 /* Sørg for at tekst-elementet kommer før ikonet i flex-layoutet */
-.cta-white span, .cta-white .text{ order: 1; }
+.cta-white span, .cta-white .text{
+  order: 1; /* order: 1 - dette prioriterer tekstens position før ikonet. Hvis du pakker teksten i en <span> eller giver den klassen .text, vil teksten fremstå før ikonet. */
+}
 
 /* Hover og fokus: visuel feedback */
 .cta-white:hover{ transform: translateY(-2px); box-shadow: 0 12px 28px rgba(11,110,219,0.14); }
@@ -405,27 +426,31 @@ body{
 
 /* CTA: blå pille-knap som alternativ til den hvide */
 .cta-blue{
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  background: #155DFC; /* Solid blå fra brugeren */
-  color: #FFFFFF; /* Hvid tekst */
-  padding: 12px 28px;
-  border-radius: 999px;
-  box-shadow: 0 8px 24px rgba(21,93,252,0.12);
-  text-decoration: none;
-  /* Samme typografi som .cta-white */
-  font-family: var(--base-font-family);
-  font-weight: 400;
-  font-synthesis: none;
-  font-size: var(--cta-font-size, 21px);
-  line-height: var(--cta-line-height, 24px);
-  letter-spacing: var(--cta-letter-spacing, 0px);
-  border: none;
-  cursor: pointer;
+  display: inline-flex; /* display: inline-flex; - gør knappen fleksibel og inline så den kan stå i linje med tekst. */
+  align-items: center;  /* align-items: center; - centrerer ikon og tekst lodret. */
+  gap: 10px;            /* gap: 10px; - afstand mellem ikon og tekst. */
+  background: #155DFC;  /* background: #155DFC; - solid blå baggrund (din ønskede farve). */
+  color: #FFFFFF;       /* color: #FFFFFF; - hvid tekst for god kontrast mod blå baggrund. */
+  padding: 12px 28px;   /* padding: 12px 28px; - samme indvendig afstand som den hvide CTA, for konsistens. */
+  border-radius: 999px; /* border-radius: 999px; - rund pille-form. */
+  box-shadow: 0 8px 24px rgba(21,93,252,0.12); /* box-shadow - let blålig skygge for dybde. */
+  text-decoration: none; /* text-decoration: none; - fjern link-understregning. */
+  font-family: var(--base-font-family); /* font-family - samme skrifttype som .cta-white. */
+  font-weight: 400;     /* font-weight: 400; - normal vægt. */
+  font-synthesis: none;  /* font-synthesis: none; - undgå syntetisk bold. */
+  font-size: var(--cta-font-size, 21px); /* font-size - samme som .cta-white. */
+  line-height: var(--cta-line-height, 24px); /* line-height - samme som .cta-white. */
+  letter-spacing: var(--cta-letter-spacing, 0px); /* letter-spacing - samme som .cta-white. */
+  border: none;         /* border: none; - ingen synlig kant. */
+  cursor: pointer;      /* cursor: pointer; - hånd-ikon ved hover. */
 }
 
-.cta-blue img{ width:20px; height:20px; display:inline-block; vertical-align:middle; }
+.cta-blue img{
+  width:20px; /* width: 20px - ikonens faste bredde. */
+  height:20px; /* height: 20px - ikonens faste højde. */
+  display:inline-block; /* display: inline-block - gør ikonet kompatibelt med tekstlayout. */
+  vertical-align:middle; /* vertical-align: middle - centrer ikonet i forhold til tekst. */
+}
 .cta-blue:hover{ transform: translateY(-2px); box-shadow: 0 12px 28px rgba(21,93,252,0.18); }
 .cta-blue:active{ transform: translateY(0); box-shadow: 0 6px 18px rgba(21,93,252,0.10); }
 .cta-blue:focus-visible{ outline: 3px solid rgba(21,93,252,0.18); outline-offset: 4px; }
