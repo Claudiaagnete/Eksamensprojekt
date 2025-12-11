@@ -523,6 +523,27 @@ footer .container, .site-footer .container{ padding: 0 20px; }
 .hurtig-links a{ color:#C8CFD8; text-decoration:none; font-size:15px }
 .hurtig-links a:hover{ color:#FFFFFF; }
 
+/* Specifik 'andet tekst' stil kun i footeren: isoleret til kontakt-tekst og hurtig-links
+   Dette sikrer, at den angivne farve og skrifttype kun anvendes i footeren.
+   Brugerspecifikation:
+     color: #99A1AF;
+     font-family: Alpino;
+     font-size: 13px;
+     font-style: normal;
+     font-weight: 421;
+     line-height: 20px;
+ */
+footer .fod-andet-tekst,
+footer .kontakt-tekst,
+footer .hurtig-links a{
+  color: #99A1AF; /* farven brugeren angav */
+  font-family: Alpino, sans-serif; /* Alpino prioriteret */
+  font-size: 13px; /* brugerens ønskede størrelse */
+  font-style: normal;
+  font-weight: 421; /* brugerens ønskede vægt */
+  line-height: 20px; /* brugerens ønskede line-height */
+}
+
 /* Divider og bundlinje */
 .fod-bund{ border-top: 1px solid rgba(255,255,255,0.04); margin-top:36px; padding-top:28px; text-align:center; }
 .fod-copyright{ color:#BFC8D2; margin:0; font-size:20px; letter-spacing:0.3px }
