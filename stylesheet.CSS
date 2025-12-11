@@ -393,15 +393,42 @@ body{
 .cta-white[role="button"], .cta-white.button{ display: inline-flex; }
 
 /* Ikon i CTA: gør billedet lille og ikke-forstyrrende */
-.cta-white img{ width:20px; height:20px; display:inline-block; vertical-align:middle; }
+.cta-white img{ width:20px; height:20px; display:inline-block; vertical-align:middle; /* placer ikon til højre */ order: 2; margin-left: 8px; margin-right: 0; }
+/* Sørg for at tekst-elementet kommer før ikonet i flex-layoutet */
+.cta-white span, .cta-white .text{ order: 1; }
 
 /* Hover og fokus: visuel feedback */
 .cta-white:hover{ transform: translateY(-2px); box-shadow: 0 12px 28px rgba(11,110,219,0.14); }
 .cta-white:active{ transform: translateY(0); box-shadow: 0 6px 18px rgba(11,110,219,0.10); }
 .cta-white:focus-visible{ outline: 3px solid rgba(11,110,219,0.18); outline-offset: 4px; }
 
-/* Mørk baggrundsvariant: hvis du bruger CTA i footeren */
-.cta-white.invert{ background: transparent; color: #fff; box-shadow: none; border: 1px solid rgba(255,255,255,0.08); }
+
+/* CTA: blå pille-knap som alternativ til den hvide */
+.cta-blue{
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: #155DFC; /* Solid blå fra brugeren */
+  color: #FFFFFF; /* Hvid tekst */
+  padding: 12px 28px;
+  border-radius: 999px;
+  box-shadow: 0 8px 24px rgba(21,93,252,0.12);
+  text-decoration: none;
+  /* Samme typografi som .cta-white */
+  font-family: var(--base-font-family);
+  font-weight: 400;
+  font-synthesis: none;
+  font-size: var(--cta-font-size, 21px);
+  line-height: var(--cta-line-height, 24px);
+  letter-spacing: var(--cta-letter-spacing, 0px);
+  border: none;
+  cursor: pointer;
+}
+
+.cta-blue img{ width:20px; height:20px; display:inline-block; vertical-align:middle; }
+.cta-blue:hover{ transform: translateY(-2px); box-shadow: 0 12px 28px rgba(21,93,252,0.18); }
+.cta-blue:active{ transform: translateY(0); box-shadow: 0 6px 18px rgba(21,93,252,0.10); }
+.cta-blue:focus-visible{ outline: 3px solid rgba(21,93,252,0.18); outline-offset: 4px; }
 
 /* Responsive justeringer: mobil (max-width:899px) - mindre typografi og spacing */
 @media (max-width: 899px){
