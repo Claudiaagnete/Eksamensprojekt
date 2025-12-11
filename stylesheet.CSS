@@ -35,26 +35,15 @@ h1 {
 */
 
 
-/* H2: Sektionstitel - fra design (Alpino Medium 55px, line-height 48px) */
+/* H2: Sektionstitel - bruger præcise specifikationer fra design */
 h2 {
-  /* Tekstfarve: mørk for god kontrast på lys baggrund */
   color: #0A0A0A;
-  /* Centrering: H2 er centreret i layoutet */
   text-align: center;
-  /* Font-familie: Alpino prioriteres for match med designet */
-  font-family: Alpino, sans-serif;
-  /* Font-størrelse: Alpino Medium 55px (variabel fallback) */
-  font-size: var(--h2-size, 55px);
-  /* Ingen kursiv */
+  font-family: Alpino;
+  font-size: 55px;
   font-style: normal;
-  /* Vægt: bruger 400 for et blødere udtryk */
   font-weight: 400;
-  /* Line-height: 48px som i vedlagte billede */
-  line-height: var(--h2-line, 48px);
-  /* Margin: sikrer luft omkring titlen */
-  margin: 12px 0 18px 0;
-  /* Maksimal bredde: begræns linjelængde for bedre typografi */
-  max-width: 1100px;
+  line-height: 48px; /* 87.273% */
 }
 
 
