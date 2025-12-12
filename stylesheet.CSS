@@ -574,6 +574,118 @@ værdi = bund (36px)
   /* box-shadow: løfter kortet visuelt fra baggrunden. */
   box-shadow: 0 12px 30px rgba(12,40,90,0.08);
 }
+
+/* ----------------------- FORSIDE SEKTION 3 ----------------------- */
+.forside-3 {
+  /* Use normal page flow so the section sits inside the page container */
+  background: #f7fbff; /* light background to match mock (adjust as needed) */
+  padding: 48px 0;
+}
+
+.forside-3 .container {
+  /* Use the global container width but add a small local gutter */
+  max-width: 1152px;
+  margin: 0 auto;
+  padding: 0 20px; /* align with global container padding */
+}
+
+.forside-3--head h2 {
+  font-size: 28px;
+  margin: 0 0 8px 0;
+}
+.forside-3--lead {
+  margin: 0 0 24px 0;
+  color: #3b5368;
+}
+
+.forside-3--grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  align-items: start;
+}
+
+.forside-3--card {
+  background: white;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 6px 18px rgba(24,39,56,0.06);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center; /* center content horizontally */
+  text-align: center; /* center text inside each card */
+}
+
+.forside-3--icon {
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
+  margin: 0 auto; /* center icon */
+  display: block;
+}
+
+.forside-3--card h3 {
+  margin: 0;
+  font-size: 18px;
+}
+
+.forside-3--card p {
+  margin: 0;
+  color: #425a6b;
+  font-size: 15px;
+}
+
+.forside-3--meta {
+  list-style: none;
+  padding: 0;
+  margin: 8px 0 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  color: #6b8190;
+  font-size: 14px;
+}
+
+.forside-3--actions {
+  margin-top: 28px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.forside-3--note {
+  margin: 0;
+  color: #425a6b;
+}
+
+.forside-3 .cta-blue {
+  margin: 0;
+}
+
+/* Responsive: stack on smaller screens */
+@media (max-width: 899px) {
+  .forside-3--grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 599px) {
+  .forside-3 {
+    width: auto;
+    left: 0;
+    right: 0;
+    margin-left: 0;
+    margin-right: 0;
+    padding: 32px 0;
+  }
+  .forside-3 .container {
+    padding: 0 16px;
+  }
+  .forside-3--grid {
+    grid-template-columns: 1fr;
+  }
+}
 /* Kortene er nu ikke-links i HTML; tidl. CSS-regel der deaktiverede klikbarhed er fjernet. */
 .card-grid img{
   /* Selektor: .card-grid img
