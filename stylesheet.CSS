@@ -521,33 +521,6 @@ værdi = bund (36px)
   margin: 0 0 22px 0; /* 22px bund-margin for luft før kortene starter. */
 }
 
-/* --- FORSIDE 2: tekst venstre, billede højre (målrettet klassename "2") --- */
-/* Vi bruger attribute selectors for at ramme elementer med class="2" uden at ændre HTML */
-.forside[class~="2"] > .container[class~="2"]{
-  display: grid; /* To kolonner: tekst + billede */
-  grid-template-columns: 1fr 560px; /* Tekst fleksibel, billede fast - juster 560px efter behov */
-  gap: 40px; /* Afstand mellem tekst og billede */
-  align-items: center; /* Vertikal centering */
-}
-
-.forside[class~="2"] h2{ text-align: left; font-size: 56px; margin: 0 0 18px 0; }
-.forside[class~="2"] h4{ text-align: left; color: #556772; font-size: 18px; line-height: 1.6; }
-
-.forside[class~="2"] > .container[class~="2"] img{
-  width: 100%; /* Fylder den faste billed-kolonne */
-  height: auto; /* Bevar aspect ratio */
-  border-radius: 14px; /* Runde hjørner */
-  box-shadow: 0 18px 40px rgba(12,40,90,0.12); /* Blød skygge */
-  display: block;
-  object-fit: cover; /* Pæn beskæring hvis nødvendigt */
-}
-
-@media (max-width: 900px){
-  /* På mobil stables indhold vertikalt: først tekst, så billede */
-  .forside[class~="2"] > .container[class~="2"]{ grid-template-columns: 1fr; gap: 20px; }
-  .forside[class~="2"] h2{ font-size: 34px; }
-  .forside[class~="2"] > .container[class~="2"] img{ border-radius: 10px; box-shadow: 0 12px 30px rgba(12,40,90,0.08); }
-}
 
 /* Card grid: opsætter et grid med to kolonner og gitter-afstand */
 .card-grid{
@@ -779,7 +752,36 @@ footer .hurtig-links a{
 
 /* Responsiv: stabler kolonner på small screens */
 @media (max-width: 900px){
-  .footer-indhold{ grid-template-columns: 1fr; gap: 24px; }
-  .social-liste li a{ width:36px; height:36px; }
+  /* Stacker footer-kolonner og centrerer indhold på mobil */
+  .footer{ padding: 40px 12px 24px; }
+
+  .footer-indhold{
+    grid-template-columns: 1fr;
+    gap: 24px;
+    justify-items: center; /* centrer hver kolonne */
+    text-align: center; /* centrer tekst i hver kolonne */
+  }
+
+  /* Mindre indre padding på mobile så tekst ikke ser skæv ud */
+  .footer-indhold > * { padding: 0 12px; box-sizing: border-box; text-align: center; }
+
+  /* Social-ikoner: centreret række og mindre gap */
+  .social-liste{ display:flex; justify-content:center; gap:12px; margin: 12px 0; padding:0; }
+  .social-liste li a{ width:36px; height:36px; display:inline-flex; align-items:center; justify-content:center; }
+  .social-liste img{ width:20px; height:20px; opacity:0.95; }
+
+  /* Kontakt-oplysninger: centrer ikoner og tekst */
+  .kontakt-link{ justify-content:center; gap:10px; }
+  .kontakt-ikon{ width:18px; height:18px; flex:0 0 18px; }
+  .kontakt-tekst{ display:inline-block; }
+
+  /* Footer-overskrifter og beskrivelser: stram op */
+  .fod-overskrift{ text-align:center; font-size:18px; margin-bottom:8px; }
+  .fod-beskrivelse{ margin: 0 auto 12px; max-width:360px; text-align:center; }
+
+  .hurtig-links{ margin: 8px 0 0 0; display:block; }
+  .hurtig-links li{ margin-bottom:8px; }
+
+  .fod-bund{ padding-top: 20px; }
 }
 
