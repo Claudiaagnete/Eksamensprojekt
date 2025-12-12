@@ -296,6 +296,9 @@ body > * { box-sizing: border-box; }
 
 /* Hovedoverskrift i hero - stor og tydelig */
 .hero h1{
+  /* Fjern grid negative margin på mobil så layoutet ikke skubber indhold ud */
+  .forside-3--grid { margin: 0; }
+  .forside-3--card { width: 100%; }
   /* H1 tilpasser sig viewport: holder sig helst på én linje på store skærme,
      men tillader wrapping på mindre skærme så teksten ikke bliver afkortet. */
   color: #FFF;
@@ -577,16 +580,21 @@ værdi = bund (36px)
 
 /* ----------------------- FORSIDE SEKTION 3 ----------------------- */
 .forside-3 {
-  /* Use normal page flow so the section sits inside the page container */
-  background: #f7fbff; /* light background to match mock (adjust as needed) */
+  /* Selector: rammer <section class="forside-3"> - hele sektionen */
+  /* Baggrundsfarve for sektionen */
+  background: #ffffff; /* Lys, svag blå-hvid baggrund */
+  /* Lodret indvendig afstand: 48px top og bund */
   padding: 48px 0;
 }
 
 .forside-3 .container {
-  /* Use the global container width but add a small local gutter */
-  max-width: 1152px;
+  /* Selector: .container inde i .forside-3 - begrænser indholdets bredde */
+  /* Maksimal bredde for indholdet så kortene ikke bliver for brede */
+  max-width: 1280px;
+  /* Centrer containeren horisontalt */
   margin: 0 auto;
-  padding: 0 20px; /* align with global container padding */
+  /* Indvendig luft til venstre/højre */
+  padding: 0 28px;
 }
 
 .forside-3--head h2 {
@@ -596,44 +604,67 @@ værdi = bund (36px)
 .forside-3--lead {
   margin: 0 0 24px 0;
   color: #3b5368;
+  text-align: center; /* Center lead text */
 }
 
+/* Center the header block above the cards */
+.forside-3--head { text-align: center; }
+
 .forside-3--grid {
+  /* Grid-layout: definerer kolonner og mellemrum mellem kort */
   display: grid;
+  /* 3 kolonner med lige bredde */
   grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
+  /* Afstand mellem kortene */
+  gap: 36px;
+  /* Sørg for kort starter øverst i cellen */
   align-items: start;
 }
 
 .forside-3--card {
+  /* Kortbaggrund */
   background: white;
-  border-radius: 8px;
-  padding: 20px;
-  box-shadow: 0 6px 18px rgba(24,39,56,0.06);
+  /* Afrundede hjørner */
+  border-radius: 10px;
+  /* Indvendig afstand i kortet */
+  padding: 32px;
+  /* Skærm-skygge for dybde */
+  box-shadow: 0 10px 30px rgba(24,39,56,0.08);
+  /* Brug flexbox til at stable elementer lodret */
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  align-items: center; /* center content horizontally */
-  text-align: center; /* center text inside each card */
+  /* Lodret mellemrum mellem kortets børn */
+  gap: 16px;
+  /* Centrer indhold horisontalt */
+  align-items: center;
+  /* Centrer tekst */
+  text-align: center;
+  /* Minimumshøjde så kortene er visuelt robuste */
+  min-height: 320px;
+  /* Sørg for padding tæller med i bredden */
+  box-sizing: border-box;
 }
 
 .forside-3--icon {
-  width: 64px;
-  height: 64px;
+  /* Ikonstørrelse */
+  width: 84px;
+  height: 84px;
+  /* Sørg for billedet skaleres ordentligt */
   object-fit: contain;
-  margin: 0 auto; /* center icon */
+  /* Centrer billedet */
+  margin: 0 auto;
   display: block;
 }
 
 .forside-3--card h3 {
   margin: 0;
-  font-size: 18px;
+  font-size: 20px;
 }
 
 .forside-3--card p {
   margin: 0;
   color: #425a6b;
-  font-size: 15px;
+  font-size: 16px;
 }
 
 .forside-3--meta {
@@ -648,10 +679,14 @@ værdi = bund (36px)
 }
 
 .forside-3--actions {
+  /* Handlinger under kortene (note + cta) */
   margin-top: 28px;
+  /* Brug flex så vi nemt kan centrere CTA */
   display: flex;
-  align-items: center;
-  gap: 20px;
+  flex-direction: column; /* Stak note over CTA */
+  justify-content: center; /* Centrer indholdet vertikalt */
+  align-items: center; /* Centrer indholdet horisontalt */
+  gap: 12px; /* Mindre gap når stacked */
 }
 
 .forside-3--note {
@@ -660,31 +695,21 @@ værdi = bund (36px)
 }
 
 .forside-3 .cta-blue {
+  /* Fjern standard margin og gør knappen centreret af forælderen */
   margin: 0;
 }
 
-/* Responsive: stack on smaller screens */
-@media (max-width: 899px) {
-  .forside-3--grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
+/* Responsive: larger layout on desktop, two columns on wide tablets, stacked on mobile */
+@media (max-width: 1100px) {
+  .forside-3--grid { grid-template-columns: repeat(2, 1fr); gap: 28px; }
+  .forside-3 .container { max-width: 980px; }
 }
 
-@media (max-width: 599px) {
-  .forside-3 {
-    width: auto;
-    left: 0;
-    right: 0;
-    margin-left: 0;
-    margin-right: 0;
-    padding: 32px 0;
-  }
-  .forside-3 .container {
-    padding: 0 16px;
-  }
-  .forside-3--grid {
-    grid-template-columns: 1fr;
-  }
+@media (max-width: 700px) {
+  .forside-3--grid { grid-template-columns: 1fr; gap: 20px; }
+  .forside-3 .container { padding: 0 16px; }
+  .forside-3--card { padding: 24px; min-height: auto; }
+  .forside-3--icon { width: 64px; height: 64px; }
 }
 /* Kortene er nu ikke-links i HTML; tidl. CSS-regel der deaktiverede klikbarhed er fjernet. */
 .card-grid img{
