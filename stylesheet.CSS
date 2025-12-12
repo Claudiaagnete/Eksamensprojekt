@@ -314,7 +314,7 @@ body > * { box-sizing: border-box; }
 
   line-height: 1.05;   /*line-height tæt på 1 holder overskriften kompakt. Vi sætter 1.05
     så der er minimal lodret luft hvis overskriften wrapper på små skærme.  */
-  margin: 0 0 12px 0;
+  margin: 0 0 28px 0; /* større mellemrum under H1 */
   /*
     Wrapping og overflow:
     - white-space: normal tillader at teksten bryder til flere linjer på små skærme
@@ -351,7 +351,7 @@ body > * { box-sizing: border-box; }
   font-weight: 421;
   line-height: 35px;
   max-width: 760px;
-  margin: 0 auto 28px auto;
+  margin: 0 auto 36px auto; /* mere luft mellem H3 og CTA */
 }
 
 /* Primær CTA-knap i hero */
@@ -376,7 +376,7 @@ body > * { box-sizing: border-box; }
 
 /* Lille meta-tekst under knap (100% gratis · Ingen dømmerier · Lokalt i Herning) */
 .hero .meta{
-  margin-top: 20px;
+  margin-top: 28px;
   color: #FFF;
   text-align: center;
   font-family: Alpino, sans-serif;
@@ -399,24 +399,25 @@ body > * { box-sizing: border-box; }
 
 /* CTA: hvid pille-knap der matcher designet i PNG'en */
 .cta-white{
-  display: inline-flex;               /* display: inline-flex; - gør elementet til en fleksibel boks (flexbox), men lader det opføre sig som inline så det kan stå på samme linje som tekst. Flex gør det let at placere ikon og tekst pænt ved siden af hinanden. */
-  align-items: center;                /* align-items: center; - centrerer indholdet vertikalt i boksen, så ikon og tekst flugter lodret. */
-  gap: 10px;                          /* gap: 10px; - sætter et pænt mellemrum mellem ikon og tekst (10px). */
-  background: #FFFFFF;                /* background: #FFFFFF; - hvid baggrund for knappen. */
-  color: #0b6edb;                     /* color: #0b6edb; - tekstfarven indeni knappen (blå). */
-  padding: 12px 28px;                 /* padding: 12px 28px; - indvendig afstand: 12px top/bund, 28px venstre/højre, giver god klikzone. */
-  border-radius: 999px;               /* border-radius: 999px; - stor radius giver pille-form (meget rund). */
-  box-shadow: 0 8px 24px rgba(11,110,219,0.12); /* box-shadow: ... - let skygge under knappen for dybde/kontrast. */
-  text-decoration: none;              /* text-decoration: none; - fjerner understregning fra links, så det ligner en knap. */
-  font-family: var(--base-font-family); /* font-family: var(--base-font-family); - brug den globale font-variabel (Alpino hvis tilgængelig). */
-  font-weight: 400;                   /* font-weight: 400; - normal vægt (ikke fed). */
-  font-synthesis: none;               /* font-synthesis: none; - forhindrer browser i at lave en kunstig fed vægt hvis den præcise vægt mangler. */
-  /* Typografi - brug variabler så det er nemt at ændre senere */
-  font-size: var(--cta-font-size, 21px); /* font-size: var(..., fallback) - sætter skriftstørrelse (21px hvis variablen ikke findes). */
-  line-height: var(--cta-line-height, 24px); /* line-height: var(..., fallback) - kontrollerer lodret afstand i teksten. */
-  letter-spacing: var(--cta-letter-spacing, 0px); /* letter-spacing: var(..., fallback) - afstand mellem bogstaver. */
-  border: none;                       /* border: none; - fjern ramme rundt om knappen. */
-  cursor: pointer;                    /* cursor: pointer; - skifter musepekeren til en klik-hånd, signalerer klikbarhed. */
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: #FFFFFF;
+  color: #0b6edb;
+  padding: 12px 28px;
+  border-radius: 999px;
+  margin-top: 16px; /* ekstra luft over knappen */
+  margin-bottom: 20px; /* luft under knappen mod meta-tekst */
+  box-shadow: 0 8px 24px rgba(11,110,219,0.12);
+  text-decoration: none;
+  font-family: var(--base-font-family);
+  font-weight: 400;
+  font-synthesis: none;
+  font-size: var(--cta-font-size, 21px);
+  line-height: var(--cta-line-height, 24px);
+  letter-spacing: var(--cta-letter-spacing, 0px);
+  border: none;
+  cursor: pointer;
 }
 
 /* Hvis cta'en bruges som <a> (link) skal den stadig ligne en knap */
@@ -479,11 +480,11 @@ body > * { box-sizing: border-box; }
 @media (max-width: 899px){
   .hero-section{ padding: 64px 0 56px; min-height: 56vh; }
   .hero h1{ font-size: 40px; }
-  .hero h3{ font-size: 15px; max-width: 92%; }
+  .hero h3{ font-size: 15px; max-width: 92%; margin: 0 auto 18px auto; }
   .hero-button{ padding: 12px 20px; }
   .hero-button .button-text{ font-size:14px; }
   /* Mobil: mindsk CTA-typografi lidt for bedre pasform */
-  .cta-white{ font-size: 18px; line-height: 20px; padding: 10px 18px; }
+  .cta-white{ font-size: 18px; line-height: 20px; padding: 10px 18px; margin-top: 12px; }
   .hero .meta{ font-size:12px; }
 }
 
