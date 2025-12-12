@@ -1,3 +1,4 @@
+
 /* ------------------------------------------------------------
   stylesheet.css
   Kort fil-hoved: Denne fil indeholder styles for hele sitet.
@@ -48,7 +49,7 @@ h2 {
   font-family: Alpino;
   font-size: 55px;
   font-style: normal;
-  font-weight: 500;
+  font-weight: 421;
   line-height: 48px; /* 87.273% */
 }
 
@@ -157,16 +158,11 @@ body > * { box-sizing: border-box; }
   box-sizing: border-box;
 }
 
-/* Header: overordnet topbar og navigation */
-/* .site-header: wrapper for toppen af siden -  indeholder logo og nav */
-.site-header{ 
-  /* Hvid baggrund for ren topbar */
-  background:#fff; 
-}
 
-/* Gør header full-bleed: stræk baggrund til hele viewport-bredden
-   men behold centrering af .container indhold. Samme teknik som hero. */
+/* ----------------------- HEADER / NAVBAR ----------------------- */
+/* Genopbygget header: full-bleed baggrund, centreret container, logo til venstre, nav til højre */
 .site-header{
+  background: #ffffff;
   width: 100vw;
   position: relative;
   left: 50%;
@@ -176,72 +172,86 @@ body > * { box-sizing: border-box; }
   box-sizing: border-box;
 }
 
-/* Indre container: layout med flex for at placere elementer på linje */
 .site-header .container.header-inner{
-  display:flex;               /* Brug flexbox til horisontal layout */
-  align-items:center;         /* Vertikal centrerings af elementer */
-  justify-content:space-between; /* Fordel plads mellem venstre og højre */
-  gap:16px;                   /* Mellemrum mellem direkte børn */
-  padding:12px 20px;          /* Indvendig afstand i header */
+  max-width: 1152px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 88px; /* højde på header */
+  padding: 0; /* fjern container-padding for 1:1 gutter kontrol */
+  gap: 16px;
+  box-sizing: border-box;
 }
 
-/* Venstre side i header: logo + evt. brandtekst */
-.site-header .left{ 
-  display:flex; align-items:center; gap:12px; /* Læg logo og tekst ved siden af hinanden */
+.site-header .left{
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 
-/* Brand logo dimensioner */
-.brand-logo{ 
-  height:50px;  /* Højde på logo - bredde auto for korrekt aspect ratio */
-  width:auto; 
+.brand-logo{
+  height: 50px;
+  width: auto;
+  display: block;
 }
 
-/* Brand tekst ved siden af logo - bruger variabel for fontstørrelse */
+/* Exact layout overrides to match design: logo flush left, nav centered across remaining width */
+.site-header .left{ position: absolute; left: 24px; top: 50%; transform: translateY(-50%); z-index:50; }
+.site-header .container.header-inner .center-nav{
+  width: 100%;
+  display: flex;
+  justify-content: center; /* center nav items horizontally */
+  pointer-events: none; /* allow left/right click zones to pass through */
+}
+.site-header .container.header-inner .center-nav .main-nav{ pointer-events: auto; }
+
+/* Ensure the header uses exact outer gutters, not the global .container padding */
+.site-header > .container{ padding: 0; }
+
 .brand-text{
-  font-family: Alpino, sans-serif; /* Prioriter Alpino */
-  font-size: var(--brand-font-size); /* Variabel gør den nem at ændre */
-  font-weight:700;                 /* Fed tekst for genkendelighed */
-  color:#111;                      /* Mørk tekstfarve */
-  margin-left:6px;                 /* Lille afstand fra logo */
+  font-family: Alpino, sans-serif;
+  font-size: var(--brand-font-size, 16px);
+  font-weight: 700;
+  color: #111;
+  margin-left: 6px;
 }
 
-/* Navigation: liste med links */
 .main-nav .nav-list{
-  display:flex;    /* Horisontal liste */
-  gap:28px;        /* Afstand mellem links */
-  align-items:center;
-  margin:0; padding:0; list-style:none; /* Fjern standard listestil */
+  display: flex;
+  gap: 28px;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 
-/* Link-styling i hovednavigation */
 .main-nav .nav-link{
-  font-size: var(--nav-font-size); /* Brug variabel for enkel responsiv justering */
-  color:#374151;                  /* Mørk blå-grå farve */
-  text-decoration:none;           /* Fjern understregning */
-  font-weight:600;                /* Semi-fed for synlighed */
+  font-size: var(--nav-font-size, 16px);
+  color: #374151;
+  text-decoration: none;
+  font-weight: 600;
 }
 
-/* Hover-effekt for navigation */
-.main-nav .nav-link:hover{ 
-  color:#0b6edb; /* Skift farve ved hover for visuel feedback */
+.main-nav .nav-link:hover{
+  color: #0b6edb;
 }
 
-/* Tynd blå linje under header for visuelt afgrænsning */
-.header-underline{ 
-  height:4px; 
-  background: linear-gradient(90deg,#0b6edb 0%, #0062b3 100%); /* Gradient for dybde */
+.header-underline{
+  height: 4px;
+  background: linear-gradient(90deg,#0b6edb 0%, #0062b3 100%);
 }
-/* Header slut css */
 
-/* Media query for små skærme: skjul full nav og juster tekststørrelser */
-@media (max-width:700px){
-  /* Skjul navigation i header for at gøre plads til mobilmenu */
-  .main-nav .nav-list{ display:none; }
-  /* Mindre brand-tekst på mobile */
-  .brand-text{ font-size:14px; }
-  /* Mobile-overskriv af vigtige variabler: opdelt i :root for konsekvens */
-  :root{ --h1-size: 36px; --brand-font-size: 14px; --nav-font-size: 14px; }
+/* Mobile: skjul standard nav-list og juster header-højde */
+@media (max-width: 700px){
+  .main-nav .nav-list{ display: none; }
+  .site-header .container.header-inner{ height: auto; padding: 12px 16px; justify-content: space-between; }
+  .site-header .left{ position: static; transform: none; }
+  :root{ --brand-font-size: 14px; --nav-font-size: 14px; }
 }
+
+
+
 
 /* ----------------------- HERO SEKTION ----------------------- */
 /* Styling af den store hero-bjælke: gradient baggrund, centreret indhold,
@@ -504,7 +514,7 @@ værdi = bund (36px)
 /* Overskrift og understødende tekst - målrettet containerens h2/h4 */
 .forside > .container.forside h2,
 .forside .container.forside h2{
-  /* font-family: sætter den ønskede skrifttype for overskriften; Alpino prioriteres. */
+  /* font-family: sætter den ønskede skrifttype for overskrift; Alpino prioriteres. */
   font-family: Alpino, sans-serif;
   /* font-size: størrelse på overskriften; stor for visuel vægt. */
   font-size: 48px; /* Stor, tydelig overskrift der matcher billedet. */
@@ -609,16 +619,16 @@ værdi = bund (36px)
 /* Responsive: tilpas grid og kortstørrelser på smallere skærme */
 @media (max-width: 900px){
   /* Stak kolonner til én kolonne for smallere displays */
-  .card-grid{ grid-template-columns: 1fr; /* Stak kolonner: 1fr = én kolonne på mobil */
+  .card-grid{ grid-template-columns: 1fr; } /* Stak kolonner: 1fr = én kolonne på mobil */
 
   /* Mindre padding i container for at passe på små skærme */
-  .forside > .container.forside{ padding: 20px; /* Containerpadding: reduceret for mobil */
+  .forside > .container.forside{ padding: 20px; } /* Containerpadding: reduceret for mobil */
 
   /* Reducer h2-størrelse for mobil */
-  .forside > .container.forside h2{ font-size: 34px; /* H2 mobilstørrelse: 34px for læsbarhed */
+  .forside > .container.forside h2{ font-size: 34px; } /* H2 mobilstørrelse: 34px for læsbarhed */
 
   /* Mindre korthøjde og padding for pladsbesparelse */
-  .card{ padding: 22px; min-height: 110px; /* Kort padding og min-højde på mobil */
+  .card{ padding: 22px; min-height: 110px; } /* Kort padding og min-højde på mobil */
 
   /* Mindre ikonstørrelse (mobil) - justér via variabler hvis du vil */
   :root{ --card-icon-size: 36px; --card-title-size: 22px; }
@@ -706,127 +716,9 @@ html, body { overflow-x: hidden; }
   .forside-2 .forside-2-img img{ height: auto; border-radius: 8px; }
 }
 
-/* ----------------------- NAVBAR SEKTION ----------------------- */
-/* Navbar: logo left, nav items slide in from right */
-.navbar{
-  position: relative;
-  width: 100%;
-  background: transparent;
-  min-height: 72px;
-  display: block;
-}
 
-.navbar .inner{
-  max-width: 1100px;
-  margin: 0 auto;
-  position: relative;
-  padding: 12px 20px;
-  box-sizing: border-box;
-  height: 72px;
-}
 
-/* Logo pinned to the far left */
-.navbar .brand{
-  position: absolute;
-  left: 20px;
-  top: 50%;
-  transform: translateY(-50%);
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  z-index: 5;
-}
 
-.navbar .brand img{
-  height: 44px; /* adjust to fit */
-  max-height: 60px;
-  display: block;
-}
-
-/* Navigation sits on the right and items animate inward */
-.navbar nav{
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  gap: 18px;
-  height: 100%;
-  width: 100%;
-  padding-right: 20px; /* space from right edge */
-  box-sizing: border-box;
-}
-
-.navbar .nav-list{
-  display: flex;
-  gap: 20px;
-  align-items: center;
-  margin-left: auto; /* ensure items are at the right */
-}
-
-.navbar .nav-item{
-  list-style: none;
-}
-
-.navbar a.nav-link{
-  color: #0b1724;
-  text-decoration: none;
-  font-weight: 600;
-  padding: 8px 12px;
-  border-radius: 8px;
-  display: inline-block;
-  opacity: 0;
-  transform: translateX(36px);
-  animation: navSlideIn .42s cubic-bezier(.2,.9,.2,1) forwards;
-}
-
-/* Staggered delays so items appear one after another */
-.navbar a.nav-link:nth-child(1){ animation-delay: 0.06s; }
-.navbar a.nav-link:nth-child(2){ animation-delay: 0.12s; }
-.navbar a.nav-link:nth-child(3){ animation-delay: 0.18s; }
-.navbar a.nav-link:nth-child(4){ animation-delay: 0.24s; }
-.navbar a.nav-link:nth-child(5){ animation-delay: 0.30s; }
-
-@keyframes navSlideIn{
-  to{ transform: translateX(0); opacity: 1; }
-}
-
-/* Small CTA button in the nav - same animation behavior */
-.navbar .btn-nav{
-  background: linear-gradient(180deg,#2468ff,#1a54d9);
-  color: #fff;
-  padding: 8px 14px;
-  border-radius: 999px;
-  box-shadow: 0 8px 24px rgba(36,104,255,0.12);
-  border: none;
-  font-weight: 700;
-  display: inline-block;
-  opacity: 0;
-  transform: translateX(36px);
-  animation: navSlideIn .42s cubic-bezier(.2,.9,.2,1) forwards;
-}
-
-/* Ensure the nav content doesn't overlap the logo on narrow viewports */
-@media (max-width: 900px){
-  .navbar .inner{ padding-left: 84px; /* leave space for logo */ }
-  .navbar nav{ padding-right: 16px; }
-}
-
-/* Mobile: stack or collapse - simple stack here */
-@media (max-width: 640px){
-  .navbar .inner{ height: auto; padding: 12px 16px; }
-  .navbar .brand{ left: 16px; }
-  .navbar nav{ width: 100%; justify-content: flex-end; }
-  .navbar .nav-list{ gap: 12px; }
-}
-
-/* Optional: faster/disabled animations for users who prefer reduced motion */
-@media (prefers-reduced-motion: reduce){
-  .navbar a.nav-link,
-  .navbar .btn-nav{
-    animation: none;
-    transform: none;
-    opacity: 1;
-  }
-}
 
 /* ----------------------- FOOTER SEKTION ----------------------- */
 /* Footer / site-footer styling: gør footeren full-bleed ligesom header/hero
