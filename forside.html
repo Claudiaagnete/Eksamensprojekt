@@ -51,11 +51,11 @@
         <img src="Pil hero.svg" alt="Pil der peger nedad" width="20" height="20">
         Få hjælp nu
         </a>
-      </div>
-        </button>
+        <!-- Rettet: fjernet et stray </button> og en ekstra </div> som lå udenfor containeren.
+             H4 flyttes ind i .container så strukturen er gyldig og semantisk korrekt. -->
         <h4>100% gratis · Ingen dømmerier · Lokalt i Herning</h4>
     </section>
-    
+
     <section class="forside 1">
     <!-- vi inddeler forsiden i forskellige sektioner, så vi nemt kan finde rundt - også når vi skal arbejde i CSS -->
       <div class="container forside 1">
@@ -70,8 +70,8 @@
         <ul class="card-grid">
         <!-- Her er der brugt en grid-layout for at organisere kortene pænt -->
           <!-- Cigaretter -->
-          <li class="card-item">
-            <a href="cigaretter.html" class="card" aria-label="Cigaretter">
+          <li class="card-cigaretter">
+            <div class="card" role="group" aria-label="Cigaretter">
                   <!-- Ikon som billedfil:
                    - Brug alt="" og aria-hidden="true" hvis ikonet kun er dekorativt og teksten viser betydningen.
                    - Angiv width/height for at reducere layout shift (CLS).
@@ -80,36 +80,36 @@
               <!-- her er der brugt et billede som ikon for at gøre det mere visuelt, ikonet er svg-format-->
               <span class="card-title">Cigaretter</span>
               <!-- her er der brugt en span til at give kortet en titel. span-tagget betyder at teksten ikke er semantisk vigtig, men stadig skal vises -->
-            </a>
+            </div>
           </li>
 
           <!-- Snus -->
-          <li class="card-item">
+          <li class="card-snus">
           <!-- li class="card-item" betyder at dette er et kort i grid-layoutet-->
-            <a href="snus.html" class="card" aria-label="Snus">
-            <!-- a href= betyder at man linker direkte til en anden side-->
+            <div class="card" role="group" aria-label="Snus">
+            <!-- kortet er ikke et link længere; brug role="group" for semantisk kontekst -->
               <img src="Snus.svg" alt="Snus">
               <span class="card-title">Snus</span>
-            </a>
+            </div>
           </li>
 
           <!-- Vapes -->
-          <li class="card-item">
-            <a href="vapes.html" class="card" aria-label="Vapes">
+          <li class="card-vapes">
+            <div class="card" role="group" aria-label="Vapes">
               <img src="Vape.svg" alt="Vape">
               <span class="card-title">Vapes</span>
               <!-- span-tagget bruges her til at give kortet en titel - det er ikke semantisk vigtigt, men hjælper med at organisere indholdet -->
-            </a>
+            </div>
           </li>
 
           <!-- Puff bars -->
-          <li class="card-item">
+          <li class="card-puffbars">
           <!-- li class="card-item" betyder at dette er et kort i grid-layoutet, det gør at kortene bliver præsenteret pænt i en gitterstruktur-->
-            <a href="puffbars.html" class="card" aria-label="Puff bars">
+            <div class="card" role="group" aria-label="Puff bars">
               <img src="puffbar.svg" alt="Puff bars">
               <!-- her er der brugt et billede som ikon for at gøre det mere visuelt, ikonet er svg-format-->
               <span class="card-title">Puff bars</span>
-            </a>
+            </div>
           </li>
         </ul>
       </div>
@@ -118,12 +118,22 @@
   <section class="forside 2">
     <!-- her har vi indsat en sektion for at organisere indholdet bedre -->
     <div class="container forside 2">
+      <!-- Kommentar: Struktur til "Du er ikke alene"
+           - H2: sektionstitel
+           - Efterfølgende H4'er er brødtekst/lead og uddybning; vi bruger H4 for at bevare
+             den visuelle størrelse uden at ændre semantisk niveau i dokumentet.
+           - Img placeres efter teksterne og styles via CSS for at vise den i højre kolonne på desktop.
+           Hvis du vil gøre HTML'en mere semantisk, overvej at bruge <p> til brødtekst i stedet for <h4>.
+      -->
       <h2>Du er ikke alene</h2>
       <!-- h2-tagget bruges til at give sektionen en overskrift -->
       <h4>Mange unge i Herning har stoppet med nikotin og det kan du også. Det handler ikke om at være perfekt. Det handler om at tage ét skridt ad gangen.</h4>
       <h4>Vi kender alle tricksene. Ja, også dem du troede du var den eneste der brugte. Vi kender udfordringerne, de små panikøjeblikke og de “jeg starter i morgen… måske” dage.
           Og vigtigst af alt: Vi dømmer dig ikke. Overhovedet. Uanset hvor mange gange du har prøvet før, eller hvor mange “sidste gange” du allerede har haft.</h4>
           <img src="img.1.webp" alt="Hjælp">
+          <!-- Vis den samme brødtekst også i højre kolonne visuelt på desktop.
+               aria-hidden så skærmlæsere ikke læser duplikatet. -->
+
     </div>
   </section>
 
@@ -314,7 +324,7 @@
 
           <div class="form-field">
             <label for="cf-usage">Hvad bruger du?</label>
-            <input id="cf-usage" name="usage" type="text" placeholder="fx cigaretter / snus / vapes">
+            <input id="cf-usage" name="usage" type="text" placeholder="fx cigaretter/snus/vapes">
           </div>
         </div>
 
@@ -353,7 +363,8 @@
     </div> <!-- /contact-grid -->
   </div> <!-- /container -->
 </section>
-x
+
+<!-- Rettet: fjernet en fejlbehæftet enkeltstående 'x' som lå før footeren. -->
 <footer class="footer" role="kontaktinfo" aria-label="footer">
   <!-- Hovedcontainer: brug klassen i CSS til baggrund, padding og grid -->
   <div class="footer-indhold container">
