@@ -7,3 +7,32 @@
     <title>Læs mere</title>
     <link href="stylesheet.css" rel="stylesheet" />
   </head>
+    <body>
+        <!--her indsætter vi logo til banner-->
+  <header class="site-header" role="banner">
+  <div class="container header-inner">
+   <div>
+   <!-- her gør vi banneret klikbart, så når man klikker på banneret kommer man ind på forsiden-->
+    <a class="brand" href="forside.html" aria-label="Forside - Herning Kommune">
+    <img src="logo.webp" alt="Herning Kommune logo" class="brand-logo" />
+   </a>
+   </div>
+  <!-- Her laver vi en nav-bar med klikbare links til undersiden-->
+  <nav id="mainNavbar" class="main-nav" role="navigation" aria-label="Hovednavigation">
+  <!-- role="navigation": angiver at dette er en navigation-landmark for assistive teknologier -->
+  <!-- aria-label="Hovednavigation": kort beskrivelse, så brugere kan identificere denne navigation -->
+    <ul class="nav-list">
+    <!-- <ul class="nav-list">: liste over navigationspunkter -->
+      <li class="nav-item"><a class="nav-link" href="dinemuligheder.html">Dine muligheder</a></li>
+      <li class="nav-item"><a class="nav-link" href="ungefortæller.html">Unge fortæller</a></li>
+      <li class="nav-item"><a class="nav-link" href="nikoberegneren.html">Nikoberegneren</a></li>
+      <li class="nav-item"><a class="nav-link" href="chatogkontakt.html">Chat & kontakt</a></li>
+      <li class="nav-item"><a class="nav-link" href="omnikotin.html">Om nikotin</a></li>
+    <!-- her kan man se alle vores undersider, som er klikkable links, det er de pga. attributet href -->
+    </ul>
+  </nav>
+  </div>
+</header>
+
+</body>
+</html>
