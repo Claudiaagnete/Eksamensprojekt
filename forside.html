@@ -137,59 +137,59 @@
 </div>
   </section>
 
-  <section class="forside-3">
-    <div class="container">
-  <h2>Få hjælp her</h2>
-  <h4 class="lead">Vi har forskellige tilbud - find det der passer til dit liv</h4>
-
-  <div class="cards">
-        <article class="card">
-          <div class="meta">
-            <div class="icon-circle"><img src="kalenderblåbaggrund.svg" alt="" width="28" height="28" aria-hidden="true"></div>
-            <div>
-              <h3>Personligt rygestop-forløb</h3>
-              <h4>Et skræddersyet forløb med fast kontaktperson, der følger dig hele vejen. Mødes når det passer dig.</h4>
-            </div>
-          </div>
-                <div class="info">
-                  <div class="item">4-6 samtaler over 3 måneder</div>
-                  <div class="item">Sundhedscenter Herning</div>
-                </div>
-        </article>
-
-        <article class="card">
-          <div class="meta">
-            <div class="icon-circle"><img src="beskedbobelblåbaggrund.svg" alt="" width="28" height="28" aria-hidden="true"></div>
-            <div>
-              <h3>Drop-in rådgivning</h3>
-              <h4>Kom forbi uden at booke tid. Stil spørgsmål, få råd, eller bare tal om det. Ingen forpligtelser.</h4>
-            </div>
-          </div>
-          <div class="info">
-            <div class="item">Hver torsdag 15-18</div>
-            <div class="item">Ungdomsskolen, Herning</div>
-          </div>
-        </article>
-
-        <article class="card">
-          <div class="meta">
-            <div class="icon-circle"><img src="tomenneskerblåbaggrund.svg" alt="" width="28" height="28" aria-hidden="true"></div>
-            <div>
-              <h3>Gruppeforløb for unge</h3>
-              <h4>Mød andre i samme situation. I hjælper hinanden og deler tricks til at holde fast. Det er faktisk ret fedt.</h4>
-            </div>
-          </div>
-          <div class="info">
-            <div class="item">6 uger, 1 gang om ugen</div>
-            <div class="item">Online eller fysisk i Herning</div>
-          </div>
-        </article>
-      </div>
-
-      <div class="cta-note">Ikke sikker på hvad der passer dig bedst? Det er helt okay.</div>
-      <a class="btn-primary" href="chatogkontakt.html">Tal med en rådgiver</a>
+  <section class="forside 3">
+    <div class="overskrift-forside-3">
+    <h2>Få hjælp her</h2>
+    <h4>Vi har forskellige tilbud - find det der passer til dit liv</h4>
     </div>
-  </section>
+    <!-- h4-tagget bruges til at give sektionen en undertitel/brødtekst -->
+    <div class="container forside 3">
+    <!-- Liste gør det nemt at lave grid i CSS -->
+
+      <!-- Personligt rygestop-forløb -->
+      <div class="boks">
+      <!-- her er der brugt en container for at samle indholdet til dette specifikke tilbud, nemlig class="boks"-->
+<ul class="box-grid 1">
+  <li class="box-item"><a class="box"><img class="kalender forside" src="kalenderblåbaggrund.svg" alt="kalender"></a></li>
+  <!-- li class="box-item" betyder at dette er et kort i grid-layoutet, det gør at kortene bliver præsenteret pænt i en gitterstruktur-->
+  <h3>Personligt rygestop-forløb</h3>
+  <h4>Et skræddersyet forløb med fast kontaktperson, der følger dig hele vejen. Mødes når det passer dig.</h4>
+  <li class="box-item"><a class="box"><img class="kalender sort forside" src="kalendersort.svg" alt="kalender"><span>4-6 samtaler over 3 måneder</span></a></li>
+  <!-- vi har valgt at samle det i en ugrupperet liste, fordi det gør det nemmere at tilføje flere elementer senere hen -->
+  <li class="box-item"><a class="box"><img class="lokation sort forside" src="lokationsort.svg" alt="lokation"><span>Sunhedscenter Herning</span></a></li>
+</ul>  
+
+      <!-- Drop-in rådgivning-->
+      <div class="boks">
+<ul class="box-grid 2">
+<!-- ul class=box grid 2 betyder at dette er en ny sektion i grid-layoutet, ul gør at man kan tilføje flere elementer uden at skulle ændre på strukturen-->
+  <li class="box-item"><a class="box"><img class="talebobel forside" src="beskedbobelblåbaggrund.svg" alt="talebobel"></a></li>
+  <h3>Drop-in rådgivning</h3>
+  <h4>Kom forbi uden at booke tid. Stil spørgsmål, få råd, eller bare tal om det. Ingen forpligtelser.</h4>
+  <li class="box-item"><a class="box"><img class="Kalender sort forside" src="kalendersort.svg" alt="kalender"><span>Hver torsdag 15-18</span></a></li>
+  <!-- alt-teksten beskriver billedet for bedre tilgængelighed -->
+  <li class="box-item"><a class="box"><img class="lokation sort forside" src="lokationsort.svg" alt="lokation"><span>Ungdomsskolen, Herning</span></a></li>
+</ul>  
+
+      <!-- Gruppeforløb for unge-->
+      <div class="boks">
+<ul class="box-grid 3">
+<!-- box-grid 3 fortæller os at alt i denne class hører sammen-->
+  <li class="box-item"><a class="box"><img class="2 mennesker forside" src="tomenneskerblåbaggrund.svg" alt="2 mennesker"></a></li>
+  <h3>Gruppeforløb for unge</h3>
+  <!-- her er der brugt en container for at samle indholdet til dette specifikke tilbud, nemlig class="boks"-->
+  <h4>Mød andre i samme situation. I hjælper hinanden og deler tricks til at holde fast. Det er faktisk ret fedt</h4>
+  <li class="box-item"><a class="box"><img class="Kalender sort forside" src="kalendersort.svg" alt="kalender"><span>6 uger, 1 gang om ugen</span></a></li>
+  <li class="box-item"><a class="box"><img class="lokation sort forside" src="lokationsort.svg" alt="lokation"><span>Online eller fysisk i Herning</span></a></li>
+</ul> 
+  </div>
+  <h4>Ikke sikker på hvad der passer dig bedst? Det er helt okay.</h4>
+  <!-- h4 er en overskrift-->
+        <a href="chatogkontakt.html" class="cta-blue" aria-label="Gå til siden for at få hjælp nu">
+        <!-- a href" linker os direkte videre til undersiden chat&kontakt når man klikker på det-->
+        Tal med en rådgiver
+        </a>
+</section>
 
 <section class="forside-4">
 <!-- section class="forside 4" bruges til at definere en ny sektion på forsiden, det har vi gjort for at adskille indholdet visuelt og gøre det nemmere at navigere i-->
@@ -241,7 +241,7 @@
     <!-- Hoved-overskrift for sektionen -->
     <h2 class="overskrift">Tag første skridt</h2>
     <!-- Underrubrik / hjelpetekst -->
-  <h4 class="underrubrik">Kontakt os - helt uforpligtende og fortroligt</h4>
+    <p class="underrubrik">Kontakt os - helt uforpligtende og fortroligt</p>
     <!-- Grid der deler indhold i to kolonner (venstre: kontaktmetoder, højre: formular).
          CSS vil senere styre grid/flex-layout via .contact-grid. -->
     <div class="contact-grid">
@@ -360,7 +360,7 @@
         </a>
           <!-- privacy-note: til at informere brugeren om fortrolig behandling -->
           <!-- Overvej at give denne paragraf et id og linke til en privacy-politik hvis nødvendigt -->
-          <h4 class="privacy-note" id="privacy-note">Alle oplysninger behandles fortroligt</h4>
+          <p class="privacy-note" id="privacy-note">Alle oplysninger behandles fortroligt</p>
         </div>
       </form>
     </div> <!-- /contact-grid -->
@@ -374,9 +374,9 @@
     <!-- KOLONNE 1: Om / branding -->
     <div class="fod-kolonne fod-om">
       <div class="fod-overskrift">Rygestop Herning</div>
-  <h4 class="fod-beskrivelse fod-andet-tekst">
-    Et tilbud fra Herning Kommune til unge der vil være fri for nikotin. Gratis, fortroligt og uden dømmelser.
-  </h4>
+  <p class="fod-beskrivelse fod-andet-tekst">
+        Et tilbud fra Herning Kommune til unge der vil være fri for nikotin. Gratis, fortroligt og uden dømmelser.
+  </p>
 
       <!-- Sociale links (ikonbilleder er dekorative => alt="") -->
       <ul class="social-liste" aria-label="Følg os">
@@ -424,7 +424,7 @@
   <!-- BUNDLINJE: copyright / note -->
   <div class="fod-bund" role="note" aria-label="Copyright">
     <!-- dekorativt hjerte: aria-hidden fordi det er pynt -->
-  <h4 class="fod-copyright">Lavet med <img src="hjerte.svg" alt="hjerte ikon" class="hjerte-ikon" aria-hidden="true"> af Herning Kommune · 2025</h4>
+    <p class="fod-copyright">Lavet med <img src="hjerte.svg" alt="hjerte ikon" class="hjerte-ikon" aria-hidden="true"> af Herning Kommune · 2025</p>
   </div>
 </footer>
 <!-- her slutter footeren -->

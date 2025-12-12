@@ -1,4 +1,3 @@
-
 /* ------------------------------------------------------------
   stylesheet.css
   Kort fil-hoved: Denne fil indeholder styles for hele sitet.
@@ -505,7 +504,7 @@ værdi = bund (36px)
 /* Overskrift og understødende tekst - målrettet containerens h2/h4 */
 .forside > .container.forside h2,
 .forside .container.forside h2{
-  /* font-family: sætter den ønskede skrifttype for overskrift; Alpino prioriteres. */
+  /* font-family: sætter den ønskede skrifttype for overskriften; Alpino prioriteres. */
   font-family: Alpino, sans-serif;
   /* font-size: størrelse på overskriften; stor for visuel vægt. */
   font-size: 48px; /* Stor, tydelig overskrift der matcher billedet. */
@@ -610,16 +609,16 @@ værdi = bund (36px)
 /* Responsive: tilpas grid og kortstørrelser på smallere skærme */
 @media (max-width: 900px){
   /* Stak kolonner til én kolonne for smallere displays */
-  .card-grid{ grid-template-columns: 1fr; } /* Stak kolonner: 1fr = én kolonne på mobil */
+  .card-grid{ grid-template-columns: 1fr; /* Stak kolonner: 1fr = én kolonne på mobil */
 
   /* Mindre padding i container for at passe på små skærme */
-  .forside > .container.forside{ padding: 20px; } /* Containerpadding: reduceret for mobil */
+  .forside > .container.forside{ padding: 20px; /* Containerpadding: reduceret for mobil */
 
   /* Reducer h2-størrelse for mobil */
-  .forside > .container.forside h2{ font-size: 34px; } /* H2 mobilstørrelse: 34px for læsbarhed */
+  .forside > .container.forside h2{ font-size: 34px; /* H2 mobilstørrelse: 34px for læsbarhed */
 
   /* Mindre korthøjde og padding for pladsbesparelse */
-  .card{ padding: 22px; min-height: 110px; } /* Kort padding og min-højde på mobil */
+  .card{ padding: 22px; min-height: 110px; /* Kort padding og min-højde på mobil */
 
   /* Mindre ikonstørrelse (mobil) - justér via variabler hvis du vil */
   :root{ --card-icon-size: 36px; --card-title-size: 22px; }
@@ -707,9 +706,127 @@ html, body { overflow-x: hidden; }
   .forside-2 .forside-2-img img{ height: auto; border-radius: 8px; }
 }
 
+/* ----------------------- NAVBAR SEKTION ----------------------- */
+/* Navbar: logo left, nav items slide in from right */
+.navbar{
+  position: relative;
+  width: 100%;
+  background: transparent;
+  min-height: 72px;
+  display: block;
+}
 
+.navbar .inner{
+  max-width: 1100px;
+  margin: 0 auto;
+  position: relative;
+  padding: 12px 20px;
+  box-sizing: border-box;
+  height: 72px;
+}
 
+/* Logo pinned to the far left */
+.navbar .brand{
+  position: absolute;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  z-index: 5;
+}
 
+.navbar .brand img{
+  height: 44px; /* adjust to fit */
+  max-height: 60px;
+  display: block;
+}
+
+/* Navigation sits on the right and items animate inward */
+.navbar nav{
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 18px;
+  height: 100%;
+  width: 100%;
+  padding-right: 20px; /* space from right edge */
+  box-sizing: border-box;
+}
+
+.navbar .nav-list{
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  margin-left: auto; /* ensure items are at the right */
+}
+
+.navbar .nav-item{
+  list-style: none;
+}
+
+.navbar a.nav-link{
+  color: #0b1724;
+  text-decoration: none;
+  font-weight: 600;
+  padding: 8px 12px;
+  border-radius: 8px;
+  display: inline-block;
+  opacity: 0;
+  transform: translateX(36px);
+  animation: navSlideIn .42s cubic-bezier(.2,.9,.2,1) forwards;
+}
+
+/* Staggered delays so items appear one after another */
+.navbar a.nav-link:nth-child(1){ animation-delay: 0.06s; }
+.navbar a.nav-link:nth-child(2){ animation-delay: 0.12s; }
+.navbar a.nav-link:nth-child(3){ animation-delay: 0.18s; }
+.navbar a.nav-link:nth-child(4){ animation-delay: 0.24s; }
+.navbar a.nav-link:nth-child(5){ animation-delay: 0.30s; }
+
+@keyframes navSlideIn{
+  to{ transform: translateX(0); opacity: 1; }
+}
+
+/* Small CTA button in the nav - same animation behavior */
+.navbar .btn-nav{
+  background: linear-gradient(180deg,#2468ff,#1a54d9);
+  color: #fff;
+  padding: 8px 14px;
+  border-radius: 999px;
+  box-shadow: 0 8px 24px rgba(36,104,255,0.12);
+  border: none;
+  font-weight: 700;
+  display: inline-block;
+  opacity: 0;
+  transform: translateX(36px);
+  animation: navSlideIn .42s cubic-bezier(.2,.9,.2,1) forwards;
+}
+
+/* Ensure the nav content doesn't overlap the logo on narrow viewports */
+@media (max-width: 900px){
+  .navbar .inner{ padding-left: 84px; /* leave space for logo */ }
+  .navbar nav{ padding-right: 16px; }
+}
+
+/* Mobile: stack or collapse - simple stack here */
+@media (max-width: 640px){
+  .navbar .inner{ height: auto; padding: 12px 16px; }
+  .navbar .brand{ left: 16px; }
+  .navbar nav{ width: 100%; justify-content: flex-end; }
+  .navbar .nav-list{ gap: 12px; }
+}
+
+/* Optional: faster/disabled animations for users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce){
+  .navbar a.nav-link,
+  .navbar .btn-nav{
+    animation: none;
+    transform: none;
+    opacity: 1;
+  }
+}
 
 /* ----------------------- FOOTER SEKTION ----------------------- */
 /* Footer / site-footer styling: gør footeren full-bleed ligesom header/hero
@@ -874,17 +991,5 @@ footer .hurtig-links a{
   .hurtig-links li{ margin-bottom:8px; }
 
   .fod-bund{ padding-top: 20px; }
-}
-
-
-/* Specifik override for .forside-3 hvis andre generelle .card regler træder i kraft */
-.forside-3 .cards{ display: grid !important; grid-template-columns: repeat(3, 1fr) !important; gap: 28px !important; }
-.forside-3 .card{ max-width: 100%; width: 100%; box-sizing: border-box; }
-
-@media (max-width: 980px){
-  .forside-3 .cards{ grid-template-columns: repeat(2, 1fr) !important; }
-}
-@media (max-width: 640px){
-  .forside-3 .cards{ grid-template-columns: 1fr !important; }
 }
 
