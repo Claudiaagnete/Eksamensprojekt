@@ -1,4 +1,11 @@
 
+/* ------------------------------------------------------------
+  stylesheet.css
+  Kort fil-hoved: Denne fil indeholder styles for hele sitet.
+  - Bevar desktop-first tankegang (desktopregler øverst, mobile overrides nederst)
+  - Kommentér i danske linjer så fremtidige udviklere forstår intent.
+  - Undgå strukturelle ændringer her; hvis du vil ændre DOM, gør det i HTML.
+  ------------------------------------------------------------ */
 /* H1: hovedoverskrift-styling
   - color: tekstfarven (her hvid, bruges ofte i hero)
   - text-align: centrerer overskriften horisontalt
@@ -39,13 +46,11 @@ h1 {
 h2 {
   color: #0A0A0A;
   text-align: center;
-  font-family: 'Alpino', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+  font-family: Alpino;
   font-size: 55px;
   font-style: normal;
-  /* Bemærk: 507 er angivet af brugeren. Browser vil bruge nærmeste tilgængelige vægt hvis Alpino ikke
-    indeholder præcis 507. Hvis du foretrækker fuld kompatibilitet, brug 500 eller 600. */
-  font-weight: 507;
-  line-height: 48px; /* tæt line-height som brugeren ønskede */
+  font-weight: 500;
+  line-height: 48px; /* 87.273% */
 }
 
 
@@ -122,6 +127,9 @@ h5 {
   /* Footer specific size tokens (brugerens præcise ønsker) */
   --footer-heading-size: 21px; /* Overskrift i footer (brugerspecifik) */
   --footer-body-size: 15px; /* Sekundær størrelse til beskrivelser og links */
+  /* Kort-variabler: gør det nemt at justere ikon- og titelstørrelser for alle bokse */
+  --card-icon-size: 44px; /* Standard ikonstørrelse for kort */
+  --card-title-size: 32px; /* Standard titelstørrelse for kort */
 }
 
 /* Fjerner browserens default margin så full-bleed elementer kan nå kanten */
@@ -136,6 +144,11 @@ body{
   /* Sæt global font-family så al tekst bruger Alpino hvis den er tilgængelig */
   font-family: var(--base-font-family);
 }
+
+/* Forebyg uønsket horisontal scroll: skjul overflow-x og brug box-sizing */
+html, body { overflow-x: hidden; }
+/* Sikr at alle direkte children måles inden for deres bokse for at undgå 100vw + padding problemer */
+body > * { box-sizing: border-box; }
 
 /* Global container: brugt til at centrere indhold og holde en max-bredde */
 .container{
@@ -255,8 +268,11 @@ body{
   right: 50%;
   margin-left: -50vw;          /* Træk elementet ud til venstre kant */
   margin-right: -50vw;         /* Træk elementet ud til højre kant */
-  box-sizing: border-box;      /* Sørg for padding regnes ind i bredde */
+  box-sizing: border-box;   
+     /* Sørg for padding regnes ind i bredde */
+     margin-bottom: var(--hero-bottom-gap, 80px);
 }
+
 
 /* Ekstra finjustering for brede desktops: sikr præcis højde på meget brede skærme */
 @media (min-width: 1400px){
@@ -462,6 +478,239 @@ body{
   .hero .meta{ font-size:12px; }
 }
 
+/* ----------------------- FORSIDE SEKTION 1----------------------- */
+/* Sektion: .forside (bruges på flere sektioner; denne blok giver "forside 1" sit visuelle udtryk)
+   Nedenfor står forklarende kommentarer på hver linje, så hver regel er tydelig. */
+/* NOTE: denne sektion indeholder forklarende kommentarer til .forside-reglerne. Ingen tomme selectors. */
+.forside{
+  /* background: sætter baggrundsfarven for hele .forside-sektionen. */
+  background: #f6f8fa; /* Lys, næsten hvid baggrund for sektionen - giver luft og kontrast til kortene. */
+  /* padding: top/right/bottom/left (her kun top og bottom defineret) - skaber lodret afstand indeni sektionen. */
+  padding: 40px 0 56px; /* 40px top-luft, 0 horisontalt, 56px bund-luft for balance under kortene. */
+}
+
+
+.forside > .container.forside,
+.forside .container.forside{
+  /* Boksen/containeren er transparent så h2/h4 står direkte på sektionens baggrund. */
+  background: transparent; /* Gør baggrunden gennemsigtig i stedet for hvid boks. */
+  padding: 25px 28px 10px; /* Bevar padding så overskrift og kort har plads omkring sig. 
+værdi = top (32px)
+værdi = højre og venstre (28px)
+værdi = bund (36px)
+*/
+  
+  box-shadow: none; /* Fjern skygge. */
+}
+/* Overskrift og understødende tekst - målrettet containerens h2/h4 */
+.forside > .container.forside h2,
+.forside .container.forside h2{
+  /* font-family: sætter den ønskede skrifttype for overskrift; Alpino prioriteres. */
+  font-family: Alpino, sans-serif;
+  /* font-size: størrelse på overskriften; stor for visuel vægt. */
+  font-size: 48px; /* Stor, tydelig overskrift der matcher billedet. */
+  /* line-height: afstand mellem linjerne i overskriften, tæt for kompakt udtryk. */
+  line-height: 1.05; /* Lidt over 1 for at undgå sammenklumpning hvis overskriften bryder. */
+  /* margin: y-axis top/right/bottom/left - styrer afstand til øvrigt indhold. */
+  margin: 12px 0 6px; /* 12px over, 6px under for passende luft imod meta-tekst og kort. */
+  /* color: mørk tekstfarve for god kontrast mod den lyse boks. */
+  color: #0b0b0b;
+}
+.forside > .container.forside h4,
+.forside .container.forside h4{
+  /* color: sekundær farve til hjælp- eller undertekst. */
+  color: #556772; /* Dæmpet blågrå farve for lavere visuel prioritet end h2. */
+  /* font-size: mindre end h2, men stor nok til læsbarhed. */
+  font-size: 18px;
+  /* margin: afstand under hjælpeteksten så kortene ikke sidder for tæt. */
+  margin: 0 0 22px 0; /* 22px bund-margin for luft før kortene starter. */
+}
+
+/* Card grid: opsætter et grid med to kolonner og gitter-afstand */
+.card-grid{
+  /* list-style: none fjerner bullets fra <ul> så det ser ud som rene kort. */
+  list-style:none;
+  /* padding: fjerner indvendig padding fra ul for at styre layout præcist. */
+  padding:0;
+  /* margin: top/right/bottom/left - her kun top-margin for afstand fra overskriften. */
+  margin: 18px 0 0 0; /* 18px top-margin så kortene starter lidt under hjælpeteksten. */
+  /* display: grid aktiverer CSS Grid for at lave to kolonner. */
+  display:grid;
+  /* grid-template-columns: to lige store kolonner. */
+  grid-template-columns: repeat(2, 1fr);
+  /* gap: afstand mellem rækker og kolonner i gridet. */
+  gap: 22px; /* 22px mellemrum giver luftig fornemmelse uden at være for langt. */
+}
+.card-item{ margin:0; /* Nulstil margin på hvert list-item for forudsigelig layout. */ }
+
+/* Kortet: styling af hver klikbare kortbox */
+.card{
+  /* display:flex: gør det nemt at placere ikon øverst og titel nederst vha. column-flow. */
+  display:flex;
+  /* flex-direction: column - stabl indhold lodret (ikon over, titel under). */
+  flex-direction:column;
+  /* justify-content: space-between - placerer titel i bunden og ikon nær toppen. */
+  justify-content:space-between;
+  /* text-decoration: none - fjerner understregning hvis kortet er et link (<a>). */
+  text-decoration:none;
+  /* color: tekstfarve inde i kortet - hvid for kontrast mod gradientbaggrund. */
+  color: #fff;
+  /* padding: indvendig afstand i kortet for ikon og tekst. */
+  padding: 34px 28px; /* 34px top/bund, 28px sider for generøs klikzone. */
+  /* min-height: sikrer at alle kort har en ensartet højde. */
+  min-height: 140px;
+  /* border-radius: afrundede hjørner på kortet for pille-form look. */
+  border-radius: 14px;
+  /* box-shadow: løfter kortet visuelt fra baggrunden. */
+  box-shadow: 0 12px 30px rgba(12,40,90,0.08);
+}
+/* Kortene er nu ikke-links i HTML; tidl. CSS-regel der deaktiverede klikbarhed er fjernet. */
+.card-grid img{
+  /* Selektor: .card-grid img
+    - Vælger alle <img> elementer som er inde i et element med klassen .card-grid.
+    - Bruges her fordi hvert kort har et ikon som <img> og vi gerne vil give dem
+     ensartet størrelse uden at skulle ændre hver enkelt fil.
+  */
+  width: var(--card-icon-size); /* Bredde på ikonet - styres fra :root via --card-icon-size */
+  height: var(--card-icon-size); /* Højde på ikonet - samme værdi som bredde for at bevare kvadratisk form */
+  display: block; /* Gør billedet til et blok-element så margin/padding håndteres mere forudsigeligt */
+  /* Bemærk for nybegyndere:
+    - Ændrer du kun --card-icon-size i :root, påvirker det alle ikoner på samme tid.
+    - Hvis du kun vil ændre et enkelt ikon, kan du give det en ekstra klasse og målrette den.
+  */
+}
+
+.card-grid .card-title{
+  /* Selektor: .card-grid .card-title
+    - Vælger elementer med klassen .card-title som er inde i .card-grid.
+    - Dette er typisk titlen på hvert kort (fx "Cigaretter").
+  */
+  font-size: var(--card-title-size); /* Skriftstørrelse styret via variabel for enkel global justering */
+  font-weight: 500; /* Gør titlen lidt fed, men ikke helt sort (700) */
+  margin-top: 12px; /* Læg lidt afstand over titlen så den ikke sidder helt op ad ikonet */
+  /* Tips til nybegyndere:
+    - Ændrer du margin-top, flytter du hvor langt titlen står fra ikonet.
+    - Vil du ændre farven på titlen, tilføj fx: color: #fff; eller color: #000;
+  */
+}
+
+/* Separate, redigerbare regler for hver boks-type - gør det let at justere farver og stil individuelt */
+/* Cigaretter: brug denne blok til at ændre baggrund, skygge, border osv. */
+.card-cigaretter .card{ background: linear-gradient(135deg,#51A2FF 0%, #155DFC 100%); /* Blå gradient for Cigaretter */ }
+
+/* Snus: juster denne blok for snus-kortet */
+.card-vapes .card{ background: linear-gradient(135deg,#00D3F2 0%, #2B7FFF 100%); /* Gradient for Snus */ }
+
+/* Vapes: juster denne blok for vape-kortet */
+.card-snus .card{ background: linear-gradient(135deg,#05DF72 0%, #009966 100%); /* Grøn gradient for Vapes */ }
+
+/* Puffbars: juster denne blok for puffbar-kortet */
+.card-puffbars .card{ background: linear-gradient(135deg,#05DF72 0%, #00A63E 100%); /* Grøn gradient for Puff bars  */ }
+
+/* Responsive: tilpas grid og kortstørrelser på smallere skærme */
+@media (max-width: 900px){
+  /* Stak kolonner til én kolonne for smallere displays */
+  .card-grid{ grid-template-columns: 1fr; } /* Stak kolonner: 1fr = én kolonne på mobil */
+
+  /* Mindre padding i container for at passe på små skærme */
+  .forside > .container.forside{ padding: 20px; } /* Containerpadding: reduceret for mobil */
+
+  /* Reducer h2-størrelse for mobil */
+  .forside > .container.forside h2{ font-size: 34px; } /* H2 mobilstørrelse: 34px for læsbarhed */
+
+  /* Mindre korthøjde og padding for pladsbesparelse */
+  .card{ padding: 22px; min-height: 110px; } /* Kort padding og min-højde på mobil */
+
+  /* Mindre ikonstørrelse (mobil) - justér via variabler hvis du vil */
+  :root{ --card-icon-size: 36px; --card-title-size: 22px; }
+}
+
+
+/* ----------------------- FORSIDE SEKTION 2 ----------------------- */
+/* Scoped rules for the "Du er ikke alene" section. Keeps container margins
+   aligned with other sections and places the image at 530x530 on the right
+   on desktop. Mobile stacks the image under the text. */
+.forside-2{
+  position: relative; /* contains the absolutely positioned image */
+  background: #f6f8fa; /* match the other forside section background */
+  padding: 40px 0; /* vertical spacing similar to other sections */
+  margin-top: 80px; /* extra gap from previous section on desktop */
+  overflow: visible;
+}
+
+.forside-2 > .container-forside-2{
+  max-width: 1152px; /* same max-width as .container */
+  margin: 0 auto;    /* center horizontally like other containers */
+  padding: 56px 28px; /* generous top padding to match visual rhythm */
+  /* Prevent text from flowing under the absolutely positioned image on desktop.
+    Add right padding equal to image width (530px) + container padding (28px) + gutter (24px) = 582px.
+    Use max() so padding is at least the required space on typical desktops; mobile rules later override this. */
+  padding-right: max(582px, calc(28px + 530px + 24px));
+  box-sizing: border-box;
+  text-align: left;   /* left-align text as in the design */
+}
+
+.forside-2 > .container-forside-2 h2,
+.forside-2 > .container-forside-2 h4{
+  text-align: left;
+  color: #0b0b0b;
+}
+
+/* Ensure headings and paragraph-like H4s wrap and have a readable line-length */
+.forside-2 > .container-forside-2 h2{
+  white-space: normal; /* allow wrapping */
+  max-width: 560px;    /* keep heading to a readable measure */
+  margin-bottom: 24px;
+}
+.forside-2 > .container-forside-2 h4{
+  white-space: normal; /* allow wrapping */
+  max-width: 640px;    /* text body width for readable lines */
+  margin-bottom: 20px;
+  line-height: 1.8;
+}
+
+/* Right-side image — absolutely positioned so it sits to the right of the
+   viewport while text stays aligned with the main container. Size: 530x530. */
+.forside-2 .forside-2-img{
+  position: absolute;
+  top: 50%;
+  /* Align image's right edge with the container's inner right edge:
+     distance = (100vw - container-width)/2 + container-right-padding
+     Use a safe minimum gutter of 24px so the image never touches the viewport edge. */
+  right: max(24px, calc((100vw - 1152px) / 2 + 28px));
+  transform: translateY(-50%);
+  width: 530px;
+  height: 530px;
+  display: block;
+  box-sizing: border-box;
+  pointer-events: none; /* image should not intercept clicks */
+}
+
+.forside-2 .forside-2-img img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 14px;
+  box-shadow: 0 18px 40px rgba(10,25,40,0.12);
+  display: block;
+}
+
+/* Safety: ensure image won't cause horizontal scrolling (global rule exists
+   already but re-declare to be explicit for this section). */
+html, body { overflow-x: hidden; }
+
+/* Mobile: stack the image under the text and make it full-width */
+@media (max-width: 900px){
+  .forside-2{ padding: 24px 0; margin-top: 40px; }
+  .forside-2 > .container-forside-2{ padding: 28px 20px; max-width: 100%; }
+  .forside-2 .forside-2-img{ position: static; width: 100%; height: auto; margin-top: 24px; transform: none; right: auto; }
+  .forside-2 .forside-2-img img{ height: auto; border-radius: 8px; }
+}
+
+
+
+
+/* ----------------------- FOOTER SEKTION ----------------------- */
 /* Footer / site-footer styling: gør footeren full-bleed ligesom header/hero
    .site-footer er en hjælperklasse hvis du ønsker at genbruge styling */
 footer, .site-footer{
@@ -593,7 +842,36 @@ footer .hurtig-links a{
 
 /* Responsiv: stabler kolonner på small screens */
 @media (max-width: 900px){
-  .footer-indhold{ grid-template-columns: 1fr; gap: 24px; }
-  .social-liste li a{ width:36px; height:36px; }
+  /* Stacker footer-kolonner og centrerer indhold på mobil */
+  .footer{ padding: 40px 12px 24px; }
+
+  .footer-indhold{
+    grid-template-columns: 1fr;
+    gap: 24px;
+    justify-items: center; /* centrer hver kolonne */
+    text-align: center; /* centrer tekst i hver kolonne */
+  }
+
+  /* Mindre indre padding på mobile så tekst ikke ser skæv ud */
+  .footer-indhold > * { padding: 0 12px; box-sizing: border-box; text-align: center; }
+
+  /* Social-ikoner: centreret række og mindre gap */
+  .social-liste{ display:flex; justify-content:center; gap:12px; margin: 12px 0; padding:0; }
+  .social-liste li a{ width:36px; height:36px; display:inline-flex; align-items:center; justify-content:center; }
+  .social-liste img{ width:20px; height:20px; opacity:0.95; }
+
+  /* Kontakt-oplysninger: centrer ikoner og tekst */
+  .kontakt-link{ justify-content:center; gap:10px; }
+  .kontakt-ikon{ width:18px; height:18px; flex:0 0 18px; }
+  .kontakt-tekst{ display:inline-block; }
+
+  /* Footer-overskrifter og beskrivelser: stram op */
+  .fod-overskrift{ text-align:center; font-size:18px; margin-bottom:8px; }
+  .fod-beskrivelse{ margin: 0 auto 12px; max-width:360px; text-align:center; }
+
+  .hurtig-links{ margin: 8px 0 0 0; display:block; }
+  .hurtig-links li{ margin-bottom:8px; }
+
+  .fod-bund{ padding-top: 20px; }
 }
 
