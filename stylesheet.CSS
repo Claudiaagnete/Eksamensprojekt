@@ -301,7 +301,6 @@ body > * { box-sizing: border-box; }
   .forside-3--card { width: 100%; }
   /* H1 tilpasser sig viewport: holder sig helst på én linje på store skærme,
      men tillader wrapping på mindre skærme så teksten ikke bliver afkortet. */
-  color: #FFF;
   text-align: center;
   font-family: Alpino, sans-serif;
   /*
@@ -597,15 +596,8 @@ værdi = bund (36px)
   padding: 0 28px;
 }
 
-.forside-3--head h2 {
-  font-size: 28px;
-  margin: 0 0 8px 0;
-}
-.forside-3--lead {
-  margin: 0 0 24px 0;
-  color: #3b5368;
-  text-align: center; /* Center lead text */
-}
+
+
 
 /* Center the header block above the cards */
 .forside-3--head { text-align: center; }
@@ -617,8 +609,8 @@ værdi = bund (36px)
   grid-template-columns: repeat(3, 1fr);
   /* Afstand mellem kortene */
   gap: 36px;
-  /* Sørg for kort starter øverst i cellen */
-  align-items: start;
+  /* Sørg for at grid-cellerne strækker sig i højden så kort kan blive lige høje */
+  align-items: stretch;
 }
 
 .forside-3--card {
@@ -635,12 +627,15 @@ værdi = bund (36px)
   flex-direction: column;
   /* Lodret mellemrum mellem kortets børn */
   gap: 16px;
-  /* Centrer indhold horisontalt */
-  align-items: center;
-  /* Centrer tekst */
-  text-align: center;
+  /* Sørg for indholdet starter fra venstre kant i kortet - nemmere at læse
+    for længere brødtekster. Ikonet håndteres separat for at forblive centreret. */
+  align-items: flex-start;
+  /* Standard tekstjustering inde i kortet er venstre for linjelæsbarhed */
+  text-align: left;
   /* Minimumshøjde så kortene er visuelt robuste */
   min-height: 320px;
+  /* Gør kortet lige så højt som grid-cellen så alle kort bliver lige høje */
+  height: 100%;
   /* Sørg for padding tæller med i bredden */
   box-sizing: border-box;
 }
@@ -651,20 +646,31 @@ værdi = bund (36px)
   height: 84px;
   /* Sørg for billedet skaleres ordentligt */
   object-fit: contain;
-  /* Centrer billedet */
-  margin: 0 auto;
+  /* Centrer billedet horisontalt indenfor kortet uden at påvirke tekstretnings
+     - margin-left/right: auto holder ikonet centreret selvom kortets øvrige
+       indhold er venstrejusteret. */
+  margin-left: auto;
+  margin-right: auto;
   display: block;
 }
 
 .forside-3--card h3 {
-  margin: 0;
-  font-size: 20px;
+  margin: 0 0 8px 0;
+  /* Fluid størrelse: skalerer mellem 22px og 36px afhængigt af viewport-bredden
+    - 22px på meget small screens
+    - 36px på store desktops
+    - midterværdier skaleres med 2.8vw for fleksibel tilpasning */
+  font-size: clamp(22px, 2.8vw, 36px);
+  /* Hold titlen på én linje på bredere skærme og afkort visuelt hvis nødvendig */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .forside-3--card p {
-  margin: 0;
+  margin: 0 0 12px 0;
   color: #425a6b;
-  font-size: 16px;
+  font-size: var(--h4-line, 21px );
 }
 
 .forside-3--meta {
@@ -678,6 +684,87 @@ værdi = bund (36px)
   font-size: 14px;
 }
 
+/* Vis et kalender-ikon foran den øverste meta-linje i hvert kort */
+.forside-3--meta li:first-child::before{
+  /* content: "" - pseudo-elementer skal have content for at blive renderet.
+    Her sætter vi en tom streng fordi selve ikonet leveres som baggrunds-billede,
+    ikke som tekst. */
+  content: "";
+
+  /* display: inline-block - gør pseudo-elementet til et inline-blok-element
+    så vi kan styre både bredde og højde uden at bryde linjeflowet. */
+  display: inline-block;
+
+  /* width / height - bestemmer hvor stort ikonet vises. 24x24px er et godt
+    kompromis mellem synlighed og pladsforbrug; justér hvis du har en anden
+    pixelstørrelse i designet. */
+  width: 24px; /* juster størrelse efter behov */
+  height: 24px;
+
+  /* margin-right - giver lidt luft mellem ikonet og tekstlinjen så de ikke
+    krammer hinanden. 10px er en standardafstand der passer til tekststørrelsen. */
+  margin-right: 10px;
+
+  /* vertical-align: middle - sikrer at ikonet flugter lodret med tekstens
+    midterlinie (bruges typisk når pseudo-elementet er inline eller inline-block). */
+  vertical-align: middle;
+
+  /* background-image - peger på selve SVG-filen. Brug relativ sti i forhold
+    til hvor `stylesheet.CSS` ligger. Hvis filen ligger i en undermappe,
+    ændr stien (fx 'images/kalendersort.svg'). */
+  background-image: url('kalendersort.svg');
+
+  /* background-size: contain - sikrer at SVG'en skaleres inden for den
+    definerede width/height uden at ændre billedets proportionsforhold. */
+  background-size: contain;
+
+  /* background-repeat: no-repeat - forhindrer gentagelse af billedet hvis
+    containeren er større end billedet. Vi ønsker kun ét ikon her. */
+  background-repeat: no-repeat;
+}
+
+/* Vis et lokations-ikon foran den nederste meta-linje i hvert kort */
+.forside-3--meta li:last-child::before{
+  /* content: tom streng for at pseudo-elementet vises; vi viser et ikon
+    via baggrunds-billede og ikke tekst, derfor ingen tekstindhold. */
+  content: "";
+
+  /* display: inline-block - gør det muligt at give pseudo-elementet en
+    præcis størrelse (width/height) og have det siddende inline med teksten. */
+  display: inline-block;
+
+  /* width/height - lidt mindre ikon her (20x20px) for at skabe visuel
+    kontrast til kalender-ikonet og bevare balance i layoutet. */
+  width: 20px; /* lidt mindre end kalender-ikonet for visuel balance */
+  height: 20px;
+
+  /* margin-right: afstand mellem ikon og tekst; samme rationale som ovenfor. */
+  margin-right: 10px;
+
+  /* vertical-align: middle - flugter ikonet lodret med linjen tekst ved siden af. */
+  vertical-align: middle;
+
+  /* we reference the lokaliserede svg here; change path if file is in a folder */
+  background-image: url('lokationsort.svg');
+
+  /* contain så SVG'en passer indenfor boxen uden at blive strukket/skåret. */
+  background-size: contain;
+
+  /* undgå at billedet gentages hvis containeren tilfældigvis er større. */
+  background-repeat: no-repeat;
+}
+
+/* Sørg for at hver meta-linje flugter pænt med ikonet:
+   - display: inline-flex: gør linjen til en inline container med flex-opførsel
+     så icon + tekst kan justeres på samme linje.
+   - align-items: center: centrerer ikon og tekst lodret i forhold til hinanden.
+   Dette er bedre end almindelig inline-flow fordi flex giver stabil lodret
+   centering uden at ændre tekstens linjehøjde. */
+.forside-3--meta li{
+  display: inline-flex;
+  align-items: center;
+}
+
 .forside-3--actions {
   /* Handlinger under kortene (note + cta) */
   margin-top: 28px;
@@ -689,11 +776,6 @@ værdi = bund (36px)
   gap: 12px; /* Mindre gap når stacked */
 }
 
-.forside-3--note {
-  margin: 0;
-  color: #425a6b;
-}
-
 .forside-3 .cta-blue {
   /* Fjern standard margin og gør knappen centreret af forælderen */
   margin: 0;
@@ -703,12 +785,14 @@ værdi = bund (36px)
 @media (max-width: 1100px) {
   .forside-3--grid { grid-template-columns: repeat(2, 1fr); gap: 28px; }
   .forside-3 .container { max-width: 980px; }
+  /* På smallere skærme må H3 gerne bryde — fjern nowrap så teksten ikke skæres af */
+  .forside-3--card h3 { white-space: normal; font-size: var(--h3-size, 34px ); }
 }
 
 @media (max-width: 700px) {
   .forside-3--grid { grid-template-columns: 1fr; gap: 20px; }
   .forside-3 .container { padding: 0 16px; }
-  .forside-3--card { padding: 24px; min-height: auto; }
+  .forside-3--card { padding: 24px; min-height: auto; height: auto; }
   .forside-3--icon { width: 64px; height: 64px; }
 }
 /* Kortene er nu ikke-links i HTML; tidl. CSS-regel der deaktiverede klikbarhed er fjernet. */
