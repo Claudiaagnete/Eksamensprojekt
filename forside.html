@@ -8,10 +8,8 @@
     <title>Forside</title>
     <!-- Korrekt link til stylesheet -->
     <link href="stylesheet.css" rel="stylesheet" />
-
 </head>
   <body>
-
   <!--her indsætter vi logo til banner-->
   <header class="site-header" role="banner">
   <div class="container header-inner">
@@ -59,12 +57,15 @@
 
     <section class="forside 1">
     <!-- vi inddeler forsiden i forskellige sektioner, så vi nemt kan finde rundt - også når vi skal arbejde i CSS -->
+      <div class="container forside 1">
+    <!-- de forskellige sektioner har hver deres container for bedre struktur div class gør det nemmere at style dem individuelt -->
         <h2>Hvad vil du gerne stoppe med?</h2>
         <h4>Vælg det der passer på dig - vi dømmer ikke, vi hjælper dig</h4>
+      </div>
     </section>
-
     <section class="bokse-section">
     <!-- vi har lavet en bokse-section for vi nemmere kan style de forskellige bokse -->
+      <div class="container bokse">
         <ul class="card-grid">
         <!-- Her er der brugt en grid-layout for at organisere kortene pænt -->
           <!-- Cigaretter -->
@@ -110,6 +111,7 @@
             </div>
           </li>
         </ul>
+      </div>
     </section>
 
   <section class="forside-2">
@@ -127,13 +129,14 @@
       <h4>Mange unge i Herning har stoppet med nikotin og det kan du også. Det handler ikke om at være perfekt. Det handler om at tage ét skridt ad gangen.</h4>
       <h4>Vi kender alle tricksene. Ja, også dem du troede du var den eneste der brugte. Vi kender udfordringerne, de små panikøjeblikke og de “jeg starter i morgen… måske” dage.
           Og vigtigst af alt: Vi dømmer dig ikke. Overhovedet. Uanset hvor mange gange du har prøvet før, eller hvor mange “sidste gange” du allerede har haft.</h4>
+             </div>
           <img src="img.1.webp" alt="Hjælp">
           <!-- Vis den samme brødtekst også i højre kolonne visuelt på desktop.
                aria-hidden så skærmlæsere ikke læser duplikatet. -->
-    </div>
+
   </section>
 
-  <section class="forside-3">
+  <section class="forside 3">
     <h2>Få hjælp her</h2>
     <h4>Vi har forskellige tilbud - find det der passer til dit liv</h4>
     <!-- h4-tagget bruges til at give sektionen en undertitel/brødtekst -->
@@ -184,7 +187,6 @@
         Tal med en rådgiver
         </a>
 </section>
-
 <section class="forside 4">
 <!-- section class="forside 4" bruges til at definere en ny sektion på forsiden, det har vi gjort for at adskille indholdet visuelt og gøre det nemmere at navigere i-->
   <div class="container forside 4">
@@ -193,9 +195,8 @@
   </div>
 </section>
 <!-- man skal altid huske at tilføje et slut-tag for at lukke tagsene-->
-
-<section class="forside-5-citater">
-  <div class="citat-1">
+<div>
+  <div>
     <img src="kolon.svg" alt="billede af kolon" width="150">
     <!-- width 150 antyder at billedet har en fast bredde på 150 pixels -->
     <h4>"Jeg troede aldrig jeg kunne stoppe med snus. Men efter et par samtaler føltes det faktisk muligt. Nu har jeg været clean i 4 måneder."</h4>
@@ -204,7 +205,7 @@
     <!-- h6 er den mindste skrift vi har - bruges til at angive mindre vigtige oplysninger eller detaljer -->
   </div>
 
-  <div class="citat-2">
+  <div>
     <img src="kolon.svg" alt="billede af kolon" width="150">
     <h4>"Det fedeste var at jeg ikke følte mig dømt. De forstod bare hvor jeg var, og hjalp mig videre derfra. Det betød alt."</h4>
     <h4>Sofia, 18 år</h4>
@@ -212,14 +213,19 @@
   </div>
   <!-- vi har valgt at lave tre forskellige div i denne sektion, da det giver et bedre overblik og gør det nemmere at navigere i og giver os muligheden for at justere layoutet mere fleksibelt og responsivt-->
 
-  <div class="citat-3">
+  <div>
     <img src="kolon.svg" alt="billede af kolon" width="150">
     <h4>"Gruppeforløbet var nice. Det hjalp at høre andre havde samme udfordringer. Vi holder stadig kontakt og holder hinanden på sporet."</h4>
     <h4>Lucas, 22 år</h4>
     <h6>Stoppede med vapes</h6>
   </div>
-</section>
+</div>
+    </div>
+    
 
+
+  </div>
+</section>
 <!-- Kontaktformular -->
 <section class="kontakt formular" id="kontakt">
   <!-- Sektionens formål:
@@ -357,7 +363,6 @@
   </div> <!-- /container -->
 </section>
 
-<!-- Footer sektion -->
 <!-- Rettet: fjernet en fejlbehæftet enkeltstående 'x' som lå før footeren. -->
 <footer class="footer" role="kontaktinfo" aria-label="footer">
   <!-- Hovedcontainer: brug klassen i CSS til baggrund, padding og grid -->
