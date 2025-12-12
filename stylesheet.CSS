@@ -1,4 +1,11 @@
 
+/* ------------------------------------------------------------
+  stylesheet.css
+  Kort fil-hoved: Denne fil indeholder styles for hele sitet.
+  - Bevar desktop-first tankegang (desktopregler øverst, mobile overrides nederst)
+  - Kommentér i danske linjer så fremtidige udviklere forstår intent.
+  - Undgå strukturelle ændringer her; hvis du vil ændre DOM, gør det i HTML.
+  ------------------------------------------------------------ */
 /* H1: hovedoverskrift-styling
   - color: tekstfarven (her hvid, bruges ofte i hero)
   - text-align: centrerer overskriften horisontalt
@@ -469,6 +476,7 @@ body{
 /* ----------------------- FORSIDE SEKTION 1----------------------- */
 /* Sektion: .forside (bruges på flere sektioner; denne blok giver "forside 1" sit visuelle udtryk)
    Nedenfor står forklarende kommentarer på hver linje, så hver regel er tydelig. */
+/* NOTE: denne sektion indeholder forklarende kommentarer til .forside-reglerne. Ingen tomme selectors. */
 .forside{
   /* background: sætter baggrundsfarven for hele .forside-sektionen. */
   background: #f6f8fa; /* Lys, næsten hvid baggrund for sektionen - giver luft og kontrast til kortene. */
@@ -511,6 +519,34 @@ værdi = bund (36px)
   font-size: 18px;
   /* margin: afstand under hjælpeteksten så kortene ikke sidder for tæt. */
   margin: 0 0 22px 0; /* 22px bund-margin for luft før kortene starter. */
+}
+
+/* --- FORSIDE 2: tekst venstre, billede højre (målrettet klassename "2") --- */
+/* Vi bruger attribute selectors for at ramme elementer med class="2" uden at ændre HTML */
+.forside[class~="2"] > .container[class~="2"]{
+  display: grid; /* To kolonner: tekst + billede */
+  grid-template-columns: 1fr 560px; /* Tekst fleksibel, billede fast - juster 560px efter behov */
+  gap: 40px; /* Afstand mellem tekst og billede */
+  align-items: center; /* Vertikal centering */
+}
+
+.forside[class~="2"] h2{ text-align: left; font-size: 56px; margin: 0 0 18px 0; }
+.forside[class~="2"] h4{ text-align: left; color: #556772; font-size: 18px; line-height: 1.6; }
+
+.forside[class~="2"] > .container[class~="2"] img{
+  width: 100%; /* Fylder den faste billed-kolonne */
+  height: auto; /* Bevar aspect ratio */
+  border-radius: 14px; /* Runde hjørner */
+  box-shadow: 0 18px 40px rgba(12,40,90,0.12); /* Blød skygge */
+  display: block;
+  object-fit: cover; /* Pæn beskæring hvis nødvendigt */
+}
+
+@media (max-width: 900px){
+  /* På mobil stables indhold vertikalt: først tekst, så billede */
+  .forside[class~="2"] > .container[class~="2"]{ grid-template-columns: 1fr; gap: 20px; }
+  .forside[class~="2"] h2{ font-size: 34px; }
+  .forside[class~="2"] > .container[class~="2"] img{ border-radius: 10px; box-shadow: 0 12px 30px rgba(12,40,90,0.08); }
 }
 
 /* Card grid: opsætter et grid med to kolonner og gitter-afstand */

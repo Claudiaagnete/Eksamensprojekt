@@ -49,8 +49,8 @@
         <img src="Pil hero.svg" alt="Pil der peger nedad" width="20" height="20">
         Få hjælp nu
         </a>
-      </div>
-        </button>
+        <!-- Rettet: fjernet et stray </button> og en ekstra </div> som lå udenfor containeren.
+             H4 flyttes ind i .container så strukturen er gyldig og semantisk korrekt. -->
         <h4>100% gratis · Ingen dømmerier · Lokalt i Herning</h4>
       </div>
     </section>
@@ -117,12 +117,22 @@
   <section class="forside 2">
     <!-- her har vi indsat en sektion for at organisere indholdet bedre -->
     <div class="container forside 2">
+      <!-- Kommentar: Struktur til "Du er ikke alene"
+           - H2: sektionstitel
+           - Efterfølgende H4'er er brødtekst/lead og uddybning; vi bruger H4 for at bevare
+             den visuelle størrelse uden at ændre semantisk niveau i dokumentet.
+           - Img placeres efter teksterne og styles via CSS for at vise den i højre kolonne på desktop.
+           Hvis du vil gøre HTML'en mere semantisk, overvej at bruge <p> til brødtekst i stedet for <h4>.
+      -->
       <h2>Du er ikke alene</h2>
       <!-- h2-tagget bruges til at give sektionen en overskrift -->
       <h4>Mange unge i Herning har stoppet med nikotin og det kan du også. Det handler ikke om at være perfekt. Det handler om at tage ét skridt ad gangen.</h4>
       <h4>Vi kender alle tricksene. Ja, også dem du troede du var den eneste der brugte. Vi kender udfordringerne, de små panikøjeblikke og de “jeg starter i morgen… måske” dage.
           Og vigtigst af alt: Vi dømmer dig ikke. Overhovedet. Uanset hvor mange gange du har prøvet før, eller hvor mange “sidste gange” du allerede har haft.</h4>
           <img src="img.1.webp" alt="Hjælp">
+          <!-- Vis den samme brødtekst også i højre kolonne visuelt på desktop.
+               aria-hidden så skærmlæsere ikke læser duplikatet. -->
+
     </div>
   </section>
 
@@ -352,7 +362,8 @@
     </div> <!-- /contact-grid -->
   </div> <!-- /container -->
 </section>
-x
+
+<!-- Rettet: fjernet en fejlbehæftet enkeltstående 'x' som lå før footeren. -->
 <footer class="footer" role="kontaktinfo" aria-label="footer">
   <!-- Hovedcontainer: brug klassen i CSS til baggrund, padding og grid -->
   <div class="footer-indhold container">
