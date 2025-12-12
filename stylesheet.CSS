@@ -120,6 +120,9 @@ h5 {
   /* Footer specific size tokens (brugerens præcise ønsker) */
   --footer-heading-size: 21px; /* Overskrift i footer (brugerspecifik) */
   --footer-body-size: 15px; /* Sekundær størrelse til beskrivelser og links */
+  /* Kort-variabler: gør det nemt at justere ikon- og titelstørrelser for alle bokse */
+  --card-icon-size: 44px; /* Standard ikonstørrelse for kort */
+  --card-title-size: 32px; /* Standard titelstørrelse for kort */
 }
 
 /* Fjerner browserens default margin så full-bleed elementer kan nå kanten */
@@ -548,12 +551,48 @@ værdi = bund (36px)
   /* box-shadow: løfter kortet visuelt fra baggrunden. */
   box-shadow: 0 12px 30px rgba(12,40,90,0.08);
 }
-.card img{ width:44px; height:44px; display:block; /* Størrelse og blok-display for ikon; undgår baseline-justering */ }
-.card-title{ font-size:32px; font-weight:500; margin-top:12px; /* Titel-styling: stor, let fed og lidt afstand over titlen */ }
+/* Kortene er nu ikke-links i HTML; tidl. CSS-regel der deaktiverede klikbarhed er fjernet. */
+.card-grid img{
+  /* Selektor: .card-grid img
+    - Vælger alle <img> elementer som er inde i et element med klassen .card-grid.
+    - Bruges her fordi hvert kort har et ikon som <img> og vi gerne vil give dem
+     ensartet størrelse uden at skulle ændre hver enkelt fil.
+  */
+  width: var(--card-icon-size); /* Bredde på ikonet - styres fra :root via --card-icon-size */
+  height: var(--card-icon-size); /* Højde på ikonet - samme værdi som bredde for at bevare kvadratisk form */
+  display: block; /* Gør billedet til et blok-element så margin/padding håndteres mere forudsigeligt */
+  /* Bemærk for nybegyndere:
+    - Ændrer du kun --card-icon-size i :root, påvirker det alle ikoner på samme tid.
+    - Hvis du kun vil ændre et enkelt ikon, kan du give det en ekstra klasse og målrette den.
+  */
+}
 
-/* Alternér gradient for visuelt forskel (ulæseligt: 1.,3. blå; 2.,4. grøn) */
-.card-item:nth-child(2n-1) .card{ background: linear-gradient(135deg,#4aa0ff 0%, #2a6df6 100%); /* Blå gradient på ulige kort */ }
-.card-item:nth-child(2n) .card{ background: linear-gradient(135deg,#00d68f 0%, #00a86b 100%); /* Grøn gradient på lige kort */ }
+.card-grid .card-title{
+  /* Selektor: .card-grid .card-title
+    - Vælger elementer med klassen .card-title som er inde i .card-grid.
+    - Dette er typisk titlen på hvert kort (fx "Cigaretter").
+  */
+  font-size: var(--card-title-size); /* Skriftstørrelse styret via variabel for enkel global justering */
+  font-weight: 500; /* Gør titlen lidt fed, men ikke helt sort (700) */
+  margin-top: 12px; /* Læg lidt afstand over titlen så den ikke sidder helt op ad ikonet */
+  /* Tips til nybegyndere:
+    - Ændrer du margin-top, flytter du hvor langt titlen står fra ikonet.
+    - Vil du ændre farven på titlen, tilføj fx: color: #fff; eller color: #000;
+  */
+}
+
+/* Separate, redigerbare regler for hver boks-type - gør det let at justere farver og stil individuelt */
+/* Cigaretter: brug denne blok til at ændre baggrund, skygge, border osv. */
+.card-cigaretter .card{ background: linear-gradient(135deg,#51A2FF 0%, #155DFC 100%); /* Blå gradient for Cigaretter */ }
+
+/* Snus: juster denne blok for snus-kortet */
+.card-vapes .card{ background: linear-gradient(135deg,#00D3F2 0%, #2B7FFF 100%); /* Gradient for Snus */ }
+
+/* Vapes: juster denne blok for vape-kortet */
+.card-snus .card{ background: linear-gradient(135deg,#05DF72 0%, #009966 100%); /* Grøn gradient for Vapes */ }
+
+/* Puffbars: juster denne blok for puffbar-kortet */
+.card-puffbars .card{ background: linear-gradient(135deg,#05DF72 0%, #00A63E 100%); /* Grøn gradient for Puff bars  */ }
 
 /* Responsive: tilpas grid og kortstørrelser på smallere skærme */
 @media (max-width: 900px){
@@ -569,11 +608,8 @@ værdi = bund (36px)
   /* Mindre korthøjde og padding for pladsbesparelse */
   .card{ padding: 22px; min-height: 110px; } /* Kort padding og min-højde på mobil */
 
-  /* Mindre ikonstørrelse */
-  .card img{ width:36px; height:36px; } /* Ikonstørrelse: 36x36px på mobil */
-  
-  /* Mindre titelstørrelse */
-  .card-title{ font-size:22px; } /* Korttitel: 22px for kompakt udseende */
+  /* Mindre ikonstørrelse (mobil) - justér via variabler hvis du vil */
+  :root{ --card-icon-size: 36px; --card-title-size: 22px; }
 }
 
 /* Footer / site-footer styling: gør footeren full-bleed ligesom header/hero

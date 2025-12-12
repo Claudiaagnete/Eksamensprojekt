@@ -54,7 +54,7 @@
         <h4>100% gratis · Ingen dømmerier · Lokalt i Herning</h4>
       </div>
     </section>
-    
+
     <section class="forside 1">
     <!-- vi inddeler forsiden i forskellige sektioner, så vi nemt kan finde rundt - også når vi skal arbejde i CSS -->
       <div class="container forside 1">
@@ -69,8 +69,8 @@
         <ul class="card-grid">
         <!-- Her er der brugt en grid-layout for at organisere kortene pænt -->
           <!-- Cigaretter -->
-          <li class="card-item">
-            <a href="cigaretter.html" class="card" aria-label="Cigaretter">
+          <li class="card-cigaretter">
+            <div class="card" role="group" aria-label="Cigaretter">
                   <!-- Ikon som billedfil:
                    - Brug alt="" og aria-hidden="true" hvis ikonet kun er dekorativt og teksten viser betydningen.
                    - Angiv width/height for at reducere layout shift (CLS).
@@ -79,36 +79,36 @@
               <!-- her er der brugt et billede som ikon for at gøre det mere visuelt, ikonet er svg-format-->
               <span class="card-title">Cigaretter</span>
               <!-- her er der brugt en span til at give kortet en titel. span-tagget betyder at teksten ikke er semantisk vigtig, men stadig skal vises -->
-            </a>
+            </div>
           </li>
 
           <!-- Snus -->
-          <li class="card-item">
+          <li class="card-snus">
           <!-- li class="card-item" betyder at dette er et kort i grid-layoutet-->
-            <a href="snus.html" class="card" aria-label="Snus">
-            <!-- a href= betyder at man linker direkte til en anden side-->
+            <div class="card" role="group" aria-label="Snus">
+            <!-- kortet er ikke et link længere; brug role="group" for semantisk kontekst -->
               <img src="Snus.svg" alt="Snus">
               <span class="card-title">Snus</span>
-            </a>
+            </div>
           </li>
 
           <!-- Vapes -->
-          <li class="card-item">
-            <a href="vapes.html" class="card" aria-label="Vapes">
+          <li class="card-vapes">
+            <div class="card" role="group" aria-label="Vapes">
               <img src="Vape.svg" alt="Vape">
               <span class="card-title">Vapes</span>
               <!-- span-tagget bruges her til at give kortet en titel - det er ikke semantisk vigtigt, men hjælper med at organisere indholdet -->
-            </a>
+            </div>
           </li>
 
           <!-- Puff bars -->
-          <li class="card-item">
+          <li class="card-puffbars">
           <!-- li class="card-item" betyder at dette er et kort i grid-layoutet, det gør at kortene bliver præsenteret pænt i en gitterstruktur-->
-            <a href="puffbars.html" class="card" aria-label="Puff bars">
+            <div class="card" role="group" aria-label="Puff bars">
               <img src="puffbar.svg" alt="Puff bars">
               <!-- her er der brugt et billede som ikon for at gøre det mere visuelt, ikonet er svg-format-->
               <span class="card-title">Puff bars</span>
-            </a>
+            </div>
           </li>
         </ul>
       </div>
@@ -313,7 +313,7 @@
 
           <div class="form-field">
             <label for="cf-usage">Hvad bruger du?</label>
-            <input id="cf-usage" name="usage" type="text" placeholder="fx cigaretter / snus / vapes">
+            <input id="cf-usage" name="usage" type="text" placeholder="fx cigaretter/snus/vapes">
           </div>
         </div>
 
