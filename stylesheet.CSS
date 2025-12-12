@@ -664,7 +664,7 @@ værdi = bund (36px)
 }
 .forside-2 > .container-forside-2 h4{
   white-space: normal; /* allow wrapping */
-  max-width: 640px;    /* text body width for readable lines */
+  max-width: 420px;    /* narrower text column so paragraphs wrap earlier on desktop */
   margin-bottom: 20px;
   line-height: 1.8;
 }
@@ -706,6 +706,7 @@ html, body { overflow-x: hidden; }
   .forside-2 .forside-2-img{ position: static; width: 100%; height: auto; margin-top: 24px; transform: none; right: auto; }
   .forside-2 .forside-2-img img{ height: auto; border-radius: 8px; }
 }
+
 
 
 
