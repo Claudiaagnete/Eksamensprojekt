@@ -876,3 +876,15 @@ footer .hurtig-links a{
   .fod-bund{ padding-top: 20px; }
 }
 
+
+/* Specifik override for .forside-3 hvis andre generelle .card regler træder i kraft */
+.forside-3 .cards{ display: grid !important; grid-template-columns: repeat(3, 1fr) !important; gap: 28px !important; }
+.forside-3 .card{ max-width: 100%; width: 100%; box-sizing: border-box; }
+
+@media (max-width: 980px){
+  .forside-3 .cards{ grid-template-columns: repeat(2, 1fr) !important; }
+}
+@media (max-width: 640px){
+  .forside-3 .cards{ grid-template-columns: 1fr !important; }
+}
+
