@@ -49,7 +49,7 @@ h2 {
   font-family: Alpino;
   font-size: 55px;
   font-style: normal;
-  font-weight: 421;
+  font-weight: 500;
   line-height: 48px; /* 87.273% */
 }
 
@@ -65,7 +65,7 @@ h3{
   /* Normal skriftstil */
   font-style: normal;
   /* Vægt 421: tynd-mellem */
-  font-weight: 421;
+  font-weight: 400;
   /* Line-height for læsbarhed */
   line-height: var(--h3-line, 32px);
 
@@ -86,7 +86,7 @@ h4 {
   /* Normal stil */
   font-style: normal;
   /* Samme vægt som h3 for konsistens */
-  font-weight: 421;
+  font-weight: 400;
   /* Line-height via variabel */
   line-height: var(--h4-line, 28px);
 }
@@ -101,7 +101,7 @@ h5 {
   /* Normal skriftstil */
   font-style: normal;
   /* Vægt for læsbarhed */
-  font-weight: 421;
+  font-weight: 400;
   /* Line-height for at undgå sammenklumpning */
   line-height: var(--h5-line, 20px);
 }
@@ -297,8 +297,7 @@ body > * { box-sizing: border-box; }
 /* Hovedoverskrift i hero - stor og tydelig */
 .hero h1{
   /* Fjern grid negative margin på mobil så layoutet ikke skubber indhold ud */
-  .forside-3--grid { margin: 0; }
-  .forside-3--card { width: 100%; }
+  /* Ingen .forside-3-regler her — tidligere utilsigtet indsat linjer fjernet */
   /* H1 tilpasser sig viewport: holder sig helst på én linje på store skærme,
      men tillader wrapping på mindre skærme så teksten ikke bliver afkortet. */
   text-align: center;
@@ -561,6 +560,8 @@ værdi = bund (36px)
   display:flex;
   /* flex-direction: column - stabl indhold lodret (ikon over, titel under). */
   flex-direction:column;
+  /* align-items: flex-start - sørger for at indholdet i kortet starter fra venstre kant */
+  align-items: flex-start;
   /* justify-content: space-between - placerer titel i bunden og ikon nær toppen. */
   justify-content:space-between;
   /* text-decoration: none - fjerner understregning hvis kortet er et link (<a>). */
@@ -577,225 +578,6 @@ værdi = bund (36px)
   box-shadow: 0 12px 30px rgba(12,40,90,0.08);
 }
 
-/* ----------------------- FORSIDE SEKTION 3 ----------------------- */
-.forside-3 {
-  /* Selector: rammer <section class="forside-3"> - hele sektionen */
-  /* Baggrundsfarve for sektionen */
-  background: #ffffff; /* Lys, svag blå-hvid baggrund */
-  /* Lodret indvendig afstand: 48px top og bund */
-  padding: 48px 0;
-}
-
-.forside-3 .container {
-  /* Selector: .container inde i .forside-3 - begrænser indholdets bredde */
-  /* Maksimal bredde for indholdet så kortene ikke bliver for brede */
-  max-width: 1280px;
-  /* Centrer containeren horisontalt */
-  margin: 0 auto;
-  /* Indvendig luft til venstre/højre */
-  padding: 0 28px;
-}
-
-
-
-
-/* Center the header block above the cards */
-.forside-3--head { text-align: center; }
-
-.forside-3--grid {
-  /* Grid-layout: definerer kolonner og mellemrum mellem kort */
-  display: grid;
-  /* 3 kolonner med lige bredde */
-  grid-template-columns: repeat(3, 1fr);
-  /* Afstand mellem kortene */
-  gap: 36px;
-  /* Sørg for at grid-cellerne strækker sig i højden så kort kan blive lige høje */
-  align-items: stretch;
-}
-
-.forside-3--card {
-  /* Kortbaggrund */
-  background: white;
-  /* Afrundede hjørner */
-  border-radius: 10px;
-  /* Indvendig afstand i kortet */
-  padding: 32px;
-  /* Skærm-skygge for dybde */
-  box-shadow: 0 10px 30px rgba(24,39,56,0.08);
-  /* Brug flexbox til at stable elementer lodret */
-  display: flex;
-  flex-direction: column;
-  /* Lodret mellemrum mellem kortets børn */
-  gap: 16px;
-  /* Sørg for indholdet starter fra venstre kant i kortet - nemmere at læse
-    for længere brødtekster. Ikonet håndteres separat for at forblive centreret. */
-  align-items: flex-start;
-  /* Standard tekstjustering inde i kortet er venstre for linjelæsbarhed */
-  text-align: left;
-  /* Minimumshøjde så kortene er visuelt robuste */
-  min-height: 320px;
-  /* Gør kortet lige så højt som grid-cellen så alle kort bliver lige høje */
-  height: 100%;
-  /* Sørg for padding tæller med i bredden */
-  box-sizing: border-box;
-}
-
-.forside-3--icon {
-  /* Ikonstørrelse */
-  width: 84px;
-  height: 84px;
-  /* Sørg for billedet skaleres ordentligt */
-  object-fit: contain;
-  /* Centrer billedet horisontalt indenfor kortet uden at påvirke tekstretnings
-     - margin-left/right: auto holder ikonet centreret selvom kortets øvrige
-       indhold er venstrejusteret. */
-  margin-left: auto;
-  margin-right: auto;
-  display: block;
-}
-
-.forside-3--card h3 {
-  margin: 0 0 8px 0;
-  /* Fluid størrelse: skalerer mellem 22px og 36px afhængigt af viewport-bredden
-    - 22px på meget small screens
-    - 36px på store desktops
-    - midterværdier skaleres med 2.8vw for fleksibel tilpasning */
-  font-size: clamp(22px, 2.8vw, 36px);
-  /* Hold titlen på én linje på bredere skærme og afkort visuelt hvis nødvendig */
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.forside-3--card p {
-  margin: 0 0 12px 0;
-  color: #425a6b;
-  font-size: var(--h4-line, 21px );
-}
-
-.forside-3--meta {
-  list-style: none;
-  padding: 0;
-  margin: 8px 0 0 0;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  color: #6b8190;
-  font-size: 14px;
-}
-
-/* Vis et kalender-ikon foran den øverste meta-linje i hvert kort */
-.forside-3--meta li:first-child::before{
-  /* content: "" - pseudo-elementer skal have content for at blive renderet.
-    Her sætter vi en tom streng fordi selve ikonet leveres som baggrunds-billede,
-    ikke som tekst. */
-  content: "";
-
-  /* display: inline-block - gør pseudo-elementet til et inline-blok-element
-    så vi kan styre både bredde og højde uden at bryde linjeflowet. */
-  display: inline-block;
-
-  /* width / height - bestemmer hvor stort ikonet vises. 24x24px er et godt
-    kompromis mellem synlighed og pladsforbrug; justér hvis du har en anden
-    pixelstørrelse i designet. */
-  width: 24px; /* juster størrelse efter behov */
-  height: 24px;
-
-  /* margin-right - giver lidt luft mellem ikonet og tekstlinjen så de ikke
-    krammer hinanden. 10px er en standardafstand der passer til tekststørrelsen. */
-  margin-right: 10px;
-
-  /* vertical-align: middle - sikrer at ikonet flugter lodret med tekstens
-    midterlinie (bruges typisk når pseudo-elementet er inline eller inline-block). */
-  vertical-align: middle;
-
-  /* background-image - peger på selve SVG-filen. Brug relativ sti i forhold
-    til hvor `stylesheet.CSS` ligger. Hvis filen ligger i en undermappe,
-    ændr stien (fx 'images/kalendersort.svg'). */
-  background-image: url('kalendersort.svg');
-
-  /* background-size: contain - sikrer at SVG'en skaleres inden for den
-    definerede width/height uden at ændre billedets proportionsforhold. */
-  background-size: contain;
-
-  /* background-repeat: no-repeat - forhindrer gentagelse af billedet hvis
-    containeren er større end billedet. Vi ønsker kun ét ikon her. */
-  background-repeat: no-repeat;
-}
-
-/* Vis et lokations-ikon foran den nederste meta-linje i hvert kort */
-.forside-3--meta li:last-child::before{
-  /* content: tom streng for at pseudo-elementet vises; vi viser et ikon
-    via baggrunds-billede og ikke tekst, derfor ingen tekstindhold. */
-  content: "";
-
-  /* display: inline-block - gør det muligt at give pseudo-elementet en
-    præcis størrelse (width/height) og have det siddende inline med teksten. */
-  display: inline-block;
-
-  /* width/height - lidt mindre ikon her (20x20px) for at skabe visuel
-    kontrast til kalender-ikonet og bevare balance i layoutet. */
-  width: 20px; /* lidt mindre end kalender-ikonet for visuel balance */
-  height: 20px;
-
-  /* margin-right: afstand mellem ikon og tekst; samme rationale som ovenfor. */
-  margin-right: 10px;
-
-  /* vertical-align: middle - flugter ikonet lodret med linjen tekst ved siden af. */
-  vertical-align: middle;
-
-  /* we reference the lokaliserede svg here; change path if file is in a folder */
-  background-image: url('lokationsort.svg');
-
-  /* contain så SVG'en passer indenfor boxen uden at blive strukket/skåret. */
-  background-size: contain;
-
-  /* undgå at billedet gentages hvis containeren tilfældigvis er større. */
-  background-repeat: no-repeat;
-}
-
-/* Sørg for at hver meta-linje flugter pænt med ikonet:
-   - display: inline-flex: gør linjen til en inline container med flex-opførsel
-     så icon + tekst kan justeres på samme linje.
-   - align-items: center: centrerer ikon og tekst lodret i forhold til hinanden.
-   Dette er bedre end almindelig inline-flow fordi flex giver stabil lodret
-   centering uden at ændre tekstens linjehøjde. */
-.forside-3--meta li{
-  display: inline-flex;
-  align-items: center;
-}
-
-.forside-3--actions {
-  /* Handlinger under kortene (note + cta) */
-  margin-top: 28px;
-  /* Brug flex så vi nemt kan centrere CTA */
-  display: flex;
-  flex-direction: column; /* Stak note over CTA */
-  justify-content: center; /* Centrer indholdet vertikalt */
-  align-items: center; /* Centrer indholdet horisontalt */
-  gap: 12px; /* Mindre gap når stacked */
-}
-
-.forside-3 .cta-blue {
-  /* Fjern standard margin og gør knappen centreret af forælderen */
-  margin: 0;
-}
-
-/* Responsive: larger layout on desktop, two columns on wide tablets, stacked on mobile */
-@media (max-width: 1100px) {
-  .forside-3--grid { grid-template-columns: repeat(2, 1fr); gap: 28px; }
-  .forside-3 .container { max-width: 980px; }
-  /* På smallere skærme må H3 gerne bryde — fjern nowrap så teksten ikke skæres af */
-  .forside-3--card h3 { white-space: normal; font-size: var(--h3-size, 34px ); }
-}
-
-@media (max-width: 700px) {
-  .forside-3--grid { grid-template-columns: 1fr; gap: 20px; }
-  .forside-3 .container { padding: 0 16px; }
-  .forside-3--card { padding: 24px; min-height: auto; height: auto; }
-  .forside-3--icon { width: 64px; height: 64px; }
-}
-/* Kortene er nu ikke-links i HTML; tidl. CSS-regel der deaktiverede klikbarhed er fjernet. */
 .card-grid img{
   /* Selektor: .card-grid img
     - Vælger alle <img> elementer som er inde i et element med klassen .card-grid.
@@ -805,6 +587,7 @@ værdi = bund (36px)
   width: var(--card-icon-size); /* Bredde på ikonet - styres fra :root via --card-icon-size */
   height: var(--card-icon-size); /* Højde på ikonet - samme værdi som bredde for at bevare kvadratisk form */
   display: block; /* Gør billedet til et blok-element så margin/padding håndteres mere forudsigeligt */
+  margin: 0 0 12px 0; /* Flyt ikonet væk fra center og giv afstand under mod titlen */
   /* Bemærk for nybegyndere:
     - Ændrer du kun --card-icon-size i :root, påvirker det alle ikoner på samme tid.
     - Hvis du kun vil ændre et enkelt ikon, kan du give det en ekstra klasse og målrette den.
@@ -819,6 +602,7 @@ værdi = bund (36px)
   font-size: var(--card-title-size); /* Skriftstørrelse styret via variabel for enkel global justering */
   font-weight: 500; /* Gør titlen lidt fed, men ikke helt sort (700) */
   margin-top: 12px; /* Læg lidt afstand over titlen så den ikke sidder helt op ad ikonet */
+  text-align: left; /* Sørg for at titler i kort starter fra venstre */
   /* Tips til nybegyndere:
     - Ændrer du margin-top, flytter du hvor langt titlen står fra ikonet.
     - Vil du ændre farven på titlen, tilføj fx: color: #fff; eller color: #000;
@@ -939,6 +723,341 @@ html, body { overflow-x: hidden; }
 }
 
 
+/* ----------------------- FORSIDE SEKTION 3 ----------------------- */
+.forside-3 {
+  /* Selector: rammer <section class="forside-3"> - hele sektionen */
+  /* Baggrundsfarve for sektionen */
+  background: #ffffff; /* Lys, svag blå-hvid baggrund */
+  /* Lodret indvendig afstand: 48px top og bund */
+  padding: 48px 0;
+}
+
+.forside-3 .container {
+  /* Selector: .container inde i .forside-3 - begrænser indholdets bredde */
+  /* Maksimal bredde for indholdet så kortene ikke bliver for brede */
+  max-width: 1280px;
+  /* Centrer containeren horisontalt */
+  margin: 0 auto;
+  /* Indvendig luft til venstre/højre */
+  padding: 0 28px;
+}
+
+
+
+/* Center the header block above the cards */
+.forside-3--head { text-align: center; }
+
+.forside-3--grid {
+  /* Grid-layout: definerer kolonner og mellemrum mellem kort */
+  display: grid;
+  /* 3 kolonner med lige bredde */
+  grid-template-columns: repeat(3, 1fr);
+  /* Afstand mellem kortene */
+  gap: 36px;
+  /* Sørg for at grid-cellerne strækker sig i højden så kort kan blive lige høje */
+  align-items: stretch;
+}
+
+.forside-3--icon {
+  /* Ikonstørrelse og placering - gruppert først så ikonet er defineret før
+     vi justerer kortets layout. */
+  width: 84px; /* fast bredde for ikonplads */
+  height: 84px; /* fast højde for ikonplads */
+  object-fit: contain; /* sørg for at billedet skaleres korrekt */
+  /* centrer ikonet horisontalt i kortet uden at ændre kortets tekstjustering */
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+
+.forside-3--card {
+  /* Kort-container: baggrund, runding, padding og skygge */
+  background: white;
+  border-radius: 10px;
+  padding: 32px;
+  box-shadow: 0 10px 30px rgba(24,39,56,0.08);
+
+  /* Flex container: stak elementer lodret med jævnt mellemrum */
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  /* Venstrejustér alt tekstindhold i kortet for bedre læsbarhed */
+  align-items: flex-start;
+  text-align: left;
+
+  /* Højde og box-sizing */
+  min-height: 320px;
+  height: 100%; /* fyld grid-cellen for lige højde */
+  box-sizing: border-box;
+}
+
+.forside-3--card h3 {
+  /* Overskrift i kortet: let bundmargin og fluid størrelse */
+  margin: 0 0 8px 0;
+  font-size: clamp(22px, 2.8vw, 36px);
+  white-space: nowrap; /* hold på én linje på desktop */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: left; /* Sørg for at kort-overskrifter starter fra venstre */
+}
+
+.forside-3--card p {
+  /* Brødtekst i kortet: mindre bundmargin for separation */
+  margin: 0 0 12px 0;
+  color: #425a6b;
+  font-size: var(--h4-line, 21px );
+}
+
+.forside-3--meta {
+  /* Metadata-listen: stak linjer og sæt farve/typografi */
+  list-style: none;
+  padding: 0;
+  margin: 8px 0 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  color: #6b8190;
+  font-size: 14px;
+}
+
+/* Vis et kalender-ikon foran den øverste meta-linje i hvert kort */
+.forside-3--meta li:first-child::before{
+  content: ""; /* pseudo-element kræver content for at blive vist */
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  margin-right: 10px;
+  vertical-align: middle;
+  background-image: url('kalendersort.svg');
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+/* Vis et lokations-ikon foran den nederste meta-linje i hvert kort */
+.forside-3--meta li:last-child::before{
+  content: "";
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+  vertical-align: middle;
+  background-image: url('lokationsort.svg');
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+/* Sørg for at hver meta-linje flugter pænt med ikonet */
+.forside-3--meta li{
+  display: inline-flex;
+  align-items: center;
+}
+
+.forside-3--actions {
+  /* Handlinger under kortene (note + cta) */
+  margin-top: 28px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+}
+
+.forside-3 .cta-blue {
+  margin: 0; /* sørg for at CTA er centreret af forælderen */
+}
+
+/* ----------------------- FORSIDE SEKTION 3 - RESPONSIVE ----------------------- */
+/* Sætter responsive regler lige efter hoveddefinitionen så alt for sektion 3
+   ligger samlet og er nem at finde for fremtidige ændringer. */
+@media (max-width: 1100px) {
+  /* To kolonner på brede tablets / små laptops */
+  .forside-3--grid { grid-template-columns: repeat(2, 1fr); gap: 28px; }
+  /* Begræns containerens max-width på mellembrede skærme så linjelængder er behagelige */
+  .forside-3 .container { max-width: 980px; }
+  /* Tillad H3 at bryde linjer og brug en fastere størrelse for pæn wrapping */
+  .forside-3--card h3 { white-space: normal; font-size: clamp(20px, 2.4vw, 32px); }
+}
+
+@media (max-width: 700px) {
+  /* Stak kort vertikalt på små skærme */
+  .forside-3--grid { grid-template-columns: 1fr; gap: 20px; }
+  /* Små skærme får smalkantede container-padding */
+  .forside-3 .container { padding: 0 16px; }
+  /* Kort skal tilpasse højde og padding så de ikke virker for høje på mobil */
+  .forside-3--card { padding: 20px; min-height: auto; height: auto; }
+  /* Gør ikonet mindre så det ikke dominerer mobilkort */
+  .forside-3--icon { width: 64px; height: 64px; }
+  /* Sørg for at action-knapper ikke ligger for tæt på kanten */
+  .forside-3--actions { margin-top: 18px; }
+}
+
+
+
+/* ----------------------- FORSIDE SEKTION 4 ----------------------- */
+.forside-4{
+  background: #ffffff; /* match sektion 3 baggrund for kontinuitet */
+  padding: 56px 0; /* lodret luft omkring billederne */
+  margin-top: 48px; /* ekstra afstand over sektion 4 */
+  margin-bottom: 48px; /* ekstra afstand under sektion 4 */
+}
+.forside-4 .container{ /* centrér og begræns bredde */
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 28px;
+}
+.forside-4--grid{
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* to kolonner ved desktop */
+  gap: 48px; /* luft mellem billederne */
+  align-items: center;
+  justify-items: start; /* placer billederne mod venstre så de flugter med layoutet i screenshot */
+}
+.forside-4--img{
+  width: 100%;
+  /* Gør billederne tydeligt større for at matche screenshotet: */
+  max-width: 820px; /* bredere begrænsning til større, mere vertikale billeder */
+  height: auto;
+  border-radius: 14px; /* afrundede hjørner som i screenshot */
+  display: block;
+  object-fit: cover;
+  box-shadow: 0 8px 28px rgba(12,40,70,0.06);
+}
+/* Responsive: stack billeder på smallere skærme */
+@media (max-width: 900px){
+  .forside-4--grid{ grid-template-columns: 1fr; gap: 28px; }
+  /* På mobil: lad billederne fylde containeren og accepter fuld bredde */
+  .forside-4--img{ max-width: 100%; }
+  .forside-4 .container{ padding: 0 20px; }
+  /* Reducer lodret margin på tablet for bedre flow */
+  .forside-4{ margin-top: 32px; margin-bottom: 32px; }
+}
+
+@media (max-width: 700px){
+  /* Endnu mindre margin på små mobil-enheder */
+  .forside-4{ margin-top: 20px; margin-bottom: 20px; padding: 40px 0; }
+}
+
+
+/* ----------------------- NY: UDTALELSER (placeret efter forside-4) ----------------------- */
+/* Dansk kommentar: Denne blok styler den simple udtalelses-sektion der starter
+   i HTML tæt efter .forside-4. Layoutet matcher screenshot: tre kort i række på
+   desktop, centreret overskrift, lige højde, afrundede hjørner, blød skygge og
+   farvet tekst for forfatternavn. Responsive: 3 -> 2 -> 1 kolonner. */
+.udtalelser{
+  background: linear-gradient(180deg, #f6fbff 0%, #f1fbf4 100%); /* svag grøn-blå baggrund */
+  padding: 64px 0 48px;
+}
+.udtalelser > h2,
+.udtalelser > h4{ text-align: center; margin: 0 auto 12px; }
+.udtalelser > h2{ font-size: clamp(32px, 4vw, 48px); margin-bottom: 6px; }
+.udtalelser > h4{ color:#6b8190; font-weight:400; margin-bottom: 28px; }
+
+.udtalelser-liste{
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 36px;
+  padding: 0 24px;
+  align-items: stretch;
+}
+.udtalelse-kort{
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 32px;
+  box-shadow: 0 20px 40px rgba(12,40,70,0.06);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: flex-start;
+  text-align: left;
+  min-height: 320px; /* sikrer visuel lige højde på desktop */
+}
+.udtalelse-kort img{ width:44px; height:44px; opacity:0.95; margin-bottom:8px; }
+.udtalelse-kort h4{ margin:0; color:#21333b; font-size:18px; line-height:1.6; }
+.udtalelse-kort h4{ margin:0; color:#21333b; font-size:18px; line-height:1.6; text-align:left; }
+.udtalelse-kort .udtalelse-forfatter{ color:#266bf1; margin-top:12px; font-size: 21px; font-weight:400; text-align:left; }
+.udtalelse-kort h6{ margin:4px 0 0 0; color:#6A7282; font-size:13px; font-weight:400; }
+
+@media (max-width: 1100px){ .udtalelser-liste{ grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 700px){ .udtalelser-liste{ grid-template-columns: 1fr; } .udtalelser{ padding: 40px 0; } .udtalelse-kort{ padding:20px; min-height: auto; } }
+
+
+/* ----------------------- KONTAKTFORMULAR (placeret efter UDTALELSER) ----------------------- */
+/* Styling for kontakt-sektionen: to kolonner (venstre: kontaktkort + info, højre: formular) */
+.contact-grid{
+  display: grid;
+  grid-template-columns: 1fr 520px; /* bredere højre kolonne til formular */
+  gap: 40px;
+  align-items: start;
+}
+
+/* Venstre kolonne: kontaktkort-listen */
+.kontakt-venstre{ /* wrapper for venstre kolonne; styles arves fra child-elementer */ }
+.kontakt-overskrift{ color:#21333b; font-size:18px; margin:0 0 18px 0; text-align:left; }
+.kontakt-metoder{ list-style:none; padding:0; margin:0 0 20px 0; display:flex; flex-direction:column; gap:14px; }
+.kontakt-kort{
+  display:flex; align-items:center; gap:14px; background:#f6fbff; padding:18px 20px; border-radius:12px; text-decoration:none; color:inherit;
+  box-shadow: 0 8px 18px rgba(12,40,70,0.04);
+}
+.kontakt-kort .ikon{ width:44px; height:44px; flex-shrink:0; }
+.kontakt-tekst .kontakt-meta{ display:block; color:#6b8190; font-size:14px; }
+.kontakt-tekst .kontakt-primær{ display:block; font-weight:400; color:#21333b; }
+
+/* Info-boks under kontaktkort */
+.kontakt-info{ background:#eaf6ff; padding:20px; border-radius:12px; margin-top:8px; }
+.kontakt-info .info-overskrift{ margin:0 0 12px 0; font: weight 400px; color: #0a0a0a; }
+.info-punkter{ margin:0; padding:0 0 0 18px; color:#364153; }
+.info-punkter li{ margin:8px 0; }
+
+
+/* Hvis sektionens direkte container eller footer-overlays overskriver paddingen,
+   anvend margin-bottom på sektionen og en lille min-height som fallback. */
+section#kontakt, .kontakt{ margin-bottom: 64px; }
+.kontakt > .container{ padding-bottom: 64px; }
+
+@media (max-width: 900px){ .kontakt{ padding-bottom: 48px; } section#kontakt, .kontakt{ margin-bottom: 48px; } .kontakt > .container{ padding-bottom: 48px; } }
+@media (max-width: 700px){ .kontakt{ padding-bottom: 32px; } section#kontakt, .kontakt{ margin-bottom: 32px; } .kontakt > .container{ padding-bottom: 32px; } }
+
+/* Højre kolonne: formular */
+.contact-form{ background:transparent; }
+.form-row{ display:flex; flex-direction:column; gap:8px; margin-bottom:14px; }
+.form-row label{ font-size:14px; color:#21333b; }
+.form-row input, .form-row textarea{ width:100%; padding:12px 14px; border-radius:10px; border:1px solid #e1e8ef; background:#fff; box-sizing:border-box; }
+.form-row input:focus, .form-row textarea:focus{ outline:none; box-shadow:0 0 0 4px rgba(34,111,241,0.08); border-color:#1e6bef; }
+.form-row--split{ display:flex; gap:14px; }
+.form-row--split .form-field{ flex:1; }
+
+/* Dansk variant: .form-række skal arve samme styling som .form-row */
+.form-række{ display:flex; flex-direction:column; gap:8px; margin-bottom:14px; }
+
+/* Telefon-input: sørg for samme visuelle behandling som andre felter */
+#kontakt-telefon, input[name="telefon"]{ width:100%; padding:12px 14px; border-radius:10px; border:1px solid #e1e8ef; background:#fff; box-sizing:border-box; }
+
+/* Fjern browser 'spinner' fra number inputs for et ensartet look */
+input[type=number]::-webkit-outer-spin-button, input[type=number]::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+input[type=number] { appearance: textfield; -moz-appearance: textfield; }
+
+.form-actions{ display:flex; flex-direction:column; gap:12px; align-items:center; }
+.form-actions .cta-blue{ display:inline-flex; align-items:center; gap:10px; background:#266bf1; color:#fff; padding:14px 28px; border-radius:12px; text-decoration:none; font-weight:700; max-width:520px; width:100%; justify-content:center; }
+.privacy-note{ color:#8aa0ad; font-size:13px; margin:0; text-align:center; }
+
+/* Responsive: tablet -> stack, mobil -> smalle inputer */
+@media (max-width: 1100px){
+  .contact-grid{ grid-template-columns: 1fr; }
+  .contact-form{ order: 2; }
+  .kontakt-venstre{ order: 1; }
+}
+
+@media (max-width: 700px){
+  .contact-grid{ gap:20px; }
+  .kontakt-kort{ padding:14px; }
+  .kontakt-overskrift{ font-size:16px; }
+  .form-row input, .form-row textarea{ padding:10px 12px; }
+  .form-actions .cta-blue{ width:100%; justify-content:center; }
+}
+
 
 
 
@@ -950,6 +1069,7 @@ footer, .site-footer{
   color: #fff;
   width: 100vw;
   position: relative;
+  z-index: 1; /* sikre at footeren ligger over normale indhold og ikke under andre positioned elementer */
   left: 50%;
   right: 50%;
   margin-left: -50vw;
@@ -957,6 +1077,10 @@ footer, .site-footer{
   box-sizing: border-box;
   padding: 60px 0 36px; /* top større, bottom mindre for visuel balance */
 }
+
+/* Beskyttelsesregel: hvis andre sektioner bruger negative margins / full-bleed,
+   sørg for at de ikke skubber sig ind under footeren ved et uheld. */
+.container, .forside-5, .forside-4, .forside-3 { position: relative; z-index: 0; }
 
 /* Indholdet i footeren holdes centreret via .container */
 footer .container, .site-footer .container{ padding: 0 20px; }
