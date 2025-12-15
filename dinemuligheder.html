@@ -1,166 +1,320 @@
 <!DOCTYPE html>
 <html lang="da">
   <head>
-    <meta charset="UTF-8" /> <!-- Sikre specialtegn som Æ, Ø, Å, specialtegn og emojis-->
+    <meta charset="UTF-8" />
+    <!-- Sikre specialtegn som Æ, Ø, Å, specialtegn og emojis-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="robots" content="noindex" />
     <title>Dine Muligheder</title>
     <link href="stylesheet.css" rel="stylesheet" />
   </head>
   <body>
-<!--her indsætter vi logo til banner-->
-  <header class="site-header" role="banner">
-  <div class="container header-inner">
-   <div>
-   <!-- her gør vi banneret klikbart, så når man klikker på banneret kommer man ind på forsiden-->
-    <a class="brand" href="forside.html" aria-label="Forside - Herning Kommune">
-    <img src="logo.webp" alt="Herning Kommune logo" class="brand-logo" />
-   </a>
-   </div>
-  <!-- Her laver vi en nav-bar med klikbare links til undersiden-->
-  <nav id="mainNavbar" class="main-nav" role="navigation" aria-label="Hovednavigation">
-  <!-- role="navigation": angiver at dette er en navigation-landmark for assistive teknologier -->
-  <!-- aria-label="Hovednavigation": kort beskrivelse, så brugere kan identificere denne navigation -->
-    <ul class="nav-list">
-    <!-- <ul class="nav-list">: liste over navigationspunkter -->
-      <li class="nav-item"><a class="nav-link" href="dinemuligheder.html">Dine muligheder</a></li>
-      <li class="nav-item"><a class="nav-link" href="ungefortæller.html">Unge fortæller</a></li>
-      <li class="nav-item"><a class="nav-link" href="nikoberegneren.html">Nikoberegneren</a></li>
-      <li class="nav-item"><a class="nav-link" href="chatogkontakt.html">Chat & kontakt</a></li>
-      <li class="nav-item"><a class="nav-link" href="omnikotin.html">Om nikotin</a></li>
-    <!-- her kan man se alle vores undersider, som er klikkable links, det er de pga. attributet href -->
-    </ul>
-  </nav>
-  </div>
-</header>
+    <!--her indsætter vi logo til banner-->
+    <header class="site-header" role="banner">
+      <div class="container header-inner">
+        <div>
+          <!-- her gør vi banneret klikbart, så når man klikker på banneret kommer man ind på forsiden-->
+          <a
+            class="brand"
+            href="forside.html"
+            aria-label="Forside - Herning Kommune"
+          >
+            <img
+              src="logo.webp"
+              alt="Herning Kommune logo"
+              class="brand-logo"
+            />
+          </a>
+        </div>
+        <!-- Her laver vi en nav-bar med klikbare links til undersiden-->
+        <nav
+          id="mainNavbar"
+          class="main-nav"
+          role="navigation"
+          aria-label="Hovednavigation"
+        >
+          <!-- role="navigation": angiver at dette er en navigation-landmark for assistive teknologier -->
+          <!-- aria-label="Hovednavigation": kort beskrivelse, så brugere kan identificere denne navigation -->
+          <ul class="nav-list">
+            <!-- <ul class="nav-list">: liste over navigationspunkter -->
+            <li class="nav-item">
+              <a class="nav-link" href="dinemuligheder.html">Dine muligheder</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="ungefortæller.html">Unge fortæller</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="nikoberegneren.html">Nikoberegneren</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="chatogkontakt.html">Chat & kontakt</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="omnikotin.html">Om nikotin</a>
+            </li>
+            <!-- her kan man se alle vores undersider, som er klikkable links, det er de pga. attributet href -->
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <!-- Hero for 'Dine muligheder' -->
+    <section class="dine-muligheder-hero" aria-label="Dine muligheder">
+      <div class="container">
+        <h1>Dine muligheder</h1>
+        <p>
+          Vi har forskellige måder at hjælpe dig på. Vælg det der passer til dig
+          og dit liv.
+        </p>
+        <a href="#services" class="cta-small" aria-label="Se vores tilbud"
+          >Se vores tilbud</a
+        >
+      </div>
+    </section>
 
-<!-- Hero sektion -->
+    <!-- Hero sektion -->
     <section class="hero-section-2">
       <div class="container hero 2">
-<!-- Her er der brugt forskellige h-størrelser, som giver visuel hierarki og hjælper brugeren med at forstå indholdets struktur. -->
+        <!-- Her er der brugt forskellige h-størrelser, som giver visuel hierarki og hjælper brugeren med at forstå indholdets struktur. -->
         <h1>Dine muligheder</h1>
-        <h3>Vi har forskellige måder at hjælpe dig på. Vælg det der passer til dig og dit liv.</h3>
-        </div>
-    </section>
-  <section class="dinemuligheder-section 1">
-    <div class="container dinemuligheder 1">
-    <!-- Liste gør det nemt at lave grid i CSS -->
-
-      <!-- Personligt rygestop-forløb -->
-      <div class="boks">
-      <!-- her er der brugt en container for at samle indholdet til dette specifikke tilbud, nemlig class="boks"-->
-<ul class="box-grid 1">
-  <li class="box-item"><a class="box"><img class="kalender forside" src="kalendergradient.svg" alt="kalender"></a></li>
-  <!-- li class="box-item" betyder at dette er et kort i grid-layoutet, det gør at kortene bliver præsenteret pænt i en gitterstruktur-->
-  <h3>Personligt rygestop-forløb</h3>
-  <h4>Et skræddersyet forløb med fast kontaktperson, der følger dig hele vejen. Mødes når det passer dig.</h4>
-  <li class="box-item"><a class="box"><img class="kalender sort forside" src="kalendersort.svg" alt="kalender"><span>4-6 samtaler over 3 måneder</span></a></li>
-  <!-- vi har valgt at samle det i en ugrupperet liste, fordi det gør det nemmere at tilføje flere elementer senere hen -->
-  <li class="box-item"><a class="box"><img class="lokation sort forside" src="lokationsort.svg" alt="lokation"><span>Sunhedscenter Herning</span></a></li>
-  <a href="læsmere.html">Læs mere</a>
-  <img src="piltilhøjre.svg" alt="pil til højre" width="20" height="20">
-</ul>
-
-      <!-- Drop-in rådgivning-->
-      <div class="boks">
-<ul class="box-grid 2">
-<!-- ul class=box grid 2 betyder at dette er en ny sektion i grid-layoutet, ul gør at man kan tilføje flere elementer uden at skulle ændre på strukturen-->
-  <li class="box-item"><a class="box"><img class="talebobel forside" src="beskedgradient.svg" alt="talebobel"></a></li>
-  <h3>Drop-in rådgivning</h3>
-  <h4>Kom forbi uden at booke tid. Stil spørgsmål, få råd, eller bare tal om det. Ingen forpligtelser.</h4>
-  <li class="box-item"><a class="box"><img class="Kalender sort forside" src="kalendersort.svg" alt="kalender"><span>Hver torsdag 15-18</span></a></li>
-  <!-- alt-teksten beskriver billedet for bedre tilgængelighed -->
-  <li class="box-item"><a class="box"><img class="lokation sort forside" src="lokationsort.svg" alt="lokation"><span>Ungdomsskolen, Herning</span></a></li>
-<a href="læsmere.html">Læs mere</a>
-  <img src="piltilhøjre.svg" alt="pil til højre" width="20" height="20">
-</ul>  
-
-      <!-- Gruppeforløb for unge-->
-      <div class="boks">
-<ul class="box-grid 3">
-<!-- box-grid 3 fortæller os at alt i denne class hører sammen-->
-  <li class="box-item"><a class="box"><img class="2 mennesker forside" src="tomenneskergradient.svg" alt="2 mennesker"></a></li>
-  <h3>Gruppeforløb for unge</h3>
-  <!-- her er der brugt en container for at samle indholdet til dette specifikke tilbud, nemlig class="boks"-->
-  <h4>Mød andre i samme situation. I hjælper hinanden og deler tricks til at holde fast. Det er faktisk ret fedt</h4>
-  <li class="box-item"><a class="box"><img class="Kalender sort forside" src="kalendersort.svg" alt="kalender"><span>6 uger, 1 gang om ugen</span></a></li>
-  <li class="box-item"><a class="box"><img class="lokation sort forside" src="lokationsort.svg" alt="lokation"><span>Online eller fysisk i Herning</span></a></li>
-<a href="læsmere.html" class="">Læs mere</a>
-<a href="læsmere.html" class="link-blue">Læs mere</a>
-  <img src="piltilhøjre.svg" alt="pil til højre" width="20" height="20">
-</ul> 
-  </div>
-
-  
-<section>
-    <section class="dinemuligheder-section 2">
-      <div class="container dinemuligheder 2">
-        <h2>Ikke sikker på hvad der passer dig? Det er helt normalt - de fleste er i tvivl i starten.</h2>
-        <h4>Kontakt os, så hjælper vi dig med at finde det forløb, der giver bedst mening for dig. Det behøver ikke være kompliceret.</h4>
-         <a href="chatogkontakt.html" class="cta-blue" aria-label="Gå til siden for at få hjælp nu"></a>
-        <!-- a href" linker os direkte videre til undersiden chat&kontakt når man klikker på det-->
-        Tal med en rådgiver
+        <h3>
+          Vi har forskellige måder at hjælpe dig på. Vælg det der passer til dig
+          og dit liv.
+        </h3>
       </div>
-      <img src="billede4.webp" alt="billede af pige som ligger og tænke med mobil i hånden">
-</section>
-</section>
-<footer class="footer" role="kontaktinfo" aria-label="footer">
-  <!-- Hovedcontainer: brug klassen i CSS til baggrund, padding og grid -->
-  <div class="footer-indhold container">
-    <!-- KOLONNE 1: Om / branding -->
-    <div class="fod-kolonne fod-om">
-      <div class="fod-overskrift">Rygestop Herning</div>
-  <p class="fod-beskrivelse fod-andet-tekst">
-        Et tilbud fra Herning Kommune til unge der vil være fri for nikotin. Gratis, fortroligt og uden dømmelser.
-  </p>
+    </section>
+    <section
+      class="muligheder-bokse"
+      id="services"
+      aria-labelledby="muligheder-bokse-titel"
+    >
+      <div class="container">
+        <ul class="muligheder-liste" role="list">
+          <li class="mulighed-kort">
+            <figure class="mulighed-ikon" aria-hidden="true">
+              <img src="kalendergradient.svg" alt="" />
+            </figure>
+            <div class="mulighed-tekst">
+              <h3>Personligt rygestop-forløb</h3>
+              <h4 class="kort-beskrivelse">
+                Et skræddersyet forløb med fast kontaktperson, der følger dig
+                hele vejen.
+              </h4>
+              <ul class="kort-meta">
+                <li>
+                  <img src="kalendersort.svg" alt="" class="meta-ikon" /> 4-6
+                  samtaler over 3 måneder
+                </li>
+                <li>
+                  <img src="lokationsort.svg" alt="" class="meta-ikon" />
+                  Sundhedscenter Herning
+                </li>
+              </ul>
+              <a class="læs-mere" href="læsmere.html">Læs mere</a>
+            </div>
+          </li>
 
-      <!-- Sociale links (ikonbilleder er dekorative => alt="") -->
-      <ul class="social-liste" aria-label="Følg os">
-        <!-- disse links er klikbare og fører direkte til herning kommunes sociale medier-->
-        <li><a href="https://www.facebook.com/herningkommune/?locale=da_DK" class="social-link" aria-label="Facebook"><img src="fb.svg" alt="" class="social-ikon" aria-hidden="true"></a></li>
-        <li><a href="https://www.instagram.com/herningkommune/" class="social-link" aria-label="Instagram"><img src="instagram.svg" alt="" class="social-ikon" aria-hidden="true"></a></li>
-        <li><a href="https://twitter.com/herningkommune" class="social-link" aria-label="Twitter"><img src="twitter.svg" alt="" class="social-ikon" aria-hidden="true"></a></li>
-      </ul>
-    </div>
+          <li class="mulighed-kort">
+            <figure class="mulighed-ikon" aria-hidden="true">
+              <img src="beskedgradient.svg" alt="" />
+            </figure>
+            <div class="mulighed-tekst">
+              <h3>Drop-in rådgivning</h3>
+              <h4 class="kort-beskrivelse">
+                Kom forbi uden at booke tid. Stil spørgsmål, få råd, eller bare
+                tal om det.
+              </h4>
+              <ul class="kort-meta">
+                <li>
+                  <img src="kalendersort.svg" alt="" class="meta-ikon" /> Hver
+                  torsdag 15-18
+                </li>
+                <li>
+                  <img src="lokationsort.svg" alt="" class="meta-ikon" />
+                  Ungdomsskolen, Herning
+                </li>
+              </ul>
+              <a class="læs-mere" href="læsmere.html">Læs mere</a>
+            </div>
+          </li>
 
-    <!-- KOLONNE 2: Kontaktoplysninger -->
-    <div class="fod-kolonne fod-kontakt" aria-label="Kontaktoplysninger">
-      <div class="fod-overskrift">Kontakt</div>
-      <ul class="kontakt-liste">
-        <li class="kontakt-element">
-          <!-- telefon-link: mobilbrugere kan starte opkald -->
-          <a href="tel:96284091" class="kontakt-link"><img src="telefonfooter.svg" alt="" class="kontakt-ikon" aria-hidden="true"> <span class="kontakt-tekst">96 28 40 91</span></a>
-        </li>
-        <li class="kontakt-element">
-          <a href="mailto:rygestop@herning.dk" class="kontakt-link"><img src="mailfooter.svg" alt="" class="kontakt-ikon" aria-hidden="true"> <span class="kontakt-tekst">rygestop@herning.dk</span></a>
-        </li>
-        <li class="kontakt-element">
-          <!-- her har vi sat et ikon ind ved src.-->
-          <div class="kontakt-element-adr"><img src="lokationfooter.svg" alt="" class="kontakt-ikon" aria-hidden="true"> <span class="kontakt-tekst">Sundhedscenter Herning</span></div>
-        </li>
-      </ul>
-    </div>
+          <li class="mulighed-kort">
+            <figure class="mulighed-ikon" aria-hidden="true">
+              <img src="tomenneskergradient.svg" alt="" />
+            </figure>
+            <div class="mulighed-tekst">
+              <h3>Gruppeforløb for unge</h3>
+              <h4 class="kort-beskrivelse">
+                Mød andre i samme situation og få støtte i et trygt fællesskab.
+              </h4>
+              <ul class="kort-meta">
+                <li>
+                  <img src="kalendersort.svg" alt="" class="meta-ikon" /> 6
+                  uger, 1 gang om ugen
+                </li>
+                <li>
+                  <img src="lokationsort.svg" alt="" class="meta-ikon" /> Online
+                  eller fysisk i Herning
+                </li>
+              </ul>
+              <a class="læs-mere" href="læsmere.html">Læs mere</a>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </section>
 
-    <!-- KOLONNE 3: Hurtige links -->
-    <div class="fod-kolonne fod-links" aria-label="Hurtige links">
-      <div class="fod-overskrift">Hurtige links</div>
-      <!-- vi har valgt at lave en ugrupperet liste for at vise hurtige links, ligesom oppe i headeren, for at brugeren nemt kan navigere rundt på sitet i footeren også -->
-      <ul class="hurtig-links">
-        <li><a href="dinemuligheder.html">Dine muligheder</a></li>
-        <li><a href="ungefortaeller.html">Unge fortæller</a></li>
-        <li><a href="nikoberegneren.html">Nikoberegneren</a></li>
-        <li><a href="chatogkontakt.html">Chat & kontakt</a></li>
-        <li><a href="omnikotin.html">Om nikotin</a></li>
-      </ul>
-    </div>
-  </div>
+    <section class="forside-2">
+      <!-- her har vi indsat en sektion for at organisere indholdet bedre -->
+      <div class="container-forside-2">
+        <!-- Kommentar: Struktur til "Du er ikke alene"
+           - H2: sektionstitel
+           - Efterfølgende H4'er er brødtekst/lead og uddybning; vi bruger H4 for at bevare
+             den visuelle størrelse uden at ændre semantisk niveau i dokumentet.
+           - Img placeres efter teksterne og styles via CSS for at vise den i højre kolonne på desktop.
+           Hvis du vil gøre HTML'en mere semantisk, overvej at bruge <p> til brødtekst i stedet for <h4>.
+      -->
+        <h2>
+          Ikke sikker på hvad der passer dig? Det er helt normalt - de fleste er
+          i tvivl i starten.
+        </h2>
+        <h4>
+          Kontakt os, så hjælper vi dig med at finde det forløb, der giver bedst
+          mening for dig. Det behøver ikke være kompliceret.
+        </h4>
+        <a href="chatogkontakt.html" class="cta-blue">Tal med en rådgiver</a>
+      </div>
 
-  <!-- BUNDLINJE: copyright / note -->
-  <div class="fod-bund" role="note" aria-label="Copyright">
-    <!-- dekorativt hjerte: aria-hidden fordi det er pynt -->
-    <p class="fod-copyright">Lavet med <img src="hjerte.svg" alt="hjerte ikon" class="hjerte-ikon" aria-hidden="true"> af Herning Kommune · 2025</p>
-  </div>
-</footer>
-<!-- her slutter footeren -->
+      <div class="forside-2-img">
+        <img src="billede4.webp" alt="En unge pige der er itvivl" />
+        <!-- Vis den samme brødtekst også i højre kolonne visuelt på desktop.
+               aria-hidden så skærmlæsere ikke læser duplikatet. -->
+      </div>
+    </section>
+
+    <footer class="footer" role="kontaktinfo" aria-label="footer">
+      <!-- Hovedcontainer: brug klassen i CSS til baggrund, padding og grid -->
+      <div class="footer-indhold container">
+        <!-- KOLONNE 1: Om / branding -->
+        <div class="fod-kolonne fod-om">
+          <div class="fod-overskrift">Rygestop Herning</div>
+          <p class="fod-beskrivelse fod-andet-tekst">
+            Et tilbud fra Herning Kommune til unge der vil være fri for nikotin.
+            Gratis, fortroligt og uden dømmelser.
+          </p>
+
+          <!-- Sociale links (ikonbilleder er dekorative => alt="") -->
+          <ul class="social-liste" aria-label="Følg os">
+            <!-- disse links er klikbare og fører direkte til herning kommunes sociale medier-->
+            <li>
+              <a
+                href="https://www.facebook.com/herningkommune/?locale=da_DK"
+                class="social-link"
+                aria-label="Facebook"
+                ><img
+                  src="fb.svg"
+                  alt=""
+                  class="social-ikon"
+                  aria-hidden="true"
+              /></a>
+            </li>
+            <li>
+              <a
+                href="https://www.instagram.com/herningkommune/"
+                class="social-link"
+                aria-label="Instagram"
+                ><img
+                  src="instagram.svg"
+                  alt=""
+                  class="social-ikon"
+                  aria-hidden="true"
+              /></a>
+            </li>
+            <li>
+              <a
+                href="https://twitter.com/herningkommune"
+                class="social-link"
+                aria-label="Twitter"
+                ><img
+                  src="twitter.svg"
+                  alt=""
+                  class="social-ikon"
+                  aria-hidden="true"
+              /></a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- KOLONNE 2: Kontaktoplysninger -->
+        <div class="fod-kolonne fod-kontakt" aria-label="Kontaktoplysninger">
+          <div class="fod-overskrift">Kontakt</div>
+          <ul class="kontakt-liste">
+            <li class="kontakt-element">
+              <!-- telefon-link: mobilbrugere kan starte opkald -->
+              <a href="tel:96284091" class="kontakt-link"
+                ><img
+                  src="telefonfooter.svg"
+                  alt=""
+                  class="kontakt-ikon"
+                  aria-hidden="true"
+                />
+                <span class="kontakt-tekst">96 28 40 91</span></a
+              >
+            </li>
+            <li class="kontakt-element">
+              <a href="mailto:rygestop@herning.dk" class="kontakt-link"
+                ><img
+                  src="mailfooter.svg"
+                  alt=""
+                  class="kontakt-ikon"
+                  aria-hidden="true"
+                />
+                <span class="kontakt-tekst">rygestop@herning.dk</span></a
+              >
+            </li>
+            <li class="kontakt-element">
+              <!-- her har vi sat et ikon ind ved src.-->
+              <div class="kontakt-element-adr">
+                <img
+                  src="lokationfooter.svg"
+                  alt=""
+                  class="kontakt-ikon"
+                  aria-hidden="true"
+                />
+                <span class="kontakt-tekst">Sundhedscenter Herning</span>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <!-- KOLONNE 3: Hurtige links -->
+        <div class="fod-kolonne fod-links" aria-label="Hurtige links">
+          <div class="fod-overskrift">Hurtige links</div>
+          <!-- vi har valgt at lave en ugrupperet liste for at vise hurtige links, ligesom oppe i headeren, for at brugeren nemt kan navigere rundt på sitet i footeren også -->
+          <ul class="hurtig-links">
+            <li><a href="dinemuligheder.html">Dine muligheder</a></li>
+            <li><a href="ungefortaeller.html">Unge fortæller</a></li>
+            <li><a href="nikoberegneren.html">Nikoberegneren</a></li>
+            <li><a href="chatogkontakt.html">Chat & kontakt</a></li>
+            <li><a href="omnikotin.html">Om nikotin</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- BUNDLINJE: copyright / note -->
+      <div class="fod-bund" role="note" aria-label="Copyright">
+        <!-- dekorativt hjerte: aria-hidden fordi det er pynt -->
+        <p class="fod-copyright">
+          Lavet med
+          <img
+            src="hjerte.svg"
+            alt="hjerte ikon"
+            class="hjerte-ikon"
+            aria-hidden="true"
+          />
+          af Herning Kommune · 2025
+        </p>
+      </div>
+    </footer>
+    <!-- her slutter footeren -->
   </body>
 </html>
