@@ -106,6 +106,14 @@ h5 {
   line-height: var(--h5-line, 20px);
 }
 
+/* Global paragraph typography — default for site body text; can be overridden by
+   more specific selectors (e.g. .forside-3--card p). */
+p{
+  color: #364153;
+  font-size: 21px;
+  font-weight: 400;
+  line-height: 30px;
+}
 /* Desktop-first variabler (standard) */
 :root{
   --h1-size: 64px;
@@ -144,6 +152,7 @@ body{
   /* Sæt global font-family så al tekst bruger Alpino hvis den er tilgængelig */
   font-family: var(--base-font-family);
 }
+
 
 /* Forebyg uønsket horisontal scroll: skjul overflow-x og brug box-sizing */
 html, body { overflow-x: hidden; }
@@ -1103,6 +1112,128 @@ input[type=number] { appearance: textfield; -moz-appearance: textfield; }
 .mulighed-tekst h3{ margin:0 0 8px 0; color:#0b3550; text-align:left; }
 .kort-beskrivelse{ margin:0 0 12px 0; color:#546571; font-weight:400; text-align:left; }
 .læs-mere{ color:#0b6edb; text-decoration:none; font-weight:400; font-size:16px; }
+
+/* ----------------------- UNGE FORTÆLLER: HISTORIEKORT ----------------------- */
+.ungefortæller-section{ padding: 40px 0 28px; background: transparent; }
+.ungefortæller-section .container-ungefortæller-1,
+.ungefortæller-section .container-ungefortæller-2,
+.ungefortæller-section .container-ungefortæller-3,
+.ungefortæller-section .container-ungefortæller-4{
+  background: #ffffff;
+  border-radius: 14px;
+  box-shadow: 0 18px 40px rgba(10,25,40,0.06);
+  padding: 28px 32px;
+  margin: 28px auto;
+  max-width: 1152px;
+  box-sizing: border-box;
+  overflow: visible;
+}
+
+.ungefortæller-section .h4-nochange {
+  /* keep a more neutral, subdued appearance for these labels */
+  color: #4A5565;  /* slightly smaller than the branded H4 */
+  font-weight: 400;
+  line-height: 24px;
+  margin: 6px 0 5px 0; /* small spacing around this metadata H4 */
+}
+
+.ungefortæller-section img{ display:block; width:85px; height:85px; border-radius:50%; float:left; margin-right:18px; margin-bottom:6px; }
+.ungefortæller-section h3{ margin:0 0 0px 0; font-weight: 500; text-align: left;}
+.ungefortæller-section h4{ color:#155DFC; font-weight: 500; text-align: left;}
+
+/* Reducer afstanden mellem navnet (h3) og den følgende 'Stoppede med' (h4) */
+.ungefortæller-section h3 + h4{ margin-top:4px; margin-bottom:0; }
+/* Fjern mellemrum mellem h4 og det følgende afsnit i story-kortene */
+/* Pull paragraph up closer to preceding H4 for tighter rhythm */
+.ungefortæller-section h4 + p{ margin-top:-10px; }
+
+@media (max-width:900px){
+  .ungefortæller-section h3 + h4{ margin-top:6px; }
+  .ungefortæller-section h4 + p{ margin-top:-4px; }
+}
+
+/* Meta pill (grøn badge) ved toppen af kortet */
+.ungefortæller-section .meta-pill{ display:inline-flex; align-items:center; gap:10px; background:#e9f8ed; color:#008236; padding:10px 35.484px 10px 12px; border-radius:22px; font-size:21px; font-weight:400; margin:8px 0 12px 0; }
+.ungefortæller-section .meta-pill img{ width:20px; height:20px; display:inline-block; margin:0; }
+
+@media (max-width:900px){
+  .ungefortæller-section .meta-pill{ padding:8px 20px 8px 10px; font-size:14px; gap:8px; }
+  .ungefortæller-section .meta-pill img{ width:18px; height:18px; }
+}
+
+/* Sørg for at avatar og tekst flugter i toppen: placér overskrift og meta tættere sammen */
+.ungefortæller-section .container-ungefortæller-1 img,
+.ungefortæller-section .container-ungefortæller-2 img,
+.ungefortæller-section .container-ungefortæller-3 img,
+.ungefortæller-section .container-ungefortæller-4 img{ margin-top:6px; }
+.ungefortæller-section .container-ungefortæller-1 h3,
+.ungefortæller-section .container-ungefortæller-2 h3,
+.ungefortæller-section .container-ungefortæller-3 h3,
+.ungefortæller-section .container-ungefortæller-4 h3{ margin-top:4px; margin-bottom:6px; }
+
+/* Quote box */
+.ungefortæller-section .quote-1,
+.ungefortæller-section .quote-2,
+.ungefortæller-section .quote-3,
+.ungefortæller-section .quote-4{
+  margin-top:18px;
+  background: #f7fbfd;
+  border-radius: 12px;
+  padding: 18px 20px;
+  border-left: 4px solid #0b6edb;
+  color:#234b6a;
+}
+.ungefortæller-section .quote-1 img,
+.ungefortæller-section .quote-2 img,
+.ungefortæller-section .quote-3 img,
+.ungefortæller-section .quote-4 img{ width:22px; height:22px; float:left; margin-right:12px; }
+
+/* Ensure quote text aligns with main h4 block (avatar 85px + gap 18px) */
+.ungefortæller-section .quote-1 h4,
+.ungefortæller-section .quote-2 h4,
+.ungefortæller-section .quote-3 h4,
+.ungefortæller-section .quote-4 h4,
+.ungefortæller-section .quote-1 p,
+.ungefortæller-section .quote-2 p,
+.ungefortæller-section .quote-3 p,
+.ungefortæller-section .quote-4 p{
+  margin-left: 40px; /* pulled slightly left: smaller gap and offset */
+}
+
+/* Ensure floated avatar and quote images do not break flow */
+.ungefortæller-section .container-ungefortæller-1:after,
+.ungefortæller-section .container-ungefortæller-2:after,
+.ungefortæller-section .container-ungefortæller-3:after,
+.ungefortæller-section .container-ungefortæller-4:after{ content:""; display:table; clear:both; }
+
+@media (max-width:900px){
+  .ungefortæller-section .container-ungefortæller-1,
+  .ungefortæller-section .container-ungefortæller-2,
+  .ungefortæller-section .container-ungefortæller-3,
+  .ungefortæller-section .container-ungefortæller-4{ padding:20px; margin:18px 12px; }
+  .ungefortæller-section img{ float:none; display:block; margin:0 0 12px 0; width:85px; height:85px; }
+  .ungefortæller-section .quote-1 img,
+  .ungefortæller-section .quote-2 img,
+  .ungefortæller-section .quote-3 img,
+  .ungefortæller-section .quote-4 img{ float:none; display:inline-block; margin:0 8px 0 0; }
+}
+
+/* ----------------------- CALLOUT: Din historie kan være den næste ----------------------- */
+.din-historie-kan-blive-den-næste{
+  background: linear-gradient(180deg, #f6fbff 0%, #f1fbf4 100%);
+  padding: 60px 24px;
+  text-align: center;
+  margin-top: 36px;
+}
+.din-historie-kan-blive-den-næste img{ width:64px; height:64px; display:block; margin:0 auto 18px; }
+.din-historie-kan-blive-den-næste h2{ margin:0 0 10px; font-size:36px; color:#0b1628; }
+.din-historie-kan-blive-den-næste h3{ margin:0 0 10px; color:#566974; font-weight:400; }
+.din-historie-kan-blive-den-næste .cta-blue{ display:inline-flex; margin-top:12px; }
+
+@media (max-width:900px){
+  .din-historie-kan-blive-den-næste{ padding: 40px 16px; }
+  .din-historie-kan-blive-den-næste h2{ font-size:28px; }
+}
 
 /* Meta-linje under kortbeskrivelsen: ikon + kort tekst */
 .kort-meta{ list-style:none; padding:0; margin:12px 0 14px 0; color:#7d8a94; font-size:14px; }
