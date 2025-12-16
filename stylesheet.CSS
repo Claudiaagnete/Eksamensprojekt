@@ -1340,6 +1340,28 @@ footer .container, .site-footer .container{ padding: 0 20px; }
 /* Bevar padding på direkte børn hvis markup ikke indeholder .footer-kolonne. Derfor der er tegnet > påvirker kun de tre direkte kolonner (de elementer du har som direkte børn af .footer-indhold).*/
 .footer-indhold > * { padding: 0 28px; box-sizing: border-box; text-align: left; }
 
+/* Gør kontakt-kolonnen mere centreret i footeren på desktop: */
+.footer-indhold .fod-kontakt{
+  justify-self: center; /* centrer kolonne-boksen i dens grid-celle */
+  max-width: 420px;    /* hold indholdet i en behagelig læselig målebredde */
+  width: 100%;
+  box-sizing: border-box;
+  /* Tunable nudge: øg værdien for at flytte kolonnen mere til højre */
+  --fod-kontakt-nudge: 110px;
+  transform: translateX(var(--fod-kontakt-nudge));
+  transition: transform 220ms cubic-bezier(.2,.9,.2,1);
+}
+
+@media (max-width: 900px){
+  /* På mobil skal kolonner stables og være fuldbrede; behold centreret tekst */
+  .footer-indhold .fod-kontakt{ justify-self: stretch; max-width: none; padding: 0 12px; }
+}
+
+/* Deaktiver store nudges på tablets og mindre skærme */
+@media (max-width: 1100px){
+  .footer-indhold .fod-kontakt{ transform: none; }
+}
+
 .fod-overskrift{
   /* Fod-overskrift: bruger den eksakte, verbatim specifikation brugeren gav */
   color: #FFF; /* farve: hvid */
