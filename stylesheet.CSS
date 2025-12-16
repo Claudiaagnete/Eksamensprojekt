@@ -109,7 +109,7 @@ h5 {
 /* Global paragraph typography — default for site body text; can be overridden by
    more specific selectors (e.g. .forside-3--card p). */
 p{
-  color: #364153;
+  color: #4A5565;
   font-size: 21px;
   font-weight: 400;
   line-height: 30px;
@@ -121,12 +121,8 @@ p{
   --h3-size: 34px;
   --h4-size: 21px;
   --h5-size: 13px;
-  --h2-line: 48px;
-  --h3-line: 32px;
-  --h4-line: 28px;
-  --h5-line: 20px;
-  --brand-font-size: 16px;
-  --nav-font-size: 16px;
+  --brand-font-size: 21px;
+  --nav-font-size: 21px;
   /* CTA-typografi: Alpino  fra designet */
   --cta-font-size: 21px;    /* Alpino Regular 21px */
   --cta-line-height: 24px;  /* Line-height 24px */
@@ -161,13 +157,13 @@ body > * { box-sizing: border-box; }
 
 /* Global container: brugt til at centrere indhold og holde en max-bredde */
 .container{
-  max-width: 1280px; /* Øget bredde så indhold fylder mere */
+  max-width: 1760px; /* Større bredde så indhold fylder mere */
   margin: 0 auto;    /* Centrer containeren horisontalt */
-  padding: 0 24px;   /* Lidt ekstra indvendig luft */
+  padding: 8px 24px; /* Endnu mindre vertikal højde */
   box-sizing: border-box;
 }
 
-@media (min-width: 1600px){ .container{ max-width: 1440px; } }
+@media (min-width: 1600px){ .container{ max-width: 1920px; padding: 16px 32px; } }
 
 
 /* ----------------------- HEADER / NAVBAR ----------------------- */
@@ -184,7 +180,7 @@ body > * { box-sizing: border-box; }
 }
 
 .site-header .container.header-inner{
-  max-width: 1152px;
+  max-width: 1600px;
   margin: 0 auto;
   display: flex;
   align-items: center;
@@ -222,7 +218,7 @@ body > * { box-sizing: border-box; }
 
 .brand-text{
   font-family: Alpino, sans-serif;
-  font-size: var(--brand-font-size, 16px);
+  font-size: var(--brand-font-size);
   font-weight: 700;
   color: #111;
   margin-left: 6px;
@@ -238,7 +234,7 @@ body > * { box-sizing: border-box; }
 }
 
 .main-nav .nav-link{
-  font-size: var(--nav-font-size, 16px);
+  font-size: var(--nav-font-size);
   color: #374151;
   text-decoration: none;
   font-weight: 600;
@@ -384,7 +380,7 @@ body > * { box-sizing: border-box; }
 .hero-button img{ width:18px; height:18px; margin-left:8px; }
 
 /* Knaptekst - bruger blå farve så teksten står ud mod hvide knap */
-.hero-button .button-text{ color:#0b6edb; font-weight:700; font-size:16px; }
+.hero-button .button-text{ color:#0b6edb; font-weight:700; font-size:21px; }
 
 /* Lille meta-tekst under knap (100% gratis · Ingen dømmerier · Lokalt i Herning) */
 .hero .meta{
@@ -810,6 +806,7 @@ html, body { overflow-x: hidden; }
   overflow: hidden;
   text-overflow: ellipsis;
   text-align: left; /* Sørg for at kort-overskrifter starter fra venstre */
+  font-size: 34px;
 }
 
 .forside-3--card p {
@@ -828,7 +825,7 @@ html, body { overflow-x: hidden; }
   flex-direction: column;
   gap: 6px;
   color: #6b8190;
-  font-size: 14px;
+  font-size: 13px;
 }
 
 /* Vis et kalender-ikon foran den øverste meta-linje i hvert kort */
@@ -985,8 +982,8 @@ html, body { overflow-x: hidden; }
   min-height: 320px; /* sikrer visuel lige højde på desktop */
 }
 .udtalelse-kort img{ width:44px; height:44px; opacity:0.95; margin-bottom:8px; }
-.udtalelse-kort h4{ margin:0; color:#21333b; font-size:18px; line-height:1.6; }
-.udtalelse-kort h4{ margin:0; color:#21333b; font-size:18px; line-height:1.6; text-align:left; }
+.udtalelse-kort h4{ margin:0; color:#21333b; line-height:1.6; }
+.udtalelse-kort h4{ margin:0; color:#21333b; line-height:1.6; text-align:left; }
 .udtalelse-kort .udtalelse-forfatter{ color:#266bf1; margin-top:12px; font-size: 21px; font-weight:400; text-align:left; }
 .udtalelse-kort h6{ margin:4px 0 0 0; color:#6A7282; font-size:13px; font-weight:400; }
 
@@ -998,9 +995,13 @@ html, body { overflow-x: hidden; }
 /* Styling for kontakt-sektionen: to kolonner (venstre: kontaktkort + info, højre: formular) */
 .contact-grid{
   display: grid;
-  grid-template-columns: 1fr 520px; /* bredere højre kolonne til formular */
+  grid-template-columns: 1fr 1fr; /* to kolonner: venstre og højre */
   gap: 40px;
   align-items: start;
+  max-width: 1152px; /* match indre containerbredde på resten af sitet */
+  margin: 0 auto; /* centrer så det flugter med sektionernes gutter */
+  width: 100%;
+  box-sizing: border-box;
 }
 
 /* Venstre kolonne: kontaktkort-listen */
@@ -1008,21 +1009,31 @@ html, body { overflow-x: hidden; }
   display: flex;
   flex-direction: column;
   gap: 18px;
+  align-items: flex-start; /* sikre at indhold ikke strækker sig under højre kolonne */
 }
-.kontakt-overskrift{ color:#21333b; font-size:18px; margin:0 0 18px 0; text-align:left; }
+.kontakt-overskrift{ color:#21333b; margin:0 0 18px 0; text-align:left; }
 .kontakt-metoder{ list-style:none; padding:0; margin:0 0 20px 0; display:flex; flex-direction:column; gap:14px; }
 .kontakt-kort{
   display:flex; align-items:center; gap:14px; background:#f6fbff; padding:18px 20px; border-radius:12px; text-decoration:none; color:inherit;
   box-shadow: 0 8px 18px rgba(12,40,70,0.04);
+  width:100%;
 }
-.kontakt-kort .ikon{ width:44px; height:44px; flex-shrink:0; }
-.kontakt-tekst .kontakt-meta{ display:block; color:#6b8190; font-size:14px; }
-.kontakt-tekst .kontakt-primær{ display:block; font-weight:400; color:#21333b; }
+.kontakt-kort .ikon{ width:44px; height:44px; flex-shrink:0;}
+.kontakt-tekst{ max-width:420px; width:420px; box-sizing:border-box; }
+.kontakt-tekst .kontakt-meta{ display:block; color:#6b8190; font-size:21px; }
+.kontakt-tekst .kontakt-primær{ display:block; font-weight:400; color:#0A0A0A; font-size:21px; }
 
 /* Info-boks under kontaktkort */
-.kontakt-info{ background:#eaf6ff; padding:20px; border-radius:12px; margin-top:8px; }
-.kontakt-info .info-overskrift{ margin:0 0 12px 0; font: weight 400px; color: #0a0a0a; }
-.info-punkter{ margin:0; padding:0 0 0 18px; color:#364153; }
+.kontakt-info{ /* slightly widened per user request: desktop */
+  background:#eaf6ff; padding:20px; border-radius:12px; margin-top:8px;
+  max-width:560px; /* small increase from 520px */
+  width:560px; box-sizing:border-box; }
+
+@media (max-width: 1100px){
+  .kontakt-tekst, .kontakt-info{ width:100%; max-width:100%; }
+}
+.kontakt-info .info-overskrift{ margin:0 0 12px 0; font-weight: 400; color: #0a0a0a; font-size:21px; text-align: left; }
+.info-punkter{ margin:0; padding:0 0 0 18px; color:#364153; font-size:21px; }
 .info-punkter li{ margin:8px 0; }
 
 
@@ -1035,16 +1046,26 @@ section#kontakt, .kontakt{ margin-bottom: 64px; }
 @media (max-width: 700px){ .kontakt{ padding-bottom: 32px; } section#kontakt, .kontakt{ margin-bottom: 32px; } .kontakt > .container{ padding-bottom: 32px; } }
 
 /* Højre kolonne: formular */
-.contact-form{ background:transparent; }
+.contact-form{ background:transparent; font-family: Alpino, sans-serif; }
+.contact-form input, .contact-form textarea, .contact-form select { font-family: inherit; }
 .form-row{ display:flex; flex-direction:column; gap:8px; margin-bottom:14px; }
-.form-row label{ font-size:14px; color:#21333b; }
-.form-row input, .form-row textarea{ width:100%; padding:12px 14px; border-radius:10px; border:1px solid #e1e8ef; background:#fff; box-sizing:border-box; }
+.form-row label{ font-size:21px; color:#21333b; }
+.form-row input, .form-row textarea{ width:100%; padding:12px 14px; border-radius:10px; border:1px solid #e1e8ef; background:#fff; box-sizing:border-box; font-size:21px; }
+
+/* Make placeholders match field font-size so examples (fx 'Fulde navn', 'fx 25', 'fx cigaretter/snus', 'navn@eksempel.dk', 'fx 96 28 40 91', 'Skriv en kort besked') display at 21px */
+.form-row input::placeholder,
+.form-row textarea::placeholder,
+#kontakt-telefon::placeholder,
+input[name="telefon"]::placeholder{ font-size:21px; opacity:0.6; }
+
+/* Ensure specific phone field uses the same font-size */
+#kontakt-telefon, input[name="telefon"]{ width:100%; padding:12px 14px; border-radius:10px; border:1px solid #e1e8ef; background:#fff; box-sizing:border-box; font-size:21px; }
 .form-row input:focus, .form-row textarea:focus{ outline:none; box-shadow:0 0 0 4px rgba(34,111,241,0.08); border-color:#1e6bef; }
 .form-row--split{ display:flex; gap:14px; }
 .form-row--split .form-field{ flex:1; }
 
 /* Dansk variant: .form-række skal arve samme styling som .form-row */
-.form-række{ display:flex; flex-direction:column; gap:8px; margin-bottom:14px; }
+.form-række{ display:flex; flex-direction:column; gap:8px; margin-bottom:14px; font-size: 21px;}
 
 /* Telefon-input: sørg for samme visuelle behandling som andre felter */
 #kontakt-telefon, input[name="telefon"]{ width:100%; padding:12px 14px; border-radius:10px; border:1px solid #e1e8ef; background:#fff; box-sizing:border-box; }
@@ -1067,7 +1088,7 @@ input[type=number] { appearance: textfield; -moz-appearance: textfield; }
 @media (max-width: 700px){
   .contact-grid{ gap:20px; }
   .kontakt-kort{ padding:14px; }
-  .kontakt-overskrift{ font-size:16px; }
+  .kontakt-overskrift{ font-size:21px; }
   .form-row input, .form-row textarea{ padding:10px 12px; }
   .form-actions .cta-blue{ width:100%; justify-content:center; }
 }
@@ -1076,7 +1097,7 @@ input[type=number] { appearance: textfield; -moz-appearance: textfield; }
 /* ----------------------- Underside - HERO ----------------------- */
 /* Høj-specificitet for at undgå at andre styles overskriver heroen. */
 .underside-hero, section.underside-hero{ background: linear-gradient(135deg,#0b6edb 0%, #1177f1 45%, #00c97b 100%) !important; color:#fff !important; }
-.underside-hero .container{ max-width:1152px; margin:0 auto; padding:48px 20px !important; text-align:center; }
+.underside-hero .container{ max-width:1760px; margin:0 auto; padding:48px 20px !important; text-align:center; }
 .underside-hero h1{ font-size: clamp(32px,6vw,64px); margin:0 0 12px; font-weight:700; color: #fff; }
 .underside-hero h3{ color: rgba(255,255,255,0.95); margin:0 auto 18px; max-width:900px; ;color: #FFF; }
 .underside-hero .cta-small{ display:inline-flex; align-items:center; gap:10px; padding:10px 18px; background:#fff; color:#0b6edb; border-radius:999px; font-weight:700; text-decoration:none; }
@@ -1111,7 +1132,7 @@ input[type=number] { appearance: textfield; -moz-appearance: textfield; }
 .mulighed-tekst h3{ margin:6px 0 10px 0; }
 .mulighed-tekst h3{ margin:0 0 8px 0; color:#0b3550; text-align:left; }
 .kort-beskrivelse{ margin:0 0 12px 0; color:#546571; font-weight:400; text-align:left; }
-.læs-mere{ color:#0b6edb; text-decoration:none; font-weight:400; font-size:16px; }
+.læs-mere{ color:#0b6edb; text-decoration:none; font-weight:400; font-size:21px; }
 
 /* ----------------------- UNGE FORTÆLLER: HISTORIEKORT ----------------------- */
 .ungefortæller-section{ padding: 40px 0 28px; background: transparent; }
@@ -1231,9 +1252,25 @@ input[type=number] { appearance: textfield; -moz-appearance: textfield; }
 .din-historie-kan-blive-den-næste .cta-blue{ display:inline-flex; margin-top:12px; }
 
 @media (max-width:900px){
-  .din-historie-kan-blive-den-næste{ padding: 40px 16px; }
+  .din-historie-kan-blive-den-næste{ padding: 40px 21px; }
   .din-historie-kan-blive-den-næste h2{ font-size:28px; }
 }
+
+/* ----------------------- CHAT & KONTAKT: SECTION 1 (Kontaktkort) ----------------------- */
+/* Placeret her direkte efter callout for at være let at finde */
+.chatogkontakt-section-1{ padding: 48px 24px 40px; }
+.chatogkontakt-section-1 .container{ max-width:1760px; margin:0 auto; }
+.chatogkontakt-cards{ display:grid; grid-template-columns: repeat(4, 1fr); gap:32px; align-items:stretch; }
+.chatogkontakt-card{ background:#fff; border-radius:14px; padding:40px 28px; box-shadow: 0 18px 40px rgba(10,25,40,0.06); display:flex; flex-direction:column; gap:18px; align-items:flex-start; min-height:160px; height:100%; }
+.chatogkontakt-card .icon-wrap img{ width:56px; height:56px; display:block; }
+.chatogkontakt-card .card-body{ display:flex; flex-direction:column; gap:6px; align-items:flex-start; width:100%; }
+.chatogkontakt-card h4{ color:#0A0A0A; font-size:34px; font-weight:500; text-align:left; margin:0; padding:0; }
+.chatogkontakt-card .card-primary{ margin:0; padding:8px 0; font-size:34px; color:#0b1628; text-align:left; }
+.chatogkontakt-card .card-meta{ margin:0; padding:0; font-size:21px; color:#6b8190; text-align:left; }
+
+@media (max-width:1100px){ .chatogkontakt-cards{ grid-template-columns: repeat(2, 1fr); } }
+@media (max-width:700px){ .chatogkontakt-cards{ grid-template-columns: 1fr; } .chatogkontakt-section-1{ padding:24px 16px; } .chatogkontakt-card{ padding:20px; min-height:unset; } }
+
 
 /* Meta-linje under kortbeskrivelsen: ikon + kort tekst */
 .kort-meta{ list-style:none; padding:0; margin:12px 0 14px 0; color:#7d8a94; font-size:14px; }
