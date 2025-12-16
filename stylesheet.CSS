@@ -1097,12 +1097,15 @@ input[type=number] { appearance: textfield; -moz-appearance: textfield; }
 /* ----------------------- Underside - HERO ----------------------- */
 /* Høj-specificitet for at undgå at andre styles overskriver heroen. */
 .underside-hero, section.underside-hero{ background: linear-gradient(135deg,#0b6edb 0%, #1177f1 45%, #00c97b 100%) !important; color:#fff !important; }
+.underside-hero{ display:flex; align-items:center; }
 .underside-hero .container{ max-width:1760px; margin:0 auto; padding:48px 20px !important; text-align:center; }
+.underside-hero{ min-height:260px; }
 .underside-hero h1{ font-size: clamp(32px,6vw,64px); margin:0 0 12px; font-weight:700; color: #fff; }
 .underside-hero h3{ color: rgba(255,255,255,0.95); margin:0 auto 18px; max-width:900px; ;color: #FFF; }
 .underside-hero .cta-small{ display:inline-flex; align-items:center; gap:10px; padding:10px 18px; background:#fff; color:#0b6edb; border-radius:999px; font-weight:700; text-decoration:none; }
 
 @media (max-width: 900px){
+  .underside-hero{ min-height:180px; }
   .underside-hero .container{ padding:36px 18px !important; }
   .underside-hero h1{ font-size: 36px; }
 }
@@ -1258,18 +1261,174 @@ input[type=number] { appearance: textfield; -moz-appearance: textfield; }
 
 /* ----------------------- CHAT & KONTAKT: SECTION 1 (Kontaktkort) ----------------------- */
 /* Placeret her direkte efter callout for at være let at finde */
-.chatogkontakt-section-1{ padding: 48px 24px 40px; }
+.chatogkontakt-section-1{ padding: 48px 24px 40px; margin-bottom: 80px; }
 .chatogkontakt-section-1 .container{ max-width:1760px; margin:0 auto; }
 .chatogkontakt-cards{ display:grid; grid-template-columns: repeat(4, 1fr); gap:32px; align-items:stretch; }
-.chatogkontakt-card{ background:#fff; border-radius:14px; padding:40px 28px; box-shadow: 0 18px 40px rgba(10,25,40,0.06); display:flex; flex-direction:column; gap:18px; align-items:flex-start; min-height:160px; height:100%; }
+.chatogkontakt-card{ background:#fff; border-radius:14px; padding:24px 20px; box-shadow: 0 12px 28px rgba(10,25,40,0.05); display:flex; flex-direction:column; gap:12px; align-items:flex-start; min-height:120px; height:100%; }
+.chatogkontakt-card .icon-wrap{ margin-top:6px; margin-bottom:10px; }
 .chatogkontakt-card .icon-wrap img{ width:56px; height:56px; display:block; }
-.chatogkontakt-card .card-body{ display:flex; flex-direction:column; gap:6px; align-items:flex-start; width:100%; }
+.chatogkontakt-card .card-body{ display:flex; flex-direction:column; gap:8px; align-items:flex-start; width:100%; }
 .chatogkontakt-card h4{ color:#0A0A0A; font-size:34px; font-weight:500; text-align:left; margin:0; padding:0; }
-.chatogkontakt-card .card-primary{ margin:0; padding:8px 0; font-size:34px; color:#0b1628; text-align:left; }
+.chatogkontakt-card .card-primary{ margin:0; padding:10px 0; font-size:34px; color:#0b1628; text-align:left; }
 .chatogkontakt-card .card-meta{ margin:0; padding:0; font-size:21px; color:#6b8190; text-align:left; }
 
 @media (max-width:1100px){ .chatogkontakt-cards{ grid-template-columns: repeat(2, 1fr); } }
 @media (max-width:700px){ .chatogkontakt-cards{ grid-template-columns: 1fr; } .chatogkontakt-section-1{ padding:24px 16px; } .chatogkontakt-card{ padding:20px; min-height:unset; } }
+
+
+/* ----------------------- CHAT & KONTAKT: SECTION 1 - CHAT-FORM (page specific) ----------------------- */
+/* Placeret direkte efter section 1 rules så den er let at finde. Klassernes prefix 'chat-' gør
+  at disse styles kun påvirker chatogkontakt-siden. Formen centreret i sektionen og matcher
+  samme visuelle proportioner som forsidens formular. */
+.chat-contact-wrapper{ display:flex; justify-content:center; margin-top:140px; padding-top:40px; }
+.chat-contact-grid{ width:100%; max-width:1100px; display:grid; grid-template-columns: 1fr 420px; gap:32px; align-items:start; }
+
+/* Heading block between cards and form - centered and pushed down */
+.chat-send-heading{ text-align:center; margin-top:200px; margin-bottom:0; }
+.chat-send-heading h4{ margin:0; color:#55606a; }
+@media (max-width:900px){ .chat-send-heading{ margin-top:56px; } }
+
+.chat-contact-form{ background:#ffffff; border-radius:14px; padding:28px; box-shadow: 0 18px 40px rgba(10,25,40,0.06); }
+.chat-contact-form .chat-form-row{ margin-bottom:16px; display:flex; flex-direction:column; }
+.chat-contact-form label{ font-size:15px; color:#334155; margin-bottom:8px; }
+.chat-contact-form input[type="text"],
+.chat-contact-form input[type="email"],
+.chat-contact-form input[type="tel"],
+.chat-contact-form input[type="number"],
+.chat-contact-form textarea{ width:100%; padding:12px 14px; border:1px solid #E6EEF6; border-radius:8px; font-size:16px; color:#0b1628; box-sizing:border-box; }
+.chat-contact-form textarea{ min-height:120px; resize:vertical; }
+.chat-form-row--split{ display:grid; grid-template-columns: 1fr 1fr; gap:18px; }
+
+.chat-form-actions{ display:flex; align-items:center; gap:16px; margin-top:8px; }
+.chat-cta-blue{ font-size: 21px; display:inline-flex; align-items:center; gap:10px; background:linear-gradient(90deg,#0b6edb 0%, #0062b3 100%); color:#fff; padding:12px 18px; border-radius:999px; text-decoration:none; border:none; cursor:pointer; font-weight:700; }
+.chat-privacy-note{ color:#6b8190; font-size:21px; margin:0; }
+
+/* Responsive collapse and small-screen tweaks are handled in the scoped
+  `.chatogkontakt-section-1` rules further below to avoid duplication. */
+
+/* Scoped centering overrides for chat page only ------------------------------------------ */
+/* These rules target elements under .chatogkontakt-section-1 to avoid changing other pages.
+   They explicitly center the wrapper and constrain inner widths so the form sits centered
+   both horizontally and with comfortable vertical spacing. Tweak padding-top/padding-bottom
+   if you want the block higher or lower on the page. */
+.chatogkontakt-section-1 .chat-contact-wrapper{
+  display:flex;              /* preserve flex layout */
+  justify-content:center;    /* horizontal center */
+  align-items:center;        /* vertical align inside wrapper area */
+  width:100%;
+  /* Larger vertical padding to make the wrapper occupy more vertical space */
+  padding-top:0;             /* removed so heading sits directly above the wrapper */
+  padding-bottom:0;     /* keep bottom spacing */
+  /* Keep a left gutter on very wide screens but make it slightly smaller so form can grow */
+  padding-left: 450px;      /* reduced from 450px to 380px */
+  box-sizing:border-box;
+}
+
+.chatogkontakt-section-1 .chat-contact-grid{
+  max-width:1400px;          /* increase so the form/grid occupies more horizontal space */
+  padding: 0 20px;           /* slightly larger gutters */
+}
+
+/* Consolidated input/textarea + placeholder styles for chat form */
+.chatogkontakt-section-1 .chat-contact-form input,
+.chatogkontakt-section-1 .chat-contact-form textarea{
+  font-family: 'Alpino', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+  color: #0b1628; /* body text color for inputs */
+  font-size: 16px;
+}
+.chatogkontakt-section-1 .chat-contact-form input::placeholder,
+.chatogkontakt-section-1 .chat-contact-form textarea::placeholder{
+  font-family: inherit; /* inherit Alpino from inputs above */
+  color: #9aa8b3; /* subtle placeholder color */
+}
+/* Vendor-prefixed placeholders kept for older browsers */
+.chatogkontakt-section-1 .chat-contact-form input::-webkit-input-placeholder,
+.chatogkontakt-section-1 .chat-contact-form textarea::-webkit-input-placeholder{ font-family: inherit; color: #9aa8b3; font-size: 21px; }
+.chatogkontakt-section-1 .chat-contact-form input::-moz-placeholder,
+.chatogkontakt-section-1 .chat-contact-form textarea::-moz-placeholder{ font-family: inherit; color: #9aa8b3; }
+.chatogkontakt-section-1 .chat-contact-form input:-ms-input-placeholder,
+.chatogkontakt-section-1 .chat-contact-form textarea:-ms-input-placeholder{ font-family: inherit; color: #9aa8b3; }
+
+
+/* Set most text inside the chat wrapper to 21px but exclude the action row
+   so buttons and privacy-note can keep their design. We target common text
+   elements explicitly to avoid unintended inheritance elsewhere. */
+
+.chatogkontakt-section-1 .chat-contact-wrapper label,
+.chatogkontakt-section-1 .chat-contact-wrapper .card-primary,
+.chatogkontakt-section-1 .chat-contact-wrapper .card-meta{
+  font-size:21px;
+  line-height:28px;
+}
+
+/* Mobile adjustments (keeps form centered and readable) */
+@media (max-width:1100px){
+  .chatogkontakt-section-1 .chat-contact-wrapper{ padding-top:0; padding-bottom:36px; }
+  .chatogkontakt-section-1 .chat-contact-grid{ grid-template-columns: 1fr; justify-items:center; }
+  .chatogkontakt-section-1 .chat-contact-form{ width:100%; max-width:760px; }
+  /* Remove large left padding on medium screens so content remains centered */
+  .chatogkontakt-section-1 .chat-contact-wrapper{ padding-left: 16px; padding-right: 16px; }
+}
+
+/* Extra override for small screens */
+@media (max-width:700px){
+  .chatogkontakt-section-1 .chat-contact-wrapper{ padding-left: 12px; padding-right: 12px; }
+  .chatogkontakt-section-1 .chat-contact-form{ padding:20px; }
+}
+
+/* End of scoped chat overrides ----------------------------------------------------------- */
+
+/* Section-scoped margin alignment ----------------------------------------------- */
+/* These rules ensure the chat section aligns with the global `.container` gutters
+   (24px) and centers the inner grid so it has equal left/right spacing like other sections. */
+.chatogkontakt-section-1 .chat-contact-wrapper{
+  padding-left: 0; /* remove asymmetric gutters */
+  padding-right: 0;
+}
+
+.chatogkontakt-section-1 > .container .chat-contact-grid{
+  max-width: 1100px;    /* match original intended grid width */
+  width: 100%;
+  margin: 0 auto;       /* center horizontally with equal side spacing */
+  padding: 0 24px;      /* same side gutters as .container */
+  box-sizing: border-box;
+  grid-template-columns: 1fr 420px; /* preserve desktop two-column layout */
+  gap: 32px;
+}
+
+@media (max-width:1100px){
+  .chatogkontakt-section-1 > .container .chat-contact-grid{ padding: 0 16px; }
+}
+
+/* End section-scoped margin alignment ------------------------------------------- */
+
+/* Force-center the chat form card only (scoped, minimal !important use) */
+.chatogkontakt-section-1 .chat-contact-wrapper .chat-contact-grid .chat-contact-form{
+  max-width: 760px;   /* standard card width */
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  box-sizing: border-box;
+}
+
+@media (max-width:1100px){
+  .chatogkontakt-section-1 .chat-contact-wrapper .chat-contact-grid .chat-contact-form{
+    max-width: 760px; /* allow slightly wider card on medium screens if desired */
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+
+/* If the grid places card in a right column, force it to center by making the card
+   span both columns and center its content. Scoped and safe for chat page only. */
+.chatogkontakt-section-1 .chat-contact-grid .chat-contact-form{
+  grid-column: 1 / -1;
+  justify-self: center;
+  align-self: start;
+}
+
+
+
 
 
 /* Meta-linje under kortbeskrivelsen: ikon + kort tekst */
@@ -1286,6 +1445,23 @@ input[type=number] { appearance: textfield; -moz-appearance: textfield; }
 @media (max-width: 700px){ .muligheder-liste{ grid-template-columns: 1fr; } .muligheder-bokse{ padding:36px 0; } .mulighed-kort{ gap:12px; } }
 
 
+
+
+/* Kontakttrin (sektion-3) - placeret efter kort-meta for bedre rækkefølge */
+.chatogkontakt-section-3{ background: #f0f8ff; padding: 48px 24px; }
+.chatogkontakt-section-3 .container{ max-width:1200px; margin:0 auto; }
+.kontakttrin-overskrift{ text-align:center; font-size:48px; margin-bottom:40px; font-weight:400; }
+.kontakttrin-grid{ display:grid; grid-template-columns: repeat(3, 1fr); gap:40px; align-items:start; }
+.kontakttrin-item{ text-align:center; padding:12px 20px; display:flex; flex-direction:column; align-items:center; gap:14px; }
+.kontakttrin-item .ikon-trin{ width:88px; height:88px; display:flex; align-items:center; justify-content:center; border-radius:50%; background: transparent; margin-top:6px; margin-bottom:12px; }
+.kontakttrin-item .ikon-trin img{ width:64px; height:64px; display:block; }
+.kontakttrin-item h4{ margin:0 0 8px; color:#0A0A0A; font-weight: 500; }
+.kontakttrin-item p{ margin:0; color:#41505b; }
+
+@media (max-width:900px){
+  .kontakttrin-grid{ grid-template-columns: 1fr; gap:24px; }
+  .kontakttrin-overskrift{ font-size:36px; }
+}
 
 
 
@@ -1471,6 +1647,12 @@ footer .hurtig-links a{
   .kontakt-link{ justify-content:center; gap:10px; }
   .kontakt-ikon{ width:18px; height:18px; flex:0 0 18px; }
   .kontakt-tekst{ display:inline-block; }
+
+  /* Tighter spacing for phone/mail/maps icons and their labels on small screens */
+  .footer .kontakt-liste .kontakt-element{ display:flex; justify-content:center; align-items:center; width:100%; }
+  .footer .kontakt-liste .kontakt-link{ gap:6px; justify-content:center; align-items:center; }
+  .footer .kontakt-liste .kontakt-ikon{ width:18px; height:18px; flex:0 0 18px; margin-right:6px; }
+  .footer .kontakt-liste .kontakt-tekst{ display:inline-block; margin:0; }
 
   /* Footer-overskrifter og beskrivelser: stram op */
   .fod-overskrift{ text-align:center; font-size:18px; margin-bottom:8px; }
