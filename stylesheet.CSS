@@ -266,6 +266,15 @@ body > * { box-sizing: border-box; }
   background: linear-gradient(90deg,#0b6edb 0%, #0062b3 100%); /* Gradient-farve til underline */
 }
 
+/* Aktiv / nuværende side: samme blå farve som ved hover.
+   Understøtter både semantisk `aria-current="page"` og `class="active"`.
+   Gælder både desktop og mobil-menu-links. */
+.main-nav .nav-link[aria-current="page"],
+.main-nav .nav-link.active {
+  color: #0b6edb;
+  font-weight: 700;
+}
+
 /* Mobile: skjul standard nav-list og juster header-højde */
 @media (max-width: 700px){
   .main-nav .nav-list{ display: none; } /* Skjul standard nav på små skærme */

@@ -27,8 +27,18 @@
           </a>
         </div>
         <!-- CSS-only hamburger: skjult checkbox + label styrer visning af navigationen (ingen JS) -->
-        <input id="nav-toggle" class="nav-toggle" type="checkbox" aria-hidden="true" />
-        <label for="nav-toggle" class="hamburger-button" aria-label="Åbn navigation" role="button">
+        <input
+          id="nav-toggle"
+          class="nav-toggle"
+          type="checkbox"
+          aria-hidden="true"
+        />
+        <label
+          for="nav-toggle"
+          class="hamburger-button"
+          aria-label="Åbn navigation"
+          role="button"
+        >
           <span class="bar"></span>
           <span class="bar"></span>
           <span class="bar"></span>
@@ -45,7 +55,9 @@
           <ul class="nav-list">
             <!-- <ul class="nav-list">: liste over navigationspunkter -->
             <li class="nav-item">
-              <a class="nav-link" href="dinemuligheder.html">Dine muligheder</a>
+              <a class="nav-link" href="dinemuligheder.html" aria-current="page"
+                >Dine muligheder</a
+              >
             </li>
             <li class="nav-item">
               <a class="nav-link" href="ungefortæller.html">Unge fortæller</a>
@@ -62,7 +74,7 @@
             <!-- her kan man se alle vores undersider, som er klikkable links, det er de pga. attributet href -->
           </ul>
         </nav>
-  <label for="nav-toggle" class="nav-overlay" aria-hidden="true"></label>
+        <label for="nav-toggle" class="nav-overlay" aria-hidden="true"></label>
       </div>
     </header>
     <!-- Hero for 'Dine muligheder' -->

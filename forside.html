@@ -7,7 +7,7 @@
     <meta name="robots" content="noindex" />
     <title>Forside</title>
     <!-- Korrekt link til stylesheet -->
-    <link href="stylesheet.css" rel="stylesheet" />
+  <link href="stylesheet.CSS" rel="stylesheet" />
 </head>
   <body>
   <!--her indsætter vi logo til banner-->
@@ -15,11 +15,18 @@
   <div class="container header-inner">
    <div>
    <!-- her gør vi banneret klikbart, så når man klikker på banneret kommer man ind på forsiden-->
-    <a class="brand" href="forside.html" aria-label="Forside - Herning Kommune">
+  <a class="brand" href="forside.html" aria-label="Forside - Herning Kommune" aria-current="page">
     <img src="logo.webp" alt="Herning Kommune logo" class="brand-logo" />
    </a>
    </div>
   <!-- Her laver vi en nav-bar med klikbare links til undersiden-->
+  <!-- CSS-only hamburger: skjult checkbox + label styrer visning af navigationen (ingen JS) -->
+  <input id="nav-toggle" class="nav-toggle" type="checkbox" aria-hidden="true" />
+  <label for="nav-toggle" class="hamburger-button" aria-label="Åbn navigation" role="button">
+    <span class="bar"></span>
+    <span class="bar"></span>
+    <span class="bar"></span>
+  </label>
   <nav id="mainNavbar" class="main-nav" role="navigation" aria-label="Hovednavigation">
   <!-- role="navigation": angiver at dette er en navigation-landmark for assistive teknologier -->
   <!-- aria-label="Hovednavigation": kort beskrivelse, så brugere kan identificere denne navigation -->
@@ -33,6 +40,7 @@
     <!-- her kan man se alle vores undersider, som er klikkable links, det er de pga. attributet href -->
     </ul>
   </nav>
+  <label for="nav-toggle" class="nav-overlay" aria-hidden="true"></label>
   </div>
 </header>
 <!-- Hero sektion -->
@@ -51,7 +59,7 @@
         </a>
         <!-- Rettet: fjernet et stray </button> og en ekstra </div> som lå udenfor containeren.
              H4 flyttes ind i .container så strukturen er gyldig og semantisk korrekt. -->
-        <h4>100% gratis · Ingen dømmerier · Lokalt i Herning</h4>
+        <h4>100% gratis · Vi dømmer ikke · Lokalt i Herning</h4>
       </div>
     </section>
 
@@ -131,97 +139,100 @@
           Og vigtigst af alt: Vi dømmer dig ikke. Overhovedet. Uanset hvor mange gange du har prøvet før, eller hvor mange “sidste gange” du allerede har haft.</h4>
              </div>
              <div class="forside-2-img">
-          <img src="img.1.webp" alt="Hjælp">
+          <img src="billede1.webp" alt="Hjælp">
           <!-- Vis den samme brødtekst også i højre kolonne visuelt på desktop.
                aria-hidden så skærmlæsere ikke læser duplikatet. -->
 </div>
   </section>
 
-  <section class="forside 3">
-    <div class="overskrift-forside-3">
-    <h2>Få hjælp her</h2>
-    <h4>Vi har forskellige tilbud - find det der passer til dit liv</h4>
+  <section class="forside-3" aria-label="Få hjælp her">
+    <div class="container forside-3">
+      <header class="forside-3--head">  <!-- Header sørger for at det bliver en semantisk gruppering -->
+        <h2>Få hjælp her</h2>
+        <h4>Vi har forskellige tilbud - find det der passer til dit liv</h4>
+      </header>
+
+      <div class="forside-3--grid">
+        <article class="forside-3--card">
+          <img src="kalenderblåbaggrund.svg" alt="Kalender" class="forside-3--icon">
+          <h3>Personligt rygestop-forløb</h3>
+          <p>Et skræddersyet forløb med fast kontaktperson, der følger dig hele vejen. Mødes når det passer dig.</p>
+          <ul class="forside-3--meta">
+            <li>4-6 samtaler over 3 måneder</li>
+            <li>Sundhedscenter Herning</li>
+          </ul>
+        </article>
+
+        <article class="forside-3--card">
+          <img src="beskedbobelblåbaggrund.svg" alt="Taleboble" class="forside-3--icon">
+          <h3>Drop-in rådgivning</h3>
+          <p>Kom forbi uden at booke tid. Stil spørgsmål, få råd, eller bare tal om det. Ingen forpligtelser.</p>
+          <ul class="forside-3--meta">
+            <li>Hver torsdag 15-18</li>
+            <li>Ungdomsskolen, Herning</li>
+          </ul>
+        </article>
+
+        <article class="forside-3--card">
+          <img src="tomenneskerblåbaggrund.svg" alt="To mennesker" class="forside-3--icon">
+          <h3>Gruppeforløb for unge</h3>
+          <p>Mød andre i samme situation. I hjælper hinanden og deler tricks til at holde fast.</p>
+          <ul class="forside-3--meta">
+            <li>6 uger, 1 gang om ugen</li>
+            <li>Online eller fysisk i Herning</li>
+          </ul>
+        </article>
+      </div>
+
+      <div class="forside-3--actions">
+        <h4>Ikke sikker på hvad der passer dig bedst? Det er helt okay.</h4>
+        <a href="chatogkontakt.html" class="cta-blue">Tal med en rådgiver</a>
+      </div>
     </div>
-    <!-- h4-tagget bruges til at give sektionen en undertitel/brødtekst -->
-    <div class="container forside 3">
-    <!-- Liste gør det nemt at lave grid i CSS -->
-
-      <!-- Personligt rygestop-forløb -->
-      <div class="boks">
-      <!-- her er der brugt en container for at samle indholdet til dette specifikke tilbud, nemlig class="boks"-->
-<ul class="box-grid 1">
-  <li class="box-item"><a class="box"><img class="kalender forside" src="kalenderblåbaggrund.svg" alt="kalender"></a></li>
-  <!-- li class="box-item" betyder at dette er et kort i grid-layoutet, det gør at kortene bliver præsenteret pænt i en gitterstruktur-->
-  <h3>Personligt rygestop-forløb</h3>
-  <h4>Et skræddersyet forløb med fast kontaktperson, der følger dig hele vejen. Mødes når det passer dig.</h4>
-  <li class="box-item"><a class="box"><img class="kalender sort forside" src="kalendersort.svg" alt="kalender"><span>4-6 samtaler over 3 måneder</span></a></li>
-  <!-- vi har valgt at samle det i en ugrupperet liste, fordi det gør det nemmere at tilføje flere elementer senere hen -->
-  <li class="box-item"><a class="box"><img class="lokation sort forside" src="lokationsort.svg" alt="lokation"><span>Sunhedscenter Herning</span></a></li>
-</ul>  
-
-      <!-- Drop-in rådgivning-->
-      <div class="boks">
-<ul class="box-grid 2">
-<!-- ul class=box grid 2 betyder at dette er en ny sektion i grid-layoutet, ul gør at man kan tilføje flere elementer uden at skulle ændre på strukturen-->
-  <li class="box-item"><a class="box"><img class="talebobel forside" src="beskedbobelblåbaggrund.svg" alt="talebobel"></a></li>
-  <h3>Drop-in rådgivning</h3>
-  <h4>Kom forbi uden at booke tid. Stil spørgsmål, få råd, eller bare tal om det. Ingen forpligtelser.</h4>
-  <li class="box-item"><a class="box"><img class="Kalender sort forside" src="kalendersort.svg" alt="kalender"><span>Hver torsdag 15-18</span></a></li>
-  <!-- alt-teksten beskriver billedet for bedre tilgængelighed -->
-  <li class="box-item"><a class="box"><img class="lokation sort forside" src="lokationsort.svg" alt="lokation"><span>Ungdomsskolen, Herning</span></a></li>
-</ul>  
-
-      <!-- Gruppeforløb for unge-->
-      <div class="boks">
-<ul class="box-grid 3">
-<!-- box-grid 3 fortæller os at alt i denne class hører sammen-->
-  <li class="box-item"><a class="box"><img class="2 mennesker forside" src="tomenneskerblåbaggrund.svg" alt="2 mennesker"></a></li>
-  <h3>Gruppeforløb for unge</h3>
-  <!-- her er der brugt en container for at samle indholdet til dette specifikke tilbud, nemlig class="boks"-->
-  <h4>Mød andre i samme situation. I hjælper hinanden og deler tricks til at holde fast. Det er faktisk ret fedt</h4>
-  <li class="box-item"><a class="box"><img class="Kalender sort forside" src="kalendersort.svg" alt="kalender"><span>6 uger, 1 gang om ugen</span></a></li>
-  <li class="box-item"><a class="box"><img class="lokation sort forside" src="lokationsort.svg" alt="lokation"><span>Online eller fysisk i Herning</span></a></li>
-</ul> 
-  </div>
-  <h4>Ikke sikker på hvad der passer dig bedst? Det er helt okay.</h4>
-  <!-- h4 er en overskrift-->
-        <a href="chatogkontakt.html" class="cta-blue" aria-label="Gå til siden for at få hjælp nu">
-        <!-- a href" linker os direkte videre til undersiden chat&kontakt når man klikker på det-->
-        Tal med en rådgiver
-        </a>
-</section>
+  </section>
 
 <section class="forside-4">
-<!-- section class="forside 4" bruges til at definere en ny sektion på forsiden, det har vi gjort for at adskille indholdet visuelt og gøre det nemmere at navigere i-->
-  <div class="container-forside-4">
-    <img src="img2.webp" alt="billede af dreng med røg">
-    <img src="img3.webp" alt="billede af kvinde med lighter">
+<!-- section .forside-4 bruges til at definere en ny sektion på forsiden -->
+  <div class="container">
+  <!-- Brug semantisk markup: grid + figure for hvert billede. -->
+    <div class="forside-4--grid" role="list">
+      <figure role="listitem">
+        <img src="billede2.webp" alt="Ung person med røg" class="forside-4--img" loading="lazy">
+      </figure>
+      <figure role="listitem">
+        <img src="billede3.webp" alt="Ung person med lighter" class="forside-4--img" loading="lazy">
+      </figure>
+    </div>
   </div>
 </section>
 <!-- man skal altid huske at tilføje et slut-tag for at lukke tagsene-->
-<div>
-  <div>
-    <img src="kolon.svg" alt="billede af kolon" width="150">
-    <!-- width 150 antyder at billedet har en fast bredde på 150 pixels -->
-    <h4>"Jeg troede aldrig jeg kunne stoppe med snus. Men efter et par samtaler føltes det faktisk muligt. Nu har jeg været clean i 4 måneder."</h4>
-    <h4>Mikkel, 20 år</h4>
-    <h6>Stoppede med snus</h6>
-    <!-- h6 er den mindste skrift vi har - bruges til at angive mindre vigtige oplysninger eller detaljer -->
-  </div>
 
-  <div>
-    <img src="kolon.svg" alt="billede af kolon" width="150">
-    <h4>"Det fedeste var at jeg ikke følte mig dømt. De forstod bare hvor jeg var, og hjalp mig videre derfra. Det betød alt."</h4>
-    <h4>Sofia, 18 år</h4>
-    <h6>Stoppede med Puff bars</h6>
-  </div>
-  <!-- vi har valgt at lave tre forskellige div i denne sektion, da det giver et bedre overblik og gør det nemmere at navigere i og giver os muligheden for at justere layoutet mere fleksibelt og responsivt-->
 
-  <div>
-    <img src="kolon.svg" alt="billede af kolon" width="150">
-    <h4>"Gruppeforløbet var nice. Det hjalp at høre andre havde samme udfordringer. Vi holder stadig kontakt og holder hinanden på sporet."</h4>
-    <h4>Lucas, 22 år</h4>
-    <h6>Stoppede med vapes</h6>
+<div class="udtalelser">
+  <h2>Andre unge fra Herning har gjort det</h2>
+  <h4>Og det kan du også</h4>
+  <div class="udtalelser-liste">
+    <div class="udtalelse-kort">
+      <img src="kolon.svg" alt="billede af kolon" width="150">
+      <!-- width 150 antyder at billedet har en fast bredde på 150 pixels -->
+      <h4>"Jeg troede aldrig jeg kunne stoppe med snus. Men efter et par samtaler føltes det faktisk muligt. Nu har jeg været clean i 4 måneder."</h4>
+      <h4 class="udtalelse-forfatter">Mikkel, 20 år</h4>
+      <h6>Stoppede med snus</h6>
+    </div>
+
+    <div class="udtalelse-kort">
+      <img src="kolon.svg" alt="billede af kolon" width="150">
+      <h4>"Det fedeste var at jeg ikke følte mig dømt. De forstod bare hvor jeg var, og hjalp mig videre derfra. Det betød alt."</h4>
+      <h4 class="udtalelse-forfatter">Sofia, 18 år</h4>
+      <h6>Stoppede med Puff bars</h6>
+    </div>
+
+    <div class="udtalelse-kort">
+      <img src="kolon.svg" alt="billede af kolon" width="150">
+      <h4>"Gruppeforløbet var nice. Det hjalp at høre andre havde samme udfordringer. Vi holder stadig kontakt og holder hinanden på sporet."</h4>
+      <h4 class="udtalelse-forfatter">Lucas, 22 år</h4>
+      <h6>Stoppede med vapes</h6>
+    </div>
   </div>
 </div>
     </div>
@@ -231,7 +242,7 @@
   </div>
 </section>
 <!-- Kontaktformular -->
-<section class="kontakt formular" id="kontakt">
+<section class="kontakt-formular-forside" id="kontakt">
   <!-- Sektionens formål:
        - <section> bruges til en selvstændig del af siden (her: kontakt).
        - id="kontakt" gør det muligt at linke direkte hertil (fx /#kontakt).
@@ -241,7 +252,7 @@
     <!-- Hoved-overskrift for sektionen -->
     <h2 class="overskrift">Tag første skridt</h2>
     <!-- Underrubrik / hjelpetekst -->
-    <p class="underrubrik">Kontakt os - helt uforpligtende og fortroligt</p>
+    <h4 class="underrubrik">Kontakt os - helt uforpligtende og fortroligt</h4>
     <!-- Grid der deler indhold i to kolonner (venstre: kontaktmetoder, højre: formular).
          CSS vil senere styre grid/flex-layout via .contact-grid. -->
     <div class="contact-grid">
@@ -285,7 +296,7 @@
         <!-- Info-boks der forklarer hvad der sker efter kontakt -->
         <div class="kontakt-info" role="note" aria-label="Hvad sker der når du kontakter os">
         <!-- class info-overskrift bruges fordi den definerer overskriften for info-boksen, så alt under denne class hører sammen -->
-          <h3 class="info-overskrift">Hvad sker der når du kontakter os?</h3>
+          <h4 class="info-overskrift">Hvad sker der når du kontakter os?</h4>
           <!-- ul bruges til at gruppere relaterede punkter-->
           <ul class="info-punkter">
             <!-- li bruges til at definere hvert punkt i listen -->
@@ -403,9 +414,6 @@
         </li>
       </ul>
     </div>
-
- 
-   
 
     <!-- KOLONNE 3: Hurtige links -->
     <div class="fod-kolonne fod-links" aria-label="Hurtige links">
