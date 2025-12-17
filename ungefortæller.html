@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="robots" content="noindex" />
     <title>Unge Fortæller</title>
-    <link href="stylesheet.css" rel="stylesheet" />
+    <link href="stylesheet.CSS" rel="stylesheet" />
   </head>
   <body>
     <!--her indsætter vi logo til banner-->
@@ -18,14 +18,16 @@
             class="brand"
             href="forside.html"
             aria-label="Forside - Herning Kommune"
-          >
-            <img
-              src="logo.webp"
-              alt="Herning Kommune logo"
-              class="brand-logo"
-            />
-          </a>
+            ><img src="logo.webp" alt="Herning Kommune logo" class="brand-logo"
+          /></a>
         </div>
+        <!-- CSS-only hamburger: skjult checkbox + label styrer visning af navigationen (ingen JS) -->
+        <input id="nav-toggle" class="nav-toggle" type="checkbox" aria-hidden="true" />
+        <label for="nav-toggle" class="hamburger-button" aria-label="Åbn navigation" role="button">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </label>
         <!-- Her laver vi en nav-bar med klikbare links til undersiden-->
         <nav
           id="mainNavbar"
@@ -55,6 +57,7 @@
             <!-- her kan man se alle vores undersider, som er klikkable links, det er de pga. attributet href -->
           </ul>
         </nav>
+  <label for="nav-toggle" class="nav-overlay" aria-hidden="true"></label>
       </div>
     </header>
 
@@ -168,7 +171,7 @@
       <div class="container-ungefortæller-3">
         <img src="emoji dreng 2.webp" alt="Lucas, 22 år emoji" />
         <h3>Lucas, 22 år</h3>
-        <h4 class="no-change">Stoppede med Vapes</h4>
+        <h4 class="h4-nochange">Stoppede med Vapes</h4>
         <!-- her har vi lavet et p element med et img inden i, fordi billedet hører sammen med teksten -->
         <p class="meta-pill">
           <img src="grønpil.svg" alt="grøn pil" />6 måneder nikotinfri
@@ -274,9 +277,8 @@
         href="chatogkontakt.html"
         class="cta-blue"
         aria-label="Gå til siden for at få hjælp nu"
+        >Start din rejse</a
       >
-        Start din rejse
-      </a>
     </section>
 
     <section>
@@ -345,8 +347,7 @@
                     alt=""
                     class="kontakt-ikon"
                     aria-hidden="true"
-                  />
-                  <span class="kontakt-tekst">96 28 40 91</span></a
+                  /><span class="kontakt-tekst">96 28 40 91</span></a
                 >
               </li>
               <li class="kontakt-element">
@@ -356,8 +357,7 @@
                     alt=""
                     class="kontakt-ikon"
                     aria-hidden="true"
-                  />
-                  <span class="kontakt-tekst">rygestop@herning.dk</span></a
+                  /><span class="kontakt-tekst">rygestop@herning.dk</span></a
                 >
               </li>
               <li class="kontakt-element">

@@ -1,11 +1,4 @@
 
-/* ------------------------------------------------------------
-  stylesheet.css
-  Kort fil-hoved: Denne fil indeholder styles for hele sitet.
-  - Bevar desktop-first tankegang (desktopregler øverst, mobile overrides nederst)
-  - Kommentér i danske linjer så fremtidige udviklere forstår intent.
-  - Undgå strukturelle ændringer her; hvis du vil ændre DOM, gør det i HTML.
-  ------------------------------------------------------------ */
 /* H1: hovedoverskrift-styling
   - color: tekstfarven (her hvid, bruges ofte i hero)
   - text-align: centrerer overskriften horisontalt
@@ -123,6 +116,8 @@ p{
   --h5-size: 13px;
   --brand-font-size: 21px;
   --nav-font-size: 21px;
+  /* Header height token - bruges af sticky header og mobile menu positioning */
+  --header-height: 88px;
   /* CTA-typografi: Alpino  fra designet */
   --cta-font-size: 21px;    /* Alpino Regular 21px */
   --cta-line-height: 24px;  /* Line-height 24px */
@@ -149,6 +144,11 @@ body{
   font-family: var(--base-font-family);
 }
 
+/* Når header er fixed, giv body top-padding så indhold ikke skjules bag headeren */
+body{
+  padding-top: var(--header-height);
+}
+
 
 /* Forebyg uønsket horisontal scroll: skjul overflow-x og brug box-sizing */
 html, body { overflow-x: hidden; }
@@ -163,98 +163,243 @@ body > * { box-sizing: border-box; }
   box-sizing: border-box;
 }
 
-@media (min-width: 1600px){ .container{ max-width: 1920px; padding: 16px 32px; } }
+@media (min-width: 1600px){
+  .container{
+    max-width: 1920px; /* øget max-width på meget brede skærme */
+    padding: 16px 32px; /* større padding på store skærme */
+  }
+}
 
 
 /* ----------------------- HEADER / NAVBAR ----------------------- */
 /* Genopbygget header: full-bleed baggrund, centreret container, logo til venstre, nav til højre */
 .site-header{
-  background: #ffffff;
-  width: 100vw;
-  position: relative;
-  left: 50%;
+  background: #ffffff; /* Baggrundsfarve for header */
+  width: 100vw; /* Gør header full-bleed så baggrunden går til viewport-kanten */
+  /* Gør header sticky/fixed så den altid er synlig */
+  position: fixed;
+  top: 0;
+  left: 50%; /* Behold full-bleed teknik */
   right: 50%;
   margin-left: -50vw;
   margin-right: -50vw;
+  z-index: 1100; /* Lidt højere end mobile menu overlay for sikkerhed */
   box-sizing: border-box;
+  height: var(--header-height); /* Fast højde så vi kan give body padding-top */
 }
 
 .site-header .container.header-inner{
-  max-width: 1600px;
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: 88px; /* højde på header */
-  padding: 0; /* fjern container-padding for 1:1 gutter kontrol */
-  gap: 16px;
-  box-sizing: border-box;
+  max-width: 1600px; /* Maksimal bredde for centreret indhold */
+  margin: 0 auto; /* Centrer containeren horisontalt */
+  display: flex; /* Brug flex for at placere logo, nav og knapper */
+  align-items: center; /* Lodret centrering af elementer i header */
+  justify-content: space-between; /* Fordel indhold med plads imellem */
+  height: var(--header-height); /* Brug token så mobile/desktop er konsistente */
+  padding: 0; /* Fjern standard container-padding for præcis gutter-kontrol */
+  gap: 16px; /* Afstand mellem direkte børn i flex-containeren */
+  box-sizing: border-box; /* Medregn padding i elementets størrelse */
 }
 
 .site-header .left{
-  display: flex;
-  align-items: center;
-  gap: 12px;
+  /* Wrapper for logo og eventuelle små elementer ved siden af */
+  display: flex; /* Brug flex for at arrangere logo og tekst vandret */
+  align-items: center; /* Centrer elementerne lodret inde i .left */
+  gap: 12px; /* Mellemrum mellem logo og brand-tekst */
 }
 
 .brand-logo{
-  height: 50px;
-  width: auto;
-  display: block;
+  /* Brand-logo billede */
+  height: 50px; /* Fast højde for konsistent logo-størrelse */
+  width: auto; /* Bredde følger billedets oprindelige proportioner */
+  display: block; /* Blok-element for forudsigelige marginer */
 }
 
-/* Exact layout overrides to match design: logo flush left, nav centered across remaining width */
+/* Præcise layout-overskrivelser for at matche designet: logo flugter til venstre, nav centreret i den resterende bredde */
 .site-header .left{ position: absolute; left: 24px; top: 50%; transform: translateY(-50%); z-index:50; }
+/* Gør logoet absolut placeret i venstre side og centrerer det lodret i headeren */
+/*
+  Note: position:absolute bruges her så logoet ligger fast i venstre side
+  uafhængigt af det centrerede nav. transform: translateY(-50%) centrerer
+  logoets Y-position i forhold til headerens højde.
+*/
 .site-header .container.header-inner .center-nav{
-  width: 100%;
-  display: flex;
-  justify-content: center; /* center nav items horizontally */
-  pointer-events: none; /* allow left/right click zones to pass through */
+  width: 100%; /* Fylder den tilgængelige plads mellem venstre og højre content */
+  display: flex; /* Brug flex for nem horisontal centering af nav */
+  justify-content: center; /* Centrerer navigationsindhold horisontalt */
+  pointer-events: none; /* Tillader klik på underliggende elementer i sidezoner */
 }
 .site-header .container.header-inner .center-nav .main-nav{ pointer-events: auto; }
 
-/* Ensure the header uses exact outer gutters, not the global .container padding */
+/* Sørg for at headeren bruger de præcise ydre gutters, ikke den globale .container-padding */
 .site-header > .container{ padding: 0; }
 
 .brand-text{
-  font-family: Alpino, sans-serif;
-  font-size: var(--brand-font-size);
-  font-weight: 700;
-  color: #111;
-  margin-left: 6px;
+  font-family: Alpino, sans-serif; /* Skrifttype for brand-teksten */
+  font-size: var(--brand-font-size); /* Størrelse styret af variabel for nem justering */
+  font-weight: 700; /* Tyk font-vægt for tydelighed */
+  color: #111; /* Mørk farve for høj kontrast */
+  margin-left: 6px; /* Lidt afstand mellem logo og brandtekst */
 }
 
 .main-nav .nav-list{
-  display: flex;
-  gap: 28px;
-  align-items: center;
-  margin: 0;
-  padding: 0;
-  list-style: none;
+  display: flex; /* Brug flex for at placere nav-elementer i en række */
+  gap: 28px; /* Mellemrum mellem hvert menupunkt */
+  align-items: center; /* Lodret centrering af menupunkter */
+  margin: 0; /* Nulstil default margin på ul */
+  padding: 0; /* Nulstil default padding på ul */
+  list-style: none; /* Fjern bullets fra listen */
 }
 
 .main-nav .nav-link{
-  font-size: var(--nav-font-size);
-  color: #374151;
-  text-decoration: none;
-  font-weight: 600;
+  font-size: var(--nav-font-size); /* Nav-tekst størrelse via variabel */
+  color: #374151; /* Sekundær mørk farve til nav-links */
+  text-decoration: none; /* Fjern understregning på links */
+  font-weight: 600; /* Halvfedt for tydelig navigation */
 }
 
 .main-nav .nav-link:hover{
-  color: #0b6edb;
+  color: #0b6edb; /* Hover-farve: gør link mere iøjnefaldende */
 }
 
 .header-underline{
-  height: 4px;
-  background: linear-gradient(90deg,#0b6edb 0%, #0062b3 100%);
+  height: 4px; /* Højden på den dekorative underline under header */
+  background: linear-gradient(90deg,#0b6edb 0%, #0062b3 100%); /* Gradient-farve til underline */
 }
 
 /* Mobile: skjul standard nav-list og juster header-højde */
 @media (max-width: 700px){
-  .main-nav .nav-list{ display: none; }
+  .main-nav .nav-list{ display: none; } /* Skjul standard nav på små skærme */
+  /* På mobil lader vi headerens indhold vokse, men sørger for passende padding så logo/hamburger ikke klistres */
   .site-header .container.header-inner{ height: auto; padding: 12px 16px; justify-content: space-between; }
-  .site-header .left{ position: static; transform: none; }
-  :root{ --brand-font-size: 14px; --nav-font-size: 14px; }
+  .site-header .left{ position: static; transform: none; } /* Gør .left statisk så det ikke overlapper layout */
+  :root{ --brand-font-size: 14px; --nav-font-size: 14px; } /* Mindsk globale font-variabler for mobil */
+}
+
+/* ------------- CSS-only hamburger / mobile nav (brug sammen med skjult checkbox #nav-toggle) ------------------------ */
+/* Skjult checkbox der styrer nav-tilstand */
+.nav-toggle{
+  /* Hold checkbox i DOM (ikke display:none) så label kan toggles; skjul visuelt off-screen */
+  position: absolute;
+  left: -9999px;
+}
+
+/* Hamburger-knap styling (label for checkbox) - skjul på desktop, vis på mobil via media query */
+.hamburger-button{ display: none; flex-direction: column; justify-content: space-between; width:34px; height:22px; background:transparent; border:none; cursor:pointer; padding:0; margin-left:12px; }
+.hamburger-button .bar{ display:block; height:3px; width:100%; background:#111; border-radius:3px; transition: transform 200ms ease, opacity 200ms ease; }
+
+/* Når checkbox er checked, vis navigationen under header */
+@media (max-width: 700px){
+  /* Gør hamburger synlig */
+  .hamburger-button{ display:inline-flex; }
+
+  /* Skjul menuen som standard (mobil) og vis den når checkbox er checked. Bruger general-sibling (~)
+    for at være robust over for små markup-forskelle mellem filer. */
+  .main-nav{ display: none; }
+  .nav-toggle:checked ~ .main-nav{ display: block; }
+
+  /* Sørg for at menuen ligger over hero-indhold ved at sætte høj z-index */
+  /*
+    .main-nav z-index: 1100
+    - Dette sikrer at den viste mobile menu ligger over næsten alt andet indhold
+      (fx hero-tekst og store billeder) når den er åben.
+    - Vi bruger en værdi højere end .site-header for at være helt sikre på, at
+      selve menupanelet vises ovenpå overlay og andre sektioner (overlay har 1050).
+    - Bemærk: z-index fungerer kun i sammenhæng med position (absolute/fixed/relative).
+  */
+  /* Vis/skjul regler for mobilmenu */
+  .main-nav{ display: none; } /* Skjult som standard på mobil */
+  .nav-toggle:checked ~ .main-nav{ display: block; } /* Vis menu når checkbox er checked */
+
+  .nav-overlay{ display: none; } /* Overlay skjult som standard */
+  .nav-toggle:checked ~ .nav-overlay{ display: block; } /* Vis overlay ved åben menu */
+
+  /* Overlay properties (inline kommentarer per property) */
+  .nav-overlay{
+    position: fixed; /* Placer overlay relativt til viewport */
+    inset: 0; /* top:0; right:0; bottom:0; left:0 så overlay dækker hele skærmen */
+    background: rgba(0,0,0,0.35); /* Semi-transparent sort for at dæmpe baggrund */
+    z-index: 1050; /* Ligger under menupanelet men over sideindhold */
+  }
+
+  /* Mobile menu panel (inline kommentarer på hver property) */
+  .main-nav{
+  z-index: 1200; /* Sikrer at menu-panelet vises ovenpå overlay og hero */
+  position: fixed; /* Fjernet fra dokumentflow og placeret relativt til viewport */
+  left: 0; /* Strækker menuens venstre kant til viewportens venstre kant */
+  right: 0; /* Strækker menuens højre kant til viewportens højre kant */
+  top: var(--header-height); /* Placer menuen lige under headeren */
+    width: 100%; /* Menuen fylder hele viewport-bredden */
+    background: #fff; /* Opak hvid baggrund så underliggende indhold ikke ses igennem */
+    box-shadow: 0 8px 20px rgba(0,0,0,0.06); /* Let skygge for visuelt løft */
+    transform: translateZ(0); /* Forcer compositing-lag for at undgå rendering-artefakter */
+  }
+
+  .main-nav .nav-list{
+    display: flex; /* Stak links vertikalt */
+    flex-direction: column; /* Kolonne-flow */
+    gap: 0; /* Ingen ekstra afstand ud over de individuelle link-padding */
+    padding: 8px 16px; /* Indvendig afstand i menuen */
+  }
+
+  .main-nav .nav-list .nav-item{ border-top: 1px solid rgba(0,0,0,0.04); } /* Diskret separator mellem links */
+
+  .main-nav .nav-list .nav-link{
+    display: block; /* Gør hele link-fladen klikbar */
+    padding: 14px 8px; /* Stor nok klikzone for touch */
+    background: #fff; /* Hvid baggrund pr. link for at forhindre underliggende blending */
+    color: #0A0A0A; /* Explicit tekstfarve for læsbarhed */
+  }
+
+  /* Overlay that appears when menu is open; implemented as a label for the same checkbox
+    so clicking the overlay toggles the checkbox and closes the menu (no JS required). */
+  .nav-overlay{ display: none; }
+  .nav-toggle:checked ~ .nav-overlay{ display: block; }
+  /*
+    .nav-overlay
+    - position: fixed: placerer overlay relativt til viewport, så det fylder hele skærmen.
+    - inset: 0: shorthand for top:0; right:0; bottom:0; left:0 så overlay dækker hele viewport.
+    - background: rgba(0,0,0,0.35): semi-transparent sort baggrund for at dæmpe baggrundsindhold
+      og fokusere brugerens opmærksomhed på menuen.
+    - z-index:1050: ligger under menu-panelet (1100) men over resten af siden.
+      Dette gør at overlayen dæmper indholdet uden at skjule menuen.
+  */
+  .nav-overlay{ position: fixed; inset: 0; background: rgba(0,0,0,0.35); z-index:1050; }
+
+  /*
+    Style den viste menu - brug fixed på mobil så den ligger ovenpå alt indhold
+    - position: fixed: gør at menuen bliver placeret relativt til viewporten og følger ikke dokumentflowet.
+    - top: 88px: placerer menuen lige under headerens højde (headeren er ~88px høj),
+      så menuens øverste kant flugter med headerens bund.
+      Ændr denne værdi hvis du ændrer header-højden.
+    - width:100%: menuen strækker sig over hele viewportens bredde.
+    - background: #fff: sikrer at menuen er fuldt opak (hvid baggrund) så ingen underliggende
+      elementer kan ses igennem.
+    - box-shadow: tilføjer en diskret skygge for at løfte menuen visuelt over indholdet.
+    - transform: translateZ(0): tvinger browseren til at lave et eget compositing-lag for menuen,
+      hvilket ofte fjerner rendering-artefakter (fx ghosting eller subpixel anti-aliasing problemer)
+      på mobile enheder.
+  */
+  .main-nav{ position: fixed; left:0; right:0; top:88px; width:100%; background:#fff; box-shadow: 0 8px 20px rgba(0,0,0,0.06); transform: translateZ(0); }
+  .main-nav .nav-list{ display:flex; flex-direction:column; gap:0; padding:8px 16px; }
+  .main-nav .nav-list .nav-item{ border-top: 1px solid rgba(0,0,0,0.04); }
+  /*
+    .main-nav .nav-link
+    - background: #fff: sikrer at hvert link har en solid baggrund, hvilket forhindrer
+      at underliggende billeder eller gradienter fra hero skinner igennem ved subpixel rendering.
+    - color: #0A0A0A: eksplicit tekstfarve for læsbarhed (undgå afhængighed af arvet farve).
+    - display & padding: sikrer at hele linkfladen er klikbar og har passende klik-zone.
+    - Denne kombination af fuld baggrund + compositing-layer fjerner typiske blødheds-/ghosting-effekter
+      når menuen åbnes over komplekse baggrunde.
+  */
+  .main-nav .nav-list .nav-link{ display:block; padding:14px 8px; background:#fff; color:#0A0A0A; }
+
+  /* Animate hamburger to X when open */
+  .nav-toggle:checked ~ .hamburger-button .bar:nth-child(1){ transform: translateY(9px) rotate(45deg); }
+  .nav-toggle:checked ~ .hamburger-button .bar:nth-child(2){ opacity:0; }
+  .nav-toggle:checked ~ .hamburger-button .bar:nth-child(3){ transform: translateY(-9px) rotate(-45deg); }
+
+  /* Accessibility: focus styles */
+  .hamburger-button:focus{ outline: 3px solid rgba(11,110,219,0.15); border-radius:6px; }
 }
 
 
@@ -267,26 +412,31 @@ body > * { box-sizing: border-box; }
 
 /* Hero container - bruger fixed min-højde så det fylder stort set hele folden */
 .hero-section{
+  /*
+    .hero-section: stor, visuel sektion øverst på siden.
+    Kommentar: Vi sætter en gradient baggrund og bruger padding/min-height
+    for at give sektionen en stærk visuel tilstedeværelse. width:100vw + negative
+    marginer gør sektionen full-bleed (strækker baggrunden til viewport-kanten)
+    samtidig med at .hero indholdet forbliver centreret via .container.
+  */
   /* Fallback gradient hvis der ikke er et baggrundsbillede tilgængeligt */
-  background: linear-gradient(135deg, #0b6edb 0%, #1177f1 45%, #00c97b 100%);
-  color: #ffffff; /* Al tekst i hero er hvid */
-  /* Juster padding og min-height for at matche PNG: desktop-first store hero */
-  padding: 140px 0 120px; /* lidt større top- og bund-paddings for luft */
-  display: grid;
-  place-items: center; /* Centrerer indhold både horisontalt og vertikalt */
-  text-align: center; /* Centrer tekst i hero */
-  min-height: 78vh; /* Øget for at give samme visuelle højde som i PNG */
+  background: linear-gradient(135deg, #0b6edb 0%, #1177f1 45%, #00c97b 100%); /* Gradient baggrund for hero */
+  color: #ffffff; /* tekstfarve i hero — hvid sikrer kontrast mod gradienten */
+  padding: 140px 0 120px; /* lodret padding for visuel højde og luft */
+  display: grid; /* grid gør det nemt at centrere indholdet */
+  place-items: center; /* centrer indhold både vertikalt og horisontalt */
+  text-align: center; /* centrerer tekstindhold i den indre boks */
+  min-height: 78vh; /* sikrer hero fylder en stor del af viewport højden */
   /* Gør sektionen full-bleed: stræk baggrund til hele viewport-bredden
     uden at påvirke det centrerede .container indhold. */
-  width: 100vw;                /* Tager hele viewport-bredden */
-  position: relative;
-  left: 50%;
-  right: 50%;
-  margin-left: -50vw;          /* Træk elementet ud til venstre kant */
-  margin-right: -50vw;         /* Træk elementet ud til højre kant */
-  box-sizing: border-box;   
-     /* Sørg for padding regnes ind i bredde */
-     margin-bottom: var(--hero-bottom-gap, 80px);
+  width: 100vw; /* gør hero full-bleed så baggrunden når viewport-kanten */
+  position: relative; /* basis for absolute/transform-justeringer internt */
+  left: 50%; /* bruger negative margin teknik til full-bleed */
+  right: 50%; /* symmetrisk offset for pålidelig full-bleed */
+  margin-left: -50vw; /* træk boksen ud til venstre kant af viewport */
+  margin-right: -50vw; /* træk boksen ud til højre kant af viewport */
+  box-sizing: border-box; /* inkludér padding i breddeberegningen */
+  margin-bottom: var(--hero-bottom-gap, 80px); /* gap under hero, kan justeres via variabel */
 }
 
 
@@ -296,13 +446,24 @@ body > * { box-sizing: border-box; }
 }
 
 .hero{
-  max-width: 980px; /* Begrænser tekstens linjebredde for bedre læsbarhed */
-  margin: 0 auto;
-  padding: 0 20px;
+  /*
+    .hero: den centrerede indre boks der holder overskrift, tekst og CTA.
+    Kommentar: max-width begrænser linjelængden for bedre læsbarhed og
+    paddings sikrer luft omkring teksten.
+  */
+  max-width: 980px; /* maks-bredde så linjelængden forbliver læsbar */
+  margin: 0 auto; /* centrer den indre hero-boks horisontalt */
+  padding: 0 20px; /* side-padding for at forhindre tekst mod kanten */
 }
 
 /* Hovedoverskrift i hero - stor og tydelig */
 .hero h1{
+  /*
+    H1 i hero: hovedoverskriften.
+    Kommentar: Vi bruger clamp() for at lave en flydende størrelse, der skalerer
+    med viewport men holder sig indenfor fornuftige grænser. line-height og
+    margin styrer lodret afstand.
+  */
   /* Fjern grid negative margin på mobil så layoutet ikke skubber indhold ud */
   /* Ingen .forside-3-regler her — tidligere utilsigtet indsat linjer fjernet */
   /* H1 tilpasser sig viewport: holder sig helst på én linje på store skærme,
@@ -316,7 +477,7 @@ body > * { box-sizing: border-box; }
     - 89px er maksimum (desktop-ønsket)
     Fordelen: overskriften vokser og skrumper pænt uden brug for mange @media-regler.
   */
-  font-size: clamp(20px, 5.5vw, 89px);
+  font-size: clamp(20px, 5.5vw, 89px); /* flydende størrelse: vokser med viewport men har grænser */
   font-style: normal;
   font-weight: 700;
 
@@ -359,28 +520,33 @@ body > * { box-sizing: border-box; }
   font-weight: 421;
   line-height: 35px;
   max-width: 760px;
-  margin: 0 auto 36px auto; /* mere luft mellem H3 og CTA */
+  margin: 0 auto 36px auto; /* afstand mellem H3 og CTA for visuel rytme */
 }
 
 /* Primær CTA-knap i hero */
 .hero-button{
-  display: inline-flex; /* Gør knappen centrerbar og indhold justerbart */
-  align-items: center;
-  justify-content: center;
-  background: #ffffff; /* Hvid knap mod farverige baggrund */
-  color: var(--h1-color, #0b6edb); /* Knappens tekstfarve (blå) */
-  padding: 14px 28px; /* Indvendig afstand */
-  border-radius: 999px; /* Helt rund */
-  border: none; /* Ingen ramme */
-  box-shadow: 0 8px 20px rgba(11,110,219,0.12); /* Let skygge for dybde */
-  cursor: pointer;
-  text-decoration: none; /* Hvis link */
+  /*
+    .hero-button: primær handlingsknap i hero.
+    Kommentar: Inline-flex giver os mulighed for at centrere ikon + tekst let,
+    padding/radius/box-shadow giver knappen sit pille-udseende.
+  */
+  display: inline-flex; /* gør knappen til en inline flex container */
+  align-items: center; /* centrer ikon og tekst lodret i knappen */
+  justify-content: center; /* centrer indhold horisontalt */
+  background: #ffffff; /* hvid baggrund giver høj kontrast mod hero */
+  color: var(--h1-color, #0b6edb); /* tekstfarve (blå) for CTA-tekst */
+  padding: 14px 28px; /* intern afstand for klik-venlig zone */
+  border-radius: 999px; /* pilleform med fuld radius */
+  border: none; /* fjern standard ramme */
+  box-shadow: 0 8px 20px rgba(11,110,219,0.12); /* let skygge til dybde */
+  cursor: pointer; /* vis hånd-ikon ved hover */
+  text-decoration: none; /* fjern understregning hvis det er et link */
 }
 
-.hero-button img{ width:18px; height:18px; margin-left:8px; }
+.hero-button img{ width:18px; height:18px; margin-left:8px; } /* lille ikonstørrelse og afstand fra tekst */
 
 /* Knaptekst - bruger blå farve så teksten står ud mod hvide knap */
-.hero-button .button-text{ color:#0b6edb; font-weight:700; font-size:21px; }
+.hero-button .button-text{ color:#0b6edb; font-weight:700; font-size:21px; } /* blå tekst for tydelig CTA-tekst */
 
 /* Lille meta-tekst under knap (100% gratis · Ingen dømmerier · Lokalt i Herning) */
 .hero .meta{
@@ -396,13 +562,13 @@ body > * { box-sizing: border-box; }
 
 /* Sørg for at eventuelle <h4> i hero-sektionen (fx meta-linje) bruger samme styling */
 .hero-section h4{
-  color: #FFF; /* Samme hvide farve som andre hero-tekster */
-  font-family: Alpino, sans-serif;
-  font-size: 21px; /* Matcher .hero .meta */
-  font-weight: 421;
-  line-height: 20px;
-  text-align: center;
-  margin: 18px 0 0 0;
+  color: #FFF; /* samme hvide farve som øvrige hero-tekster */
+  font-family: Alpino, sans-serif; /* sikrer samme typografi som resten af hero */
+  font-size: 21px; /* tilsvarende størrelse som meta-teksten */
+  font-weight: 421; /* let/mellem vægt */
+  line-height: 20px; /* tæt line-height for kompakt udtryk */
+  text-align: center; /* centrer overskrifter i hero */
+  margin: 18px 0 0 0; /* plads over elementet for separation */
 }
 
 /* CTA: hvid pille-knap der matcher designet i PNG'en */
@@ -502,23 +668,18 @@ body > * { box-sizing: border-box; }
 /* NOTE: denne sektion indeholder forklarende kommentarer til .forside-reglerne. Ingen tomme selectors. */
 .forside{
   /* background: sætter baggrundsfarven for hele .forside-sektionen. */
-  background: #f6f8fa; /* Lys, næsten hvid baggrund for sektionen - giver luft og kontrast til kortene. */
+  background: #f6f8fa; /* lys, neutral baggrund der skaber kontrast til kortene */
   /* padding: top/right/bottom/left (her kun top og bottom defineret) - skaber lodret afstand indeni sektionen. */
-  padding: 40px 0 56px; /* 40px top-luft, 0 horisontalt, 56px bund-luft for balance under kortene. */
+  padding: 40px 0 56px; /* lodret luft: 40px top og 56px bund for visuel balance */
 }
 
 
 .forside > .container.forside,
 .forside .container.forside{
   /* Boksen/containeren er transparent så h2/h4 står direkte på sektionens baggrund. */
-  background: transparent; /* Gør baggrunden gennemsigtig i stedet for hvid boks. */
-  padding: 25px 28px 10px; /* Bevar padding så overskrift og kort har plads omkring sig. 
-værdi = top (32px)
-værdi = højre og venstre (28px)
-værdi = bund (36px)
-*/
-  
-  box-shadow: none; /* Fjern skygge. */
+  background: transparent; /* behold gennemsigtig baggrund så overskrifter står på sektionens baggrund */
+  padding: 25px 28px 10px; /* indvendig padding: top 25px, sider 28px, bund 10px */
+  box-shadow: none; /* fjern skygge så container er flad */
 }
 /* Overskrift og understødende tekst - målrettet containerens h2/h4 */
 .forside > .container.forside h2,
@@ -528,20 +689,20 @@ værdi = bund (36px)
   /* font-size: størrelse på overskriften; stor for visuel vægt. */
   font-size: 48px; /* Stor, tydelig overskrift der matcher billedet. */
   /* line-height: afstand mellem linjerne i overskriften, tæt for kompakt udtryk. */
-  line-height: 1.05; /* Lidt over 1 for at undgå sammenklumpning hvis overskriften bryder. */
+  line-height: 1.05; /* tæt line-height for kompakt overskrift */
   /* margin: y-axis top/right/bottom/left - styrer afstand til øvrigt indhold. */
-  margin: 12px 0 6px; /* 12px over, 6px under for passende luft imod meta-tekst og kort. */
+  margin: 12px 0 6px; /* afstand: 12px over, 6px under for passende luft */
   /* color: mørk tekstfarve for god kontrast mod den lyse boks. */
-  color: #0b0b0b;
+  color: #0b0b0b; /* mørk farve for høj kontrast og læsbarhed */
 }
 .forside > .container.forside h4,
 .forside .container.forside h4{
   /* color: sekundær farve til hjælp- eller undertekst. */
-  color: #556772; /* Dæmpet blågrå farve for lavere visuel prioritet end h2. */
+  color: #556772; /* dæmpet blågrå til sekundær tekst */
   /* font-size: mindre end h2, men stor nok til læsbarhed. */
-  font-size: 18px;
+  font-size: 18px; /* mindre end h2 men stadig læsbart */
   /* margin: afstand under hjælpeteksten så kortene ikke sidder for tæt. */
-  margin: 0 0 22px 0; /* 22px bund-margin for luft før kortene starter. */
+  margin: 0 0 22px 0; /* bundmargin for luft før kortsektionen */
 }
 
 /* Card grid: opsætter et grid med to kolonner og gitter-afstand */
@@ -578,11 +739,11 @@ værdi = bund (36px)
   /* padding: indvendig afstand i kortet for ikon og tekst. */
   padding: 34px 28px; /* 34px top/bund, 28px sider for generøs klikzone. */
   /* min-height: sikrer at alle kort har en ensartet højde. */
-  min-height: 140px;
+  min-height: 140px; /* sikrer ensartet kort-højde */
   /* border-radius: afrundede hjørner på kortet for pille-form look. */
   border-radius: 14px;
   /* box-shadow: løfter kortet visuelt fra baggrunden. */
-  box-shadow: 0 12px 30px rgba(12,40,90,0.08);
+  box-shadow: 0 12px 30px rgba(12,40,90,0.08); /* let skygge for dybde */
 }
 
 .card-grid img{
@@ -591,10 +752,10 @@ værdi = bund (36px)
     - Bruges her fordi hvert kort har et ikon som <img> og vi gerne vil give dem
      ensartet størrelse uden at skulle ændre hver enkelt fil.
   */
-  width: var(--card-icon-size); /* Bredde på ikonet - styres fra :root via --card-icon-size */
-  height: var(--card-icon-size); /* Højde på ikonet - samme værdi som bredde for at bevare kvadratisk form */
-  display: block; /* Gør billedet til et blok-element så margin/padding håndteres mere forudsigeligt */
-  margin: 0 0 12px 0; /* Flyt ikonet væk fra center og giv afstand under mod titlen */
+  width: var(--card-icon-size); /* ikonbredde styret fra :root-variablen */
+  height: var(--card-icon-size); /* ikonhøjde for at holde kvadratisk udseende */
+  display: block; /* gør billedet til blok for forudsigelig layoutadfærd */
+  margin: 0 0 12px 0; /* afstand under ikonet til korttitel */
   /* Bemærk for nybegyndere:
     - Ændrer du kun --card-icon-size i :root, påvirker det alle ikoner på samme tid.
     - Hvis du kun vil ændre et enkelt ikon, kan du give det en ekstra klasse og målrette den.
@@ -618,16 +779,41 @@ værdi = bund (36px)
 
 /* Separate, redigerbare regler for hver boks-type - gør det let at justere farver og stil individuelt */
 /* Cigaretter: brug denne blok til at ændre baggrund, skygge, border osv. */
-.card-cigaretter .card{ background: linear-gradient(135deg,#51A2FF 0%, #155DFC 100%); /* Blå gradient for Cigaretter */ }
+.card-cigaretter .card{
+  /*
+    .card-cigaretter .card: specifik styling for cigaret-kortet.
+    Kommentar: Ændringer her påvirker kun kort med klassen .card-cigaretter.
+    Du kan fx skifte gradient, border eller skygge uden at ændre fælles .card-regler.
+  */
+  background: linear-gradient(135deg,#51A2FF 0%, #155DFC 100%); /* Blå gradient for Cigaretter */
+}
 
 /* Snus: juster denne blok for snus-kortet */
-.card-vapes .card{ background: linear-gradient(135deg,#00D3F2 0%, #2B7FFF 100%); /* Gradient for Snus */ }
+.card-vapes .card{
+  /*
+    .card-vapes .card: styling til snus/vapes-relateret kort.
+    Kommentar: navngivningen kan virke forvirrende; tjek HTML-klasser så du ændrer den rigtige blok.
+  */
+  background: linear-gradient(135deg,#00D3F2 0%, #2B7FFF 100%); /* Gradient for Snus */
+}
 
 /* Vapes: juster denne blok for vape-kortet */
-.card-snus .card{ background: linear-gradient(135deg,#05DF72 0%, #009966 100%); /* Grøn gradient for Vapes */ }
+.card-snus .card{
+  /*
+    .card-snus .card: styling til vape-kort.
+    Kommentar: ændre denne gradient for at give vape-kortet en grøn nuance.
+  */
+  background: linear-gradient(135deg,#05DF72 0%, #009966 100%); /* Grøn gradient for Vapes */
+}
 
 /* Puffbars: juster denne blok for puffbar-kortet */
-.card-puffbars .card{ background: linear-gradient(135deg,#05DF72 0%, #00A63E 100%); /* Grøn gradient for Puff bars  */ }
+.card-puffbars .card{
+  /*
+    .card-puffbars .card: styling til puffbar-kort.
+    Kommentar: Puffbars har egen gradient som kan justeres her.
+  */
+  background: linear-gradient(135deg,#05DF72 0%, #00A63E 100%); /* Grøn gradient for Puff bars  */
+}
 
 /* Responsive: tilpas grid og kortstørrelser på smallere skærme */
 @media (max-width: 900px){
@@ -653,23 +839,23 @@ værdi = bund (36px)
    aligned with other sections and places the image at 530x530 on the right
    on desktop. Mobile stacks the image under the text. Denne bruges også til den nedereste section på dinemuligheder side.  */
 .forside-2{
-  position: relative; /* contains the absolutely positioned image */
-  background: #f6f8fa; /* match the other forside section background */
-  padding: 40px 0; /* vertical spacing similar to other sections */
-  margin-top: 80px; /* extra gap from previous section on desktop */
-  overflow: visible;
+  position: relative; /* indeholder det absolut-positionerede billede */
+  background: #f6f8fa; /* matcher andre forside-sektioners baggrund */
+  padding: 40px 0; /* lodret spacing for sektionen */
+  margin-top: 80px; /* ekstra afstand fra foregående sektion på desktop */
+  overflow: visible; /* tillad synlige child elementer uden clipping */
 }
 
 .forside-2 > .container-forside-2{
-  max-width: 1152px; /* same max-width as .container */
-  margin: 0 auto;    /* center horizontally like other containers */
-  padding: 56px 28px; /* generous top padding to match visual rhythm */
+  max-width: 1152px; /* maks bredde så indhold flugter med andre containere */
+  margin: 0 auto;    /* centrer containeren horisontalt */
+  padding: 56px 28px; /* generøs top-padding for visuel rytme */
   /* Prevent text from flowing under the absolutely positioned image on desktop.
     Add right padding equal to image width (530px) + container padding (28px) + gutter (24px) = 582px.
     Use max() so padding is at least the required space on typical desktops; mobile rules later override this. */
-  padding-right: max(582px, calc(28px + 530px + 24px));
-  box-sizing: border-box;
-  text-align: left;   /* left-align text as in the design */
+  padding-right: max(582px, calc(28px + 530px + 24px)); /* sikre plads til det absolut placerede billede */
+  box-sizing: border-box; /* inkludér padding i beregninger */
+  text-align: left;   /* venstre-juster tekst i denne sektion */
 }
 
 .forside-2 > .container-forside-2 h2,
@@ -677,47 +863,47 @@ værdi = bund (36px)
   text-align: left;
 }
 
-/* Ensure headings and paragraph-like H4s wrap and have a readable line-length */
+/* Sørg for at overskrifter og H4'er, der fungerer som paragrafer, bryder linjer og har en læsbar linjelængde */
 .forside-2 > .container-forside-2 h2{
-  white-space: normal; /* allow wrapping */
-  max-width: 560px;    /* keep heading to a readable measure */
-  margin-bottom: 24px;
+  white-space: normal; /* tillad omslag så lange overskrifter bryder pænt */
+  max-width: 560px;    /* hold overskriftens linjelængde behagelig */
+  margin-bottom: 24px; /* afstand under overskrift */
 }
 .forside-2 > .container-forside-2 h4{
-  white-space: normal; /* allow wrapping */
-  max-width: 420px;    /* narrower text column so paragraphs wrap earlier on desktop */
-  margin-bottom: 20px;
-  line-height: 1.8;
+  white-space: normal; /* tillad omslag for H4 */
+  max-width: 420px;    /* smalere kolonne for bedre læsbarhed */
+  margin-bottom: 20px; /* afstand under H4 */
+  line-height: 1.8; /* øget line-height for læsbarhed i paragraflignende H4 */
 }
 
-/* Right-side image — absolutely positioned so it sits to the right of the
-   viewport while text stays aligned with the main container. Size: 530x530. */
+/* Billede i højre side — absolut placeret så det sidder i højre del af viewporten
+  mens teksten forbliver tilpasset hovedcontaineren. Størrelse: 530x530. */
 .forside-2 .forside-2-img{
-  position: absolute;
-  top: 50%;
+  position: absolute; /* absolut placeret billede i højre side */
+  top: 50%; /* centrer vertikalt i forhold til sektionen */
   /* Align image's right edge with the container's inner right edge:
      distance = (100vw - container-width)/2 + container-right-padding
      Use a safe minimum gutter of 24px so the image never touches the viewport edge. */
-  right: max(24px, calc((100vw - 1152px) / 2 + 28px));
-  transform: translateY(-50%);
-  width: 530px;
-  height: 530px;
-  display: block;
-  box-sizing: border-box;
-  pointer-events: none; /* image should not intercept clicks */
+  right: max(24px, calc((100vw - 1152px) / 2 + 28px)); /* placér billedets højre kant i forhold til container */
+  transform: translateY(-50%); /* finjuster centrerings-translation */
+  width: 530px; /* fast størrelse som designet */
+  height: 530px; /* fast størrelse */
+  display: block; /* block for forudsigelig flow */
+  box-sizing: border-box; /* medregn padding i størrelsen */
+  pointer-events: none; /* gør billedet ikke-klikkbart */
 }
 
 .forside-2 .forside-2-img img{
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 14px;
-  box-shadow: 0 18px 40px rgba(10,25,40,0.12);
-  display: block;
+  width: 100%; /* fyld den forældre-boks der er sat til 530x530 */
+  height: 100%; /* samme som over */
+  object-fit: cover; /* beskær billedet til boksen uden at forvride forholdet */
+  border-radius: 14px; /* afrundede hjørner på billedet */
+  box-shadow: 0 18px 40px rgba(10,25,40,0.12); /* blød skygge for løft */
+  display: block; /* forudsigeligt inline/flow */
 }
 
-/* Safety: ensure image won't cause horizontal scrolling (global rule exists
-   already but re-declare to be explicit for this section). */
+/* Sikkerhed: sørg for at billedet ikke forårsager horisontal scroll (global regel findes allerede,
+   men genangives her for eksplicithed i denne sektion). */
 html, body { overflow-x: hidden; }
 
 /* Mobile: stack the image under the text and make it full-width */
@@ -733,80 +919,75 @@ html, body { overflow-x: hidden; }
 .forside-3 {
   /* Selector: rammer <section class="forside-3"> - hele sektionen */
   /* Baggrundsfarve for sektionen */
-  background: #ffffff; /* Lys, svag blå-hvid baggrund */
+  background: #ffffff; /* lys hvid baggrund for sektionen */
   /* Lodret indvendig afstand: 48px top og bund */
-  padding: 48px 0;
+  padding: 48px 0; /* lodret padding for sektionens luft */
 }
 
 .forside-3 .container {
   /* Selector: .container inde i .forside-3 - begrænser indholdets bredde */
   /* Maksimal bredde for indholdet så kortene ikke bliver for brede */
-  max-width: 1280px;
-  /* Centrer containeren horisontalt */
-  margin: 0 auto;
-  /* Indvendig luft til venstre/højre */
-  padding: 0 28px;
+  max-width: 1280px; /* maks-bredde for indhold i sektionen */
+  margin: 0 auto; /* centrer containeren horisontalt */
+  padding: 0 28px; /* side-padding for indre luft */
 }
 
 
 
-/* Center the header block above the cards */
+/* Centrér header-blokken over kortene */
 .forside-3--head { text-align: center; }
 
 .forside-3--grid {
   /* Grid-layout: definerer kolonner og mellemrum mellem kort */
-  display: grid;
-  /* 3 kolonner med lige bredde */
-  grid-template-columns: repeat(3, 1fr);
-  /* Afstand mellem kortene */
-  gap: 36px;
-  /* Sørg for at grid-cellerne strækker sig i højden så kort kan blive lige høje */
-  align-items: stretch;
+  display: grid; /* brug CSS Grid til kolonne-layout */
+  grid-template-columns: repeat(3, 1fr); /* tre lige kolonner på desktop */
+  gap: 36px; /* afstand mellem kortene */
+  align-items: stretch; /* sørg for at kort fylder grid-højden */
 }
 
 .forside-3--icon {
   /* Ikonstørrelse og placering - gruppert først så ikonet er defineret før
      vi justerer kortets layout. */
-  width: 84px; /* fast bredde for ikonplads */
-  height: 84px; /* fast højde for ikonplads */
-  object-fit: contain; /* sørg for at billedet skaleres korrekt */
+  width: 84px; /* fast ikonbredde */
+  height: 84px; /* fast ikanhøjde */
+  object-fit: contain; /* skalér billedet korrekt inden for boksen */
   /* centrer ikonet horisontalt i kortet uden at ændre kortets tekstjustering */
-  margin-left: auto;
-  margin-right: auto;
-  display: block;
+  margin-left: auto; /* centrer ikonet horisontalt i kortet */
+  margin-right: auto; /* centrer ikonet horisontalt i kortet */
+  display: block; /* block for forudsigelig marginadfærd */
 }
 
 .forside-3--card {
   /* Kort-container: baggrund, runding, padding og skygge */
-  background: white;
-  border-radius: 10px;
-  padding: 32px;
-  box-shadow: 0 10px 30px rgba(24,39,56,0.08);
+  background: white; /* kortbaggrund */
+  border-radius: 10px; /* afrundede hjørner */
+  padding: 32px; /* indvendig luft i kortet */
+  box-shadow: 0 10px 30px rgba(24,39,56,0.08); /* blød skygge for dybde */
 
   /* Flex container: stak elementer lodret med jævnt mellemrum */
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
+  display: flex; /* brug flex til at stakke kortindhold lodret */
+  flex-direction: column; /* lodret stak */
+  gap: 16px; /* mellemrum mellem elementer i kortet */
 
   /* Venstrejustér alt tekstindhold i kortet for bedre læsbarhed */
-  align-items: flex-start;
-  text-align: left;
+  align-items: flex-start; /* start indhold fra venstre */
+  text-align: left; /* venstrejuster kortets tekst */
 
   /* Højde og box-sizing */
-  min-height: 320px;
-  height: 100%; /* fyld grid-cellen for lige højde */
-  box-sizing: border-box;
+  min-height: 320px; /* sikr visuel lige højde */
+  height: 100%; /* fyld grid-celle */
+  box-sizing: border-box; /* inklusiv padding i beregning af størrelse */
 }
 
 .forside-3--card h3 {
   /* Overskrift i kortet: let bundmargin og fluid størrelse */
-  margin: 0 0 8px 0;
-  font-size: clamp(22px, 2.8vw, 36px);
+  margin: 0 0 8px 0; /* lille bundmargin */
+  font-size: clamp(22px, 2.8vw, 36px); /* responsiv titelstørrelse */
   white-space: nowrap; /* hold på én linje på desktop */
-  overflow: hidden;
-  text-overflow: ellipsis;
-  text-align: left; /* Sørg for at kort-overskrifter starter fra venstre */
-  font-size: 34px;
+  overflow: hidden; /* skjul overflow for pæn ellipsis */
+  text-overflow: ellipsis; /* vis prikker hvis titlen er for lang */
+  text-align: left; /* venstrejuster kort-overskrifter */
+  font-size: 34px; /* fast desktop størrelse */
 }
 
 .forside-3--card p {
@@ -909,26 +1090,26 @@ html, body { overflow-x: hidden; }
   margin-bottom: 48px; /* ekstra afstand under sektion 4 */
 }
 .forside-4 .container{ /* centrér og begræns bredde */
-  max-width: 1120px;
-  margin: 0 auto;
-  padding: 0 28px;
+  max-width: 1120px; /* maks-bredde for indhold i sektionen */
+  margin: 0 auto; /* centrer containeren horisontalt */
+  padding: 0 28px; /* side-padding for indre luft */
 }
 .forside-4--grid{
-  display: grid;
-  grid-template-columns: 1fr 1fr; /* to kolonner ved desktop */
-  gap: 48px; /* luft mellem billederne */
-  align-items: flex-start; /* juster billederne til toppen for bedre alignment */
-  justify-items: stretch; /* stræk billederne for at fylde kolonnerne */
+  display: grid; /* brug grid til at placere billeder i to kolonner */
+  grid-template-columns: 1fr 1fr; /* to kolonner på desktop */
+  gap: 48px; /* afstand mellem kolonner */
+  align-items: flex-start; /* top-juster billeder for bedre alignment */
+  justify-items: stretch; /* stræk billederne til at fylde kolonnen */
 }
 .forside-4--img{
-  width: 100%;
+  width: 100%; /* lad billedet fylde sin kolonne */
   /* Gør billederne tydeligt større for at matche screenshotet: */
-  max-width: 820px; /* bredere begrænsning til større, mere vertikale billeder */
-  height: auto;
-  border-radius: 14px; /* afrundede hjørner som i screenshot */
-  display: block;
-  object-fit: cover;
-  box-shadow: 0 8px 28px rgba(12,40,70,0.06);
+  max-width: 820px; /* begræns maksimal bredde for større billeder */
+  height: auto; /* bevar billedets proportioner */
+  border-radius: 14px; /* afrundede hjørner */
+  display: block; /* forudsigelig visning */
+  object-fit: cover; /* dæk boksen uden at ændre billedforhold */
+  box-shadow: 0 8px 28px rgba(12,40,70,0.06); /* blød skygge for løft */
 }
 /* Responsive: stack billeder på smallere skærme */
 @media (max-width: 900px){
@@ -948,93 +1129,175 @@ html, body { overflow-x: hidden; }
 
 /* ----------------------- NY: UDTALELSER (placeret efter forside-4) ----------------------- */
 /* Dansk kommentar: Denne blok styler den simple udtalelses-sektion der starter
-   i HTML tæt efter .forside-4. Layoutet matcher screenshot: tre kort i række på
+   i HTML tæt efter .forside-4. Tre kort i række på
    desktop, centreret overskrift, lige højde, afrundede hjørner, blød skygge og
    farvet tekst for forfatternavn. Responsive: 3 -> 2 -> 1 kolonner. */
 .udtalelser{
   background: linear-gradient(180deg, #f6fbff 0%, #f1fbf4 100%); /* svag grøn-blå baggrund */
-  padding: 64px 0 48px;
+  padding: 64px 0 48px; /* lodret padding: top 64px, bund 48px */
 }
-.udtalelser > h2,
-.udtalelser > h4{ text-align: center; margin: 0 auto 12px; }
-.udtalelser > h2{ font-size: clamp(32px, 4vw, 48px); margin-bottom: 6px; }
-.udtalelser > h4{ color:#6b8190; font-weight:400; margin-bottom: 28px; }
+.udtalelser > h2{
+  text-align: center; /* centrer overskriften horisontalt */
+  margin: 0 auto 12px; /* centrer og giv lidt afstand under */
+  font-size: clamp(32px, 4vw, 48px); /* responsiv størrelse mellem 32-48px */
+  margin-bottom: 6px; /* ekstra plads under h2 */
+}
+.udtalelser > h4{
+  text-align: center; /* centrer underoverskriften */
+  margin: 0 auto 12px; /* match h2's centering og spacing */
+  color: #6b8190; /* sekundær farve for undertekst */
+  font-weight: 400; /* normal vægt */
+  margin-bottom: 28px; /* afstand før udtalelseskort */
+}
 
 .udtalelser-liste{
-  max-width: 1200px;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 36px;
-  padding: 0 24px;
-  align-items: stretch;
+  max-width: 1200px; /* maks bredde for listen af udtalelser */
+  margin: 0 auto; /* centrer sektionens grid */
+  display: grid; /* brug grid til at vise kort i rækker */
+  grid-template-columns: repeat(3, 1fr); /* tre kolonner på desktop */
+  gap: 36px; /* afstand mellem kort */
+  padding: 0 24px; /* side-padding for indre luft */
+  align-items: stretch; /* sørg for kortene flugter i højden */
 }
 .udtalelse-kort{
-  background: #ffffff;
-  border-radius: 12px;
-  padding: 32px;
-  box-shadow: 0 20px 40px rgba(12,40,70,0.06);
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  align-items: flex-start;
-  text-align: left;
+  background: #ffffff; /* hvid kortbaggrund */
+  border-radius: 12px; /* afrundede hjørner */
+  padding: 32px; /* indvendig plads i kortet */
+  box-shadow: 0 20px 40px rgba(12,40,70,0.06); /* blød skygge */
+  display: flex; /* flex-container for indholdet */
+  flex-direction: column; /* stak indhold lodret */
+  gap: 12px; /* mellemrum mellem elementer i kortet */
+  align-items: flex-start; /* start indhold fra venstre */
+  text-align: left; /* venstrejuster tekst */
   min-height: 320px; /* sikrer visuel lige højde på desktop */
 }
-.udtalelse-kort img{ width:44px; height:44px; opacity:0.95; margin-bottom:8px; }
-.udtalelse-kort h4{ margin:0; color:#21333b; line-height:1.6; }
-.udtalelse-kort h4{ margin:0; color:#21333b; line-height:1.6; text-align:left; }
-.udtalelse-kort .udtalelse-forfatter{ color:#266bf1; margin-top:12px; font-size: 21px; font-weight:400; text-align:left; }
-.udtalelse-kort h6{ margin:4px 0 0 0; color:#6A7282; font-size:13px; font-weight:400; }
+.udtalelse-kort img{ width:44px; height:44px; opacity:0.95; margin-bottom:8px; } /* avatar-størrelse i kort */
+.udtalelse-kort h4{ margin:0; color:#21333b; line-height:1.6; } /* kort-overskrift */
+.udtalelse-kort h4{ margin:0; color:#21333b; line-height:1.6; text-align:left; } /* sikr venstrejustering */
+.udtalelse-kort .udtalelse-forfatter{ color:#266bf1; margin-top:12px; font-size: 21px; font-weight:400; text-align:left; } /* forfatternavn */
+.udtalelse-kort h6{ margin:4px 0 0 0; color:#6A7282; font-size:13px; font-weight:400; } /* sekundær metadata */
 
-@media (max-width: 1100px){ .udtalelser-liste{ grid-template-columns: repeat(2, 1fr); } }
-@media (max-width: 700px){ .udtalelser-liste{ grid-template-columns: 1fr; } .udtalelser{ padding: 40px 0; } .udtalelse-kort{ padding:20px; min-height: auto; } }
+@media (max-width: 1100px){
+  .udtalelser-liste{
+    grid-template-columns: repeat(2, 1fr); /* to kolonner ved mellemstore skærme */
+  }
+}
+
+@media (max-width: 700px){
+  .udtalelser-liste{
+    grid-template-columns: 1fr; /* enkel kolonne på smallere skærme */
+  }
+  .udtalelser{
+    padding: 40px 0; /* reduceret lodret padding for mobil */
+  }
+  .udtalelse-kort{
+    padding: 20px; /* mindre padding i kortene på mobil */
+    min-height: auto; /* fjern minimumshøjde for fleksibilitet */
+  }
+}
 
 
 /* ----------------------- KONTAKTFORMULAR (placeret efter UDTALELSER) ----------------------- */
 /* Styling for kontakt-sektionen: to kolonner (venstre: kontaktkort + info, højre: formular) */
 .contact-grid{
-  display: grid;
+  display: grid; /* brug CSS Grid til tospaltet layout */
   grid-template-columns: 1fr 1fr; /* to kolonner: venstre og højre */
-  gap: 40px;
-  align-items: start;
-  max-width: 1152px; /* match indre containerbredde på resten af sitet */
-  margin: 0 auto; /* centrer så det flugter med sektionernes gutter */
-  width: 100%;
-  box-sizing: border-box;
+  gap: 40px; /* afstand mellem kolonner */
+  align-items: start; /* top-juster indhold i rækkerne */
+  max-width: 1152px; /* begræns bredde for læsbarhed */
+  margin: 0 auto; /* centrer gridet i den overordnede container */
+  width: 100%; /* fyld bredde inden for max-width */
+  box-sizing: border-box; /* inkluder padding i elementets bredde */
 }
 
-/* Venstre kolonne: kontaktkort-listen */
+/*------------------- Venstre kolonne: kontaktkort-listen -----------*/
 .kontakt-venstre{ /* wrapper for venstre kolonne; arrangerer kontaktkort lodret */
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
-  align-items: flex-start; /* sikre at indhold ikke strækker sig under højre kolonne */
+  display: flex; /* brug flexbox til lodret stak */
+  flex-direction: column; /* stak elementer lodret */
+  gap: 18px; /* afstand mellem kontaktkort */
+  align-items: flex-start; /* venstrejuster indhold i kolonnen */
 }
-.kontakt-overskrift{ color:#21333b; margin:0 0 18px 0; text-align:left; }
-.kontakt-metoder{ list-style:none; padding:0; margin:0 0 20px 0; display:flex; flex-direction:column; gap:14px; }
+.kontakt-overskrift{
+  color: #21333b; /* primær overskriftsfarve */
+  margin: 0 0 18px 0; /* plads under overskriften */
+  text-align: left; /* overskrift venstre-justeret */
+}
+.kontakt-metoder{
+  list-style: none; /* fjern punktopstilling */
+  padding: 0; /* nulstil padding */
+  margin: 0 0 20px 0; /* afstand efter listen */
+  display: flex; /* brug flexbox til kolonneopsætning */
+  flex-direction: column; /* stak metoder lodret */
+  gap: 14px; /* afstand mellem metoderne */
+}
 .kontakt-kort{
-  display:flex; align-items:center; gap:14px; background:#f6fbff; padding:18px 20px; border-radius:12px; text-decoration:none; color:inherit;
-  box-shadow: 0 8px 18px rgba(12,40,70,0.04);
-  width:100%;
+  display: flex; /* rækker med ikon + tekst */
+  align-items: center; /* centrer ikon og tekst vertikalt */
+  gap: 14px; /* afstand mellem ikon og tekst */
+  background: #f6fbff; /* svag blå baggrund */
+  padding: 18px 20px; /* indvendig afstand i kortet */
+  border-radius: 12px; /* afrundede hjørner */
+  text-decoration: none; /* fjern understregning på links */
+  color: inherit; /* arver tekstfarve fra kontekst */
+  box-shadow: 0 8px 18px rgba(12,40,70,0.04); /* diskret skygge */
+  width: 100%; /* fyld bredde i kolonnen */
 }
-.kontakt-kort .ikon{ width:44px; height:44px; flex-shrink:0;}
-.kontakt-tekst{ max-width:420px; width:420px; box-sizing:border-box; }
-.kontakt-tekst .kontakt-meta{ display:block; color:#6b8190; font-size:21px; }
-.kontakt-tekst .kontakt-primær{ display:block; font-weight:400; color:#0A0A0A; font-size:21px; }
+.kontakt-kort .ikon{
+  width: 44px; /* ikon bredde */
+  height: 44px; /* ikon højde */
+  flex-shrink: 0; /* forhindr ikon i at krympe */
+}
+.kontakt-tekst{
+  max-width: 420px; /* maks bredde for tekstblokken */
+  width: 420px; /* fast bredde for layoutstabilitet */
+  box-sizing: border-box; /* inkluder padding i bredden */
+}
+.kontakt-tekst .kontakt-meta{
+  display: block; /* vis som blok for linjebrud */
+  color: #6b8190; /* sekundær tekstfarve */
+  font-size: 21px; /* let stor font for meta */
+}
+.kontakt-tekst .kontakt-primær{
+  display: block; /* vis som blok for klar adskillelse */
+  font-weight: 400; /* normal vægt */
+  color: #0A0A0A; /* primær tekstfarve */
+  font-size: 21px; /* match meta-typen i størrelse */
+}
 
 /* Info-boks under kontaktkort */
 .kontakt-info{ /* slightly widened per user request: desktop */
-  background:#eaf6ff; padding:20px; border-radius:12px; margin-top:8px;
-  max-width:560px; /* small increase from 520px */
-  width:560px; box-sizing:border-box; }
+  background: #eaf6ff; /* lys blå info-boks */
+  padding: 20px; /* indvendig afstand */
+  border-radius: 12px; /* afrundet kant */
+  margin-top: 8px; /* afstand til kontaktkort */
+  max-width: 560px; /* small increase from 520px */
+  width: 560px; /* fast bredde på desktop */
+  box-sizing: border-box; /* inkluder padding i bredden */
+}
 
 @media (max-width: 1100px){
-  .kontakt-tekst, .kontakt-info{ width:100%; max-width:100%; }
+  .kontakt-tekst,
+  .kontakt-info{
+    width: 100%; /* fuld bredde på mindre skærme */
+    max-width: 100%; /* fjern maksimalbegrænsning */
+  }
 }
-.kontakt-info .info-overskrift{ margin:0 0 12px 0; font-weight: 400; color: #0a0a0a; font-size:21px; text-align: left; }
-.info-punkter{ margin:0; padding:0 0 0 18px; color:#364153; font-size:21px; }
-.info-punkter li{ margin:8px 0; }
+.kontakt-info .info-overskrift{
+  margin: 0 0 12px 0; /* plads under info-overskriften */
+  font-weight: 400; /* normal vægt */
+  color: #0a0a0a; /* mørk tekstfarve */
+  font-size: 21px; /* tydelig, men ikke stor */
+  text-align: left; /* venstrejusteret */
+}
+.info-punkter{
+  margin: 0; /* ingen ekstern margin */
+  padding: 0 0 0 18px; /* indrykning for punktliste */
+  color: #364153; /* listefarve */
+  font-size: 21px; /* match kontakt-tekststørrelse */
+}
+.info-punkter li{
+  margin: 8px 0; /* afstand mellem punkterne */
+}
 
 
 /* Hvis sektionens direkte container eller footer-overlays overskriver paddingen,
@@ -1042,177 +1305,463 @@ html, body { overflow-x: hidden; }
 section#kontakt, .kontakt{ margin-bottom: 64px; }
 .kontakt > .container{ padding-bottom: 64px; }
 
-@media (max-width: 900px){ .kontakt{ padding-bottom: 48px; } section#kontakt, .kontakt{ margin-bottom: 48px; } .kontakt > .container{ padding-bottom: 48px; } }
-@media (max-width: 700px){ .kontakt{ padding-bottom: 32px; } section#kontakt, .kontakt{ margin-bottom: 32px; } .kontakt > .container{ padding-bottom: 32px; } }
+@media (max-width: 900px){
+  .kontakt{
+    padding-bottom: 48px; /* reduceret padding under 900px for bedre pasform */
+  }
+  section#kontakt,
+  .kontakt{
+    margin-bottom: 48px; /* mindre bundmargin for at give plads til overlay på smallere skærme */
+  }
+  .kontakt > .container{
+    padding-bottom: 48px; /* match containerens padding for visuel balance */
+  }
+}
 
-/* Højre kolonne: formular */
-.contact-form{ background:transparent; font-family: Alpino, sans-serif; }
-.contact-form input, .contact-form textarea, .contact-form select { font-family: inherit; }
-.form-row{ display:flex; flex-direction:column; gap:8px; margin-bottom:14px; }
-.form-row label{ font-size:21px; color:#21333b; }
-.form-row input, .form-row textarea{ width:100%; padding:12px 14px; border-radius:10px; border:1px solid #e1e8ef; background:#fff; box-sizing:border-box; font-size:21px; }
+@media (max-width: 700px){
+  .kontakt{
+    padding-bottom: 32px; /* yderligere reduceret padding på smalle mobilskærme */
+  }
+  section#kontakt,
+  .kontakt{
+    margin-bottom: 32px; /* mindre margin tilpasning på mobil */
+  }
+  .kontakt > .container{
+    padding-bottom: 32px; /* container fallback padding for mobil */
+  }
+}
 
-/* Make placeholders match field font-size so examples (fx 'Fulde navn', 'fx 25', 'fx cigaretter/snus', 'navn@eksempel.dk', 'fx 96 28 40 91', 'Skriv en kort besked') display at 21px */
+/* ------------Højre kolonne: formular------------------ */
+
+.contact-form{
+  background: transparent; /* baggrund holdes gennemsigtig for at blende med sektionen */
+  font-family: Alpino, sans-serif; /* formularens skrifttype */
+}
+.contact-form input,
+.contact-form textarea,
+.contact-form select{
+  font-family: inherit; /* arver font fra .contact-form for konsistens */
+}
+.form-row{
+  display: flex; /* flexbox for label + felt eller lodret stak */
+  flex-direction: column; /* stak elementer lodret */
+  gap: 8px; /* afstand mellem label og felt */
+  margin-bottom: 14px; /* afstand til næste række */
+}
+.form-row label{
+  font-size: 21px; /* label-tekststørrelse */
+  color: #21333b; /* label-farve */
+}
+.form-row input,
+.form-row textarea{
+  width: 100%; /* fyld tilgængelig bredde */
+  padding: 12px 14px; /* indvendig afstand i felterne */
+  border-radius: 10px; /* afrundede felter */
+  border: 1px solid #e1e8ef; /* lys grå kant */
+  background: #fff; /* hvid baggrund i felter */
+  box-sizing: border-box; /* inkluder padding i elementets bredde */
+  font-size: 21px; /* sørg for læsbar tekst i felter */
+}
+
+/* Placeholders: vis eksempler i samme font-size som felterne */
 .form-row input::placeholder,
 .form-row textarea::placeholder,
 #kontakt-telefon::placeholder,
-input[name="telefon"]::placeholder{ font-size:21px; opacity:0.6; }
+input[name="telefon"]::placeholder{
+  font-size: 21px; /* match feltets skriftstørrelse */
+  opacity: 0.6; /* tonet placeholder for at skille sig svagt ud */
+}
 
-/* Ensure specific phone field uses the same font-size */
-#kontakt-telefon, input[name="telefon"]{ width:100%; padding:12px 14px; border-radius:10px; border:1px solid #e1e8ef; background:#fff; box-sizing:border-box; font-size:21px; }
-.form-row input:focus, .form-row textarea:focus{ outline:none; box-shadow:0 0 0 4px rgba(34,111,241,0.08); border-color:#1e6bef; }
-.form-row--split{ display:flex; gap:14px; }
-.form-row--split .form-field{ flex:1; }
+/* Specifik telefonfelt-styling (samme som andre felter) */
+#kontakt-telefon,
+input[name="telefon"]{
+  width: 100%; /* fyld bredde */
+  padding: 12px 14px; /* indvendig afstand */
+  border-radius: 10px; /* afrundet */
+  border: 1px solid #e1e8ef; /* let kant */
+  background: #fff; /* hvid baggrund */
+  box-sizing: border-box; /* inkluder padding i bredden */
+  font-size: 21px; /* match andre felter */
+}
+.form-row input:focus,
+.form-row textarea:focus{
+  outline: none; /* fjern browserens standard outline */
+  box-shadow: 0 0 0 4px rgba(34,111,241,0.08); /* blød blå fokus-glorie */
+  border-color: #1e6bef; /* fremhæv kant ved fokus */
+}
+.form-row--split{
+  display: flex; /* to-felts layout i en enkelt række */
+  gap: 14px; /* afstand mellem felter */
+}
+.form-row--split .form-field{
+  flex: 1; /* felterne deler plads ligeligt */
+}
 
 /* Dansk variant: .form-række skal arve samme styling som .form-row */
-.form-række{ display:flex; flex-direction:column; gap:8px; margin-bottom:14px; font-size: 21px;}
+.form-række{
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 14px;
+  font-size: 21px; /* sikrer samme skriftstørrelse i dansk variant */
+}
 
 /* Telefon-input: sørg for samme visuelle behandling som andre felter */
-#kontakt-telefon, input[name="telefon"]{ width:100%; padding:12px 14px; border-radius:10px; border:1px solid #e1e8ef; background:#fff; box-sizing:border-box; }
+#kontakt-telefon,
+input[name="telefon"]{
+  width: 100%; /* fyld bredden i layoutet */
+  padding: 12px 14px; /* indvendig afstand for klik-venlig zone */
+  border-radius: 10px; /* rundede hjørner for visuel konsistens */
+  border: 1px solid #e1e8ef; /* let kant for at afgrænse feltet */
+  background: #fff; /* hvid baggrund i inputfelt */
+  box-sizing: border-box; /* inkluder padding i feltets bredde */
+}
 
 /* Fjern browser 'spinner' fra number inputs for et ensartet look */
 input[type=number]::-webkit-outer-spin-button, input[type=number]::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
 input[type=number] { appearance: textfield; -moz-appearance: textfield; }
 
-.form-actions{ display:flex; flex-direction:column; gap:12px; align-items:center; }
-.form-actions .cta-blue{ display:inline-flex; align-items:center; gap:10px; background:#266bf1; color:#fff; padding:14px 28px; border-radius:12px; text-decoration:none; font-weight:700; max-width:520px; width:100%; justify-content:center; }
-.privacy-note{ color:#8aa0ad; font-size:13px; margin:0; text-align:center; }
+.form-actions{
+  display: flex; /* brug flex til at arrangere handlingselementer */
+  flex-direction: column; /* stak knapper lodret som standard */
+  gap: 12px; /* afstand mellem knapper og noter */
+  align-items: center; /* centrer indhold horisontalt */
+}
+.form-actions .cta-blue{
+  display: inline-flex; /* inline-flex for centrering af ikon + tekst */
+  align-items: center; /* centrér ikon og tekst vertikalt */
+  gap: 10px; /* afstand mellem ikon og tekst */
+  background: #266bf1; /* primær blå baggrund for CTA */
+  color: #fff; /* hvid tekst i CTA */
+  padding: 14px 28px; /* indvendig afstand i knappen */
+  border-radius: 12px; /* afrundet knap */
+  text-decoration: none; /* fjern understregning */
+  font-weight: 700; /* tydelig vægt for CTA */
+  max-width: 520px; /* maks bredde for knappen */
+  width: 100%; /* fyld tilgængelig bredde i sin konteiner */
+  justify-content: center; /* centrer indhold horisontalt */
+}
+.privacy-note{
+  color: #8aa0ad; /* lys sekundær farve for noter */
+  font-size: 13px; /* lille tekst for note */
+  margin: 0; /* ingen ekstra margin */
+  text-align: center; /* centrer note under knappen */
+}
 
 /* Responsive: tablet -> stack, mobil -> smalle inputer */
+
 @media (max-width: 1100px){
-  .contact-grid{ grid-template-columns: 1fr; }
-  .contact-form{ order: 2; }
-  .kontakt-venstre{ order: 1; }
+  .contact-grid{
+    grid-template-columns: 1fr; /* stack kolonner til én kolonne på tablet */
+  }
+  .contact-form{
+    order: 2; /* placer formularen efter kontakt-venstre på tablets */
+  }
+  .kontakt-venstre{
+    order: 1; /* vis kontaktinfo først */
+  }
 }
 
 @media (max-width: 700px){
-  .contact-grid{ gap:20px; }
-  .kontakt-kort{ padding:14px; }
-  .kontakt-overskrift{ font-size:21px; }
-  .form-row input, .form-row textarea{ padding:10px 12px; }
-  .form-actions .cta-blue{ width:100%; justify-content:center; }
+  .contact-grid{
+    gap: 20px; /* mindsk afstand mellem kolonner på mobil */
+  }
+  .kontakt-kort{
+    padding: 14px; /* mindre padding i kontaktkort på mobil */
+  }
+  .kontakt-overskrift{
+    font-size: 21px; /* hold overskrift på en passende størrelse på mobil */
+  }
+  .form-row input,
+  .form-row textarea{
+    padding: 10px 12px; /* mindre indvendig afstand i felter på mobil */
+  }
+  .form-actions .cta-blue{
+    width: 100%; /* CTA tager fuld bredde på små skærme */
+    justify-content: center; /* centrer indhold i knappen */
+  }
 }
 
 
 /* ----------------------- Underside - HERO ----------------------- */
 /* Høj-specificitet for at undgå at andre styles overskriver heroen. */
-.underside-hero, section.underside-hero{ background: linear-gradient(135deg,#0b6edb 0%, #1177f1 45%, #00c97b 100%) !important; color:#fff !important; }
-.underside-hero{ display:flex; align-items:center; }
-.underside-hero .container{ max-width:1760px; margin:0 auto; padding:48px 20px !important; text-align:center; }
-.underside-hero{ min-height:260px; }
-.underside-hero h1{ font-size: clamp(32px,6vw,64px); margin:0 0 12px; font-weight:700; color: #fff; }
-.underside-hero h3{ color: rgba(255,255,255,0.95); margin:0 auto 18px; max-width:900px; ;color: #FFF; }
-.underside-hero .cta-small{ display:inline-flex; align-items:center; gap:10px; padding:10px 18px; background:#fff; color:#0b6edb; border-radius:999px; font-weight:700; text-decoration:none; }
+.underside-hero,
+section.underside-hero{
+  background: linear-gradient(135deg,#0b6edb 0%, #1177f1 45%, #00c97b 100%) !important; /* gradient baggrund for underside-hero */
+  color: #fff !important; /* sikre hvid tekst på hero */
+}
+.underside-hero{
+  display: flex; /* brug flex til at centrere indhold horisontalt/vertikalt */
+  align-items: center; /* centrer elementer lodret i hero */
+  min-height: 260px; /* minimum højde for hero-sektionen */
+}
+.underside-hero .container{
+  max-width: 1760px; /* begræns maksimal containerbredde */
+  margin: 0 auto; /* centrer containeren */
+  padding: 48px 20px !important; /* indvendig afstand i hero */
+  text-align: center; /* centrér tekst i hero */
+}
+.underside-hero h1{
+  font-size: clamp(32px,6vw,64px); /* responsiv hovedoverskrift */
+  margin: 0 0 12px; /* afstand under h1 */
+  font-weight: 700; /* kraftig vægt for overskrift */
+  color: #fff; /* hvid overskriftsfarve */
+}
+.underside-hero h3{
+  color: rgba(255,255,255,0.95); /* lidt tonet hvid for undertekst */
+  margin: 0 auto 18px; /* centreret med afstand under */
+  max-width: 900px; /* linjelængdebegrænsning for læsbarhed */
+  color: #FFF; /* sikre fuldt hvid farve (gentaget for høj-specifikation) */
+}
+.underside-hero .cta-small{
+  display: inline-flex; /* inline-flex for ikon + tekst */
+  align-items: center; /* centrér ikon og tekst */
+  gap: 10px; /* afstand mellem ikon og tekst */
+  padding: 10px 18px; /* indermargin i knappen */
+  background: #fff; /* hvid baggrund i CTA */
+  color: #0b6edb; /* blå tekst i CTA */
+  border-radius: 999px; /* fuldt afrundet pilleknap */
+  font-weight: 700; /* tydelig vægt */
+  text-decoration: none; /* fjern understregning */
+}
 
 @media (max-width: 900px){
-  .underside-hero{ min-height:180px; }
-  .underside-hero .container{ padding:36px 18px !important; }
-  .underside-hero h1{ font-size: 36px; }
+  .underside-hero{
+    min-height: 180px; /* lavere min-højde på smallere skærme */
+  }
+  .underside-hero .container{
+    padding: 36px 18px !important; /* mindre indvendig afstand på tablet */
+  }
+  .underside-hero h1{
+    font-size: 36px; /* fast størrelse for h1 under 900px */
+  }
 }
 
 /* ----------------------- MULIGHEDER: TRE BOKSE (inspireret af forsiden) ----------------------- */
 /* Denne sektion følger samme struktur som .forside-3 men bruger andre farver og mindre skygge */
 /* Full-bleed layout: sektionen strækker sig til viewport-kanten og er tættere på hero */
 .muligheder-bokse{
-  width: 100vw;
-  position: relative;
-  left: 50%;
-  right: 50%;
-  margin-left: -50vw;
-  margin-right: -50vw;
+  width: 100vw; /* full-bleed: stræk sektionen til viewportens bredde */
+  position: relative; /* gør det muligt at bruge venstre/højre offsets */
+  left: 50%; /* flyt til midten før neg. margin for full-bleed */
+  right: 50%; /* symmetrisk offset for full-bleed */
+  margin-left: -50vw; /* træk tilbage for at udligne left:50% */
+  margin-right: -50vw; /* træk tilbage for at udligne right:50% */
   padding: 64px 0 40px; /* øget top-padding for at skabe mere afstand til hero */
-  box-sizing: border-box;
+  box-sizing: border-box; /* inkluder padding i bredden */
 }
 /* Gør container lokalt fuld-bredde så grid kan nå kanterne minus gutter */
-.muligheder-bokse .container{ max-width: none; padding: 0; margin: 0 auto; }
-.muligheder-bokse .introduktion{ color:#374151; text-align:left; margin:6px 0 18px 0; }
-.muligheder-liste{ list-style:none; padding:0 24px; margin:0 auto; display:grid; grid-template-columns: repeat(3, 1fr); gap: 28px; width: calc(100%); box-sizing: border-box; }
-.mulighed-kort{ background:#ffffff; border-radius:16px; padding:24px; box-shadow: 0 10px 15px -3px rgba(12,40,70,0.12); display:flex; flex-direction:column; gap:18px; align-items:flex-start; height:380px; box-sizing:border-box; }
+.muligheder-bokse .container{
+  max-width: none; /* fjern maksimal bredde så sektionen kan være full-bleed */
+  padding: 0; /* fjern container-padding for at lade indhold nå kanten */
+  margin: 0 auto; /* centrer containerens indhold horisontalt */
+} /* container fjernet max-width for full-bleed */
+.muligheder-bokse .introduktion{
+  color: #374151; /* tekstfarve for introduktionstekst */
+  text-align: left; /* venstrejuster introduktionstekst */
+  margin: 6px 0 18px 0; /* afstand omkring introduktionens blok */
+} /* introduktionstekst: farve og margin */
+.muligheder-liste{
+  list-style: none; /* fjern standard bullets */
+  padding: 0 24px; /* sidegutter for listen */
+  margin: 0 auto; /* centrer listen horisontalt */
+  display: grid; /* brug grid til tre-kolonne layout */
+  grid-template-columns: repeat(3, 1fr); /* tre lige kolonner */
+  gap: 28px; /* afstand mellem kolonner og rækker */
+  width: calc(100%); /* fyld den beregnede bredde */
+  box-sizing: border-box; /* inkluder padding i bredden */
+} /* grid med tre kolonner */
+.mulighed-kort{
+  background: #ffffff; /* hvid baggrund for kortet */
+  border-radius: 16px; /* afrundede hjørner */
+  padding: 24px; /* indvendig afstand i kortet */
+  box-shadow: 0 10px 15px -3px rgba(12,40,70,0.12); /* diskret skygge */
+  display: flex; /* flex container for indre layout */
+  flex-direction: column; /* stak indhold lodret */
+  gap: 18px; /* afstand mellem elementer i kortet */
+  align-items: flex-start; /* venstrejuster kortindhold */
+  height: 380px; /* fast højde for visuel ensartethed */
+  box-sizing: border-box; /* inkluder padding i bredden */
+} /* kort-styling: baggrund, skygge, højde */
 /* Ikonet vises øverst i kortet, efterfulgt af titel, beskrivelse, meta og link */
-.mulighed-ikon{ margin:0 0 6px 0; }
-.mulighed-ikon img{ width:56px; height:56px; display:block; border-radius:999px; background: none !important; padding:0; }
-.mulighed-tekst{ display:flex; flex-direction:column; justify-content:flex-start; align-items:flex-start; text-align:left; width:100%; }
-.mulighed-tekst h3{ margin:6px 0 10px 0; }
-.mulighed-tekst h3{ margin:0 0 8px 0; color:#0b3550; text-align:left; }
-.kort-beskrivelse{ margin:0 0 12px 0; color:#546571; font-weight:400; text-align:left; }
-.læs-mere{ color:#0b6edb; text-decoration:none; font-weight:400; font-size:21px; }
+.mulighed-ikon{
+  margin: 0 0 6px 0; /* plads under ikonet for separation */
+} /* plads under ikonet */
+.mulighed-ikon img{
+  width: 56px; /* ikonets faste bredde */
+  height: 56px; /* ikonets faste højde */
+  display: block; /* blokvis billede for forudsigelig margin */
+  border-radius: 999px; /* rund ikonform */
+  background: none !important; /* tving fjernelse af baggrund hvis et asset har den */
+  padding: 0; /* ingen ekstra padding */
+} /* ikon-dimensioner og runding */
+.mulighed-tekst{
+  display: flex; /* fleksibel beholder for teksten */
+  flex-direction: column; /* stak tekst lodret */
+  justify-content: flex-start; /* start fra toppen */
+  align-items: flex-start; /* venstrejuster teksten */
+  text-align: left; /* venstrejusteret tekst */
+  width: 100%; /* lad tekstboksen fylde kortets bredde */
+} /* tekststak i kortet */
+.mulighed-tekst h3{ margin: 6px 0 10px 0; }
+.mulighed-tekst h3{
+  margin: 0 0 8px 0; /* mindre bundmargin for titel */
+  color: #0b3550; /* titelens farve */
+  text-align: left; /* venstrejuster titlen */
+} /* titel-farve og margin */
+.kort-beskrivelse{
+  margin: 0 0 12px 0; /* bundmargin for beskrivelsestekst */
+  color: #546571; /* dæmpet grå-blå farve for brødtekst */
+  font-weight: 400; /* normal vægt */
+  text-align: left; /* venstrejuster teksten */
+} /* kort-beskrivelse styling */
+.læs-mere{
+  color: #0b6edb; /* linkfarve i brandblå */
+  text-decoration: none; /* fjern understregning */
+  font-weight: 400; /* normal vægt */
+  font-size: 21px; /* læsbar størrelsesindstilling */
+} /* læs-mere link styling */
 
 /* ----------------------- UNGE FORTÆLLER: HISTORIEKORT ----------------------- */
-.ungefortæller-section{ padding: 40px 0 28px; background: transparent; }
+
+
+.ungefortæller-section{
+  padding: 40px 0 28px; /* sektion: lodret padding */
+  background: transparent; /* transparant baggrund */
+}
 .ungefortæller-section .container-ungefortæller-1,
 .ungefortæller-section .container-ungefortæller-2,
 .ungefortæller-section .container-ungefortæller-3,
 .ungefortæller-section .container-ungefortæller-4{
-  background: #ffffff;
-  border-radius: 14px;
-  box-shadow: 0 18px 40px rgba(10,25,40,0.06);
-  padding: 28px 32px;
-  margin: 28px auto;
-  max-width: 1152px;
-  box-sizing: border-box;
-  overflow: visible;
+  background: #ffffff; /* kortbaggrund: hvid */
+  border-radius: 14px; /* afrundede hjørner */
+  box-shadow: 0 18px 40px rgba(10,25,40,0.06); /* diskret skygge */
+  padding: 28px 32px; /* indvendig padding */
+  margin: 28px auto; /* centrer kortene og tilføj lodret margin */
+  max-width: 1152px; /* maks bredde for kort */
+  box-sizing: border-box; /* inkluder padding i bredden */
+  overflow: visible; /* sørg for popouts ikke klippes */
 }
 
 .ungefortæller-section .h4-nochange {
-  /* keep a more neutral, subdued appearance for these labels */
-  color: #4A5565;  /* slightly smaller than the branded H4 */
-  font-weight: 400;
-  line-height: 24px;
-  margin: 6px 0 5px 0; /* small spacing around this metadata H4 */
+  /* hold en neutral, afdæmpet stil for disse labels */
+  color: #4A5565;  /* afdæmpet farve */
+  font-weight: 400; /* normal vægt */
+  line-height: 24px; /* linjehøjde for læsbarhed */
+  margin: 6px 0 5px 0; /* lille afstand omkring metadata H4 */
 }
 
-.ungefortæller-section img{ display:block; width:85px; height:85px; border-radius:50%; float:left; margin-right:18px; margin-bottom:6px; }
-.ungefortæller-section h3{ margin:0 0 0px 0; font-weight: 500; text-align: left;}
-.ungefortæller-section h4{ color:#155DFC; font-weight: 500; text-align: left;}
+.ungefortæller-section img{
+  display: block; /* blokvis billede */
+  width: 85px; /* avatar bredde */
+  height: 85px; /* avatar højde */
+  object-fit: cover; /* beskær og centrer billedet */
+  border-radius: 50%; /* rund avatar */
+  float: left; /* flyd billede til venstre */
+  margin-right: 18px; /* afstand til tekst */
+  margin-bottom: 6px; /* lille bundmargin */
+}
+.ungefortæller-section h3{
+  margin: 0 0 0px 0; /* nulstil margin */
+  font-weight: 500; /* semibold h3 */
+  text-align: left; /* venstrejusteret */
+}
+.ungefortæller-section h4{
+  color: #155DFC; /* blå farve for underoverskrifter */
+  font-weight: 500; /* semibold */
+  text-align: left; /* venstrejusteret */
+}
 
 /* Reducer afstanden mellem navnet (h3) og den følgende 'Stoppede med' (h4) */
-.ungefortæller-section h3 + h4{ margin-top:4px; margin-bottom:0; }
+.ungefortæller-section h3 + h4{
+  margin-top: 4px; /* mindre top-afstand */
+  margin-bottom: 0; /* ingen bundafstand */
+}
 /* Fjern mellemrum mellem h4 og det følgende afsnit i story-kortene */
 /* Pull paragraph up closer to preceding H4 for tighter rhythm */
-.ungefortæller-section h4 + p{ margin-top:-10px; }
+.ungefortæller-section h4 + p{
+  margin-top: -10px; /* bring paragraf tættere på h4 */
+}
 
 @media (max-width:900px){
-  .ungefortæller-section h3 + h4{ margin-top:6px; }
-  .ungefortæller-section h4 + p{ margin-top:-4px; }
+  .ungefortæller-section h3 + h4{
+    margin-top: 6px; /* lidt større afstand på mobil */
+  }
+  .ungefortæller-section h4 + p{
+    margin-top: -4px; /* mindre negativ margin på mobil */
+  }
 }
 
 /* Meta pill (grøn badge) ved toppen af kortet */
-.ungefortæller-section .meta-pill{ display:inline-flex; align-items:center; gap:10px; background:#e9f8ed; color:#008236; padding:10px 35.484px 10px 12px; border-radius:22px; font-size:21px; font-weight:400; margin:8px 0 12px 0; }
-.ungefortæller-section .meta-pill img{ width:20px; height:20px; display:inline-block; margin:0; }
+.ungefortæller-section .meta-pill{
+  display: inline-flex; /* inline-flex så pill kan sidde i flowet */
+  align-items: center; /* centrer indholdet vertikalt */
+  gap: 10px; /* afstand mellem ikon og tekst i pill */
+  background: #e9f8ed; /* lys grøn baggrund */
+  color: #008236; /* grøn tekstfarve */
+  padding: 10px 35.484px 10px 12px; /* indvendig afstand, behold decimal for præcision */
+  border-radius: 22px; /* afrundet badge */
+  font-size: 21px; /* læsbar størrelse */
+  font-weight: 400; /* normal vægt */
+  margin: 8px 0 12px 0; /* afstand omkring pill */
+}
+.ungefortæller-section .meta-pill img{
+  width: 20px; /* ikon bredde i pill */
+  height: 20px; /* ikon højde i pill */
+  display: inline-block; /* inline-block for flow */
+  margin: 0; /* ingen ekstra margin */
+}
 
 @media (max-width:900px){
-  .ungefortæller-section .meta-pill{ padding:8px 20px 8px 10px; font-size:14px; gap:8px; }
-  .ungefortæller-section .meta-pill img{ width:18px; height:18px; }
+  .ungefortæller-section .meta-pill{
+    padding: 8px 20px 8px 10px; /* mindre padding på mobil */
+    font-size: 14px; /* mindre font på mobil */
+    gap: 8px; /* mindre afstand i pill */
+  }
+  .ungefortæller-section .meta-pill img{
+    width: 18px; /* mindre ikon på mobil */
+    height: 18px; /* mindre ikon på mobil */
+  }
 }
 
 /* Sørg for at avatar og tekst flugter i toppen: placér overskrift og meta tættere sammen */
 .ungefortæller-section .container-ungefortæller-1 img,
 .ungefortæller-section .container-ungefortæller-2 img,
 .ungefortæller-section .container-ungefortæller-3 img,
-.ungefortæller-section .container-ungefortæller-4 img{ margin-top:6px; }
+.ungefortæller-section .container-ungefortæller-4 img{
+  margin-top: 6px; /* top margin for avatar-billeder */
+}
 .ungefortæller-section .container-ungefortæller-1 h3,
 .ungefortæller-section .container-ungefortæller-2 h3,
 .ungefortæller-section .container-ungefortæller-3 h3,
-.ungefortæller-section .container-ungefortæller-4 h3{ margin-top:4px; margin-bottom:6px; }
+.ungefortæller-section .container-ungefortæller-4 h3{
+  margin-top: 4px; /* lille afstand over h3 */
+  margin-bottom: 6px; /* afstand under h3 */
+}
 
 /* Quote box */
 .ungefortæller-section .quote-1,
 .ungefortæller-section .quote-2,
 .ungefortæller-section .quote-3,
 .ungefortæller-section .quote-4{
-  margin-top:18px;
-  background: #f7fbfd;
-  border-radius: 12px;
-  padding: 18px 20px;
-  border-left: 4px solid #0b6edb;
+  margin-top: 18px; /* afstand over citatboksen */
+  background: #f7fbfd; /* lys baggrund i citatboksen */
+  border-radius: 12px; /* afrundet kant */
+  padding: 18px 20px; /* indvendig afstand */
+  border-left: 4px solid #0b6edb; /* dekorativ venstre kant */
   color:#234b6a;
 }
 .ungefortæller-section .quote-1 img,
 .ungefortæller-section .quote-2 img,
 .ungefortæller-section .quote-3 img,
-.ungefortæller-section .quote-4 img{ width:22px; height:22px; float:left; margin-right:12px; }
+.ungefortæller-section .quote-4 img{
+  width: 22px; /* små citat-ikoner bredde */
+  height: 22px; /* små citat-ikoner højde */
+  float: left; /* flyd ikon venstre i teksten */
+  margin-right: 12px; /* afstand mellem ikon og tekst */
+}
 
-/* Ensure quote text aligns with main h4 block (avatar 85px + gap 18px) */
+/* Sørg for at citattekst flugter med hoved-h4-blokken (avatar 85px + gap 18px) */
 .ungefortæller-section .quote-1 h4,
 .ungefortæller-section .quote-2 h4,
 .ungefortæller-section .quote-3 h4,
@@ -1224,22 +1773,39 @@ input[type=number] { appearance: textfield; -moz-appearance: textfield; }
   margin-left: 40px; /* pulled slightly left: smaller gap and offset */
 }
 
-/* Ensure floated avatar and quote images do not break flow */
+/* Sørg for at flydende avatar- og citatbilleder ikke bryder layout-flowet */
 .ungefortæller-section .container-ungefortæller-1:after,
 .ungefortæller-section .container-ungefortæller-2:after,
 .ungefortæller-section .container-ungefortæller-3:after,
-.ungefortæller-section .container-ungefortæller-4:after{ content:""; display:table; clear:both; }
+.ungefortæller-section .container-ungefortæller-4:after{
+  content: ""; /* clearfix pseudo-element for at rydde float */
+  display: table; /* skaber en blok som rydder float */
+  clear: both; /* fjern flydende elementeffekt */
+}
 
 @media (max-width:900px){
   .ungefortæller-section .container-ungefortæller-1,
   .ungefortæller-section .container-ungefortæller-2,
   .ungefortæller-section .container-ungefortæller-3,
-  .ungefortæller-section .container-ungefortæller-4{ padding:20px; margin:18px 12px; }
-  .ungefortæller-section img{ float:none; display:block; margin:0 0 12px 0; width:85px; height:85px; }
+  .ungefortæller-section .container-ungefortæller-4{
+    padding: 20px; /* mindre padding på mobil */
+    margin: 18px 12px; /* mobil-specifik margin */
+  }
+  .ungefortæller-section img{
+    float: none; /* fjern float på mobil */
+    display: block; /* vis som blok for bedre flow */
+    margin: 0 0 12px 0; /* plads under billede */
+    width: 85px; /* bevare ikonstørrelse */
+    height: 85px; /* bevare ikonstørrelse */
+  }
   .ungefortæller-section .quote-1 img,
   .ungefortæller-section .quote-2 img,
   .ungefortæller-section .quote-3 img,
-  .ungefortæller-section .quote-4 img{ float:none; display:inline-block; margin:0 8px 0 0; }
+  .ungefortæller-section .quote-4 img{
+    float: none; /* fjern float i citat-ikon på mobil */
+    display: inline-block; /* linjevis ikon */
+    margin: 0 8px 0 0; /* lille højre margin */
+  }
 }
 
 /* ----------------------- CALLOUT: Din historie kan være den næste ----------------------- */
@@ -1250,9 +1816,9 @@ input[type=number] { appearance: textfield; -moz-appearance: textfield; }
   margin-top: 36px;
 }
 .din-historie-kan-blive-den-næste img{ width:64px; height:64px; display:block; margin:0 auto 18px; }
-.din-historie-kan-blive-den-næste h2{ margin:0 0 10px; font-size:36px; color:#0b1628; }
-.din-historie-kan-blive-den-næste h3{ margin:0 0 10px; color:#566974; font-weight:400; }
-.din-historie-kan-blive-den-næste .cta-blue{ display:inline-flex; margin-top:12px; }
+.din-historie-kan-blive-den-næste h2{ margin:0 0 10px; font-size:36px; color:#0b1628; } /* h2: afstand under, stor størrelse, mørk farve */
+.din-historie-kan-blive-den-næste h3{ margin:0 0 10px; color:#566974; font-weight:400; } /* h3: sekundær farve og normal vægt */
+.din-historie-kan-blive-den-næste .cta-blue{ display:inline-flex; margin-top:12px; } /* CTA: inline-flex for ikon + tekst, afstand over */
 
 @media (max-width:900px){
   .din-historie-kan-blive-den-næste{ padding: 40px 21px; }
@@ -1261,22 +1827,89 @@ input[type=number] { appearance: textfield; -moz-appearance: textfield; }
 
 /* ----------------------- CHAT & KONTAKT: SECTION 1 (Kontaktkort) ----------------------- */
 /* Placeret her direkte efter callout for at være let at finde */
-.chatogkontakt-section-1{ padding: 48px 24px 40px; margin-bottom: 80px; }
-.chatogkontakt-section-1 .container{ max-width:1760px; margin:0 auto; }
-.chatogkontakt-cards{ display:grid; grid-template-columns: repeat(4, 1fr); gap:32px; align-items:stretch; }
-.chatogkontakt-card{ background:#fff; border-radius:14px; padding:24px 20px; box-shadow: 0 12px 28px rgba(10,25,40,0.05); display:flex; flex-direction:column; gap:12px; align-items:flex-start; min-height:120px; height:100%; }
-.chatogkontakt-card .icon-wrap{ margin-top:6px; margin-bottom:10px; }
-.chatogkontakt-card .icon-wrap img{ width:56px; height:56px; display:block; }
-.chatogkontakt-card .card-body{ display:flex; flex-direction:column; gap:8px; align-items:flex-start; width:100%; }
-.chatogkontakt-card h4{ color:#0A0A0A; font-size:34px; font-weight:500; text-align:left; margin:0; padding:0; }
-.chatogkontakt-card .card-primary{ margin:0; padding:10px 0; font-size:34px; color:#0b1628; text-align:left; }
-.chatogkontakt-card .card-meta{ margin:0; padding:0; font-size:21px; color:#6b8190; text-align:left; }
+.chatogkontakt-section-1{
+  padding: 48px 24px 40px; /* sektion: top, sider, bund - skaber luft omkring indholdet */
+  margin-bottom: 80px; /* afstand under sektionen til næste blok */
+}
 
-@media (max-width:1100px){ .chatogkontakt-cards{ grid-template-columns: repeat(2, 1fr); } }
-@media (max-width:700px){ .chatogkontakt-cards{ grid-template-columns: 1fr; } .chatogkontakt-section-1{ padding:24px 16px; } .chatogkontakt-card{ padding:20px; min-height:unset; } }
+.chatogkontakt-section-1 h2{
+  font-size: 48px; /* stor sektionstitel */
+}
+
+.chatogkontakt-section-1 .container{
+  max-width: 1760px; /* stor max-bredde for sektionens indhold */
+  margin: 0 auto; /* centrer containeren horisontalt */
+}
+.chatogkontakt-cards{
+  display: grid; /* brug CSS Grid for kort-layout */
+  grid-template-columns: repeat(4, 1fr); /* fire lige kolonner på desktop */
+  gap: 32px; /* afstand mellem kortene */
+  align-items: stretch; /* sørg for kortene strækker sig i højden */
+}
+.chatogkontakt-card{
+  background: #fff; /* hvid kortbaggrund */
+  border-radius: 14px; /* afrundede hjørner */
+  padding: 24px 20px; /* indvendig afstand i kortet */
+  box-shadow: 0 12px 28px rgba(10,25,40,0.05); /* let skygge for løft */
+  display: flex; /* flex for at stakke og fordele indhold lodret */
+  flex-direction: column; /* lodret stak */
+  gap: 12px; /* afstand mellem elementer i kortet */
+  align-items: flex-start; /* start indhold fra venstre */
+  min-height: 120px; /* sikr minimal højde */
+  height: 100%; /* udfyld den tilgængelige grid-cellehøjde */
+}
+.chatogkontakt-card .icon-wrap{
+  margin-top: 6px; /* lidt top-margin så ikon ikke sidder op ad kanten */
+  margin-bottom: 10px; /* afstand under ikonet */
+}
+.chatogkontakt-card .icon-wrap img{
+  width: 56px; /* ikonets faste bredde */
+  height: 56px; /* ikonets faste højde */
+  display: block; /* blokvis billede for forudsigelig layout */
+}
+.chatogkontakt-card .card-body{
+  display: flex; /* flex container for kort-tekst */
+  flex-direction: column; /* stak tekstelementer lodret */
+  gap: 8px; /* afstand mellem tekstelementerne */
+  align-items: flex-start; /* venstrejuster indhold */
+  width: 100%; /* fyld den tilgængelige bredde */
+}
+.chatogkontakt-card h4{
+  color: #0A0A0A; /* mørk overskriftfarve */
+  font-size: 34px; /* stor titel i kort */
+  font-weight: 500; /* semibold vægt */
+  text-align: left; /* venstrejuster overskriften */
+  margin: 0; /* nulstil margin */
+  padding: 0; /* nulstil padding */
+}
+.chatogkontakt-card .card-primary{
+  margin: 0; /* nulstil margin */
+  padding: 10px 0; /* lodret padding for luft */
+  font-size: 34px; /* primær tekststørrelse */
+  color: #0b1628; /* sekundær mørk farve til primær tekst */
+  text-align: left; /* venstrejuster teksten */
+}
+.chatogkontakt-card .card-meta{
+  margin: 0; /* nulstil margin for meta */
+  padding: 0; /* nulstil padding */
+  font-size: 21px; /* meta-tekststørrelse */
+  color: #6b8190; /* dæmpet meta-farve */
+  text-align: left; /* venstrejuster meta-teksten */
+}
+
+@media (max-width:1100px){
+  .chatogkontakt-cards{ grid-template-columns: repeat(2, 1fr); /* to kolonner på mellemskærme */ }
+}
+@media (max-width:700px){
+  .chatogkontakt-cards{ grid-template-columns: 1fr; /* enkel kolonne på mobil */ }
+  .chatogkontakt-section-1{ padding:24px 16px; /* mindre sektion-padding på mobil */ }
+  .chatogkontakt-card{ padding:20px; /* mindre kort-padding på små skærme */
+    min-height: unset; /* fjern min-height så kort kan vokse med indhold */
+  }
+}
 
 
-/* ----------------------- CHAT & KONTAKT: SECTION 1 - CHAT-FORM (page specific) ----------------------- */
+/* ----------------------- & KONTAKT: SECTION 1 - CHAT-FORM (page specific) ----------------------- */
 /* Placeret direkte efter section 1 rules så den er let at finde. Klassernes prefix 'chat-' gør
   at disse styles kun påvirker chatogkontakt-siden. Formen centreret i sektionen og matcher
   samme visuelle proportioner som forsidens formular. */
@@ -1284,33 +1917,83 @@ input[type=number] { appearance: textfield; -moz-appearance: textfield; }
 .chat-contact-grid{ width:100%; max-width:1100px; display:grid; grid-template-columns: 1fr 420px; gap:32px; align-items:start; }
 
 /* Heading block between cards and form - centered and pushed down */
-.chat-send-heading{ text-align:center; margin-top:200px; margin-bottom:0; }
+.chat-send-heading{ text-align:center; margin-top:200px; margin-bottom:0; font-size: 48px; }
 .chat-send-heading h4{ margin:0; color:#55606a; }
 @media (max-width:900px){ .chat-send-heading{ margin-top:56px; } }
 
-.chat-contact-form{ background:#ffffff; border-radius:14px; padding:28px; box-shadow: 0 18px 40px rgba(10,25,40,0.06); }
-.chat-contact-form .chat-form-row{ margin-bottom:16px; display:flex; flex-direction:column; }
-.chat-contact-form label{ font-size:15px; color:#334155; margin-bottom:8px; }
+.chat-contact-form{
+  background: #ffffff; /* kortbaggrund for chatformular */
+  border-radius: 14px; /* afrundet kort */
+  padding: 28px; /* indvendig afstand i kortet */
+  box-shadow: 0 18px 40px rgba(10,25,40,0.06); /* dyb skygge for kortet */
+}
+.chat-contact-form .chat-form-row{
+  margin-bottom: 16px; /* afstand mellem rækker i formularen */
+  display: flex; /* flex for label + felt */
+  flex-direction: column; /* stak label og felt lodret */
+}
+.chat-contact-form label{
+  font-size: 15px; /* mindre label-tekst */
+  color: #334155; /* label-farve */
+  margin-bottom: 8px; /* afstand under label */
+}
 .chat-contact-form input[type="text"],
 .chat-contact-form input[type="email"],
 .chat-contact-form input[type="tel"],
 .chat-contact-form input[type="number"],
-.chat-contact-form textarea{ width:100%; padding:12px 14px; border:1px solid #E6EEF6; border-radius:8px; font-size:16px; color:#0b1628; box-sizing:border-box; }
-.chat-contact-form textarea{ min-height:120px; resize:vertical; }
-.chat-form-row--split{ display:grid; grid-template-columns: 1fr 1fr; gap:18px; }
+.chat-contact-form textarea{
+  width: 100%; /* fyld tilgængelig bredde */
+  padding: 12px 14px; /* indvendig afstand i felterne */
+  border: 1px solid #E6EEF6; /* let kant */
+  border-radius: 8px; /* rundede felter */
+  font-size: 16px; /* felt-tekst størrelse */
+  color: #0b1628; /* tekstfarve i felter */
+  box-sizing: border-box; /* inkluder padding i bredden */
+}
+.chat-contact-form textarea{
+  min-height: 120px; /* minimum højde for tekstfelt */
+  resize: vertical; /* tillad vertikal resizing */
+}
+.chat-form-row--split{
+  display: grid; /* grid til to-felts layout */
+  grid-template-columns: 1fr 1fr; /* to lige kolonner */
+  gap: 18px; /* afstand mellem felter */
+}
 
-.chat-form-actions{ display:flex; align-items:center; gap:16px; margin-top:8px; }
-.chat-cta-blue{ font-size: 21px; display:inline-flex; align-items:center; gap:10px; background:linear-gradient(90deg,#0b6edb 0%, #0062b3 100%); color:#fff; padding:12px 18px; border-radius:999px; text-decoration:none; border:none; cursor:pointer; font-weight:700; }
-.chat-privacy-note{ color:#6b8190; font-size:21px; margin:0; }
+.chat-form-actions{
+  display: flex; /* flex for handlingsknapper */
+  align-items: center; /* centrér vertikalt */
+  gap: 16px; /* afstand mellem handlinger */
+  margin-top: 8px; /* afstand over action-row */
+}
+.chat-cta-blue{
+  font-size: 21px; /* tekststørrelse i CTA */
+  display: inline-flex; /* inline-flex for ikon + tekst */
+  align-items: center; /* centrér indhold */
+  gap: 10px; /* afstand mellem ikon og tekst */
+  background: linear-gradient(90deg,#0b6edb 0%, #0062b3 100%); /* gradient baggrund */
+  color: #fff; /* hvid tekst */
+  padding: 12px 18px; /* indvendig afstand */
+  border-radius: 999px; /* pilleformet knap */
+  text-decoration: none; /* fjern understregning */
+  border: none; /* ingen kant */
+  cursor: pointer; /* vis klikbar */
+  font-weight: 700; /* fed vægt */
+}
+.chat-privacy-note{
+  color: #6b8190; /* sekundær note-farve */
+  font-size: 21px; /* note-tekststørrelse */
+  margin: 0; /* nulstil margin */
+}
 
 /* Responsive collapse and small-screen tweaks are handled in the scoped
   `.chatogkontakt-section-1` rules further below to avoid duplication. */
 
 /* Scoped centering overrides for chat page only ------------------------------------------ */
-/* These rules target elements under .chatogkontakt-section-1 to avoid changing other pages.
-   They explicitly center the wrapper and constrain inner widths so the form sits centered
-   both horizontally and with comfortable vertical spacing. Tweak padding-top/padding-bottom
-   if you want the block higher or lower on the page. */
+/* Disse regler retter sig mod elementer under .chatogkontakt-section-1 for at undgå at ændre andre sider.
+  De centrerer eksplicit wrappere og afgrænser indre bredder, så formularen står centreret
+  både horisontalt og med behagelig vertikal afstand. Juster padding-top/padding-bottom
+  hvis du vil have blokken højere eller lavere på siden. */
 .chatogkontakt-section-1 .chat-contact-wrapper{
   display:flex;              /* preserve flex layout */
   justify-content:center;    /* horizontal center */
@@ -1379,8 +2062,8 @@ input[type=number] { appearance: textfield; -moz-appearance: textfield; }
 /* End of scoped chat overrides ----------------------------------------------------------- */
 
 /* Section-scoped margin alignment ----------------------------------------------- */
-/* These rules ensure the chat section aligns with the global `.container` gutters
-   (24px) and centers the inner grid so it has equal left/right spacing like other sections. */
+/* Disse regler sikrer at chat-sektionen flugter med de globale `.container`-gutters
+  (24px) og centrerer den indre grid, så der er lige venstre/højre afstand som i andre sektioner. */
 .chatogkontakt-section-1 .chat-contact-wrapper{
   padding-left: 0; /* remove asymmetric gutters */
   padding-right: 0;
@@ -1441,61 +2124,114 @@ input[type=number] { appearance: textfield; -moz-appearance: textfield; }
 .mulighed-kort:nth-child(2) .mulighed-ikon img{ background: none !important; }
 .mulighed-kort:nth-child(3) .mulighed-ikon img{ background: none !important; }
 
-@media (max-width: 1100px){ .muligheder-liste{ grid-template-columns: repeat(2, 1fr); } .mulighed-kort{ padding:20px; } }
-@media (max-width: 700px){ .muligheder-liste{ grid-template-columns: 1fr; } .muligheder-bokse{ padding:36px 0; } .mulighed-kort{ gap:12px; } }
+@media (max-width: 1100px){
+  .muligheder-liste{ grid-template-columns: repeat(2, 1fr); /* to kolonner på medium skærme */ }
+  .mulighed-kort{ padding:20px; /* mindre padding på medium skærme */ }
+}
+@media (max-width: 700px){
+  .muligheder-liste{ grid-template-columns: 1fr; /* enkel kolonne på small screens */ }
+  .muligheder-bokse{ padding:36px 0; /* reducer lodret padding på meget små skærme */ }
+  .mulighed-kort{ gap:12px; /* tættere kort-gab på mobil */ }
+}
 
 
 
 
 /* Kontakttrin (sektion-3) - placeret efter kort-meta for bedre rækkefølge */
-.chatogkontakt-section-3{ background: #f0f8ff; padding: 48px 24px; }
-.chatogkontakt-section-3 .container{ max-width:1200px; margin:0 auto; }
-.kontakttrin-overskrift{ text-align:center; font-size:48px; margin-bottom:40px; font-weight:400; }
-.kontakttrin-grid{ display:grid; grid-template-columns: repeat(3, 1fr); gap:40px; align-items:start; }
-.kontakttrin-item{ text-align:center; padding:12px 20px; display:flex; flex-direction:column; align-items:center; gap:14px; }
-.kontakttrin-item .ikon-trin{ width:88px; height:88px; display:flex; align-items:center; justify-content:center; border-radius:50%; background: transparent; margin-top:6px; margin-bottom:12px; }
-.kontakttrin-item .ikon-trin img{ width:64px; height:64px; display:block; }
-.kontakttrin-item h4{ margin:0 0 8px; color:#0A0A0A; font-weight: 500; }
-.kontakttrin-item p{ margin:0; color:#41505b; }
+.chatogkontakt-section-3{
+  background: #f0f8ff; /* sektionens svage blå baggrund */
+  padding: 48px 24px; /* lodret og vandret luft omkring sektionen */
+}
+.chatogkontakt-section-3 .container{
+  max-width: 1200px; /* begræns indholdets bredde */
+  margin: 0 auto; /* centrer containeren */
+}
+.kontakttrin-overskrift{
+  text-align: center; /* centrer titel */
+  font-size: 48px; /* stor overskrift på desktop */
+  margin-bottom: 40px; /* afstand under overskrift */
+  font-weight: 400; /* normal vægt som i design */
+}
+.kontakttrin-grid{
+  display: grid; /* grid-layout for trin-kort */
+  grid-template-columns: repeat(3, 1fr); /* tre kolonner på desktop */
+  gap: 40px; /* afstand mellem trinene */
+  align-items: start; /* top-juster indholdet i hver celle */
+}
+.kontakttrin-item{
+  text-align: center; /* centrer indhold i hvert trin */
+  padding: 12px 20px; /* indvendig padding */
+  display: flex; /* brug flex for vertikal stak */
+  flex-direction: column; /* stak elementer lodret */
+  align-items: center; /* centrer elementer horisontalt */
+  gap: 14px; /* afstand mellem ikon, titel og tekst */
+}
+.kontakttrin-item .ikon-trin{
+  width: 88px; /* cirkel dimension */
+  height: 88px; /* cirkel dimension */
+  display: flex; /* centrer ikon inden i cirklen */
+  align-items: center; /* vertikal centring */
+  justify-content: center; /* horisontal centring */
+  border-radius: 50%; /* rund cirkel */
+  background: transparent; /* ingen ekstra baggrund */
+  margin-top: 6px; /* lille topmargin */
+  margin-bottom: 12px; /* afstand til titel */
+}
+.kontakttrin-item .ikon-trin img{
+  width: 64px; /* ikonbredde */
+  height: 64px; /* ikonhøjde */
+  display: block; /* fjern inline-afhængighed */
+}
+.kontakttrin-item h4{
+  margin: 0 0 8px; /* afstand under titlen */
+  color: #0A0A0A; /* mørk titel-farve */
+  font-weight: 500; /* medium vægt */
+}
+.kontakttrin-item p{
+  margin: 0; /* nulstil margin for kort tekst */
+  color: #41505b; /* sekundær tekst-farve */
+}
 
 @media (max-width:900px){
-  .kontakttrin-grid{ grid-template-columns: 1fr; gap:24px; }
-  .kontakttrin-overskrift{ font-size:36px; }
+  .kontakttrin-grid{ grid-template-columns: 1fr; /* stable til enkelt kolonne på mobil */
+    gap: 24px; /* mindre gab mellem trinene */
+  }
+  .kontakttrin-overskrift{ font-size: 36px; /* mindre overskrift på mobil */ }
 }
 
 /* ----------------------- OM NIKOTIN: SECTION 1 (card) ----------------------- */
 /* Placeret her efter chat & kontakt sektionerne for nem adgang */
 .omnikotin-section-1{
   padding: 56px 24px; /* lodret luft omkring sektionen */
-  background: transparent;
+  background: transparent; /* ingen særlig baggrundsfarve */
 }
 .omnikotin-section-1 .container{
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 0 20px;
-  box-sizing: border-box;
+  max-width: 1100px; /* begræns indholdets maks bredde */
+  margin: 0 auto; /* centrer container */
+  padding: 0 20px; /* sidegutter */
+  box-sizing: border-box; /* inkluder padding i breddeberegning */
 }
 .omnikotin-section-1 h2{
-  text-align: center;
-  font-family: Alpino, sans-serif;
-  font-size: 48px;
-  font-weight: 500;
-  margin: 0 0 28px 0;
-  color: #0A0A0A;
+  text-align: center; /* centrer overskriften */
+  font-family: Alpino, sans-serif; /* anvend Alpino for denne overskrift */
+  font-size: 48px; /* stor overskrift på desktop */
+  font-weight: 500; /* semi-fed vægt */
+  margin: 0 0 28px 0; /* afstand under overskrift */
+  color: #0A0A0A; /* mørk farve for høj kontrast */
 }
 .omnikotin-card{
   background: #f7fafc; /* lys kort-baggrund som i screenshot */
-  border-radius: 16px;
-  box-shadow: 0 10px 30px rgba(12,40,70,0.06);
-  padding: 32px 40px;
-  margin: 0 auto;
-  max-width: 980px;
-  color: #F9FAFB;
-  font-family: Alpino, sans-serif;
-  font-size: 20px;
-  line-height: 30px;
+  border-radius: 16px; /* bløde hjørner */
+  box-shadow: 0 10px 30px rgba(12,40,70,0.06); /* let skygge for dybde */
+  padding: 32px 40px; /* indvendig afstand i kortet */
+  margin: 0 auto; /* centrer kortet */
+  max-width: 980px; /* begræns kortets bredde */
+  color: #F9FAFB; /* tekstfarve (bevar eksisterende værdi) */
+  font-family: Alpino, sans-serif; /* sikre typografi */
+  font-size: 20px; /* basis tekststørrelse i kortet */
+  line-height: 30px; /* line-height for læsbarhed */
 }
-.omnikotin-card p{ margin: 0 0 18px 0; }
+.omnikotin-card p{ margin: 0 0 18px 0; /* afsnitsafstand i kortet */ }
 
 @media (max-width: 900px){
   .omnikotin-section-1{ padding: 36px 16px; }
@@ -1532,56 +2268,173 @@ input[type=number] { appearance: textfield; -moz-appearance: textfield; }
   padding: 0 20px;
   box-sizing: border-box;
 }
-.omnikotin-section-2 h2{ text-align:center; font-family: Alpino, sans-serif; font-size:48px; margin-bottom:28px; color:#0A0A0A; }
-.omnikotin-cards{ display:grid; grid-template-columns: repeat(3, 340px); justify-content: center; gap:36px; align-items:stretch; }
-.omnikotin-card-item{ width:340px; height:300px; background:#fff; border-radius:14px; padding:20px; box-shadow: 0 14px 36px rgba(12,40,70,0.06); display:flex; flex-direction:column; gap:12px; align-items:flex-start; box-sizing:border-box; }
+.omnikotin-section-2 h2{
+  text-align: center; /* centrer overskriften i denne sektion */
+  font-family: Alpino, sans-serif; /* brug Alpino som designet kræver */
+  font-size: 48px; /* stor titelstørrelse på desktop */
+  margin-bottom: 28px; /* afstand under overskriften */
+  color: #0A0A0A; /* mørk farve for god kontrast */
+}
+.omnikotin-cards{
+  display: grid; /* brug grid for kortlayout */
+  grid-template-columns: repeat(3, 340px); /* tre faste kolonner til kortene */
+  justify-content: center; /* centrer rækken af kort i containeren */
+  gap: 36px; /* afstand mellem kort */
+  align-items: stretch; /* sørg for kort fylder grid-højden */
+}
+.omnikotin-card-item{
+  width: 340px; /* fast kortbredde som i design */
+  height: 300px; /* fast højde for ensartet visuel rytme */
+  background: #fff; /* hvid kortbaggrund */
+  border-radius: 14px; /* afrundede hjørner */
+  padding: 20px; /* indvendig afstand i kortet */
+  box-shadow: 0 14px 36px rgba(12,40,70,0.06); /* blød skygge for dybde */
+  display: flex; /* flex container for kortets indhold */
+  flex-direction: column; /* stak elementer lodret */
+  gap: 12px; /* afstand mellem elementer i kortet */
+  align-items: flex-start; /* venstrejuster indhold */
+  box-sizing: border-box; /* inkluder padding i bredden */
+}
 
-.omnikotin-card-item .ikon-wrapper img{ width:56px; height:56px; display:block; }
-.omnikotin-card-item{ font-size:21px; line-height:28px; color:#41505b; }
-.omnikotin-card-item .ikon-wrapper img{ width:56px; height:56px; display:block; }
-.omnikotin-card-item h4{ margin:0; font-size:21px; font-weight:500; color:#0A0A0A; line-height:28px; }
-.omnikotin-card-item p{ margin:0; color:#41505b; font-size:21px; line-height:28px; }
+.omnikotin-card-item .ikon-wrapper img{
+  width: 56px; /* ikonets faste bredde i kortet */
+  height: 56px; /* ikonets faste højde i kortet */
+  display: block; /* gør billedet til en blok for forudsigeligt layout */
+}
+.omnikotin-card-item{
+  font-size: 21px; /* basis tekststørrelse i kortet */
+  line-height: 28px; /* linjehøjde for læsbarhed */
+  color: #41505b; /* primær tekstfarve i kortet */
+}
+.omnikotin-card-item .ikon-wrapper img{
+  width: 56px; /* ikonets faste bredde i kortet (duplikat for scope) */
+  height: 56px; /* ikonets faste højde i kortet (duplikat for scope) */
+  display: block; /* gør billedet til en blok for forudsigeligt layout */
+}
+.omnikotin-card-item h4{
+  margin: 0; /* nulstil margin for tæt layout */
+  font-size: 21px; /* titelstørrelse i kortets header */
+  font-weight: 500; /* semibold vægt for overskrifter */
+  color: #0A0A0A; /* mørk farve for høj kontrast */
+  line-height: 28px; /* linjehøjde for konsistent rytme */
+}
+.omnikotin-card-item p{
+  margin: 0; /* nulstil margin for korttekst */
+  color: #41505b; /* sekundær tekstfarve i kortet */
+  font-size: 21px; /* brødtekststørrelse i kort */
+  line-height: 28px; /* linjehøjde for læsbarhed */
+}
 
 @media (max-width: 1500px){
   /* Tablet / small desktop: 2 columns with medium gap */
-  .omnikotin-cards{ grid-template-columns: repeat(2, minmax(260px, 1fr)); gap:28px; justify-content: center; }
-  .omnikotin-card-item{ padding:16px; width:100%; max-width: 640px; height:auto; }
+  .omnikotin-cards{
+    grid-template-columns: repeat(2, minmax(260px, 1fr)); /* to kolonner med minimumsbredde */
+    gap: 28px; /* afstand mellem kort */
+    justify-content: center; /* centrer kortrækker i containeren */
+  }
+  .omnikotin-card-item{
+    padding: 16px; /* mindre padding på tablet for pladsbesparelse */
+    width: 100%; /* lad kortet fylde tilgængelig plads */
+    max-width: 640px; /* begræns maksimal bredde */
+    height: auto; /* lad højde følge indhold */
+  }
 }
 @media (max-width: 900px){
   /* Mobile: single column with comfortable gap */
-  .omnikotin-cards{ grid-template-columns: 1fr; gap:18px; }
-  .omnikotin-card-item{ width:100%; max-width: 520px; height:auto; padding:14px; }
+  .omnikotin-cards{
+    grid-template-columns: 1fr; /* én kolonne på mobil */
+    gap: 18px; /* mindre mellemrum mellem kort */
+  }
+  .omnikotin-card-item{
+    width: 100%; /* fyld den tilgængelige bredde på mobil */
+    max-width: 520px; /* begræns maksimal bredde på mobil */
+    height: auto; /* lad kortet vokse med indhold */
+    padding: 14px; /* mindre padding for at spare plads */
+  }
 }
 
 
 /* ----------------------- OM NIKOTIN: SECTION 3 (highlight box) ----------------------- */
 .omnikotin-section-3{
-  padding: 56px 24px;
-  background: transparent;
+  padding: 56px 24px; /* lodret og horisontal indvendig afstand i sektionen */
+  background: transparent; /* ingen ekstra baggrund, hold sektionen neutral */
+}
+
+.omnikotin-section-3 h2{
+  font-size: 48px; /* stor overskrift på desktop */
+  margin: 0 0 40px 0; /* afstand under overskriften */
+
 }
 .omnikotin-section-3 .container{
-  max-width: 1180px;
-  margin: 0 auto;
-  padding: 0 20px;
-  box-sizing: border-box;
+  max-width: 1180px; /* maks-bredde for indhold i denne sektion */
+  margin: 0 auto; /* centrer containeren horisontalt */
+  padding: 0 20px; /* sidegutter for at forhindre at tekst rammer kanten */
+  box-sizing: border-box; /* inkluder padding i elementets bredde */
 }
 .omnikotin-section-3 .highlight-box{
+  /*
+    .highlight-box: fremhævet informations-boks i Om Nikotin
+    Kommentar: Lys baggrund, venstre kant-farve og blød skygge gør boksen tydelig uden
+    at dominere siden. Brug padding til at give luft til teksten.
+  */
   background: #eff6ff; /* lys blå baggrund */
-  border-radius: 18px;
-  padding: 36px 42px;
-  border-left: 6px solid #0b6edb;
-  box-shadow: 0 10px 30px rgba(11,110,219,0.06);
-  color: #21333b;
+  border-radius: 18px; /* afrundede hjørner for blødere udtryk */
+  padding: 36px 42px; /* indvendig afstand for god læsbarhed */
+  border-left: 6px solid #0b6edb; /* tydelig venstre kant som accent */
+  box-shadow: 0 10px 30px rgba(11,110,219,0.06); /* diskret skygge for løft */
+  color: #21333b; /* primær tekstfarve i boksen */
 }
-.omnikotin-section-3 .highlight-box p{ margin:0 0 18px 0; font-size:21px; line-height:28px; color:#21333b; }
-.omnikotin-section-3 .highlight-box h4{ margin:30px 0 12px 0; font-size:21px; line-height:28px; color:#0A0A0A; font-weight:500; text-align: left;}
-.omnikotin-section-3 .highlight-list{ margin: 14px 0 0 0; padding: 0 0 0 22px; list-style:none; }
-.omnikotin-section-3 .highlight-list li{ position:relative; margin:10px 0; padding-left:18px; font-size:21px; line-height:28px; color:#21333b; }
-.omnikotin-section-3 .highlight-list li::before{ content: ''; position:absolute; left:0; top:10px; width:10px; height:10px; background:#BEDBFF; border-radius:50%; box-shadow: none; }
+.omnikotin-section-3 .highlight-box p{
+  margin: 0 0 18px 0; /* bundmargin mellem afsnit i highlight-boksen */
+  font-size: 21px; /* brødtekststørrelse i boksen */
+  line-height: 28px; /* linjehøjde for læsbarhed */
+  color: #21333b; /* tekstfarve */
+}
+.omnikotin-section-3 .highlight-box h4{
+  margin: 30px 0 12px 0; /* afstand over og under overskriften i boksen */
+  font-size: 21px; /* overskriftsstørrelse i highlight-boksen */
+  line-height: 28px; /* linjehøjde for overskrift */
+  color: #0A0A0A; /* mørk overskriftsfarve */
+  font-weight: 500; /* semibold vægt */
+  text-align: left; /* venstrejuster overskriften */
+}
+.omnikotin-section-3 .highlight-list{
+  margin: 14px 0 0 0; /* afstand over listen */
+  padding: 0 0 0 22px; /* venstre indrykning for punktlisten */
+  list-style: none; /* fjern standard bullets */
+}
+.omnikotin-section-3 .highlight-list li{
+  position: relative; /* nødvendig for pseudo-elementet til at fungere */
+  margin: 10px 0; /* lodret mellemrum mellem listepunkter */
+  padding-left: 18px; /* plads til pseudo-ikonet til venstre */
+  font-size: 21px; /* liste-tekststørrelse */
+  line-height: 28px; /* linjehøjde */
+  color: #21333b; /* tekstfarve */
+}
+.omnikotin-section-3 .highlight-list li::before{
+  content: ''; /* pseudo-element bruges som visuelt punkt foran hver linje */
+  position: absolute; /* absolut positionering i forhold til li */
+  left: 0; /* placer pseudo-ikonet til venstre */
+  top: 10px; /* finjuster vertikal position */
+  width: 10px; /* størrelse på punkt-ikonet */
+  height: 10px; /* størrelse på punkt-ikonet */
+  background: #BEDBFF; /* farve på punkt-ikonet */
+  border-radius: 50%; /* gør punktet cirkelrundt */
+  box-shadow: none; /* ingen skygge på punkt-ikonet */
+}
 @media (max-width:900px){
-  .omnikotin-section-3 .highlight-box{ padding:20px; border-left-width:4px; border-radius:14px; }
-  .omnikotin-section-3 h2{ font-size:34px; }
-  .omnikotin-section-3 .highlight-box p, .omnikotin-section-3 .highlight-box h4, .omnikotin-section-3 .highlight-list li{ font-size:18px; line-height:26px; }
+  .omnikotin-section-3 .highlight-box{
+    padding: 20px; /* mindre padding på mobil */
+    border-left-width: 4px; /* tyndere venstre kant på smallere skærme */
+    border-radius: 14px; /* mindre runding på mobil */
+  }
+  .omnikotin-section-3 h2{ font-size: 34px; /* mindre H2 på mobil for bedre pasform */ }
+  .omnikotin-section-3 .highlight-box p,
+  .omnikotin-section-3 .highlight-box h4,
+  .omnikotin-section-3 .highlight-list li{
+    font-size: 18px; /* lidt mindre tekststørrelse på mobil */
+    line-height: 26px; /* justeret linjehøjde for mobil */
+  }
 }
 
 
@@ -1597,14 +2450,25 @@ input[type=number] { appearance: textfield; -moz-appearance: textfield; }
   padding: 0 20px;
   box-sizing: border-box;
 }
+
+.omnikotin-section-4 h2{
+font-size:48px; 
+}
 .omnikotin-section-4 .trin{ display:flex; flex-direction:column; gap:22px; }
-.omnikotin-section-4 .trin-item{ display:flex; align-items:center; gap:18px; background:#ffffff; padding:18px 22px; border-radius:12px; box-shadow: 0 8px 20px rgba(11,110,219,0.04); }
+.omnikotin-section-4 .trin-item{ display:flex; align-items:center; gap:18px; background:#ffffff; padding:18px 22px; border-radius:12px; box-shadow: 0 8px 20px rgba(11,110,219,0.04);
+  /*
+    .trin-item: individuel trin i stoppe-tidslinjen.
+    Kommentar: Hver trin-item er hvid med afrundede hjørner og en let skygge
+    så den fremstår som et kort. gap og padding skaber afstand mellem ikon og tekst.
+  */
+}
 .omnikotin-section-4 .trin-item .maerke img{ width:95px; height:40px; object-fit:contain; display:block; }
 .omnikotin-section-4 .trin-item .trin-indhold h4{ margin:0; font-size:21px; color:#0A0A0A; text-align: left;}
 .omnikotin-section-4 .trin-item .trin-indhold p{ margin:6px 0 0 0; font-size:14px; color:#4A5565; font-size: 21px; }
 .omnikotin-section-4 .trin-cta{ display:flex; flex-direction:column; align-items:center; text-align:center; padding:22px; font-size:16px; gap:10px; }
 .omnikotin-section-4 .trin-cta h3{ margin:5px,0; color:#00A63E; font-size:34px; }
 .omnikotin-section-4 .trin-cta p{ margin:0; color:#4A5565; }
+
 @media (max-width:900px){
   .omnikotin-section-4 h2{ font-size:34px; }
   .omnikotin-section-4 .trin-item{ padding:14px; gap:12px; }
@@ -1634,21 +2498,31 @@ input[type=number] { appearance: textfield; -moz-appearance: textfield; }
 .omnikotin-section-5 .faq-item p{ margin:10px 0 0 0; color:#4a5565; }
 .omnikotin-section-5 .faq-item[open]{ background:#ffffff; }
 .omnikotin-section-5 .faq-item summary::after{
-  content: '';
-  position: absolute;
-  right: 8px;
-  top: 50%;
-  transform: translateY(-50%);
-  width:28px;
-  height:28px;
-  background-image: url('lukketx.svg');
-  background-size: 20px 20px;
-  background-repeat: no-repeat;
-  background-position: center;
+  /*
+    FAQ-ikon: bruger pseudo-element (::after) for at vise et ikon til højre for summary.
+    Kommentar: Når <details> er lukket viser vi 'lukketx.svg' og når open ændres billedet
+    til 'åbenx.svg'. Ved at lave det her i CSS undgår vi JavaScript for denne simple opførsel.
+    Bemærk: background-size kontrollerer den faktiske visuelle størrelse af ikonet.
+  */
+  content: ''; /* pseudo-element kræver content for at blive vist */
+  position: absolute; /* placer elementet relativt til summary */
+  right: 8px; /* afstand fra højre kant af summary */
+  top: 50%; /* placer midt lodret inden for summary */
+  transform: translateY(-50%); /* finjuster så ikonet er vertikalt centreret */
+  width:28px; /* højde/bredde på pseudo-elementets boks */
+  height:28px; /* sikrer et kvadratisk klik-venligt område */
+  background-image: url('lukketx.svg'); /* lukket-ikon når details er lukket */
+  background-size: 20px 20px; /* styrer faktisk icon-visual størrelse */
+  background-repeat: no-repeat; /* undgå gentagelse af SVG-billedet */
+  background-position: center; /* centrer ikonet inden for pseudo-elementet */
 }
 .omnikotin-section-5 .faq-item[open] summary::after{
-  background-image: url('åbenx.svg');
-  background-size: 24px 24px;
+  /*
+    Åben-tilstand for FAQ: når <details> har attributten [open] skifter vi baggrundsbilledet
+    til et andet SVG og øger den viste størrelse lidt for at vise aktiveret tilstand.
+  */
+  background-image: url('åbenx.svg'); /* skiftet ikon når FAQ er åben */
+  background-size: 24px 24px; /* større ikon for at indikere aktiv/åben tilstand */
 }
 @media (max-width:900px){
   .omnikotin-section-5 h2{ font-size:34px; }
@@ -1751,11 +2625,33 @@ footer .container, .site-footer .container{ padding: 0 20px; }
   max-width: 420px;
 }
 
-.social-liste{ display:flex; gap:18px; padding:0; margin:18px 0 0 0; list-style:none; align-items:center; }
-.social-liste li a{ display:inline-flex; align-items:center; justify-content:center; width:40px; height:40px; border-radius:50%; }
-.social-liste img{ width:25px; height:25px; opacity:0.85}
+.social-liste{
+  display: flex; /* vis social-ikoner i en række */
+  gap: 18px; /* afstand mellem ikoner */
+  padding: 0; /* fjern default padding */
+  margin: 18px 0 0 0; /* top-margin for afstand fra øvrigt indhold */
+  list-style: none; /* fjern bullets */
+  align-items: center; /* vertikal centrering af ikonlinks */
+}
+.social-liste li a{
+  display: inline-flex; /* inline-flex for centreret ikon i cirkel */
+  align-items: center; /* centrér ikon lodret */
+  justify-content: center; /* centrér ikon horisontalt */
+  width: 40px; /* fast klikzone-bredde */
+  height: 40px; /* fast klikzone-højde */
+  border-radius: 50%; /* rund klikzone */
+}
+.social-liste img{
+  width: 25px; /* ikonets visuelle bredde */
+  height: 25px; /* ikonets visuelle højde */
+  opacity: 0.85; /* let transparens for visuelt look */
+}
 
-.kontakt-liste{ list-style:none; padding:0; margin:8px 0 0 0; }
+.kontakt-liste{
+  list-style: none; /* fjern bullets fra kontaktlisten */
+  padding: 0; /* nulstil padding */
+  margin: 8px 0 0 0; /* top-margin for afstand fra overskrift */
+}
 /* Kontakt-elementer: gør selve linket til en flexbox så ikoner står ude foran teksten */
 .kontakt-element{ margin-bottom:10px; }
 .kontakt-link{ display:flex; align-items:center; gap:12px; color:inherit; text-decoration:none; justify-content: flex-start; }
@@ -1765,10 +2661,22 @@ footer .container, .site-footer .container{ padding: 0 20px; }
    sørg for samme layout som .kontakt-link så ikonet står ude foran teksten. */
 .kontakt-element-adr{ display:flex; align-items:center; gap:12px; }
 
-.hurtig-links{ list-style:none; padding:0; margin:8px 0 0 0; }
-.hurtig-links li{ margin-bottom:8px; }
-.hurtig-links a{ color:#C8CFD8; text-decoration:none; font-size:15px }
-.hurtig-links a:hover{ color:#FFFFFF; }
+.hurtig-links{
+  list-style: none; /* fjern bullets fra listen */
+  padding: 0; /* nulstil padding */
+  margin: 8px 0 0 0; /* small top-margin for afstand */
+}
+.hurtig-links li{
+  margin-bottom: 8px; /* afstand mellem hvert link */
+}
+.hurtig-links a{
+  color: #C8CFD8; /* standard link-farve i footeren */
+  text-decoration: none; /* fjern understregning */
+  font-size: 15px; /* læsbar størrelse for hurtig-links */
+}
+.hurtig-links a:hover{
+  color: #FFFFFF; /* hover: gør linket tydeligere */
+}
 
 /* Specifik 'andet tekst' stil kun i footeren: isoleret til kontakt-tekst og hurtig-links
    Dette sikrer, at den angivne farve og skrifttype kun anvendes i footeren.
@@ -1777,7 +2685,7 @@ footer .container, .site-footer .container{ padding: 0 20px; }
      font-family: Alpino;
      font-size: 13px;
      font-style: normal;
-     font-weight: 421;
+     font-weight: 400;
      line-height: 20px;
  */
 footer .fod-andet-tekst,
@@ -1787,7 +2695,7 @@ footer .hurtig-links a{
   font-family: Alpino, sans-serif; /* Alpino prioriteret */
   font-size: 13px; /* brugerens ønskede størrelse */
   font-style: normal;
-  font-weight: 421; /* brugerens ønskede vægt */
+  font-weight: 400; /* brugerens ønskede vægt */
   line-height: 20px; /* brugerens ønskede line-height */
 }
 
@@ -1799,19 +2707,19 @@ footer .hurtig-links a{
   font-family: Alpino;
   font-size: 21px;
   font-style: normal;
-  font-weight: 421;
+  font-weight: 400;
   line-height: 20px;
   margin: 0;
 }
 
 /* Hjerte-ikon i footer: brug det leverede hjerte.svg uden CSS-filters */
 .hjerte-ikon{
-  width:18px;
-  height:18px;
-  vertical-align:middle;
+  width:18px; /* bredde på hjerte-ikonet */
+  height:18px; /* højde på hjerte-ikonet */
+  vertical-align:middle; /* linjehøjde-justering med tekst */
   margin: 0 8px; /* afstand til tekst */
-  filter: none !important; /* fjern invert/filters hvis tidligere regler påvirker ikonet */
-  opacity: 1 !important;
+  filter: none !important; /* fjern CSS-filtre hvis tidligere regler påvirker ikonet */
+  opacity: 1 !important; /* sørg for fuld synlighed */
 }
 
 /* Responsiv: stabler kolonner på small screens */
@@ -1832,22 +2740,22 @@ footer .hurtig-links a{
   /* Social-ikoner: centreret række og mindre gap */
   .social-liste{ display:flex; justify-content:center; gap:12px; margin: 12px 0; padding:0; }
   .social-liste li a{ width:36px; height:36px; display:inline-flex; align-items:center; justify-content:center; }
-  .social-liste img{ width:20px; height:20px; opacity:0.95; }
+  .social-liste img{ width:20px; height:20px; opacity:0.95; } /* ikonstørrelse og let transparens */
 
   /* Kontakt-oplysninger: centrer ikoner og tekst */
   .kontakt-link{ justify-content:center; gap:10px; }
-  .kontakt-ikon{ width:18px; height:18px; flex:0 0 18px; }
-  .kontakt-tekst{ display:inline-block; }
+  .kontakt-ikon{ width:18px; height:18px; flex:0 0 18px; } /* størrelse for kontakt-ikoner */
+  .kontakt-tekst{ display:inline-block; } /* gør tekst linjeopstillet ved siden af ikonet */
 
   /* Tighter spacing for phone/mail/maps icons and their labels on small screens */
   .footer .kontakt-liste .kontakt-element{ display:flex; justify-content:center; align-items:center; width:100%; }
   .footer .kontakt-liste .kontakt-link{ gap:6px; justify-content:center; align-items:center; }
-  .footer .kontakt-liste .kontakt-ikon{ width:18px; height:18px; flex:0 0 18px; margin-right:6px; }
-  .footer .kontakt-liste .kontakt-tekst{ display:inline-block; margin:0; }
+  .footer .kontakt-liste .kontakt-ikon{ width:18px; height:18px; flex:0 0 18px; margin-right:6px; } /* mindre ikonafstand */
+  .footer .kontakt-liste .kontakt-tekst{ display:inline-block; margin:0; } /* fjern ekstra margin på labels */
 
   /* Footer-overskrifter og beskrivelser: stram op */
   .fod-overskrift{ text-align:center; font-size:18px; margin-bottom:8px; }
-  .fod-beskrivelse{ margin: 0 auto 12px; max-width:360px; text-align:center; }
+  .fod-beskrivelse{ margin: 0 auto 12px; max-width:360px; text-align:center; } /* kort beskrivelse og maks bredde */
 
   .hurtig-links{ margin: 8px 0 0 0; display:block; }
   .hurtig-links li{ margin-bottom:8px; }

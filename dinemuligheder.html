@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="robots" content="noindex" />
     <title>Dine Muligheder</title>
-    <link href="stylesheet.css" rel="stylesheet" />
+    <link href="stylesheet.CSS" rel="stylesheet" />
   </head>
   <body>
     <!--her indsætter vi logo til banner-->
@@ -26,6 +26,13 @@
             />
           </a>
         </div>
+        <!-- CSS-only hamburger: skjult checkbox + label styrer visning af navigationen (ingen JS) -->
+        <input id="nav-toggle" class="nav-toggle" type="checkbox" aria-hidden="true" />
+        <label for="nav-toggle" class="hamburger-button" aria-label="Åbn navigation" role="button">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </label>
         <!-- Her laver vi en nav-bar med klikbare links til undersiden-->
         <nav
           id="mainNavbar"
@@ -55,6 +62,7 @@
             <!-- her kan man se alle vores undersider, som er klikkable links, det er de pga. attributet href -->
           </ul>
         </nav>
+  <label for="nav-toggle" class="nav-overlay" aria-hidden="true"></label>
       </div>
     </header>
     <!-- Hero for 'Dine muligheder' -->
