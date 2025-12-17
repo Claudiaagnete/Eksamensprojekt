@@ -46,159 +46,192 @@
 
 <!-- vi har lavet en section class, så vi nemt kan finde netop denne sektion i vores stylesheet, og lave ændringer specifikt til denne-->
     <section class="omnikotin-section-1">
-            <h2>Hvad er nikotin egentlig?</h2>
-            <p>Nikotin er et stærkt vanedannende stof der findes i tobak - og derfor også i cigaretter, snus, vapes og puff bars. Det er samme stof, uanset hvordan du indtager det.</p>
-            <p>Når nikotin kommer ind i din krop, påvirker det dit hjernes belønningssystem. Det får dig til at føle dig godt tilpas og afslappet - men kun i kort tid. Så skal du have mere. Og mere. Og mere.</p>
-            <p>Det er derfor afhængighed opstår. Din hjerne vænner sig til nikotinen og kræver den for at fungere normalt. Uden nikotin føler du dig rastløs, irritabel og ufokuseret.</p>
+      <div class="container">
+        <h2>Hvad er nikotin egentlig?</h2>
+        <div class="omnikotin-card">
+          <p>Nikotin er et stærkt vanedannende stof der findes i tobak - og derfor også i cigaretter, snus, vapes og puff bars. Det er samme stof, uanset hvordan du indtager det.</p>
+
+          <p>Når nikotin kommer ind i din krop, påvirker det dit hjernes belønningssystem. Det får dig til at føle dig godt tilpas og afslappet - men kun i kort tid. Så skal du have mere. Og mere. Og mere.</p>
+
+          <p>Det er derfor afhængighed opstår. Din hjerne vænner sig til nikotinen og kræver den for at fungere normalt. Uden nikotin føler du dig rastløs, irritabel og ufokuseret.</p>
+        </div>
+      </div>
     </section>
 <!-- Her slutter sektion omnikotin-section-1, og vi går videre til sektion 2 -->
     <section class="omnikotin-section-2">
-            <h2>Hvad gør nikotin egentlig?</h2>
-            <!-- vi har lavet en div class inde i vores section class, da de forskellige elementer i sektionen skal grupperes sammen. det er kun det indhold som er inde i denne div, som ændres, når man styler denne div i stylesheetet-->
-            <div class="påvirkerhjernen">
-                <!-- her har vi indsat et billede, alt teksten beskriver hvad der ses på billedet-->
-                <img src="hjerneblåbaggrund.svg" alt="hjernen">
-                <h4>Påvirker hjernen</h4>
-                <p>Nikotin ændrer kemien i din hjerne. Det er derfor det føles godt i starten - men også derfor det er så svært at stoppe.</p>
-            </div>
-            <!-- her slutte den første div-->
-             <!-- her starter der en ny div i den samme sektion. at kunne indele forskellige div'er i samme sektion gør det nemmere at style dem individuelt-->
-            <div class="stresser kroppen">
-                <img src="hjerteblåbaggrund.svg" alt="hjerte">
-                <h4>Stresser kroppen</h4>
-                <p>Dit hjerte slår hurtigere, dit blodtryk stiger, og din krop er i konstant alarmberedskab. Det er faktisk ret hårdt.</p>
-                </div>
-                <!-- her slutter div'en-->
-                 <!-- her starter der en ny div i den samme sektion. at kunne indele forskellige div'er i samme sektion gør det nemmere at style dem individuelt-->
-        <div class="skaber-afhængighed">
-                <img src="lynblåbaggrund.svg" alt="skaber en lynende afhængighed">
-                <!-- vi bruger forskellige h-størrelser. vi laver en overordnet regel for de forskellige størrelser i CSS, så de altid ser ens u-->
-                <h4>Skaber afhængighed</h4>
-                <p>Din hjerne lærer at have brug for nikotin. Uden det føles alting bare lidt mere besværligt og kedeligt.</p>
-                </div>
-                <div class="rammer-din-økonomi">
-                <!-- her har vi indsat et billede, alt teksten beskriver hvad der ses på billedet-->
-                <img src="pilnedblåbaggrund.svg" alt="rammer din økonomi">
-                <h4>Rammer din økonomi</h4>
-                <p>Det er crazy hvor meget det koster over tid. Penge du kunne bruge på noget meget federe.</p>
-                </div>
-                <!-- her starter der en ny div i denne sektion. at kunne indele forskellige div'er i samme sektion gør det nemmere at style dem individuelt-->
-                <div class="påvirker-din-sundhed">
-                <img src="hjerteblåbaggrund.svg" alt="påvirker din sundhed">
-                <h4>Påvirker din sundhed</h4>
-                <p>Din kondition, din søvn, din energi - det hele bliver påvirket på måder du måske ikke engang mærker endnu.</p>
-                </div>
-                <!-- her slutter div'en-->
-                 <!-- her starter den sidste div i denne sektion-->
-            <div class="påvirker-dit-immunforsvar">
-                <img src="våbenskjoldblåbaggrund.svg" alt="påvirker dit immunforsvar">
-                <h4>Påvirker dit immunforsvar</h4>
-                <p>Nikotin svækker kroppens evne til at bekæmpe sygdomme og forlænger helingstiden ved skader.</p>
-            </div>
-            <!-- her slutter den sidste div i denne sektion-->
-    </section>
+      <div class="container">
+        <!-- Hvad gør nikotin egentlig? -->
+        <h2>Hvad gør nikotin egentlig?</h2>
+
+          <div class="omnikotin-cards">
+            <article class="omnikotin-card-item">
+              <div class="ikon-wrapper"><img src="hjerneblåbaggrund.svg" alt="hjernen"></div>
+              <h4>Påvirker hjernen</h4>
+              <p>Nikotin ændrer kemien i din hjerne. Det er derfor det føles godt i starten - men også derfor det er så svært at stoppe.</p>
+            </article>
+
+            <article class="omnikotin-card-item">
+              <div class="ikon-wrapper"><img src="hjerteblåbaggrund.svg" alt="hjerte"></div>
+              <h4>Stresser kroppen</h4>
+              <p>Dit hjerte slår hurtigere, dit blodtryk stiger, og din krop er i konstant alarmberedskab. Det er faktisk ret hårdt.</p>
+            </article>
+
+            <article class="omnikotin-card-item">
+              <div class="ikon-wrapper"><img src="lynblåbaggrund.svg" alt="skaber en lynende afhængighed"></div>
+              <h4>Skaber afhængighed</h4>
+              <p>Din hjerne lærer at have brug for nikotin. Uden det føles alting bare lidt mere besværligt og kedeligt.</p>
+            </article>
+
+            <article class="omnikotin-card-item">
+              <div class="ikon-wrapper"><img src="pilnedblåbaggrund.svg" alt="rammer din økonomi"></div>
+              <h4>Rammer din økonomi</h4>
+              <p>Det er crazy hvor meget det koster over tid. Penge du kunne bruge på noget meget federe.</p>
+            </article>
+
+            <article class="omnikotin-card-item">
+              <div class="ikon-wrapper"><img src="hjerteblåbaggrund.svg" alt="påvirker din sundhed"></div>
+              <h4>Påvirker din sundhed</h4>
+              <p>Din kondition, din søvn, din energi - det hele bliver påvirket på måder du måske ikke engang mærker endnu.</p>
+            </article>
+
+            <article class="omnikotin-card-item">
+              <div class="ikon-wrapper"><img src="våbenskjoldblåbaggrund.svg" alt="påvirker dit immunforsvar"></div>
+              <h4>Påvirker dit immunforsvar</h4>
+              <p>Nikotin svækker kroppens evne til at bekæmpe sygdomme og forlænger helingstiden ved skader.</p>
+            </article>
+          </div>
+    </div>
+  </section>
     <!-- her slutter sektionen-->
 
     <!-- her starter der en ny sektion med class "omnikotin-section-3"-->
     <section class="omnikotin-section-3">
-            <!-- her har vi brugt en h2. vi bruger størrelser fra h1-h6, for at skabe en visuel hierarki i teksten-->
-            <h2>Hvorfor er nikotin særligt farligt for unge?</h2>
-            <p>Din hjerne er ikke færdigudviklet før du er omkring 25 år. Det betyder at nikotin har en større og mere varig effekt på unge end på voksne.</p>
-           <ul>
-            <!-- ul elementet bruges til at lave en liste -->
-             <h4>Hvis du starter med nikotin som ung, er der større risiko for:</h4>
-             <!-- li elementet bruges til at lave et listepunkt - ugrupperede punkter -->
-             <li>At blive mere afhængig, hurtigere</li>
-             <li>Varige ændringer i hjernens belønningssystem</li>
-             <li>Problemer med opmærksomhed og indlæring</li>
-             <li>Større risiko for angst og depression</li>
-             <!-- her slutter listen -->
-           </ul>
-           <h2>Men her er den gode nyhed:</h2>
-           <p>Jo yngre du er når du stopper, jo bedre er din hjerne til at hele. Så selvom du er startet, er det aldrig for sent at stoppe.</p>
+      <div class="container">         
+        <h2>Hvorfor er nikotin særligt farligt for unge?</h2>
+        <div class="highlight-box">
+ 
+          <p>Din hjerne er ikke færdigudviklet før du er omkring 25 år. Det betyder at nikotin har en større og mere varig effekt på unge end på voksne.</p>
+
+          <h4>Hvis du starter med nikotin som ung, er der større risiko for:</h4>
+          <ul class="highlight-list">
+            <li>At blive mere afhængig, hurtigere</li>
+            <li>Varige ændringer i hjernens belønningssystem</li>
+            <li>Problemer med opmærksomhed og indlæring</li>
+            <li>Større risiko for angst og depression</li>
+          </ul>
+
+          <h4>Men her er den gode nyhed:</h4>
+          <p>Jo yngre du er når du stopper, jo bedre er din hjerne til at hele. Så selvom du er startet, er det aldrig for sent at stoppe.</p>
+        </div>
+      </div>
     </section>
     <!-- her slutter sektionen -->
         <section class="omnikotin-section-4">
-            <!-- her har vi brugt en h2. vi bruger størrelser fra h1-h6, for at skabe en visuel hierarki i teksten-->
+          <div class="container">
             <h2>Hvad sker der når du stopper?</h2>
-            <div class="20-minutter">
-                <img src="20min.svg" alt="20 minutter">
-                <h4>Dit blodtryk normaliseres</h4>
-                <p>Din puls og blodtryk falder til normale niveauer.</p>
-            </div>
-            <div class="2dage" alt="2 dage">
-                <img src="2dage.svg" alt="2 dage">
-                <h4>Bedre smag og lugt</h4>
-                <p>Dine smagsløg og lugtesans begynder at vende tilbage</p>
-            </div>
-            <div class="2uger">
-                <img src="2uger.svg" alt="2 uger">
-                <h4>Bedre kondition</h4>
-                <p>Din cirkulation forbedres og det bliver lettere at røre dig</p>
-            </div>
-            <div class="1måned">
-                <img src="1måned.svg" alt="1 måned">
-                <h4>Renere hud og bedre åndedræt</h4>
-                <p>Din hud ser sundere ud og din lungefunktion forbedres</p>
-            </div>
-            <div class="1år">
-                <img src="1år.svg" alt="1 år">
-                <h4>Halveret risiko for hjertesygdom</h4>
-                <p>Din risiko for hjertesygdomme er halveret sammenlignet med da du brugte nikotin</p>
-            </div>
-            <div class="dinkropviltakkedig">
-                 <h4>Plus: Du sparer en masse penge, får mere energi, og slipper for den konstante tanke om hvor du kan få din næste dosis.</h4>
-                 <h3>Din krop vil takke dig! </h3>
-                <img src="grøn hjerte.webp" alt="grønt hjerte">
+
+            <div class="trin">
+              <div class="trin-item">
+                <div class="maerke"> <img src="20min.svg" alt="20 min">  </div>
+                <div class="trin-indhold">
+                  <h4>Dit blodtryk normaliseres</h4>
+                  <p>Din puls og blodtryk falder til normale niveauer.</p>
                 </div>
-        </div>
-    </section>
+              </div>
+
+              <div class="trin-item">
+                <div class="maerke"> <img src="2dage.svg" alt="2 dage">  </div>
+                <div class="trin-indhold">
+                  <h4>Bedre smag og lugt</h4>
+                  <p>Dine smagsløg og lugtesans begynder at vende tilbage</p>
+                </div>
+              </div>
+
+              <div class="trin-item">
+                <div class="maerke"> <img src="2uger.svg" alt="2 uger">  </div>
+                <div class="trin-indhold">
+                  <h4>Bedre kondition</h4>
+                  <p>Din cirkulation forbedres og det bliver lettere at røre dig</p>
+                </div>
+              </div>
+
+              <div class="trin-item">
+                <div class="maerke"> <img src="1måned.svg" alt="1 måned"> </div>
+                <div class="trin-indhold">
+                  <h4>Renere hud og bedre åndedræt</h4>
+                  <p>Din hud ser sundere ud og din lungefunktion forbedres</p>
+                </div>
+              </div>
+
+              <div class="trin-item">
+                <div class="maerke"> <img src="1år.svg" alt="1 år">  </div>
+                <div class="trin-indhold">
+                  <h4>Halveret risiko for hjertesygdom</h4>
+                  <p>Din risiko for hjertesygdomme er halveret sammenlignet med da du brugte nikotin</p>
+                </div>
+              </div>
+
+              <div class="trin-item trin-cta">
+                <div class="trin-indhold">
+                  <p>Plus: Du sparer en masse penge, får mere energi, og slipper for den konstante tanke om hvor du kan få din næste dosis.</p>
+                  <h3>Din krop vil takke dig! <img src="grøn hjerte.webp" alt="grønt hjerte" style="width:28px; vertical-align:middle"></h3>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </section>
     </section>
 
     <section>
         <section class="omnikotin-section-5">
-        <div class="container-omnikotin-5">
-            <h2>Ofte stillede spørgsmål</h2>
+          <div class="container">
+            <div class="faq-header">
+              <div class="icon"> <img src="faq.svg" alt="spørgsmål"> </div>
+              <h2>Ofte stillede spørgsmål</h2>
+            </div>
 
-          <details>
-            <summary>Er snus virkelig farligt? Det er jo ikke rygning?</summary>
-            <p>Allerede efter 20 minutter falder dit blodtryk. Efter 2 dage forbedres din smags- og lugtesans. Efter 2-12 uger bliver din cirkulation bedre. Efter 1 år er din risiko for hjertesygdomme halveret. Din krop er faktisk vanvittig god til at hele sig selv!</p>
-            </details>
+            <div class="faq-list">
+              <details class="faq-item">
+                <summary>Er snus virkelig farligt? Det er jo ikke rygning?</summary>
+                <p>Allerede efter 20 minutter falder dit blodtryk. Efter 2 dage forbedres din smags- og lugtesans. Efter 2-12 uger bliver din cirkulation bedre. Efter 1 år er din risiko for hjertesygdomme halveret. Din krop er faktisk vanvittig god til at hele sig selv!</p>
+              </details>
 
-            <details>
-            <summary>Hvad sker der i min krop når jeg stopper?</summary>
-            <p>Snus indeholder nikotin og mange andre skadelige stoffer. Selvom du ikke indånder røg, øger snus risikoen for kræft i mund og spiserør, hjertesygdomme og tandproblemer. Og nikotinen gør dig lige så afhængig som cigaretter.</p>
-            </details>
+              <details class="faq-item">
+                <summary>Hvad sker der i min krop når jeg stopper?</summary>
+                <p>Snus indeholder nikotin og mange andre skadelige stoffer. Selvom du ikke indånder røg, øger snus risikoen for kræft i mund og spiserør, hjertesygdomme og tandproblemer. Og nikotinen gør dig lige så afhængig som cigaretter.</p>
+              </details>
 
-             <details>
-            <summary>Bliver jeg tyk hvis jeg stopper?</summary>
-            <p>Nogle tager lidt på fordi nikotin normalt undertrykker appetitten. Men gennemsnittet er kun 2-4 kg, og det kan nemt kontrolleres ved at spise sundt og røre sig. Plus, fordelene ved at stoppe er langt større end et par kilo.</p>
-            </details>
+              <details class="faq-item">
+                <summary>Bliver jeg tyk hvis jeg stopper?</summary>
+                <p>Nogle tager lidt på fordi nikotin normalt undertrykker appetitten. Men gennemsnittet er kun 2-4 kg, og det kan nemt kontrolleres ved at spise sundt og røre sig. Plus, fordelene ved at stoppe er langt større end et par kilo.</p>
+              </details>
 
-            <details>
-            <summary>Kan jeg stoppe gradvist eller skal jeg stoppe helt?</summary>
-            <p>Begge dele kan virke! Nogle har brug for at trappe ned gradvist, andre stopper fra dag til dag. Det vigtigste er at finde den metode der passer dig. Vi hjælper dig med at finde ud af hvad der giver mening for netop dig.</p>
-            </details>
+              <details class="faq-item">
+                <summary>Kan jeg stoppe gradvist eller skal jeg stoppe helt?</summary>
+                <p>Begge dele kan virke! Nogle har brug for at trappe ned gradvist, andre stopper fra dag til dag. Det vigtigste er at finde den metode der passer dig. Vi hjælper dig med at finde ud af hvad der giver mening for netop dig.</p>
+              </details>
 
-            <details>
-            <summary>Hvor lang tid tager det før jeg ikke er afhængig længere?</summary>
-            <p>Den fysiske abstinens varer typisk 2-4 uger. Men den mentale afhængighed kan tage længere tid. Det er derfor støtte er så vigtigt - vi hjælper dig gennem hele processen.</p>
-            </details>
+              <details class="faq-item">
+                <summary>Hvor lang tid tager det før jeg ikke er afhængig længere?</summary>
+                <p>Den fysiske abstinens varer typisk 2-4 uger. Men den mentale afhængighed kan tage længere tid. Det er derfor støtte er så vigtigt - vi hjælper dig gennem hele processen.</p>
+              </details>
 
-        </div>
+            </div>
+          </div>
         </section>
     </section>
 
-<!-- Hero sektion -->
-    <section class="hero-section-2">
-      <div class="container hero ">
-<!-- Her er der brugt forskellige h-størrelser, som giver visuel hierarki og hjælper brugeren med at forstå indholdets struktur. -->
-        <h2>Klar til at tage kontrollen tilbage?</h2>
-        <h3>Nu ved du hvorfor det er smart at stoppe. Næste skridt er at få hjælp til at gøre det.</h3>
-        <a href="dinemuligheder.html" class="cta-white" aria-label="Gå til siden for at se dine muligheder">Se dine muligheder</a>
-        </div>
-    </section>
 
+ <section class="underside-hero" aria-label="Dine muligheder">
+      <div class="container">
+        <h2 style="color:#FFF;">Klar til at tage kontrollen tilbage?</h2>
+        <h3>Nu ved du hvorfor det er smart at stoppe. Næste skridt er at få hjælp til at gøre det.</h3>
+        <!-- Her er der brugt forskellige h-størrelser, som giver visuel hierarki og hjælper brugeren med at forstå indholdets struktur. -->
+         <a href="dinemuligheder.html" class="cta-white" aria-label="Gå til siden for at se dine muligheder">Se dine muligheder</a>
+      </div>
+    </section>
+    
      <section>
 <footer class="footer" role="kontaktinfo" aria-label="footer">
   <!-- Hovedcontainer: brug klassen i CSS til baggrund, padding og grid -->
@@ -255,6 +288,9 @@
   <div class="fod-bund" role="note" aria-label="Copyright">
     <!-- dekorativt hjerte: aria-hidden fordi det er pynt -->
     <p class="fod-copyright">Lavet med <img src="hjerte.svg" alt="hjerte ikon" class="hjerte-ikon" aria-hidden="true"> af Herning Kommune · 2025</p>
+  </div>
+   <div class="fod-note">
+    <p style="text-align: center; color:#99A1AF;">Dette site er kun til undervisningsformål</p>
   </div>
 </footer>
 </section>

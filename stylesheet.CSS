@@ -917,8 +917,8 @@ html, body { overflow-x: hidden; }
   display: grid;
   grid-template-columns: 1fr 1fr; /* to kolonner ved desktop */
   gap: 48px; /* luft mellem billederne */
-  align-items: center;
-  justify-items: start; /* placer billederne mod venstre så de flugter med layoutet i screenshot */
+  align-items: flex-start; /* juster billederne til toppen for bedre alignment */
+  justify-items: stretch; /* stræk billederne for at fylde kolonnerne */
 }
 .forside-4--img{
   width: 100%;
@@ -1463,7 +1463,198 @@ input[type=number] { appearance: textfield; -moz-appearance: textfield; }
   .kontakttrin-overskrift{ font-size:36px; }
 }
 
+/* ----------------------- OM NIKOTIN: SECTION 1 (card) ----------------------- */
+/* Placeret her efter chat & kontakt sektionerne for nem adgang */
+.omnikotin-section-1{
+  padding: 56px 24px; /* lodret luft omkring sektionen */
+  background: transparent;
+}
+.omnikotin-section-1 .container{
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+.omnikotin-section-1 h2{
+  text-align: center;
+  font-family: Alpino, sans-serif;
+  font-size: 48px;
+  font-weight: 500;
+  margin: 0 0 28px 0;
+  color: #0A0A0A;
+}
+.omnikotin-card{
+  background: #f7fafc; /* lys kort-baggrund som i screenshot */
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(12,40,70,0.06);
+  padding: 32px 40px;
+  margin: 0 auto;
+  max-width: 980px;
+  color: #F9FAFB;
+  font-family: Alpino, sans-serif;
+  font-size: 20px;
+  line-height: 30px;
+}
+.omnikotin-card p{ margin: 0 0 18px 0; }
 
+@media (max-width: 900px){
+  .omnikotin-section-1{ padding: 36px 16px; }
+  .omnikotin-section-1 h2{ font-size: 34px; }
+  .omnikotin-card{ padding: 20px; font-size:18px; line-height:26px; }
+}
+
+
+/* ----------------------- OM NIKOTIN: SECTION 2 (cards grid) ----------------------- */
+.omnikotin-section-2{
+  /* Make this section able to reach closer to the viewport edges without
+    affecting any other section. We keep the visual padding but allow the
+    inner container to become effectively full-bleed so the grid can spread.
+  */
+  padding: 120px 0 80px; /* reduce overall vertical padding from previous values */
+  background: transparent;
+  /* allow this section to be full-bleed horizontally while inner .container
+    controls gutters for content: we set width:100vw and negative margins to
+    pull the section to the viewport edges (scoped to this section only). */
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  box-sizing: border-box;
+}
+.omnikotin-section-2 .container{
+  /* Narrow the internal gutters so cards can spread further to the sides.
+    We keep a small side padding so content doesn't touch the viewport edge. */
+  max-width: none; /* allow content to use nearly full width */
+  width: calc(100% - 40px); /* 20px gutter on each side */
+  margin: 0 auto;
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+.omnikotin-section-2 h2{ text-align:center; font-family: Alpino, sans-serif; font-size:48px; margin-bottom:28px; color:#0A0A0A; }
+.omnikotin-cards{ display:grid; grid-template-columns: repeat(3, 340px); justify-content: center; gap:36px; align-items:stretch; }
+.omnikotin-card-item{ width:340px; height:300px; background:#fff; border-radius:14px; padding:20px; box-shadow: 0 14px 36px rgba(12,40,70,0.06); display:flex; flex-direction:column; gap:12px; align-items:flex-start; box-sizing:border-box; }
+
+.omnikotin-card-item .ikon-wrapper img{ width:56px; height:56px; display:block; }
+.omnikotin-card-item{ font-size:21px; line-height:28px; color:#41505b; }
+.omnikotin-card-item .ikon-wrapper img{ width:56px; height:56px; display:block; }
+.omnikotin-card-item h4{ margin:0; font-size:21px; font-weight:500; color:#0A0A0A; line-height:28px; }
+.omnikotin-card-item p{ margin:0; color:#41505b; font-size:21px; line-height:28px; }
+
+@media (max-width: 1500px){
+  /* Tablet / small desktop: 2 columns with medium gap */
+  .omnikotin-cards{ grid-template-columns: repeat(2, minmax(260px, 1fr)); gap:28px; justify-content: center; }
+  .omnikotin-card-item{ padding:16px; width:100%; max-width: 640px; height:auto; }
+}
+@media (max-width: 900px){
+  /* Mobile: single column with comfortable gap */
+  .omnikotin-cards{ grid-template-columns: 1fr; gap:18px; }
+  .omnikotin-card-item{ width:100%; max-width: 520px; height:auto; padding:14px; }
+}
+
+
+/* ----------------------- OM NIKOTIN: SECTION 3 (highlight box) ----------------------- */
+.omnikotin-section-3{
+  padding: 56px 24px;
+  background: transparent;
+}
+.omnikotin-section-3 .container{
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+.omnikotin-section-3 .highlight-box{
+  background: #eff6ff; /* lys blå baggrund */
+  border-radius: 18px;
+  padding: 36px 42px;
+  border-left: 6px solid #0b6edb;
+  box-shadow: 0 10px 30px rgba(11,110,219,0.06);
+  color: #21333b;
+}
+.omnikotin-section-3 .highlight-box p{ margin:0 0 18px 0; font-size:21px; line-height:28px; color:#21333b; }
+.omnikotin-section-3 .highlight-box h4{ margin:30px 0 12px 0; font-size:21px; line-height:28px; color:#0A0A0A; font-weight:500; text-align: left;}
+.omnikotin-section-3 .highlight-list{ margin: 14px 0 0 0; padding: 0 0 0 22px; list-style:none; }
+.omnikotin-section-3 .highlight-list li{ position:relative; margin:10px 0; padding-left:18px; font-size:21px; line-height:28px; color:#21333b; }
+.omnikotin-section-3 .highlight-list li::before{ content: ''; position:absolute; left:0; top:10px; width:10px; height:10px; background:#BEDBFF; border-radius:50%; box-shadow: none; }
+@media (max-width:900px){
+  .omnikotin-section-3 .highlight-box{ padding:20px; border-left-width:4px; border-radius:14px; }
+  .omnikotin-section-3 h2{ font-size:34px; }
+  .omnikotin-section-3 .highlight-box p, .omnikotin-section-3 .highlight-box h4, .omnikotin-section-3 .highlight-list li{ font-size:18px; line-height:26px; }
+}
+
+
+/* ----------------------- OM NIKOTIN: SECTION 4 (stoppe-tidslinje / steps) ----------------------- */
+.omnikotin-section-4{
+  margin-top: 50px;
+  padding: 56px 24px;
+  background: linear-gradient(135deg, #F0FDF4 0%, #ECFDF5 100%);
+}
+.omnikotin-section-4 .container{
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+.omnikotin-section-4 .trin{ display:flex; flex-direction:column; gap:22px; }
+.omnikotin-section-4 .trin-item{ display:flex; align-items:center; gap:18px; background:#ffffff; padding:18px 22px; border-radius:12px; box-shadow: 0 8px 20px rgba(11,110,219,0.04); }
+.omnikotin-section-4 .trin-item .maerke img{ width:95px; height:40px; object-fit:contain; display:block; }
+.omnikotin-section-4 .trin-item .trin-indhold h4{ margin:0; font-size:21px; color:#0A0A0A; text-align: left;}
+.omnikotin-section-4 .trin-item .trin-indhold p{ margin:6px 0 0 0; font-size:14px; color:#4A5565; font-size: 21px; }
+.omnikotin-section-4 .trin-cta{ display:flex; flex-direction:column; align-items:center; text-align:center; padding:22px; font-size:16px; gap:10px; }
+.omnikotin-section-4 .trin-cta h3{ margin:5px,0; color:#00A63E; font-size:34px; }
+.omnikotin-section-4 .trin-cta p{ margin:0; color:#4A5565; }
+@media (max-width:900px){
+  .omnikotin-section-4 h2{ font-size:34px; }
+  .omnikotin-section-4 .trin-item{ padding:14px; gap:12px; }
+  .omnikotin-section-4 .trin-item .maerke{ min-width:64px; padding:6px 10px; font-size:13px; }
+}
+
+
+/* ----------------------- OM NIKOTIN: SECTION 5 (FAQ) ----------------------- */
+.omnikotin-section-5{
+  padding: 56px 24px;
+  background: #ffffff;
+}
+.omnikotin-section-5 .container{
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+.omnikotin-section-5 .faq-header{ display:flex; align-items:center; gap:18px; margin-bottom:22px; }
+.omnikotin-section-5 .faq-header .icon{ width:84px; height:84px; display:flex; align-items:center; justify-content:center; background: transparent; border-radius:0; }
+.omnikotin-section-5 .faq-header .icon img{ width:56px; height:auto; }
+.omnikotin-section-5 h2{ font-family: Alpino, sans-serif; font-size:48px; margin:0; }
+.omnikotin-section-5 .faq-list{ display:flex; flex-direction:column; gap:18px; }
+.omnikotin-section-5 .faq-item{ background:#f7fafc; border-radius:12px; padding:18px 22px; box-shadow: 0 6px 18px rgba(11,110,219,0.03); }
+.omnikotin-section-5 .faq-item summary{ list-style:none; cursor:pointer; font-weight:500; font-size:21px; padding-right:40px; position:relative; }
+.omnikotin-section-5 .faq-item summary::-webkit-details-marker{ display:none; }
+.omnikotin-section-5 .faq-item p{ margin:10px 0 0 0; color:#4a5565; }
+.omnikotin-section-5 .faq-item[open]{ background:#ffffff; }
+.omnikotin-section-5 .faq-item summary::after{
+  content: '';
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  width:28px;
+  height:28px;
+  background-image: url('lukketx.svg');
+  background-size: 20px 20px;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.omnikotin-section-5 .faq-item[open] summary::after{
+  background-image: url('åbenx.svg');
+  background-size: 24px 24px;
+}
+@media (max-width:900px){
+  .omnikotin-section-5 h2{ font-size:34px; }
+  .omnikotin-section-5 .faq-item{ padding:14px; }
+  .omnikotin-section-5 .faq-header{ gap:12px; }
+}
 
 
 /* ----------------------- FOOTER SEKTION ----------------------- */
