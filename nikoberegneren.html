@@ -1,76 +1,112 @@
 <!DOCTYPE html>
+<!-- dokumenttype: HTML5 -->
 <html lang="da">
+  <!-- sprog: dansk for skærmlæsere og søgemaskiner -->
   <head>
     <meta charset="UTF-8" />
+    <!-- tegnsætning sikrer Æ, Ø, Å vises korrekt -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- mobilvenligt viewport -->
     <meta name="robots" content="noindex" />
+    <!-- forhindrer indeksering under udvikling -->
     <title>Nikoberegneren</title>
+    <!-- sidens titel vist i browserfanen -->
     <link href="stylesheet.CSS" rel="stylesheet" />
+    <!-- tilknyt stylesheet -->
   </head>
   <body>
+    <!-- Header: logo og navigation -->
     <header class="site-header" role="banner">
+      <!-- øverste banner -->
       <div class="container header-inner">
+        <!-- container: centrer og begræns bredde i header -->
         <div>
+          <!-- wrapper til logo -->
           <a
             class="brand"
             href="forside.html"
             aria-label="Forside - Herning Kommune"
-            ><img src="logo.webp" alt="Herning Kommune logo" class="brand-logo"
-          /></a>
+          >
+            <!-- klikbart logo-link -->
+            <img
+              src="logo.webp"
+              alt="Herning Kommune logo"
+              class="brand-logo"
+            />
+            <!-- logo-billede -->
+          </a>
         </div>
+        <!-- Mobilmenu: skjult checkbox + label styrer navigation uden JS -->
         <input
           id="nav-toggle"
           class="nav-toggle"
           type="checkbox"
           aria-hidden="true"
         />
+        <!-- checkbox styrer mobilmenu -->
         <label
           for="nav-toggle"
           class="hamburger-button"
           aria-label="Åbn navigation"
           role="button"
         >
+          <!-- trykbar hamburger -->
           <span class="bar"></span>
+          <!-- linje i hamburger-ikon -->
           <span class="bar"></span>
+          <!-- linje i hamburger-ikon -->
           <span class="bar"></span>
+          <!-- linje i hamburger-ikon -->
         </label>
+        <!-- Hovednavigation: liste over sider -->
         <nav
           id="mainNavbar"
           class="main-nav"
           role="navigation"
           aria-label="Hovednavigation"
         >
+          <!-- navigation landmark -->
           <ul class="nav-list">
+            <!-- uordnet liste over navigationselementer -->
             <li class="nav-item">
               <a class="nav-link" href="dinemuligheder.html">Dine muligheder</a>
+              <!-- link til muligheder -->
             </li>
             <li class="nav-item">
               <a class="nav-link" href="ungefortæller.html">Unge fortæller</a>
+              <!-- link til unge fortæller -->
             </li>
             <li class="nav-item">
               <a class="nav-link" href="nikoberegneren.html" aria-current="page"
                 >Nikoberegneren</a
               >
+              <!-- aktivt link -->
             </li>
             <li class="nav-item">
               <a class="nav-link" href="chatogkontakt.html">Chat & kontakt</a>
+              <!-- link til chat og kontakt -->
             </li>
             <li class="nav-item">
               <a class="nav-link" href="omnikotin.html">Om nikotin</a>
+              <!-- link til om nikotin -->
             </li>
           </ul>
         </nav>
+        <!-- overlay, klik for at lukke mobilmenu -->
         <label for="nav-toggle" class="nav-overlay" aria-hidden="true"></label>
       </div>
     </header>
 
     <main>
+      <!-- Hero: top-introduktion til nikoberegneren -->
       <section class="underside-hero" aria-label="Nikoberegneren">
         <div class="container">
           <h1>Nikoberegneren</h1>
+          <!-- h1: siderens hovedtitel -->
           <h2 style="color: #fff; font-size: 48px">
             Her kommer nikotinkalkulatoren (Under konstruktion).
           </h2>
+          <!-- h2: midlertidig meddelelse om at værktøjet er under opbygning -->
         </div>
       </section>
     </main>
