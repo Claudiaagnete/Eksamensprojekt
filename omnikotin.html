@@ -298,86 +298,159 @@
       </div>
     </section>
     
-   
-<<<<<<< HEAD
-  <footer class="footer" aria-label="footer">
-=======
-<footer class="footer" role="contentinfo" aria-label="footer">
->>>>>>> da8a06928aa157193a3157a90c5857596d0ffacd
-  <!-- Hovedcontainer: brug klassen i CSS til baggrund, padding og grid -->
-  <div class="footer-indhold container">
-    <!-- KOLONNE 1: Om / branding -->
-    <div class="fod-kolonne fod-om">
-      <div class="fod-overskrift">Rygestop Herning</div>
-  <p class="fod-beskrivelse fod-andet-tekst">
-        Et tilbud fra Herning Kommune til unge der vil være fri for nikotin. Gratis, fortroligt og uden dømmelser.
-  </p>
+    <footer class="footer" aria-label="footer">
+      <!-- footer: bundinformation og kontakt -->
+      <div class="footer-indhold container">
+        <!-- footer-indhold: wrapper for kolonner -->
+        <div class="fod-kolonne fod-om">
+          <!-- fod-om: om/branding -->
+          <div class="fod-overskrift">Rygestop Herning</div>
+          <!-- fod-overskrift: brand -->
+          <p class="fod-beskrivelse fod-andet-tekst">
+            Et tilbud fra Herning Kommune til unge der vil være fri for nikotin.
+            Gratis, fortroligt og uden dømmelser.
+          </p>
+          <!-- fod-beskrivelse: kort forklaring -->
 
-      <!-- Sociale links (ikonbilleder er dekorative => alt="") -->
-      <ul class="social-liste" aria-label="Følg os">
-        <!-- disse links er klikbare og fører direkte til herning kommunes sociale medier-->
-        <li><a href="https://www.facebook.com/herningkommune/?locale=da_DK" class="social-link" aria-label="Facebook"><img src="fb.svg" alt="" class="social-ikon" aria-hidden="true"></a></li>
-        <li><a href="https://www.instagram.com/herningkommune/" class="social-link" aria-label="Instagram"><img src="instagram.svg" alt="" class="social-ikon" aria-hidden="true"></a></li>
-        <li><a href="https://twitter.com/herningkommune" class="social-link" aria-label="Twitter"><img src="twitter.svg" alt="" class="social-ikon" aria-hidden="true"></a></li>
-      </ul>
-    </div>
+          <ul class="social-liste" aria-label="Følg os">
+            <!-- social-liste: sociale links -->
+            <li>
+              <a
+                href="https://www.facebook.com/herningkommune/?locale=da_DK"
+                class="social-link"
+                aria-label="Facebook"
+                ><img
+                  src="fb.svg"
+                  alt=""
+                  class="social-ikon"
+                  aria-hidden="true"
+              /></a>
+            </li>
+            <!-- facebook -->
+            <li>
+              <a
+                href="https://www.instagram.com/herningkommune/"
+                class="social-link"
+                aria-label="Instagram"
+                ><img
+                  src="instagram.svg"
+                  alt=""
+                  class="social-ikon"
+                  aria-hidden="true"
+              /></a>
+            </li>
+            <!-- instagram -->
+            <li>
+              <a
+                href="https://twitter.com/herningkommune"
+                class="social-link"
+                aria-label="Twitter"
+                ><img
+                  src="twitter.svg"
+                  alt=""
+                  class="social-ikon"
+                  aria-hidden="true"
+              /></a>
+            </li>
+            <!-- twitter -->
+          </ul>
+          <!-- /social-liste -->
+        </div>
+        <!-- /fod-om -->
 
-    <!-- KOLONNE 2: Kontaktoplysninger -->
-<<<<<<< HEAD
-    <div class="fod-kolonne fod-kontakt" aria-labelledby="fod-kontakt-titel">
-      <div id="fod-kontakt-titel" class="sr-only">Kontaktoplysninger</div>
-=======
-  <div class="fod-kolonne fod-kontakt">
->>>>>>> da8a06928aa157193a3157a90c5857596d0ffacd
-      <div class="fod-overskrift">Kontakt</div>
-      <ul class="kontakt-liste">
-        <li class="kontakt-element">
-          <!-- telefon-link: mobilbrugere kan starte opkald -->
-          <a href="tel:96284091" class="kontakt-link"><img src="telefonfooter.svg" alt="" class="kontakt-ikon" aria-hidden="true"> <span class="kontakt-tekst">96 28 40 91</span></a>
-        </li>
-        <li class="kontakt-element">
-          <a href="mailto:rygestop@herning.dk" class="kontakt-link"><img src="mailfooter.svg" alt="" class="kontakt-ikon" aria-hidden="true"> <span class="kontakt-tekst">rygestop@herning.dk</span></a>
-        </li>
-        <li class="kontakt-element">
-          <!-- her har vi sat et ikon ind ved src.-->
-          <div class="kontakt-element-adr"><img src="lokationfooter.svg" alt="" class="kontakt-ikon" aria-hidden="true"> <span class="kontakt-tekst">Sundhedscenter Herning</span></div>
-        </li>
-      </ul>
-    </div>
+        <div
+          class="fod-kolonne fod-kontakt"
+          role="region"
+          aria-labelledby="fod-kontakt-titel"
+        >
+          <div id="fod-kontakt-titel" class="sr-only">Kontaktoplysninger</div>
+          <!-- fod-kontakt: kontaktoplysninger -->
+          <div class="fod-overskrift">Kontakt</div>
+          <!-- kolonne titel -->
+          <ul class="kontakt-liste">
+            <!-- kontakt-liste: liste over kontaktmuligheder -->
+            <li class="kontakt-element">
+              <!-- telefon -->
+              <a href="tel:96284091" class="kontakt-link"
+                ><img
+                  src="telefonfooter.svg"
+                  alt=""
+                  class="kontakt-ikon"
+                  aria-hidden="true"
+                />
+                <span class="kontakt-tekst">96 28 40 91</span></a
+              >
+            </li>
+            <li class="kontakt-element">
+              <!-- mail -->
+              <a href="mailto:rygestop@herning.dk" class="kontakt-link"
+                ><img
+                  src="mailfooter.svg"
+                  alt=""
+                  class="kontakt-ikon"
+                  aria-hidden="true"
+                />
+                <span class="kontakt-tekst">rygestop@herning.dk</span></a
+              >
+            </li>
+            <li class="kontakt-element">
+              <!-- adresse/sted -->
+              <div class="kontakt-element-adr">
+                <img
+                  src="lokationfooter.svg"
+                  alt=""
+                  class="kontakt-ikon"
+                  aria-hidden="true"
+                />
+                <span class="kontakt-tekst">Sundhedscenter Herning</span>
+              </div>
+            </li>
+          </ul>
+          <!-- /kontakt-liste -->
+        </div>
+        <!-- /fod-kontakt -->
 
-    <!-- KOLONNE 3: Hurtige links -->
-<<<<<<< HEAD
-    <div class="fod-kolonne fod-links" aria-labelledby="fod-links-titel">
-      <div id="fod-links-titel" class="fod-overskrift">Hurtige links</div>
-=======
-  <div class="fod-kolonne fod-links">
-      <div class="fod-overskrift">Hurtige links</div>
->>>>>>> da8a06928aa157193a3157a90c5857596d0ffacd
-      <!-- vi har valgt at lave en ugrupperet liste for at vise hurtige links, ligesom oppe i headeren, for at brugeren nemt kan navigere rundt på sitet i footeren også -->
-      <ul class="hurtig-links">
-        <li><a href="dinemuligheder.html">Dine muligheder</a></li>
-        <!-- hurtig-link: Dine muligheder -->
-  <li><a href="ungefortæller.html">Unge fortæller</a></li>
-        <!-- hurtig-link: Unge fortæller -->
-        <li><a href="nikoberegneren.html">Nikoberegneren</a></li>
-        <!-- hurtig-link: Nikoberegneren -->
-  <li><a href="chatogkontakt.html">Chat &amp; kontakt</a></li>
-        <!-- hurtig-link: Chat & kontakt -->
-        <li><a href="omnikotin.html">Om nikotin</a></li>
-        <!-- hurtig-link: Om nikotin -->
-      </ul>
-    </div>
-  </div>
+        <div class="fod-kolonne fod-links">
+          <!-- fod-links: hurtige links -->
+          <div id="fod-links-titel" class="fod-overskrift">Hurtige links</div>
+          <!-- kolonne titel -->
+          <ul class="hurtig-links">
+            <!-- hurtig-links: liste -->
+            <li><a href="dinemuligheder.html">Dine muligheder</a></li>
+            <!-- link -->
+            <li><a href="ungefortæller.html">Unge fortæller</a></li>
+            <!-- link -->
+            <li><a href="nikoberegneren.html">Nikoberegneren</a></li>
+            <!-- link -->
+            <li><a href="chatogkontakt.html">Chat &amp; kontakt</a></li>
+            <!-- link -->
+            <li><a href="omnikotin.html">Om nikotin</a></li>
+            <!-- link -->
+          </ul>
+          <!-- /hurtig-links -->
+        </div>
+        <!-- /fod-links -->
+      </div>
+      <!-- /footer-indhold container -->
 
-  <!-- BUNDLINJE: copyright / note -->
-  <div class="fod-bund" role="note" aria-label="Copyright">
-    <!-- dekorativt hjerte: aria-hidden fordi det er pynt -->
-    <p class="fod-copyright">Lavet med <img src="hjerte.svg" alt="hjerte ikon" class="hjerte-ikon" aria-hidden="true"> af Herning Kommune &middot; 2025</p>
-  </div>
-   <div class="fod-note">
-    <p style="text-align: center; color:#99A1AF;">Dette site er kun til undervisningsformål</p>
-  </div>
-</footer>
+      <div class="fod-bund" role="note" aria-label="Copyright">
+        <!-- fod-bund: bundlinje og copyright -->
+        <p class="fod-copyright">
+          Lavet med
+          <img
+            src="hjerte.svg"
+            alt="hjerte ikon"
+            class="hjerte-ikon"
+            aria-hidden="true"
+          />
+          af Herning Kommune &middot; 2025
+        </p>
+        <!-- copyright -->
+      </div>
+      <!-- /fod-bund -->
+    </footer>
+
+  
 <!-- her slutter footeren -->
   </body>
 </html>
