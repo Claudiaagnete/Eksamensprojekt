@@ -2411,7 +2411,7 @@ font-size:48px;
   /*
     FAQ-ikon: bruger pseudo-element (::after) for at vise et ikon til højre for summary.
     Kommentar: Når <details> er lukket viser vi 'lukketx.svg' og når open ændres billedet
-    til 'åbenx.svg'. Ved at lave det her i CSS undgår vi JavaScript for denne simple opførsel.
+    til 'aabenx.svg'. Ved at lave det her i CSS undgår vi JavaScript for denne simple opførsel.
     Bemærk: background-size kontrollerer den faktiske visuelle størrelse af ikonet.
   */
   content: ''; /* pseudo-element kræver content for at blive vist */
@@ -2431,7 +2431,7 @@ font-size:48px;
     Åben-tilstand for FAQ: når <details> har attributten [open] skifter vi baggrundsbilledet
     til et andet SVG og øger den viste størrelse lidt for at vise aktiveret tilstand.
   */
-  background-image: url('åbenx.svg'); /* skiftet ikon når FAQ er åben */
+  background-image: url('aabenx.svg'); /* skiftet ikon når FAQ er åben */
   background-size: 24px 24px; /* større ikon for at indikere aktiv/åben tilstand */
 }
 @media (max-width:900px){
