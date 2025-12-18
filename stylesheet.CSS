@@ -9,21 +9,21 @@
   - line-height: afstand mellem linjer
 */
 h1 {
-  /* Tekstfarve for h1 - typisk brugt i hero-sektionen */
-  color: #FFF;
+  /* Tekstfarve for h1 – typisk brugt i hero-sektionen */
+  color: #FFF; /* farve: hvid for kontrast mod mørk/gradient baggrund */
   /* Centrerer overskriften i sit element */
-  text-align: center;
+  text-align: center; /* centrer tekst horisontalt */
   /* Foretrukken font; hvis Alpino ikke findes, vælges fallback */
-  font-family: Alpino;
+  font-family: Alpino; /* font-family: Alpino er designkrav */
   /* Størrelse for h1: bruger variabel hvis den findes, ellers 89px */
-  font-size: var(--h1-size, 89px);
+  font-size: var(--h1-size, 89px); /* variabel med fallback */
   /* Ingen kursiv */
-  font-style: normal;
+  font-style: normal; /* font-style: normal for ikke-italic */
   /* Fed skrift for at gøre overskriften tydelig */
   /* Brug en lettere vægt for at matche Alpino Regular/Medium i designet */
-  font-weight: 500;
+  font-weight: 500; /* font-weight: 500 = medium */
   /* Line-height kontrollerer vertikal afstand i overskriften */
-  line-height: 72px;
+  line-height: 72px; /* line-height i px for præcis lodret spacing */
 }
 
 /* ---------------------- FONT-FACE: Alpino ---------------------- */
@@ -33,6 +33,23 @@ h1 {
    Når filerne er uploadet, vil disse @font-face-regler sikre korrekt vægt og
    at `font-family: 'Alpino'` bruger de rigtige filer.
 */
+
+/* Valgfri: lokal font-face for Alpino. Hvis filerne ikke findes, bruger browser fallback-stack. */
+@font-face{
+  font-family: 'Alpino';
+  src: url('./fonts/Alpino-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face{
+  font-family: 'Alpino';
+  src: url('./fonts/Alpino-Medium.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
 
 
 /* H2: Sektionstitel - bruger præcise specifikationer fra design */
@@ -102,51 +119,42 @@ h5 {
 /* Global paragraph typography — default for site body text; can be overridden by
    more specific selectors (e.g. .forside-3--card p). */
 p{
-  color: #4A5565;
-  font-size: 21px;
-  font-weight: 400;
-  line-height: 30px;
+  color: #4A5565; /* tekstfarve for brødtekst */
+  font-size: 21px; /* læsbar standardstørrelse */
+  font-weight: 400; /* normal vægt */
+  line-height: 30px; /* god lodret luft mellem linjer */
 }
 /* Desktop-first variabler (standard) */
 :root{
-  --h1-size: 64px;
-  --h2-size: 55px;
-  --h3-size: 34px;
-  --h4-size: 21px;
-  --h5-size: 13px;
-  --brand-font-size: 21px;
-  --nav-font-size: 21px;
-  /* Header height token - bruges af sticky header og mobile menu positioning */
-  --header-height: 88px;
-  /* CTA-typografi: Alpino  fra designet */
-  --cta-font-size: 21px;    /* Alpino Regular 21px */
-  --cta-line-height: 24px;  /* Line-height 24px */
-  /* Base font variable: Alpino er førstevalg, sans-serif som fallback */
-  --base-font-family: 'Alpino', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
-  /* Footer specific size tokens (brugerens præcise ønsker) */
-  --footer-heading-size: 21px; /* Overskrift i footer (brugerspecifik) */
-  --footer-body-size: 15px; /* Sekundær størrelse til beskrivelser og links */
-  /* Kort-variabler: gør det nemt at justere ikon- og titelstørrelser for alle bokse */
-  --card-icon-size: 44px; /* Standard ikonstørrelse for kort */
-  --card-title-size: 32px; /* Standard titelstørrelse for kort */
+  /* Root-variabler: nemt at ændre globale størrelser/verdier herfra */
+  --h1-size: 64px; /* h1 default på desktop */
+  --h2-size: 55px; /* h2 default */
+  --h3-size: 34px; /* h3 default */
+  --h4-size: 21px; /* h4 default */
+  --h5-size: 13px; /* h5 default */
+  --brand-font-size: 21px; /* brand-tekst størrelse */
+  --nav-font-size: 21px; /* navigationens font-størrelse */
+  --header-height: 88px; /* header-højde token, bruges også som body top-padding */
+  --cta-font-size: 21px; /* CTA font-size */
+  --cta-line-height: 24px; /* CTA line-height */
+  --base-font-family: 'Alpino', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; /* fallback font-stack */
+  --footer-heading-size: 21px; /* footer overskrift */
+  --footer-body-size: 15px; /* footer bodytekst */
+  --card-icon-size: 44px; /* ikonstørrelse for kort */
+  --card-title-size: 32px; /* kort-titel størrelse */
 }
 
 /* Fjerner browserens default margin så full-bleed elementer kan nå kanten */
 body{
-  margin: 0;
+  margin: 0; /* fjern browser-default margin så full-bleed sektioner kan nå kanten */
   /*
-    Kommentar: Browsere tilføjer som standard en lille margin omkring <body>.
-    Den margin forhindrer elementer som bruger 100vw i at ramme kanten af
-    viewporten. Ved at sætte margin:0 sikrer vi, at .hero-section kan
-    være full-bleed og nå helt ud til venstre/højre kant.
+    Note: uden margin:0 vil elementer med width:100vw kunne give horisontal
+    scroll pga. side-margener. margin:0 sikrer at layoutet kan bruge hele viewport.
   */
-  /* Sæt global font-family så al tekst bruger Alpino hvis den er tilgængelig */
-  font-family: var(--base-font-family);
-}
-
-/* Når header er fixed, giv body top-padding så indhold ikke skjules bag headeren */
-body{
-  padding-top: var(--header-height);
+  /* Sæt global font-family så al tekst bruger den definerede base-font */
+  font-family: var(--base-font-family); /* base-font: Alpino eller fallback */
+  /* Når header er fixed, giv body top-padding så indhold ikke skjules bag headeren */
+  padding-top: var(--header-height); /* undgå at indhold skjules bag fixed header */
 }
 
 
@@ -157,10 +165,10 @@ body > * { box-sizing: border-box; }
 
 /* Global container: brugt til at centrere indhold og holde en max-bredde */
 .container{
-  max-width: 1760px; /* Større bredde så indhold fylder mere */
-  margin: 0 auto;    /* Centrer containeren horisontalt */
-  padding: 8px 24px; /* Endnu mindre vertikal højde */
-  box-sizing: border-box;
+  max-width: 1760px; /* maks-bredde: begrænser linjelængde på meget brede skærme */
+  margin: 0 auto; /* centrer horisontalt */
+  padding: 8px 24px; /* indvendig padding: top/bund og sider */
+  box-sizing: border-box; /* inkluder padding i bredde-beregningen */
 }
 
 @media (min-width: 1600px){
@@ -174,30 +182,26 @@ body > * { box-sizing: border-box; }
 /* ----------------------- HEADER / NAVBAR ----------------------- */
 /* Genopbygget header: full-bleed baggrund, centreret container, logo til venstre, nav til højre */
 .site-header{
-  background: #ffffff; /* Baggrundsfarve for header */
-  width: 100vw; /* Gør header full-bleed så baggrunden går til viewport-kanten */
-  /* Gør header sticky/fixed så den altid er synlig */
-  position: fixed;
-  top: 0;
-  left: 50%; /* Behold full-bleed teknik */
-  right: 50%;
-  margin-left: -50vw;
-  margin-right: -50vw;
-  z-index: 1100; /* Lidt højere end mobile menu overlay for sikkerhed */
-  box-sizing: border-box;
-  height: var(--header-height); /* Fast højde så vi kan give body padding-top */
+  background: #ffffff; /* baggrund: hvid */
+  width: 100vw; /* full-bleed: stræk til hele viewport-bredden */
+  position: fixed; /* sticky header */
+  top: 0; /* placer øverst i viewport */
+  left: 50%; right: 50%; margin-left: -50vw; margin-right: -50vw; /* centrer full-bleed */
+  z-index: 1100; /* ligger over sideindhold */
+  box-sizing: border-box; /* box-sizing */
+  height: var(--header-height); /* fast højde fra :root */
 }
 
 .site-header .container.header-inner{
-  max-width: 1600px; /* Maksimal bredde for centreret indhold */
-  margin: 0 auto; /* Centrer containeren horisontalt */
-  display: flex; /* Brug flex for at placere logo, nav og knapper */
-  align-items: center; /* Lodret centrering af elementer i header */
-  justify-content: space-between; /* Fordel indhold med plads imellem */
-  height: var(--header-height); /* Brug token så mobile/desktop er konsistente */
-  padding: 0; /* Fjern standard container-padding for præcis gutter-kontrol */
-  gap: 16px; /* Afstand mellem direkte børn i flex-containeren */
-  box-sizing: border-box; /* Medregn padding i elementets størrelse */
+  max-width: 1600px; /* maks-bredde for headerens indre */
+  margin: 0 auto; /* centrer indhold i header */
+  display: flex; /* brug flex for horisontal layout */
+  align-items: center; /* lodret centrering */
+  justify-content: space-between; /* fordel plads mellem elementer */
+  height: var(--header-height); /* match headerens højde */
+  padding: 0; /* fjern container padding i header */
+  gap: 16px; /* mellemrum mellem direkte børn */
+  box-sizing: border-box; /* box-sizing */
 }
 
 .site-header .left{
@@ -242,12 +246,10 @@ body > * { box-sizing: border-box; }
 }
 
 .main-nav .nav-list{
-  display: flex; /* Brug flex for at placere nav-elementer i en række */
-  gap: 28px; /* Mellemrum mellem hvert menupunkt */
-  align-items: center; /* Lodret centrering af menupunkter */
-  margin: 0; /* Nulstil default margin på ul */
-  padding: 0; /* Nulstil default padding på ul */
-  list-style: none; /* Fjern bullets fra listen */
+  display: flex; /* nav som horisontal flex-række */
+  gap: 28px; /* afstand mellem menupunkter */
+  align-items: center; /* vertikal align */
+  margin: 0; padding: 0; list-style: none; /* nulstil default ul-styling */
 }
 
 .main-nav .nav-link{
@@ -287,9 +289,8 @@ body > * { box-sizing: border-box; }
 /* ------------- CSS-only hamburger / mobile nav (brug sammen med skjult checkbox #nav-toggle) ------------------------ */
 /* Skjult checkbox der styrer nav-tilstand */
 .nav-toggle{
-  /* Hold checkbox i DOM (ikke display:none) så label kan toggles; skjul visuelt off-screen */
-  position: absolute;
-  left: -9999px;
+  /* skjult checkbox: bruges til at styre mobilmenu via CSS (ikke JS) */
+  position: absolute; left: -9999px; /* flyt ud af skærm men lad den være i DOM */
 }
 
 /* Hamburger-knap styling (label for checkbox) - skjul på desktop, vis på mobil via media query */
@@ -315,14 +316,15 @@ body > * { box-sizing: border-box; }
       selve menupanelet vises ovenpå overlay og andre sektioner (overlay har 1050).
     - Bemærk: z-index fungerer kun i sammenhæng med position (absolute/fixed/relative).
   */
-  /* Vis/skjul regler for mobilmenu */
+  /* Vis/skjul regler for mobilmenu: samlet og konsolideret for vedligehold */
   .main-nav{ display: none; } /* Skjult som standard på mobil */
   .nav-toggle:checked ~ .main-nav{ display: block; } /* Vis menu når checkbox er checked */
 
-  .nav-overlay{ display: none; } /* Overlay skjult som standard */
-  .nav-toggle:checked ~ .nav-overlay{ display: block; } /* Vis overlay ved åben menu */
+  /* Overlay (vises når menu er åben) */
+  .nav-overlay{ display: none; }
+  .nav-toggle:checked ~ .nav-overlay{ display: block; }
 
-  /* Overlay properties (inline kommentarer per property) */
+  /* Overlay properties */
   .nav-overlay{
     position: fixed; /* Placer overlay relativt til viewport */
     inset: 0; /* top:0; right:0; bottom:0; left:0 så overlay dækker hele skærmen */
@@ -330,76 +332,20 @@ body > * { box-sizing: border-box; }
     z-index: 1050; /* Ligger under menupanelet men over sideindhold */
   }
 
-  /* Mobile menu panel (inline kommentarer på hver property) */
+  /* Mobile menu panel */
   .main-nav{
-  z-index: 1200; /* Sikrer at menu-panelet vises ovenpå overlay og hero */
-  position: fixed; /* Fjernet fra dokumentflow og placeret relativt til viewport */
-  left: 0; /* Strækker menuens venstre kant til viewportens venstre kant */
-  right: 0; /* Strækker menuens højre kant til viewportens højre kant */
-  top: var(--header-height); /* Placer menuen lige under headeren */
+    z-index: 1200; /* Sikrer at menu-panelet vises ovenpå overlay og hero */
+    position: fixed; /* Fjernet fra dokumentflow og placeret relativt til viewport */
+    left: 0; right: 0; /* Strækker menuens kanter til viewportens kanter */
+    top: var(--header-height); /* Placer menuen lige under headeren */
     width: 100%; /* Menuen fylder hele viewport-bredden */
     background: #fff; /* Opak hvid baggrund så underliggende indhold ikke ses igennem */
     box-shadow: 0 8px 20px rgba(0,0,0,0.06); /* Let skygge for visuelt løft */
     transform: translateZ(0); /* Forcer compositing-lag for at undgå rendering-artefakter */
   }
 
-  .main-nav .nav-list{
-    display: flex; /* Stak links vertikalt */
-    flex-direction: column; /* Kolonne-flow */
-    gap: 0; /* Ingen ekstra afstand ud over de individuelle link-padding */
-    padding: 8px 16px; /* Indvendig afstand i menuen */
-  }
-
-  .main-nav .nav-list .nav-item{ border-top: 1px solid rgba(0,0,0,0.04); } /* Diskret separator mellem links */
-
-  .main-nav .nav-list .nav-link{
-    display: block; /* Gør hele link-fladen klikbar */
-    padding: 14px 8px; /* Stor nok klikzone for touch */
-    background: #fff; /* Hvid baggrund pr. link for at forhindre underliggende blending */
-    color: #0A0A0A; /* Explicit tekstfarve for læsbarhed */
-  }
-
-  /* Overlay that appears when menu is open; implemented as a label for the same checkbox
-    so clicking the overlay toggles the checkbox and closes the menu (no JS required). */
-  .nav-overlay{ display: none; }
-  .nav-toggle:checked ~ .nav-overlay{ display: block; }
-  /*
-    .nav-overlay
-    - position: fixed: placerer overlay relativt til viewport, så det fylder hele skærmen.
-    - inset: 0: shorthand for top:0; right:0; bottom:0; left:0 så overlay dækker hele viewport.
-    - background: rgba(0,0,0,0.35): semi-transparent sort baggrund for at dæmpe baggrundsindhold
-      og fokusere brugerens opmærksomhed på menuen.
-    - z-index:1050: ligger under menu-panelet (1100) men over resten af siden.
-      Dette gør at overlayen dæmper indholdet uden at skjule menuen.
-  */
-  .nav-overlay{ position: fixed; inset: 0; background: rgba(0,0,0,0.35); z-index:1050; }
-
-  /*
-    Style den viste menu - brug fixed på mobil så den ligger ovenpå alt indhold
-    - position: fixed: gør at menuen bliver placeret relativt til viewporten og følger ikke dokumentflowet.
-    - top: 88px: placerer menuen lige under headerens højde (headeren er ~88px høj),
-      så menuens øverste kant flugter med headerens bund.
-      Ændr denne værdi hvis du ændrer header-højden.
-    - width:100%: menuen strækker sig over hele viewportens bredde.
-    - background: #fff: sikrer at menuen er fuldt opak (hvid baggrund) så ingen underliggende
-      elementer kan ses igennem.
-    - box-shadow: tilføjer en diskret skygge for at løfte menuen visuelt over indholdet.
-    - transform: translateZ(0): tvinger browseren til at lave et eget compositing-lag for menuen,
-      hvilket ofte fjerner rendering-artefakter (fx ghosting eller subpixel anti-aliasing problemer)
-      på mobile enheder.
-  */
-  .main-nav{ position: fixed; left:0; right:0; top:88px; width:100%; background:#fff; box-shadow: 0 8px 20px rgba(0,0,0,0.06); transform: translateZ(0); }
   .main-nav .nav-list{ display:flex; flex-direction:column; gap:0; padding:8px 16px; }
   .main-nav .nav-list .nav-item{ border-top: 1px solid rgba(0,0,0,0.04); }
-  /*
-    .main-nav .nav-link
-    - background: #fff: sikrer at hvert link har en solid baggrund, hvilket forhindrer
-      at underliggende billeder eller gradienter fra hero skinner igennem ved subpixel rendering.
-    - color: #0A0A0A: eksplicit tekstfarve for læsbarhed (undgå afhængighed af arvet farve).
-    - display & padding: sikrer at hele linkfladen er klikbar og har passende klik-zone.
-    - Denne kombination af fuld baggrund + compositing-layer fjerner typiske blødheds-/ghosting-effekter
-      når menuen åbnes over komplekse baggrunde.
-  */
   .main-nav .nav-list .nav-link{ display:block; padding:14px 8px; background:#fff; color:#0A0A0A; }
 
   /* Animate hamburger to X when open */
@@ -421,31 +367,14 @@ body > * { box-sizing: border-box; }
 
 /* Hero container - bruger fixed min-højde så det fylder stort set hele folden */
 .hero-section{
-  /*
-    .hero-section: stor, visuel sektion øverst på siden.
-    Kommentar: Vi sætter en gradient baggrund og bruger padding/min-height
-    for at give sektionen en stærk visuel tilstedeværelse. width:100vw + negative
-    marginer gør sektionen full-bleed (strækker baggrunden til viewport-kanten)
-    samtidig med at .hero indholdet forbliver centreret via .container.
-  */
-  /* Fallback gradient hvis der ikke er et baggrundsbillede tilgængeligt */
-  background: linear-gradient(135deg, #0b6edb 0%, #1177f1 45%, #00c97b 100%); /* Gradient baggrund for hero */
-  color: #ffffff; /* tekstfarve i hero — hvid sikrer kontrast mod gradienten */
-  padding: 140px 0 120px; /* lodret padding for visuel højde og luft */
-  display: grid; /* grid gør det nemt at centrere indholdet */
-  place-items: center; /* centrer indhold både vertikalt og horisontalt */
-  text-align: center; /* centrerer tekstindhold i den indre boks */
-  min-height: 78vh; /* sikrer hero fylder en stor del af viewport højden */
-  /* Gør sektionen full-bleed: stræk baggrund til hele viewport-bredden
-    uden at påvirke det centrerede .container indhold. */
-  width: 100vw; /* gør hero full-bleed så baggrunden når viewport-kanten */
-  position: relative; /* basis for absolute/transform-justeringer internt */
-  left: 50%; /* bruger negative margin teknik til full-bleed */
-  right: 50%; /* symmetrisk offset for pålidelig full-bleed */
-  margin-left: -50vw; /* træk boksen ud til venstre kant af viewport */
-  margin-right: -50vw; /* træk boksen ud til højre kant af viewport */
-  box-sizing: border-box; /* inkludér padding i breddeberegningen */
-  margin-bottom: var(--hero-bottom-gap, 80px); /* gap under hero, kan justeres via variabel */
+  /* hero-section: stor visuel sektion øverst på siden */
+  background: linear-gradient(135deg, #0b6edb 0%, #1177f1 45%, #00c97b 100%); /* gradient baggrund */
+  color: #ffffff; /* tekstfarve i hero */
+  padding: 140px 0 120px; /* top/right/bund padding for højde */
+  display: grid; place-items: center; text-align: center; /* centrer indhold */
+  min-height: 78vh; /* fyld en stor del af skærmen */
+  width: 100vw; position: relative; left: 50%; right: 50%; margin-left: -50vw; margin-right: -50vw; /* full-bleed teknik */
+  box-sizing: border-box; margin-bottom: var(--hero-bottom-gap, 80px);
 }
 
 
@@ -455,14 +384,9 @@ body > * { box-sizing: border-box; }
 }
 
 .hero{
-  /*
-    .hero: den centrerede indre boks der holder overskrift, tekst og CTA.
-    Kommentar: max-width begrænser linjelængden for bedre læsbarhed og
-    paddings sikrer luft omkring teksten.
-  */
-  max-width: 980px; /* maks-bredde så linjelængden forbliver læsbar */
-  margin: 0 auto; /* centrer den indre hero-boks horisontalt */
-  padding: 0 20px; /* side-padding for at forhindre tekst mod kanten */
+  /* hero: centreret indre boks til overskrift, tekst og CTA */
+  max-width: 980px; /* begrænser linjelængde for læsbarhed */
+  margin: 0 auto; padding: 0 20px; /* centreret med side-padding */
 }
 
 /* Hovedoverskrift i hero - stor og tydelig */
@@ -526,7 +450,7 @@ body > * { box-sizing: border-box; }
   font-family: Alpino, sans-serif;
   font-size: 34px;
   font-style: normal;
-  font-weight: 421;
+  font-weight: 400;
   line-height: 35px;
   max-width: 760px;
   margin: 0 auto 36px auto; /* afstand mellem H3 og CTA for visuel rytme */
@@ -565,7 +489,7 @@ body > * { box-sizing: border-box; }
   font-family: Alpino, sans-serif;
   font-size: 21px;
   font-style: normal;
-  font-weight: 421;
+  font-weight: 400;
   line-height: 20px;
 }
 
@@ -574,7 +498,7 @@ body > * { box-sizing: border-box; }
   color: #FFF; /* samme hvide farve som øvrige hero-tekster */
   font-family: Alpino, sans-serif; /* sikrer samme typografi som resten af hero */
   font-size: 21px; /* tilsvarende størrelse som meta-teksten */
-  font-weight: 421; /* let/mellem vægt */
+  font-weight: 400; /* let/mellem vægt */
   line-height: 20px; /* tæt line-height for kompakt udtryk */
   text-align: center; /* centrer overskrifter i hero */
   margin: 18px 0 0 0; /* plads over elementet for separation */
@@ -582,25 +506,13 @@ body > * { box-sizing: border-box; }
 
 /* CTA: hvid pille-knap der matcher designet i PNG'en */
 .cta-white{
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  background: #FFFFFF;
-  color: #0b6edb;
-  padding: 12px 28px;
-  border-radius: 999px;
-  margin-top: 16px; /* ekstra luft over knappen */
-  margin-bottom: 20px; /* luft under knappen mod meta-tekst */
-  box-shadow: 0 8px 24px rgba(11,110,219,0.12);
-  text-decoration: none;
-  font-family: var(--base-font-family);
-  font-weight: 400;
-  font-synthesis: none;
-  font-size: var(--cta-font-size, 21px);
-  line-height: var(--cta-line-height, 24px);
-  letter-spacing: var(--cta-letter-spacing, 0px);
-  border: none;
-  cursor: pointer;
+  display: inline-flex; align-items: center; gap: 10px; /* fleksibel knap med plads til ikon */
+  background: #FFFFFF; color: #0b6edb; /* hvid knap med blå tekst */
+  padding: 12px 28px; border-radius: 999px; /* rund pille-form */
+  margin-top: 16px; margin-bottom: 20px; box-shadow: 0 8px 24px rgba(11,110,219,0.12); /* løft-effekt */
+  text-decoration: none; font-family: var(--base-font-family); font-weight: 400; font-synthesis: none;
+  font-size: var(--cta-font-size, 21px); line-height: var(--cta-line-height, 24px);
+  letter-spacing: var(--cta-letter-spacing, 0px); border: none; cursor: pointer;
 }
 
 /* Hvis cta'en bruges som <a> (link) skal den stadig ligne en knap */
@@ -716,74 +628,26 @@ body > * { box-sizing: border-box; }
 
 /* Card grid: opsætter et grid med to kolonner og gitter-afstand */
 .card-grid{
-  /* list-style: none fjerner bullets fra <ul> så det ser ud som rene kort. */
-  list-style:none;
-  /* padding: fjerner indvendig padding fra ul for at styre layout præcist. */
-  padding:0;
-  /* margin: top/right/bottom/left - her kun top-margin for afstand fra overskriften. */
-  margin: 18px 0 0 0; /* 18px top-margin så kortene starter lidt under hjælpeteksten. */
-  /* display: grid aktiverer CSS Grid for at lave to kolonner. */
-  display:grid;
-  /* grid-template-columns: to lige store kolonner. */
-  grid-template-columns: repeat(2, 1fr);
-  /* gap: afstand mellem rækker og kolonner i gridet. */
-  gap: 22px; /* 22px mellemrum giver luftig fornemmelse uden at være for langt. */
+  list-style:none; /* fjern bullets */
+  padding:0; margin: 18px 0 0 0; /* afstand top */
+  display:grid; grid-template-columns: repeat(2, 1fr); gap: 22px; /* to-kolonne grid */
 }
 .card-item{ margin:0; /* Nulstil margin på hvert list-item for forudsigelig layout. */ }
 
 /* Kortet: styling af hver klikbare kortbox */
 .card{
-  /* display:flex: gør det nemt at placere ikon øverst og titel nederst vha. column-flow. */
-  display:flex;
-  /* flex-direction: column - stabl indhold lodret (ikon over, titel under). */
-  flex-direction:column;
-  /* align-items: flex-start - sørger for at indholdet i kortet starter fra venstre kant */
-  align-items: flex-start;
-  /* justify-content: space-between - placerer titel i bunden og ikon nær toppen. */
-  justify-content:space-between;
-  /* text-decoration: none - fjerner understregning hvis kortet er et link (<a>). */
-  text-decoration:none;
-  /* color: tekstfarve inde i kortet - hvid for kontrast mod gradientbaggrund. */
-  color: #fff;
-  /* padding: indvendig afstand i kortet for ikon og tekst. */
-  padding: 34px 28px; /* 34px top/bund, 28px sider for generøs klikzone. */
-  /* min-height: sikrer at alle kort har en ensartet højde. */
-  min-height: 140px; /* sikrer ensartet kort-højde */
-  /* border-radius: afrundede hjørner på kortet for pille-form look. */
-  border-radius: 14px;
-  /* box-shadow: løfter kortet visuelt fra baggrunden. */
-  box-shadow: 0 12px 30px rgba(12,40,90,0.08); /* let skygge for dybde */
+  display:flex; flex-direction:column; align-items:flex-start; justify-content:space-between; /* stak indhold lodret */
+  text-decoration:none; color:#fff; /* kort-tekstfarve */
+  padding:34px 28px; min-height:140px; border-radius:14px; box-shadow:0 12px 30px rgba(12,40,90,0.08);
 }
 
 .card-grid img{
-  /* Selektor: .card-grid img
-    - Vælger alle <img> elementer som er inde i et element med klassen .card-grid.
-    - Bruges her fordi hvert kort har et ikon som <img> og vi gerne vil give dem
-     ensartet størrelse uden at skulle ændre hver enkelt fil.
-  */
-  width: var(--card-icon-size); /* ikonbredde styret fra :root-variablen */
-  height: var(--card-icon-size); /* ikonhøjde for at holde kvadratisk udseende */
-  display: block; /* gør billedet til blok for forudsigelig layoutadfærd */
-  margin: 0 0 12px 0; /* afstand under ikonet til korttitel */
-  /* Bemærk for nybegyndere:
-    - Ændrer du kun --card-icon-size i :root, påvirker det alle ikoner på samme tid.
-    - Hvis du kun vil ændre et enkelt ikon, kan du give det en ekstra klasse og målrette den.
-  */
+  width: var(--card-icon-size); height: var(--card-icon-size); /* kvadratisk ikon via variabel */
+  display:block; margin:0 0 12px 0; /* afstand under ikonet */
 }
 
 .card-grid .card-title{
-  /* Selektor: .card-grid .card-title
-    - Vælger elementer med klassen .card-title som er inde i .card-grid.
-    - Dette er typisk titlen på hvert kort (fx "Cigaretter").
-  */
-  font-size: var(--card-title-size); /* Skriftstørrelse styret via variabel for enkel global justering */
-  font-weight: 500; /* Gør titlen lidt fed, men ikke helt sort (700) */
-  margin-top: 12px; /* Læg lidt afstand over titlen så den ikke sidder helt op ad ikonet */
-  text-align: left; /* Sørg for at titler i kort starter fra venstre */
-  /* Tips til nybegyndere:
-    - Ændrer du margin-top, flytter du hvor langt titlen står fra ikonet.
-    - Vil du ændre farven på titlen, tilføj fx: color: #fff; eller color: #000;
-  */
+  font-size: var(--card-title-size); font-weight:500; margin-top:12px; text-align:left; /* korttitel: størrelse, vægt og margin */
 }
 
 /* Separate, redigerbare regler for hver boks-type - gør det let at justere farver og stil individuelt */
