@@ -40,12 +40,8 @@
           aria-hidden="true"
         />
         <!-- nav-toggle: skjult controller for mobilmenu -->
-        <label
-          for="nav-toggle"
-          class="hamburger-button"
-          aria-label="Åbn navigation"
-          role="button"
-        >
+        <label for="nav-toggle" class="hamburger-button">
+          <span class="sr-only">Åbn navigation</span>
           <!-- hamburger-button: trykbar toggler -->
           <span class="bar"></span>
           <!-- bar: linje i hamburger-ikon -->
@@ -87,7 +83,9 @@
             <!-- /nav-item -->
             <li class="nav-item">
               <!-- nav-item -->
-              <a class="nav-link" href="chatogkontakt.html">Chat & kontakt</a>
+              <a class="nav-link" href="chatogkontakt.html"
+                >Chat &amp; kontakt</a
+              >
               <!-- nav-link -->
             </li>
             <!-- /nav-item -->
@@ -101,7 +99,9 @@
           <!-- /nav-list -->
         </nav>
         <!-- /main-nav -->
-        <label for="nav-toggle" class="nav-overlay" aria-hidden="true"></label>
+        <label for="nav-toggle" class="nav-overlay"
+          ><span class="sr-only">Luk navigation</span></label
+        >
         <!-- nav-overlay: overlay når mobilmenu er åben -->
       </div>
       <!-- /container header-inner -->
@@ -125,11 +125,7 @@
     </section>
     <!-- /underside-hero -->
 
-    <section
-      class="muligheder-bokse"
-      id="services"
-      aria-labelledby="muligheder-bokse-titel"
-    >
+    <section class="muligheder-bokse" id="services">
       <div class="container">
         <ul class="muligheder-liste" role="list">
           <li class="mulighed-kort">
@@ -276,7 +272,7 @@
     </section>
     <!-- /forside-2 -->
 
-    <footer class="footer" role="kontaktinfo" aria-label="footer">
+    <footer class="footer" aria-label="footer">
       <!-- footer: bundinformation og kontakt -->
       <div class="footer-indhold container">
         <!-- footer-indhold: wrapper for kolonner -->
@@ -336,7 +332,8 @@
         </div>
         <!-- /fod-om -->
 
-        <div class="fod-kolonne fod-kontakt" aria-label="Kontaktoplysninger">
+        <div class="fod-kolonne fod-kontakt">
+          <div id="fod-kontakt-titel" class="sr-only">Kontaktoplysninger</div>
           <!-- fod-kontakt: kontaktoplysninger -->
           <div class="fod-overskrift">Kontakt</div>
           <!-- kolonne titel -->
@@ -383,9 +380,9 @@
         </div>
         <!-- /fod-kontakt -->
 
-        <div class="fod-kolonne fod-links" aria-label="Hurtige links">
+        <div class="fod-kolonne fod-links">
           <!-- fod-links: hurtige links -->
-          <div class="fod-overskrift">Hurtige links</div>
+          <div id="fod-links-titel" class="fod-overskrift">Hurtige links</div>
           <!-- kolonne titel -->
           <ul class="hurtig-links">
             <!-- hurtig-links: liste -->
@@ -395,7 +392,7 @@
             <!-- link -->
             <li><a href="nikoberegneren.html">Nikoberegneren</a></li>
             <!-- link -->
-            <li><a href="chatogkontakt.html">Chat & kontakt</a></li>
+            <li><a href="chatogkontakt.html">Chat &amp; kontakt</a></li>
             <!-- link -->
             <li><a href="omnikotin.html">Om nikotin</a></li>
             <!-- link -->
@@ -416,7 +413,7 @@
             class="hjerte-ikon"
             aria-hidden="true"
           />
-          af Herning Kommune · 2025
+          af Herning Kommune &middot; 2025
         </p>
         <!-- copyright -->
       </div>

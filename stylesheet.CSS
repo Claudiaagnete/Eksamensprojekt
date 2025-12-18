@@ -144,6 +144,19 @@ p{
   --card-title-size: 32px; /* kort-titel størrelse */
 }
 
+/* Utility: screen-reader only (visually hidden) */
+.sr-only{
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
 /* Fjerner browserens default margin så full-bleed elementer kan nå kanten */
 body{
   margin: 0; /* fjern browser-default margin så full-bleed sektioner kan nå kanten */
@@ -587,7 +600,8 @@ body > * { box-sizing: border-box; }
 /* Sektion: .forside (bruges på flere sektioner; denne blok giver "forside 1" sit visuelle udtryk)
    Nedenfor står forklarende kommentarer på hver linje, så hver regel er tydelig. */
 /* NOTE: denne sektion indeholder forklarende kommentarer til .forside-reglerne. Ingen tomme selectors. */
-.forside{
+.forside,
+.forside-1{
   /* background: sætter baggrundsfarven for hele .forside-sektionen. */
   background: #f6f8fa; /* lys, neutral baggrund der skaber kontrast til kortene */
   /* padding: top/right/bottom/left (her kun top og bottom defineret) - skaber lodret afstand indeni sektionen. */
@@ -596,7 +610,9 @@ body > * { box-sizing: border-box; }
 
 
 .forside > .container.forside,
-.forside .container.forside{
+.forside .container.forside,
+.forside-1 > .container.forside-1,
+.forside-1 .container.forside-1{
   /* Boksen/containeren er transparent så h2/h4 står direkte på sektionens baggrund. */
   background: transparent; /* behold gennemsigtig baggrund så overskrifter står på sektionens baggrund */
   padding: 25px 28px 10px; /* indvendig padding: top 25px, sider 28px, bund 10px */
@@ -604,7 +620,9 @@ body > * { box-sizing: border-box; }
 }
 /* Overskrift og understødende tekst - målrettet containerens h2/h4 */
 .forside > .container.forside h2,
-.forside .container.forside h2{
+.forside .container.forside h2,
+.forside-1 > .container.forside-1 h2,
+.forside-1 .container.forside-1 h2{
   /* font-family: sætter den ønskede skrifttype for overskrift; Alpino prioriteres. */
   font-family: Alpino, sans-serif;
   /* font-size: størrelse på overskriften; stor for visuel vægt. */
@@ -617,7 +635,9 @@ body > * { box-sizing: border-box; }
   color: #0b0b0b; /* mørk farve for høj kontrast og læsbarhed */
 }
 .forside > .container.forside h4,
-.forside .container.forside h4{
+.forside .container.forside h4,
+.forside-1 > .container.forside-1 h4,
+.forside-1 .container.forside-1 h4{
   /* color: sekundær farve til hjælp- eller undertekst. */
   color: #556772; /* dæmpet blågrå til sekundær tekst */
   /* font-size: mindre end h2, men stor nok til læsbarhed. */
