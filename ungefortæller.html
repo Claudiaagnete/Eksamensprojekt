@@ -28,12 +28,8 @@
           type="checkbox"
           aria-hidden="true"
         />
-        <label
-          for="nav-toggle"
-          class="hamburger-button"
-          aria-label="Åbn navigation"
-          role="button"
-        >
+        <label for="nav-toggle" class="hamburger-button">
+          <span class="sr-only">Åbn navigation</span>
           <span class="bar"></span>
           <span class="bar"></span>
           <span class="bar"></span>
@@ -71,7 +67,9 @@
             <!-- her kan man se alle vores undersider, som er klikkable links, det er de pga. attributet href -->
           </ul>
         </nav>
-        <label for="nav-toggle" class="nav-overlay" aria-hidden="true"></label>
+        <label for="nav-toggle" class="nav-overlay"
+          ><span class="sr-only">Luk navigation</span></label
+        >
       </div>
     </header>
 
@@ -89,7 +87,7 @@
     <!-- her har vi valgt at benytte os af både en section class og en container class for at samle indholdet til denne specifikke sektion. der er en div class mere, men det er fordi vi gerne vil have den skal se anderledes ud end det andet indhold i div'en-->
     <section class="ungefortæller-section">
       <div class="container-ungefortæller-1">
-        <img src="emoji dreng.webp" alt="Mikkel, 20 år emoji" />
+        <img src="emoji%20dreng.webp" alt="Mikkel, 20 år emoji" />
         <h3>Mikkel, 20 år</h3>
         <h4 class="h4-nochange">Stoppede med Snus</h4>
         <p class="meta-pill">
@@ -136,7 +134,7 @@
       <!-- her slutter div classsen container-ungefortæller-1-->
       <!-- her starter der en ny div class-->
       <div class="container-ungefortæller-2">
-        <img src="emoji pige.webp" alt="Sofia, 18 år emoji" />
+        <img src="emoji%20pige.webp" alt="Sofia, 18 år emoji" />
         <h3>Sofia, 18 år</h3>
         <h4 class="h4-nochange">Stoppede med Puff bars</h4>
         <p class="meta-pill">
@@ -183,7 +181,7 @@
       <!-- her slutter div classsen container-ungefortæller-2-->
       <!-- her starter der en ny div class-->
       <div class="container-ungefortæller-3">
-        <img src="emoji dreng 2.webp" alt="Lucas, 22 år emoji" />
+        <img src="emoji%20dreng%202.webp" alt="Lucas, 22 år emoji" />
         <h3>Lucas, 22 år</h3>
         <h4 class="h4-nochange">Stoppede med Vapes</h4>
         <!-- her har vi lavet et p element med et img inden i, fordi billedet hører sammen med teksten -->
@@ -232,7 +230,7 @@
       <!-- her starter der sidste div class-->
       <div class="container-ungefortæller-4">
         <!-- her har vi indsat et billede. alt teksten forklarer billedet -->
-        <img src="emoji pige 2.webp" alt="Emma, 17 år emoji" />
+        <img src="emoji%20pige%202.webp" alt="Emma, 17 år emoji" />
         <h3>Emma, 17 år</h3>
         <h4 class="h4-nochange">Stoppede med Cigaretter</h4>
         <p class="meta-pill">
@@ -296,7 +294,7 @@
     </section>
 
     <section>
-      <footer class="footer" role="kontaktinfo" aria-label="footer">
+      <footer class="footer" aria-label="footer">
         <!-- Hovedcontainer: brug klassen i CSS til baggrund, padding og grid -->
         <div class="footer-indhold container">
           <!-- KOLONNE 1: Om / branding -->
@@ -350,7 +348,12 @@
           </div>
 
           <!-- KOLONNE 2: Kontaktoplysninger -->
-          <div class="fod-kolonne fod-kontakt" aria-label="Kontaktoplysninger">
+          <div
+            class="fod-kolonne fod-kontakt"
+            role="region"
+            aria-labelledby="fod-kontakt-titel"
+          >
+            <div id="fod-kontakt-titel" class="sr-only">Kontaktoplysninger</div>
             <div class="fod-overskrift">Kontakt</div>
             <ul class="kontakt-liste">
               <li class="kontakt-element">
@@ -390,8 +393,8 @@
           </div>
 
           <!-- KOLONNE 3: Hurtige links -->
-          <div class="fod-kolonne fod-links" aria-label="Hurtige links">
-            <div class="fod-overskrift">Hurtige links</div>
+          <div class="fod-kolonne fod-links" aria-labelledby="fod-links-titel">
+            <div id="fod-links-titel" class="fod-overskrift">Hurtige links</div>
             <!-- vi har valgt at lave en ugrupperet liste for at vise hurtige links, ligesom oppe i headeren, for at brugeren nemt kan navigere rundt på sitet i footeren også -->
             <ul class="hurtig-links">
               <li><a href="dinemuligheder.html">Dine muligheder</a></li>
