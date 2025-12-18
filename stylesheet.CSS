@@ -152,7 +152,24 @@ p{
   padding: 0 !important;
   margin: -1px !important;
   overflow: hidden !important;
-  clip: rect(0, 0, 0, 0) !important;
+  /*
+    Brug `clip-path` i stedet for det forældede `clip` for at skjule elementet visuelt
+    uden at fjerne det fra DOM'en og derved bevare skærmlæser-adgang.
+
+    Baggrund og anbefalinger:
+    - `clip` er forældet og kan give validerings- eller advarselsmeddelelser i moderne værktøjer.
+    - `clip-path: inset(...)` har samme effekt (klipper indholdet så det ikke er synligt),
+      men er den moderne, understøttede metode.
+    - Bevar `-webkit-clip-path` for bedre kompatibilitet med ældre WebKit-browsere.
+    - Reglen bruger `!important` i denne hjælperklasse for at sikre, at den ikke
+      utilsigtet bliver overskrevet af andre stilarter (dette er normalt acceptabelt
+      for små, veldefinerede utilities som `.sr-only`).
+
+    Effekt: elementet forbliver i dokumentstrømmen (tilgængeligt for assistive
+    teknologier og fokus), men er visuelt skjult for sighted users.
+  */
+  -webkit-clip-path: inset(50%) !important;
+  clip-path: inset(50%) !important;
   white-space: nowrap !important;
   border: 0 !important;
 }
@@ -165,9 +182,9 @@ body{
     scroll pga. side-margener. margin:0 sikrer at layoutet kan bruge hele viewport.
   */
   /* Sæt global font-family så al tekst bruger den definerede base-font */
-  font-family: var(--base-font-family); /* base-font: Alpino eller fallback */
+  font-family: var(--base-font-family, 'Alpino', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial); /* base-font: Alpino eller fallback */
   /* Når header er fixed, giv body top-padding så indhold ikke skjules bag headeren */
-  padding-top: var(--header-height); /* undgå at indhold skjules bag fixed header */
+  padding-top: var(--header-height, 88px); /* undgå at indhold skjules bag fixed header */
 }
 
 
@@ -202,7 +219,7 @@ body > * { box-sizing: border-box; }
   left: 50%; right: 50%; margin-left: -50vw; margin-right: -50vw; /* centrer full-bleed */
   z-index: 1100; /* ligger over sideindhold */
   box-sizing: border-box; /* box-sizing */
-  height: var(--header-height); /* fast højde fra :root */
+  height: var(--header-height, 88px); /* fast højde fra :root */
 }
 
 .site-header .container.header-inner{
@@ -211,7 +228,7 @@ body > * { box-sizing: border-box; }
   display: flex; /* brug flex for horisontal layout */
   align-items: center; /* lodret centrering */
   justify-content: space-between; /* fordel plads mellem elementer */
-  height: var(--header-height); /* match headerens højde */
+  height: var(--header-height, 88px); /* match headerens højde */
   padding: 0; /* fjern container padding i header */
   gap: 16px; /* mellemrum mellem direkte børn */
   box-sizing: border-box; /* box-sizing */
@@ -252,7 +269,7 @@ body > * { box-sizing: border-box; }
 
 .brand-text{
   font-family: Alpino, sans-serif; /* Skrifttype for brand-teksten */
-  font-size: var(--brand-font-size); /* Størrelse styret af variabel for nem justering */
+  font-size: var(--brand-font-size, 21px); /* Størrelse styret af variabel for nem justering */
   font-weight: 700; /* Tyk font-vægt for tydelighed */
   color: #111; /* Mørk farve for høj kontrast */
   margin-left: 6px; /* Lidt afstand mellem logo og brandtekst */
@@ -266,7 +283,7 @@ body > * { box-sizing: border-box; }
 }
 
 .main-nav .nav-link{
-  font-size: var(--nav-font-size); /* Nav-tekst størrelse via variabel */
+  font-size: var(--nav-font-size, 21px); /* Nav-tekst størrelse via variabel */
   color: #374151; /* Sekundær mørk farve til nav-links */
   text-decoration: none; /* Fjern understregning på links */
   font-weight: 600; /* Halvfedt for tydelig navigation */
@@ -350,7 +367,7 @@ body > * { box-sizing: border-box; }
     z-index: 1200; /* Sikrer at menu-panelet vises ovenpå overlay og hero */
     position: fixed; /* Fjernet fra dokumentflow og placeret relativt til viewport */
     left: 0; right: 0; /* Strækker menuens kanter til viewportens kanter */
-    top: var(--header-height); /* Placer menuen lige under headeren */
+  top: var(--header-height, 88px); /* Placer menuen lige under headeren */
     width: 100%; /* Menuen fylder hele viewport-bredden */
     background: #fff; /* Opak hvid baggrund så underliggende indhold ikke ses igennem */
     box-shadow: 0 8px 20px rgba(0,0,0,0.06); /* Let skygge for visuelt løft */
@@ -523,7 +540,7 @@ body > * { box-sizing: border-box; }
   background: #FFFFFF; color: #0b6edb; /* hvid knap med blå tekst */
   padding: 12px 28px; border-radius: 999px; /* rund pille-form */
   margin-top: 16px; margin-bottom: 20px; box-shadow: 0 8px 24px rgba(11,110,219,0.12); /* løft-effekt */
-  text-decoration: none; font-family: var(--base-font-family); font-weight: 400; font-synthesis: none;
+  text-decoration: none; font-family: var(--base-font-family, 'Alpino', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial); font-weight: 400; font-synthesis: none;
   font-size: var(--cta-font-size, 21px); line-height: var(--cta-line-height, 24px);
   letter-spacing: var(--cta-letter-spacing, 0px); border: none; cursor: pointer;
 }
@@ -564,7 +581,7 @@ body > * { box-sizing: border-box; }
   border-radius: 999px; /* border-radius: 999px; - rund pille-form. */
   box-shadow: 0 8px 24px rgba(21,93,252,0.12); /* box-shadow - let blålig skygge for dybde. */
   text-decoration: none; /* text-decoration: none; - fjern link-understregning. */
-  font-family: var(--base-font-family); /* font-family - samme skrifttype som .cta-white. */
+  font-family: var(--base-font-family, 'Alpino', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial); /* font-family - samme skrifttype som .cta-white. */
   font-weight: 400;     /* font-weight: 400; - normal vægt. */
   font-synthesis: none;  /* font-synthesis: none; - undgå syntetisk bold. */
   font-size: var(--cta-font-size, 21px); /* font-size - samme som .cta-white. */
@@ -662,12 +679,12 @@ body > * { box-sizing: border-box; }
 }
 
 .card-grid img{
-  width: var(--card-icon-size); height: var(--card-icon-size); /* kvadratisk ikon via variabel */
+  width: var(--card-icon-size, 44px); height: var(--card-icon-size, 44px); /* kvadratisk ikon via variabel */
   display:block; margin:0 0 12px 0; /* afstand under ikonet */
 }
 
 .card-grid .card-title{
-  font-size: var(--card-title-size); font-weight:500; margin-top:12px; text-align:left; /* korttitel: størrelse, vægt og margin */
+  font-size: var(--card-title-size, 32px); font-weight:500; margin-top:12px; text-align:left; /* korttitel: størrelse, vægt og margin */
 }
 
 /* Separate, redigerbare regler for hver boks-type - gør det let at justere farver og stil individuelt */
@@ -2359,7 +2376,7 @@ font-size:48px;
 .omnikotin-section-4 .trin-item .trin-indhold h4{ margin:0; font-size:21px; color:#0A0A0A; text-align: left;}
 .omnikotin-section-4 .trin-item .trin-indhold p{ margin:6px 0 0 0; font-size:14px; color:#4A5565; font-size: 21px; }
 .omnikotin-section-4 .trin-cta{ display:flex; flex-direction:column; align-items:center; text-align:center; padding:22px; font-size:16px; gap:10px; }
-.omnikotin-section-4 .trin-cta h3{ margin:5px,0; color:#00A63E; font-size:34px; }
+.omnikotin-section-4 .trin-cta h3{ margin:5px 0; color:#00A63E; font-size:34px; }
 .omnikotin-section-4 .trin-cta p{ margin:0; color:#4A5565; }
 
 @media (max-width:900px){
@@ -2482,7 +2499,7 @@ footer .container, .site-footer .container{ padding: 0 20px; }
   box-sizing: border-box;
   /* Tunable nudge: øg værdien for at flytte kolonnen mere til højre */
   --fod-kontakt-nudge: 110px;
-  transform: translateX(var(--fod-kontakt-nudge));
+  transform: translateX(var(--fod-kontakt-nudge, 0px));
   transition: transform 220ms cubic-bezier(.2,.9,.2,1);
 }
 
@@ -2500,7 +2517,7 @@ footer .container, .site-footer .container{ padding: 0 20px; }
   /* Fod-overskrift: bruger den eksakte, verbatim specifikation brugeren gav */
   color: #FFF; /* farve: hvid */
   font-family: Alpino; /* font-family: Alpino; */
-  font-size: var(--footer-heading-size); /* font-size: 21px; */
+  font-size: var(--footer-heading-size, 21px); /* font-size: 21px; */
   font-style: normal; /* font-style: normal; */
   font-weight: 400; /* font-weight: 400; */
   line-height: 28px; /* line-height: 28px; */
@@ -2512,7 +2529,7 @@ footer .container, .site-footer .container{ padding: 0 20px; }
   /* Sekundær footer-tekst: beskrivelser og link-tekst */
   color: #A9B0BD;
   font-family: Alpino, sans-serif;
-  font-size: var(--footer-body-size); /* 15px som sekundær størrelse */
+  font-size: var(--footer-body-size, 15px); /* 15px som sekundær størrelse */
   line-height: 1.6;
   margin: 0 0 18px 0;
   max-width: 420px;
