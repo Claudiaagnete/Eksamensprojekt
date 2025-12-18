@@ -1,12 +1,76 @@
 <!DOCTYPE html>
 <html lang="da">
   <head>
-    <meta charset="UTF-8" /> <!-- Sikre specialtegn som Æ, Ø, Å, specialtegn og emojis-->
+    <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="robots" content="noindex" />
     <title>Nikoberegneren</title>
+    <link href="stylesheet.CSS" rel="stylesheet" />
   </head>
   <body>
+    <header class="site-header" role="banner">
+      <div class="container header-inner">
+        <div>
+          <a
+            class="brand"
+            href="forside.html"
+            aria-label="Forside - Herning Kommune"
+            ><img src="logo.webp" alt="Herning Kommune logo" class="brand-logo"
+          /></a>
+        </div>
+        <input
+          id="nav-toggle"
+          class="nav-toggle"
+          type="checkbox"
+          aria-hidden="true"
+        />
+        <label
+          for="nav-toggle"
+          class="hamburger-button"
+          aria-label="Åbn navigation"
+          role="button"
+        >
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </label>
+        <nav
+          id="mainNavbar"
+          class="main-nav"
+          role="navigation"
+          aria-label="Hovednavigation"
+        >
+          <ul class="nav-list">
+            <li class="nav-item">
+              <a class="nav-link" href="dinemuligheder.html">Dine muligheder</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="ungefortæller.html">Unge fortæller</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="nikoberegneren.html" aria-current="page"
+                >Nikoberegneren</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="chatogkontakt.html">Chat & kontakt</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="omnikotin.html">Om nikotin</a>
+            </li>
+          </ul>
+        </nav>
+        <label for="nav-toggle" class="nav-overlay" aria-hidden="true"></label>
+      </div>
+    </header>
 
+    <main>
+      <section class="underside-hero" aria-label="Nikoberegneren">
+        <div class="container">
+          <h1>Nikoberegneren</h1>
+          <p>Her kommer nikotinkalkulatoren (indhold kan tilføjes senere).</p>
+        </div>
+      </section>
+    </main>
   </body>
 </html>
