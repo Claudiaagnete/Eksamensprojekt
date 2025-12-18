@@ -22,8 +22,8 @@
    </a>
    </div>
   <!-- CSS-only hamburger: skjult checkbox + label styrer visning af navigationen (ingen JS) -->
-  <input id="nav-toggle" class="nav-toggle" type="checkbox" aria-hidden="true" />
-  <label for="nav-toggle" class="hamburger-button" aria-label="Åbn navigation" role="button">
+  <input id="nav-toggle" class="nav-toggle" type="checkbox" aria-label="Åbn navigation" />
+  <label for="nav-toggle" class="hamburger-button">
     <span class="bar"></span>
     <span class="bar"></span>
     <span class="bar"></span>
@@ -47,7 +47,7 @@
     <!-- navigationen giver hurtig adgang til alle undersider -->
     </ul>
   </nav>
-  <label for="nav-toggle" class="nav-overlay" aria-hidden="true"></label>
+  <label for="nav-toggle" class="nav-overlay"></label>
   </div>
 </header>
 
@@ -230,18 +230,16 @@
                 <div class="trin-indhold">
                   <p>Plus: Du sparer en masse penge, får mere energi, og slipper for den konstante tanke om hvor du kan få din næste dosis.</p>
                   <!-- ekstra fordele ud over helbred -->
-                  <h3>Din krop vil takke dig! <img src="grøn hjerte.webp" alt="grønt hjerte" style="width:28px; vertical-align:middle"></h3>
+                  <h3>Din krop vil takke dig! <img src="groenhjerte.webp" alt="grønt hjerte" style="width:28px; vertical-align:middle"></h3>
                   <!-- opmuntrende afslutning af tidslinjen -->
                 </div>
               </div>
 
             </div>
           </div>
-        </section>
-    </section>
+      </section>
 
-    <section>
-        <section class="omnikotin-section-5">
+  <section class="omnikotin-section-5">
           <div class="container">
             <div class="faq-header">
               <div class="icon"> <img src="faq.svg" alt="spørgsmål"> </div>
@@ -302,7 +300,7 @@
     </section>
     
    
-<footer class="footer" role="kontaktinfo" aria-label="footer">
+<footer class="footer" role="contactinfo" aria-label="footer">
   <!-- Hovedcontainer: brug klassen i CSS til baggrund, padding og grid -->
   <div class="footer-indhold container">
     <!-- KOLONNE 1: Om / branding -->
@@ -322,7 +320,7 @@
     </div>
 
     <!-- KOLONNE 2: Kontaktoplysninger -->
-    <div class="fod-kolonne fod-kontakt" aria-label="Kontaktoplysninger">
+  <div class="fod-kolonne fod-kontakt">
       <div class="fod-overskrift">Kontakt</div>
       <ul class="kontakt-liste">
         <li class="kontakt-element">
@@ -340,7 +338,7 @@
     </div>
 
     <!-- KOLONNE 3: Hurtige links -->
-    <div class="fod-kolonne fod-links" aria-label="Hurtige links">
+  <div class="fod-kolonne fod-links">
       <div class="fod-overskrift">Hurtige links</div>
       <!-- vi har valgt at lave en ugrupperet liste for at vise hurtige links, ligesom oppe i headeren, for at brugeren nemt kan navigere rundt på sitet i footeren også -->
       <ul class="hurtig-links">
@@ -367,7 +365,6 @@
     <p style="text-align: center; color:#99A1AF;">Dette site er kun til undervisningsformål</p>
   </div>
 </footer>
-</section>
 <!-- her slutter footeren -->
   </body>
 </html>
