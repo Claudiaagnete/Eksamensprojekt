@@ -12,6 +12,18 @@
   <body>
   <!--her indsætter vi logo til banner-->
   <header class="site-header" role="banner">
+  <!--
+    .site-header: Dette er header-sektionen øverst på siden. CSS-klassen
+    "site-header" gør headeren "sticky" (fixed) og giver den en fast højde.
+    For en begynder:
+    - "role=\"banner\"" hjælper skærmlæsere til at forstå at dette er et
+      banner/header område.
+    - De visuelle egenskaber (baggrund, højde, position) kommer fra
+      `stylesheet.CSS` under .site-header.
+    - Hvis du vil ændre headerens højde, kan du ændre variablen
+      `--header-height` i CSS (:root) — så får du konsekvent opførsel
+      (fx body får top-padding automatisk så indholdet ikke skjules).
+  -->
   <div class="container header-inner">
    <div>
    <!-- her gør vi banneret klikbart, så når man klikker på banneret kommer man ind på forsiden-->
@@ -22,11 +34,27 @@
   <!-- Her laver vi en nav-bar med klikbare links til undersiden-->
   <!-- CSS-only hamburger: skjult checkbox + label styrer visning af navigationen (ingen JS) -->
   <input id="nav-toggle" class="nav-toggle" type="checkbox" aria-hidden="true" />
+  <!--
+    .nav-toggle: Dette er en skjult checkbox der bruges til at styre den
+    mobile navigation uden JavaScript. Når checkbox'en er tjekket, viser
+    CSS-regler (f.eks. .nav-toggle:checked ~ .main-nav) mobilmenuen.
+    For nybegyndere:
+    - Checkboxen er flyttet off-screen (ikke display:none) så den stadig kan
+      skiftes via dens label (hamburgerknappen).
+    - Label'en med for="nav-toggle" fungerer som en knap der toggler denne
+      checkbox.
+  -->
   <label for="nav-toggle" class="hamburger-button" aria-label="Åbn navigation" role="button">
     <span class="bar"></span>
     <span class="bar"></span>
     <span class="bar"></span>
   </label>
+  <!--
+    .hamburger-button + .bar: De tre span-elementer danner den klassiske
+    hamburger-ikon. CSS skifter dem til et kryds når .nav-toggle er checked.
+    - Der er separate CSS-regler for at skjule hamburger på desktop og vise
+      den på mobil (via @media queries).
+  -->
   <nav id="mainNavbar" class="main-nav" role="navigation" aria-label="Hovednavigation">
   <!-- role="navigation": angiver at dette er en navigation-landmark for assistive teknologier -->
   <!-- aria-label="Hovednavigation": kort beskrivelse, så brugere kan identificere denne navigation -->
@@ -40,17 +68,39 @@
     <!-- her kan man se alle vores undersider, som er klikkable links, det er de pga. attributet href -->
     </ul>
   </nav>
+  <!--
+    .main-nav: Her ligger hovednavigationen (ul.nav-list). På desktop er den
+    vist som en horisontal liste (flex). På mobil skjules den og vises via
+    checkboxen (.nav-toggle:checked ~ .main-nav).
+    - Links får hover- og active-styling i CSS.
+    - Tip: For at ændre interlineafstand i menuen, juster --nav-font-size i :root.
+  -->
   <label for="nav-toggle" class="nav-overlay" aria-hidden="true"></label>
   </div>
 </header>
 <!-- Hero sektion -->
     <section class="hero-section">
+      <!--
+        .hero-section: Stor visuel sektion øverst på siden.
+        - Baggrundsgradient, stor højde (min-height) og centreret indhold.
+        - CSS bruger full-bleed teknik (width:100vw + negative margin), så
+          baggrunden går helt ud til viewport-kanten, mens .container
+          holder indholdet centreret.
+        - For nybegyndere: Hvis hero ser for høj ud på små skærme, kan du
+          justere værdier i media queries (fx @media max-width:899px).
+      -->
       <div class="container hero">
 <!-- Her er der brugt forskellige h-størrelser, som giver visuel hierarki og hjælper brugeren med at forstå indholdets struktur. -->
         <h1>Klar til et liv uden nikotin?</h1>
         <h3>Du behøver ikke at stoppe i morgen... men du kan godt starte i dag. Vi er her i Herning, klar til at hjælpe dig.</h3>
 
         <!-- Primær CTA med ned-pil ikon.-->
+        <!--
+          .cta-white: Hvid, pilleformet call-to-action.
+          - Har indbyggede hover/fokus effekter for tilgængelig feedback.
+          - Hvis du bruger <a> som knap (som her), sørg for at den har
+            text-decoration: none i CSS så den ligner en rigtig knap.
+        -->
         <a href="chatogkontakt.html" class="cta-white" aria-label="Gå til siden for at få hjælp nu">
         <!-- Her har vi indsat et billede/ikon for at gøre det mere visuelt -->
         <!-- width/height for at reducere størrelsesskift -->
@@ -64,9 +114,22 @@
     </section>
 
     <section class="forside 1">
-    <!-- vi inddeler forsiden i forskellige sektioner, så vi nemt kan finde rundt - også når vi skal arbejde i CSS -->
+    <!--
+      .forside: Denne klasse bruges til den lyse informationssektion lige
+      under hero. CSS for .forside kontrollerer baggrund, padding og
+      typografi for dens overskrifter.
+      - Bemærk: i HTML er der også en ekstra '1' i class-attributten; det kan
+        være utilsigtet (klassenavn med mellemrum tæller som separate klasser).
+        Hvis du ikke har en CSS-regel for klassen '1', kan du fjerne den.
+    -->
       <div class="container forside 1">
-    <!-- de forskellige sektioner har hver deres container for bedre struktur div class gør det nemmere at style dem individuelt -->
+    <!--
+      .container.forside: Wrapper for indholdet i sektionen.
+      - Padding og max-width styres i CSS via .container regler og .forside
+        specificeringerne.
+      - Tip: Hvis du ændrer tekststørrelsen for h2/h4, gør det i CSS under
+        .forside > .container.forside h2/h4 for at bevare konsistens.
+    -->
         <h2>Hvad vil du gerne stoppe med?</h2>
         <h4>Vælg det der passer på dig - vi dømmer ikke, vi hjælper dig</h4>
       </div>
@@ -123,6 +186,13 @@
     </section>
 
   <section class="forside-2">
+    <!--
+      .forside-2: Sektion med tekst til venstre og et dekorativt billede til højre.
+      - CSS absolut-placerer billedet på desktop (width: 530px). På mobil bliver
+        billedet stacked (position: static) under teksten via media query.
+      - Hvis billedet overlapper teksten, kan du justere padding-right i
+        .container-forside-2 i stylesheetet, som beregner pladsen til billedet.
+    -->
     <!-- her har vi indsat en sektion for at organisere indholdet bedre -->
     <div class="container-forside-2">
       <!-- Kommentar: Struktur til "Du er ikke alene"
@@ -146,6 +216,13 @@
   </section>
 
   <section class="forside-3" aria-label="Få hjælp her">
+    <!--
+      .forside-3: Sektion med tre kort (fx Personligt forløb, Drop-in, Gruppeforløb).
+      - Kort-layout er defineret i .forside-3--grid (grid-template-columns: repeat(3,1fr)).
+      - Ikoner, meta-lister og call-to-action knapper har separate klasser for
+        nem styling i CSS.
+      - Tip: For at ændre hvordan kort flugter i højde, se .forside-3--card min-height.
+    -->
     <div class="container forside-3">
       <header class="forside-3--head">  <!-- Header sørger for at det bliver en semantisk gruppering -->
         <h2>Få hjælp her</h2>
@@ -209,6 +286,12 @@
 
 
 <div class="udtalelser">
+  <!--
+    .udtalelser: Sektion med testimonials/udtalelser.
+    - Grid-regler i CSS bestemmer om der er 3, 2 eller 1 kolonne afhængigt af
+      viewport-størrelsen. For begyndere: hvis du vil ændre antal kolonner,
+      kig efter .udtalelser-liste { grid-template-columns: ... }
+  -->
   <h2>Andre unge fra Herning har gjort det</h2>
   <h4>Og det kan du også</h4>
   <div class="udtalelser-liste">
@@ -256,8 +339,19 @@
     <!-- Grid der deler indhold i to kolonner (venstre: kontaktmetoder, højre: formular).
          CSS vil senere styre grid/flex-layout via .contact-grid. -->
     <div class="contact-grid">
+      <!--
+        .contact-grid: Grid der deler sektionen i to kolonner: venstre (kontaktinfo)
+        og højre (formular). På smallere skærme (via media queries) bliver
+        kolonnerne stacket til én kolonne (formular under kontaktinfo).
+      -->
       <!-- VENSTRE KOLONNE - direkte kontaktmetoder og info -->
       <aside class="kontakt-venstre" aria-label="Kontakt os direkte">
+        <!--
+          .kontakt-venstre: Wrapper for kontaktkort. Indeholder .kontakt-kort
+          elementer (telefon, mail, chat) som er links med ikon og tekst.
+          - Hvert kort har egen baggrund, padding og afrundede hjørner.
+          - For at justere ikon-størrelsen, se .kontakt-kort .ikon i CSS.
+        -->
         <!-- Kort overskrift over kontaktmulighederne -->
         <h4 class="kontakt-overskrift">Kontakt os direkte</h4>
         <!-- vi har lavet en ugrupperet liste for at vise kontaktmulighederne, telefonnummer er klikbar -->
@@ -317,6 +411,13 @@
         - id bruges til at finde formularen med JS (fx til validering).
         - aria-label beskriver formularens formål for skærmlæsere.
       -->
+      <!--
+        .contact-form: Formular-styling (felter, labels, knap) er defineret i
+        stylesheet.CSS under kontakt-sektionen. Feltstørrelser og font-størrelser
+        er sat relativt store for bedre læsbarhed.
+        - Hvis du vil tilføje validering, kan det ske via JavaScript, men
+          HTML-attributter som required og type="email" hjælper allerede.
+      -->
       <form class="contact-form" id="contactForm" action="#" method="post" aria-label="Kontaktformular">
         <!-- FORMROW: hver række indeholder label + input. Labels er vigtige for tilgængelighed. -->
 
@@ -363,8 +464,15 @@
 
         <!-- Formular handlinger: submit-knap og fortrolig-note -->
         <div class="form-actions">
-          <!-- Brug <button type="submit"> for at sende formularen -->
-          <!-- aria-label beskriver knappen hvis tekst er uklar; her er teksten dog tydelig -->
+          <!--
+            Bemærk: Her bruges et <a>-element med klasse .cta-blue for at ligne en
+            submit-knap og navigere til tak-siden. I en rigtig formular-opsætning
+            bør dette være <button type="submit"> så formular-data sendes til
+            serveren. Her er det et link, så det kun navigerer til en takkebesked.
+            For begyndere:
+            - Brug <button type="submit"> når du vil sende data.
+            - Brug <a> når du bare vil linke til en anden side uden at sende formen.
+          -->
           <a href="tak.html" class="cta-blue" aria-label="send besked, gå til tak-siden">
         <img src="send.svg" alt="send ikon" width="20" height="20">
         Send besked
