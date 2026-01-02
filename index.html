@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+<!-- doctype: fortæller browseren at dette er et HTML5-dokument -->
+<html lang="da">
+  <!-- html: rod-element, sprog angivet som dansk via lang="da" -->
+  <head>
+    <meta charset="UTF-8" />
+    <!-- Sikre specialtegn: Æ Ø Å og emojis -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- robots.txt betyder at søgemaskiner ikke må indeksere denne side -->
+    <meta name="robots" content="noindex" />
+    <title>Forside</title>
+    <!-- Korrekt link til stylesheet -->
+    <link href="stylesheet.CSS" rel="stylesheet" />
+    <!-- link: tilknyt stylesheet -->
+  </head>
+  <body>
+    <!-- body: alt synligt indhold på siden placeres her -->
+    <!--her indsætter vi logo til banner-->
+    <header class="site-header" role="banner">
+      <!-- site-header: øverste banner -->
+      <div class="container header-inner">
+        <!-- container: begrænser bredde og centrerer content -->
+        <div>
+          <!-- wrapper: hjælper med layout for brand/logo -->
+          <a
+            class="brand"
+            href="index.html"
+            aria-label="Forside - Herning Kommune"
+          >
+            <!-- brand: klikbart logo-link -->
+            <img
+              src="logo.webp"
+              alt="Herning Kommune logo"
+              class="brand-logo"
+            />
+            <!-- brand-logo: logo-billede, alt for skærmlæsere -->
+          </a>
+          <!-- /brand -->
+        </div>
+        <!-- /wrapper -->
+        <input
+          id="nav-toggle"
+          class="nav-toggle"
+          type="checkbox"
+          aria-hidden="true"
+        />
+        <!-- nav-toggle: skjult checkbox, styrer mobilmenu via CSS -->
+        <label for="nav-toggle" class="hamburger-button">
+          <!-- hamburger-button: toggler mobilmenu -->
+          <span class="bar"></span>
+          <!-- bar: linje i hamburger-ikon -->
+          <span class="bar"></span>
+          <!-- bar: linje i hamburger-ikon -->
+          <span class="bar"></span>
+          <!-- bar: linje i hamburger-ikon -->
+        </label>
+        <!-- /hamburger-button -->
+        <nav
+          id="mainNavbar"
+          class="main-nav"
+          role="navigation"
+          aria-label="Hovednavigation"
+        >
+          <!-- main-nav: hovednavigation -->
+          <ul class="nav-list">
+            <!-- nav-list: uordnet liste af navigationselementer -->
+            <li class="nav-item">
+              <!-- nav-item: enkelt menu-punkt -->
+              <a class="nav-link" href="dinemuligheder.html">Dine muligheder</a>
+              <!-- nav-link: link til underside -->
+            </li>
+            <!-- /nav-item -->
+            <li class="nav-item">
+              <!-- nav-item: enkelt menu-punkt -->
+              <a class="nav-link" href="ungefortæller.html">Unge fortæller</a>
+              <!-- nav-link: link til underside -->
+            </li>
+            <!-- /nav-item -->
+            <li class="nav-item">
+              <!-- nav-item: enkelt menu-punkt -->
+              <a class="nav-link" href="nikoberegneren.html">Nikoberegneren</a>
+              <!-- nav-link: link til underside -->
+            </li>
+            <!-- /nav-item -->
+            <li class="nav-item">
+              <!-- nav-item: enkelt menu-punkt -->
+              <a class="nav-link" href="chatogkontakt.html"
+                >Chat &amp; kontakt</a
+              >
+              <!-- nav-link: link til underside -->
+            </li>
+            <!-- /nav-item -->
+            <li class="nav-item">
+              <!-- nav-item: enkelt menu-punkt -->
+              <a class="nav-link" href="omnikotin.html">Om nikotin</a>
+              <!-- nav-link: link til underside -->
+            </li>
+            <!-- /nav-item -->
+          </ul>
+          <!-- /nav-list -->
+        </nav>
+        <!-- /main-nav -->
+        <label for="nav-toggle" class="nav-overlay"></label>
+        <!-- nav-overlay: klikbar overlay på mobil -->
+      </div>
+      <!-- /container header-inner -->
+    </header>
+
+    <!-- /site-header -->
+    <!-- Hero sektion -->
+    <section class="hero-section">
+      <!-- hero-section: stor visuel sektion med CTA -->
+      <div class="container hero">
+        <!-- container.hero: centreret indhold -->
+        <!-- note: hero indeholder h1, h3, CTA og meta-tekst -->
+        <h1>Klar til et liv uden nikotin?</h1>
+        <!-- h1: hovedoverskrift -->
+        <h3>
+          Du behøver ikke at stoppe i morgen... men du kan godt starte i dag. Vi
+          er her i Herning, klar til at hjælpe dig.
+        </h3>
+        <!-- h3: underoverskrift / lead -->
+
+        <a href="chatogkontakt.html" class="cta-white">
+          <!-- cta-white: primær call-to-action -->
+          <img
+            src="pilhero.svg"
+            alt="Pil der peger nedad"
+            width="20"
+            height="20"
+          />
+          <!-- ikon: sætter width/height for stabilitet -->
+          Få hjælp nu
+        </a>
+        <!-- /cta -->
+
+        <h4>100% gratis &middot; Vi dømmer ikke &middot; Lokalt i Herning</h4>
+        <!-- h4: kort meta-tekst under hero -->
+      </div>
+      <!-- /container hero -->
+    </section>
+
+    <section class="forside-1">
+      <!-- forside: informationssektion -->
+      <div class="container forside-1">
+        <!-- container.forside: wrapper -->
+        <h2>Hvad vil du gerne stoppe med?</h2>
+        <!-- h2: sektionstitel -->
+        <h4>Vælg det der passer på dig - vi dømmer ikke, vi hjælper dig</h4>
+        <!-- h4: hjælpetekst -->
+      </div>
+      <!-- /container forside -->
+    </section>
+    <div class="bokse-section">
+      <!-- bokse-section: wrapper for kort-sektionen -->
+      <!-- bokse-section: holder et grid af korte kort (kortene er indholdselementer) -->
+      <div class="container bokse">
+        <!-- container.bokse: centrerer sektionen og sætter max-bredde -->
+        <ul class="card-grid">
+          <!-- card-grid: CSS-grid der fordeler kort i kolonner -->
+          <!-- grid-notes: brug CSS for at ændre antal kolonner på forskellige skærmstørrelser -->
+          <!-- Cigaretter - enkelt kort -->
+          <li class="card-cigaretter">
+            <!-- card-cigaretter: li for cigaret-kort -->
+            <div class="card" role="group" aria-label="Cigaretter">
+              <!-- card: kort-beholder, role=group for assistive tech -->
+              <!-- Bemærk: brug alt-tekst på billedet så skærmlæsere forstår ikonet -->
+              <img src="cigaret.svg" alt="Cigaretter" />
+              <!-- img: ikon for cigaretter, alt beskriver billedet -->
+              <span class="card-title">Cigaretter</span>
+              <!-- card-title: kortets synlige titel -->
+            </div>
+            <!-- /card -->
+          </li>
+          <!-- /card-cigaretter -->
+
+          <!-- Snus - næste kort -->
+          <li class="card-snus">
+            <!-- card-snus: li for snus-kort -->
+            <div class="card" role="group" aria-label="Snus">
+              <!-- card: wrapper for snus-kort -->
+              <img src="Snus.svg" alt="Snus" />
+              <!-- img: ikon for snus, alt gør det forståeligt for skærmlæsere -->
+              <span class="card-title">Snus</span>
+              <!-- card-title: viser titel i kortet -->
+            </div>
+            <!-- /card -->
+          </li>
+          <!-- /card-snus -->
+
+          <!-- Vapes - næste kort -->
+          <li class="card-vapes">
+            <!-- card-vapes: li for vape-kort -->
+            <div class="card" role="group" aria-label="Vapes">
+              <!-- card: wrapper for vape-kort -->
+              <img src="vape.svg" alt="Vape" />
+              <!-- img: ikon for vape -->
+              <span class="card-title">Vapes</span>
+              <!-- card-title: titel i kortet -->
+            </div>
+            <!-- /card -->
+          </li>
+          <!-- /card-vapes -->
+
+          <!-- Puff bars - sidste kort i denne gruppe -->
+          <li class="card-puffbars">
+            <!-- card-puffbars: li for puffbars-kort -->
+            <div class="card" role="group" aria-label="Puff bars">
+              <!-- card: wrapper for puffbars -->
+              <img src="puffbar.svg" alt="Puff bars" />
+              <!-- img: ikon for puff bars -->
+              <span class="card-title">Puff bars</span>
+              <!-- card-title: titel -->
+            </div>
+            <!-- /card -->
+          </li>
+          <!-- /card-puffbars -->
+        </ul>
+        <!-- /card-grid -->
+      </div>
+      <!-- /container bokse -->
+    </div>
+    <!-- /bokse-section -->
+
+    <section class="forside-2">
+      <!-- forside-2: tekst + dekorativt billede -->
+      <!-- forside-2: tekstkolonne til venstre, billede til højre (på desktop via CSS) -->
+      <!-- Bemærk: billedet er dekorativt i layoutet - sørg for korrekt alt/aria hvis det er vigtigt -->
+      <div class="container-forside-2">
+        <!-- container-forside-2: wrapper for tekst og billede -->
+        <!-- Sektionens formål: opmuntring + info -->
+        <h2>Du er ikke alene</h2>
+        <!-- h2: sektionstitel - opmuntrende budskab -->
+        <h4>
+          Mange unge i Herning har stoppet med nikotin og det kan du også. Det
+          handler ikke om at være perfekt. Det handler om at tage ét skridt ad
+          gangen.
+        </h4>
+        <!-- h4: brødtekst/lead -->
+        <h4>
+          Vi kender alle tricksene. Ja, også dem du troede du var den eneste der
+          brugte. Vi kender udfordringerne, de små panikøjeblikke og de "jeg
+          starter i morgen&hellip; måske" dage. Og vigtigst af alt: Vi dømmer
+          dig ikke. Overhovedet.
+        </h4>
+        <!-- h4: uddybning og opmuntring -->
+      </div>
+      <!-- /container-forside-2 -->
+      <div class="forside-2-img">
+        <!-- forside-2-img: dekorativt billede, absolut-placeret på desktop -->
+        <img src="billede1.webp" alt="Hjælp" />
+        <!-- img: dekorativt foto - alt beskriver kort hvad billedet viser -->
+        <!-- Hvis billedet kun er dekorativt kan du sætte aria-hidden="true" og alt="" -->
+      </div>
+      <!-- /forside-2-img -->
+    </section>
+    <!-- /forside-2 -->
+
+    <section class="forside-3" aria-label="Få hjælp her">
+      <!-- forside-3: sektion med tre service-kort -->
+      <!-- forside-3: kort med tilbud (personligt, drop-in, gruppe) -->
+      <div class="container forside-3">
+        <!-- container.forside-3: centrerer indhold og sætter max-bredde -->
+        <header class="forside-3--head">
+          <!-- forside-3 head: sektionens header med titel og lead -->
+          <h2>Få hjælp her</h2>
+          <!-- h2: overskrift for hjælp-tilbud -->
+          <h4>Vi har forskellige tilbud - find det der passer til dit liv</h4>
+          <!-- h4: kort forklaring -->
+        </header>
+        <!-- /forside-3 head -->
+
+        <div class="forside-3--grid">
+          <!-- forside-3 grid: CSS-grid, 3 kolonner på desktop -->
+          <article class="forside-3--card">
+            <!-- card: personligt forløb -->
+            <img
+              src="kalenderblaabaggrund.svg"
+              alt="Kalender"
+              class="forside-3--icon"
+            />
+            <!-- icon: symbol for forløb -->
+            <h3>Personligt rygestop-forløb</h3>
+            <!-- h3: kortets titel -->
+            <p>
+              Et skræddersyet forløb med fast kontaktperson, der følger dig hele
+              vejen. Mødes når det passer dig.
+            </p>
+            <!-- p: kort beskrivelse -->
+            <ul class="forside-3--meta">
+              <!-- meta-liste: ekstra info om tilbuddet -->
+              <li>4-6 samtaler over 3 måneder</li>
+              <!-- li: varighed -->
+              <li>Sundhedscenter Herning</li>
+              <!-- li: sted -->
+            </ul>
+            <!-- /meta-liste -->
+          </article>
+          <!-- /card -->
+
+          <article class="forside-3--card">
+            <!-- card: drop-in rådgivning -->
+            <img
+              src="beskedbobelblaabaggrund.svg"
+              alt="Taleboble"
+              class="forside-3--icon"
+            />
+            <!-- icon: taleboble -->
+            <h3>Drop-in rådgivning</h3>
+            <!-- h3: kortets titel -->
+            <p>
+              Kom forbi uden at booke tid. Stil spørgsmål, få råd, eller bare
+              tal om det. Ingen forpligtelser.
+            </p>
+            <!-- p: kort beskrivelse -->
+            <ul class="forside-3--meta">
+              <!-- meta-liste -->
+              <li>Hver torsdag 15-18</li>
+              <!-- li: tid -->
+              <li>Ungdomsskolen, Herning</li>
+              <!-- li: sted -->
+            </ul>
+            <!-- /meta-liste -->
+          </article>
+          <!-- /card -->
+
+          <article class="forside-3--card">
+            <!-- card: gruppeforløb -->
+            <img
+              src="tomenneskerblaabaggrund.svg"
+              alt="To mennesker"
+              class="forside-3--icon"
+            />
+            <!-- icon: to mennesker -->
+            <h3>Gruppeforløb for unge</h3>
+            <!-- h3: kortets titel -->
+            <p>
+              Mød andre i samme situation. I hjælper hinanden og deler tricks
+              til at holde fast.
+            </p>
+            <!-- p: kort beskrivelse -->
+            <ul class="forside-3--meta">
+              <!-- meta-liste -->
+              <li>6 uger, 1 gang om ugen</li>
+              <!-- li: varighed -->
+              <li>Online eller fysisk i Herning</li>
+              <!-- li: format/sted -->
+            </ul>
+            <!-- /meta-liste -->
+          </article>
+          <!-- /card -->
+        </div>
+        <!-- /forside-3 grid -->
+
+        <div class="forside-3--actions">
+          <!-- actions: ekstra opfordring + CTA -->
+          <h4>Ikke sikker på hvad der passer dig bedst? Det er helt okay.</h4>
+          <!-- h4: beroligende tekst -->
+          <a href="chatogkontakt.html" class="cta-blue">Tal med en rådgiver</a>
+          <!-- cta-blue: opfordring til at kontakte rådgiver -->
+        </div>
+        <!-- /forside-3 actions -->
+      </div>
+      <!-- /container forside-3 -->
+    </section>
+    <!-- /forside-3 -->
+
+    <section class="forside-4">
+      <!-- forside-4: billedgalleri sektion med to billeder -->
+      <!-- forside-4: brug grid + <figure> for semantisk billedgalleri -->
+      <div class="container">
+        <!-- container: centrerer galleriet -->
+        <div class="forside-4--grid" role="list">
+          <!-- forside-4 grid: to billeder i et list-role grid -->
+          <figure role="listitem">
+            <!-- figure: enkelt billede -->
+            <img
+              src="billede2.webp"
+              alt="Ung person med røg"
+              class="forside-4--img"
+              loading="lazy"
+            />
+            <!-- img: lazy-load for performance -->
+          </figure>
+          <!-- /figure -->
+          <figure role="listitem">
+            <!-- figure: andet billede -->
+            <img
+              src="billede3.webp"
+              alt="Ung person med lighter"
+              class="forside-4--img"
+              loading="lazy"
+            />
+            <!-- img: lazy-load -->
+          </figure>
+          <!-- /figure -->
+        </div>
+        <!-- /forside-4 grid -->
+      </div>
+      <!-- /container -->
+    </section>
+    <!-- /forside-4 -->
+    <!-- man skal altid huske at tilføje et slut-tag for at lukke tagsene-->
+
+    <div class="udtalelser">
+      <!-- udtalelser: testimonials sektion med grid af kort -->
+      <!-- udtalelser: brug CSS-grid til at styre antal kolonner på forskellige skærmstørrelser -->
+      <h2>Andre unge fra Herning har gjort det</h2>
+      <!-- h2: testimonials-overskrift -->
+      <h4>Og det kan du også</h4>
+      <!-- h4: kort opmuntringstekst -->
+      <div class="udtalelser-liste">
+        <!-- udtalelser-liste: grid-container for kortene -->
+        <div class="udtalelse-kort">
+          <!-- udtalelse-kort: enkelt testimonial-kort -->
+          <img src="kolon.svg" alt="billede af kolon" width="150" />
+          <!-- img: dekorativt ikon med fast bredde -->
+          <h4>
+            "Jeg troede aldrig jeg kunne stoppe med snus. Men efter et par
+            samtaler føltes det faktisk muligt. Nu har jeg været clean i 4
+            måneder."
+          </h4>
+          <!-- testimonial-tekst -->
+          <h4 class="udtalelse-forfatter">Mikkel, 20 år</h4>
+          <!-- forfatter: hvem sagde det -->
+          <h6>Stoppede med snus</h6>
+          <!-- meta: hvad de stoppede med -->
+        </div>
+        <!-- /udtalelse-kort -->
+
+        <div class="udtalelse-kort">
+          <!-- udtalelse-kort: andet kort -->
+          <img src="kolon.svg" alt="billede af kolon" width="150" />
+          <!-- img: ikon -->
+          <h4>
+            "Det fedeste var at jeg ikke følte mig dømt. De forstod bare hvor
+            jeg var, og hjalp mig videre derfra. Det betød alt."
+          </h4>
+          <!-- testimonial-tekst -->
+          <h4 class="udtalelse-forfatter">Sofia, 18 år</h4>
+          <!-- forfatter -->
+          <h6>Stoppede med Puff bars</h6>
+          <!-- meta -->
+        </div>
+        <!-- /udtalelse-kort -->
+
+        <div class="udtalelse-kort">
+          <!-- udtalelse-kort: tredje kort -->
+          <img src="kolon.svg" alt="billede af kolon" width="150" />
+          <!-- img: ikon -->
+          <h4>
+            "Gruppeforløbet var nice. Det hjalp at høre andre havde samme
+            udfordringer. Vi holder stadig kontakt og holder hinanden på
+            sporet."
+          </h4>
+          <!-- testimonial-tekst -->
+          <h4 class="udtalelse-forfatter">Lucas, 22 år</h4>
+          <!-- forfatter -->
+          <h6>Stoppede med vapes</h6>
+          <!-- meta -->
+        </div>
+        <!-- /udtalelse-kort -->
+      </div>
+      <!-- /udtalelser-liste -->
+    </div>
+    <!-- /udtalelser -->
+    <!-- Kontaktformular -->
+    <section class="kontakt-formular-forside" id="kontakt">
+      <!-- kontakt-sektion: kontakt-info og formular (kan linkes via #kontakt) -->
+      <!-- Sektionens formål:
+       - <section> bruges til en selvstændig del af siden (her: kontakt).
+       - id="kontakt" gør det muligt at linke direkte hertil (fx /#kontakt).
+  - class bruges kun til CSS (styling) - du kan ændre den senere uden at bryde funktioner. -->
+      <div class="container">
+        <!-- .container: almindelig wrapper til at begrænse bredde og centrering via CSS. -->
+        <!-- Hoved-overskrift for sektionen -->
+        <h2 class="overskrift">Tag første skridt</h2>
+        <!-- Underrubrik / hjelpetekst -->
+        <h4 class="underrubrik">
+          Kontakt os - helt uforpligtende og fortroligt
+        </h4>
+        <!-- Grid der deler indhold i to kolonner (venstre: kontaktmetoder, højre: formular).
+         CSS vil senere styre grid/flex-layout via .contact-grid. -->
+        <div class="contact-grid">
+          <!-- contact-grid: grid der deler venstre kontaktinfo og højre formular -->
+          <!--
+        .contact-grid: Grid der deler sektionen i to kolonner: venstre (kontaktinfo)
+        og højre (formular). På smallere skærme (via media queries) bliver
+        kolonnerne stacket til én kolonne (formular under kontaktinfo).
+      -->
+          <!-- VENSTRE KOLONNE - direkte kontaktmetoder og info -->
+          <aside class="kontakt-venstre" aria-label="Kontakt os direkte">
+            <!-- kontakt-venstre: liste over kontaktmetoder (telefon, mail, chat) -->
+            <!--
+          .kontakt-venstre: Wrapper for kontaktkort. Indeholder .kontakt-kort
+          elementer (telefon, mail, chat) som er links med ikon og tekst.
+          - Hvert kort har egen baggrund, padding og afrundede hjørner.
+          - For at justere ikon-størrelsen, se .kontakt-kort .ikon i CSS.
+        -->
+            <!-- Kort overskrift over kontaktmulighederne -->
+            <h4 class="kontakt-overskrift">Kontakt os direkte</h4>
+            <!-- kontakt-overskrift: kort titel for kontaktmuligheder -->
+            <!-- vi har lavet en ugrupperet liste for at vise kontaktmulighederne, telefonnummer er klikbar -->
+            <ul class="kontakt-metoder">
+              <li class="kontakt-item">
+                <!-- kontakt-item: enkelt kontaktkort i listen -->
+                <a
+                  href="tel:96284091"
+                  class="kontakt-kort"
+                  aria-label="Ring til os på 96 28 40 91"
+                >
+                  <!-- kontakt-kort: klikbart link der ringer -->
+                  <img
+                    src="telefonblaabaggrund.svg"
+                    alt=""
+                    class="ikon"
+                    width="40"
+                    height="40"
+                    aria-hidden="true"
+                    loading="lazy"
+                  />
+                  <!-- ikon: dekorativt, aria-hidden så skærmlæsere ignorerer -->
+                  <div class="kontakt-tekst">
+                    <!-- kontakt-tekst: indeholder titel + primær kontakt -->
+                    <span class="kontakt-meta">Ring til os</span>
+                    <!-- kontakt-meta: kort instruktion -->
+                    <strong class="kontakt-primær">96 28 40 91</strong>
+                    <!-- kontakt-primær: selve telefonnummeret -->
+                  </div>
+                  <!-- /kontakt-tekst -->
+                </a>
+                <!-- /kontakt-kort -->
+              </li>
+              <!-- /kontakt-item -->
+              <!-- vi har lavet en ugrupperet liste for at vise kontaktmulighederne, mail er klikbar -->
+              <li class="kontakt-item">
+                <!-- kontakt-item: mail -->
+                <a
+                  href="mailto:rygestop@herning.dk"
+                  class="kontakt-kort"
+                  aria-label="Send en mail til rygestop@herning.dk"
+                >
+                  <!-- mail-link -->
+                  <img
+                    src="mailblaabaggrund.svg"
+                    alt=""
+                    class="ikon"
+                    width="40"
+                    height="40"
+                    aria-hidden="true"
+                    loading="lazy"
+                  />
+                  <!-- ikon: mail, dekorativ -->
+                  <div class="kontakt-tekst">
+                    <!-- tekst: beskrivelse + mail -->
+                    <span class="kontakt-meta">Send en mail</span>
+                    <!-- meta-tekst -->
+                    <strong class="kontakt-primær">rygestop@herning.dk</strong>
+                    <!-- mailadresse -->
+                  </div>
+                  <!-- /kontakt-tekst -->
+                </a>
+                <!-- /kontakt-kort -->
+              </li>
+              <!-- /kontakt-item -->
+              <!-- vi har lavet en ugrupperet liste for at vise kontaktmulighederne, chat er klikbar -->
+              <li class="kontakt-item">
+                <!-- kontakt-item: chat -->
+                <a
+                  href="chat.html"
+                  class="kontakt-kort"
+                  aria-label="Åbn chat - Man-Fre 10-16"
+                >
+                  <!-- chat-link -->
+                  <img
+                    src="beskedblaabaggrund.svg"
+                    alt=""
+                    class="ikon"
+                    width="40"
+                    height="40"
+                    aria-hidden="true"
+                    loading="lazy"
+                  />
+                  <!-- ikon: chat, dekorativ -->
+                  <div class="kontakt-tekst">
+                    <!-- tekst: titel + tid -->
+                    <span class="kontakt-meta">Chat med os</span>
+                    <!-- meta: hvad handlingen er -->
+                    <strong class="kontakt-primær">Man - Fre 10 16</strong>
+                    <!-- primær: åbningstider -->
+                  </div>
+                  <!-- /kontakt-tekst -->
+                </a>
+                <!-- /kontakt-kort -->
+              </li>
+              <!-- /kontakt-item -->
+            </ul>
+            <!-- Info-boks der forklarer hvad der sker efter kontakt -->
+            <div
+              class="kontakt-info"
+              role="note"
+              aria-label="Hvad sker der når du kontakter os"
+            >
+              <!-- kontakt-info: forklaring om hvad der sker efter kontakt -->
+              <h4 class="info-overskrift">
+                Hvad sker der når du kontakter os?
+              </h4>
+              <!-- info-overskrift: titel for info-box -->
+              <ul class="info-punkter">
+                <!-- info-punkter: liste over hvad der sker -->
+                <li>Vi ringer eller skriver tilbage inden for 1-2 dage</li>
+                <!-- punkt 1 -->
+                <li>Vi taler om hvad der passer dig bedst</li>
+                <!-- punkt 2 -->
+                <li>Ingen forpligtelser - du bestemmer tempoet</li>
+                <!-- punkt 3 -->
+                <li>Alt er fortroligt og gratis</li>
+                <!-- punkt 4 -->
+              </ul>
+              <!-- /info-punkter -->
+            </div>
+            <!-- /kontakt-info -->
+          </aside>
+          <!-- aside betyder en sektion der er relateret til hovedindholdet, men som står lidt for sig selv -->
+
+          <!-- HØJRE KOLONNE - selve kontaktformularen -->
+          <!--
+        - <form action="#" method="post">:
+          * action: server-url hvor formular data sendes (her "#" som pladsholder).
+          * method: "post" sender data i request-body (typisk til formularer).
+        - id bruges til at finde formularen med JS (fx til validering).
+        - aria-label beskriver formularens formål for skærmlæsere.
+      -->
+          <!--
+        .contact-form: Formular-styling (felter, labels, knap) er defineret i
+        stylesheet.CSS under kontakt-sektionen. Feltstørrelser og font-størrelser
+        er sat relativt store for bedre læsbarhed.
+        - Hvis du vil tilføje validering, kan det ske via JavaScript, men
+          HTML-attributter som required og type="email" hjælper allerede.
+      -->
+          <form
+            class="contact-form"
+            id="contactForm"
+            action="#"
+            method="post"
+            aria-label="Kontaktformular"
+          >
+            <!-- contact-form: formularfelter og send-knap -->
+            <!-- FORMROW: hver række indeholder label + input. Labels er vigtige for tilgængelighed. -->
+
+            <div class="form-row">
+              <!-- form-row: label + input par -->
+              <label for="cf-name">Dit navn</label>
+              <!-- label: fortæller brugeren hvad feltet er -->
+              <input
+                id="cf-name"
+                name="name"
+                type="text"
+                required
+                placeholder="Fulde navn"
+              />
+              <!-- input: tekstfelt, required betyder påkrævet -->
+            </div>
+            <!-- /form-row -->
+
+            <!-- Eksempel på to felter på en linje (aldersfelt + "hvad bruger du") -->
+            <div class="form-row form-row--split">
+              <div class="form-field">
+                <!-- form-field: individuel input-beholder -->
+                <label for="cf-age">Din alder</label>
+                <!-- label: angiver feltet -->
+                <input
+                  id="cf-age"
+                  name="age"
+                  type="number"
+                  min="0"
+                  inputmode="numeric"
+                  placeholder="fx 25"
+                />
+                <!-- input: talfelt, inputmode hjælper mobilskærm -->
+              </div>
+              <!-- /form-field -->
+
+              <div class="form-field">
+                <!-- form-field: hvad bruger du -->
+                <label for="cf-usage">Hvad bruger du?</label>
+                <!-- label -->
+                <input
+                  id="cf-usage"
+                  name="usage"
+                  type="text"
+                  placeholder="fx cigaretter/snus/vapes"
+                />
+                <!-- input: tekstfelt -->
+              </div>
+              <!-- /form-field -->
+            </div>
+
+            <div class="form-row">
+              <!-- form-row: email -->
+              <label for="cf-email">Din email</label>
+              <!-- label: email-felt -->
+              <input
+                id="cf-email"
+                name="email"
+                type="email"
+                required
+                placeholder="navn@eksempel.dk"
+              />
+              <!-- input: type=email hjælper browservalidering -->
+            </div>
+            <!-- /form-row -->
+
+            <div class="form-række">
+              <!-- form-række: telefonnummer -->
+              <label for="kontakt-telefon">Dit telefonnummer (valgfrit)</label>
+              <!-- label: valgfrit telefonfelt -->
+              <input
+                id="kontakt-telefon"
+                name="telefon"
+                type="tel"
+                inputmode="numeric"
+                pattern="\\d*"
+                placeholder="fx 96 28 40 91"
+              />
+              <!-- input: telefonfelt (bedre til telefonnumre) -->
+            </div>
+            <!-- /form-række -->
+
+            <div class="form-row">
+              <!-- form-row: beskedfelt -->
+              <label for="cf-message"
+                >Fortæl os kort hvad du har brug for (valgfrit)</label
+              >
+              <!-- label: forklar hvad brugeren skal skrive -->
+              <textarea
+                id="cf-message"
+                name="message"
+                rows="5"
+                placeholder="Skriv en kort besked"
+              ></textarea>
+              <!-- textarea: multi-line input -->
+            </div>
+            <!-- /form-row -->
+
+            <!-- Formular handlinger: submit-knap og fortrolig-note -->
+            <div class="form-actions">
+              <!--
+            Bemærk: Her bruges et <a>-element med klasse .cta-blue for at ligne en
+            submit-knap og navigere til tak-siden. I en rigtig formular-opsætning
+            bør dette være <button type="submit"> så formular-data sendes til
+            serveren. Her er det et link, så det kun navigerer til en takkebesked.
+            For begyndere:
+            - Brug <button type="submit"> når du vil sende data.
+            - Brug <a> når du bare vil linke til en anden side uden at sende formen.
+          -->
+              <a
+                href="tak.html"
+                class="cta-blue"
+                aria-label="send besked, gå til tak-siden"
+              >
+                <!-- cta-blue: link som ligner knap (brug <button> for rigtig submit) -->
+                <img src="send.svg" alt="send ikon" width="20" height="20" />
+                <!-- send-ikon: visuelt peg for send -->
+                Send besked
+              </a>
+              <!-- /cta-blue -->
+              <!-- privacy-note: til at informere brugeren om fortrolig behandling -->
+              <!-- Overvej at give denne paragraf et id og linke til en privacy-politik hvis nødvendigt -->
+              <p class="privacy-note" id="privacy-note">
+                Alle oplysninger behandles fortroligt
+              </p>
+            </div>
+          </form>
+        </div>
+        <!-- /contact-grid -->
+      </div>
+      <!-- /container -->
+    </section>
+
+    <!-- Rettet: fjernet en fejlbehæftet enkeltstående 'x' som lå før footeren. -->
+    <footer class="footer" role="contentinfo">
+      <!-- footer: bundinformation, kontakt og links -->
+      <!-- Hovedcontainer: brug klassen i CSS til baggrund, padding og grid -->
+      <div class="footer-indhold container">
+        <!-- footer-indhold: wrapper for alle footer-kolonner -->
+        <!-- KOLONNE 1: Om / branding -->
+        <div class="fod-kolonne fod-om">
+          <!-- fod-om: information om tilbuddet -->
+          <div class="fod-overskrift">Rygestop Herning</div>
+          <!-- fod-overskrift: brand/tilbudsnavn -->
+          <p class="fod-beskrivelse fod-andet-tekst">
+            <!-- fod-beskrivelse: kort forklaring -->
+            Et tilbud fra Herning Kommune til unge der vil være fri for nikotin.
+            Gratis, fortroligt og uden dømmelser.
+          </p>
+
+          <!-- Sociale links (ikonbilleder er dekorative => alt="") -->
+          <ul class="social-liste" aria-label="Følg os">
+            <!-- social-liste: sociale medier links -->
+            <li>
+              <a
+                href="https://www.facebook.com/herningkommune/?locale=da_DK"
+                class="social-link"
+                aria-label="Facebook"
+                ><img
+                  src="fb.svg"
+                  alt=""
+                  class="social-ikon"
+                  aria-hidden="true"
+              /></a>
+            </li>
+            <!-- facebook -->
+            <li>
+              <a
+                href="https://www.instagram.com/herningkommune/"
+                class="social-link"
+                aria-label="Instagram"
+                ><img
+                  src="instagram.svg"
+                  alt=""
+                  class="social-ikon"
+                  aria-hidden="true"
+              /></a>
+            </li>
+            <!-- instagram -->
+            <li>
+              <a
+                href="https://twitter.com/herningkommune"
+                class="social-link"
+                aria-label="Twitter"
+                ><img
+                  src="twitter.svg"
+                  alt=""
+                  class="social-ikon"
+                  aria-hidden="true"
+              /></a>
+            </li>
+            <!-- twitter -->
+          </ul>
+          <!-- /social-liste -->
+        </div>
+        <!-- /fod-om -->
+
+        <!-- KOLONNE 2: Kontaktoplysninger -->
+        <div class="fod-kolonne fod-kontakt">
+          <!-- fod-kontakt: kontaktinfo i footeren -->
+          <div class="fod-overskrift">Kontakt</div>
+          <!-- fod-overskrift: titel for kolonnen -->
+          <ul class="kontakt-liste">
+            <!-- kontakt-liste: liste over kontaktlinks -->
+            <li class="kontakt-element">
+              <!-- kontakt-element: telefon -->
+              <a href="tel:96284091" class="kontakt-link"
+                ><img
+                  src="telefonfooter.svg"
+                  alt=""
+                  class="kontakt-ikon"
+                  aria-hidden="true"
+                />
+                <span class="kontakt-tekst">96 28 40 91</span></a
+              >
+              <!-- telefon-link -->
+            </li>
+            <li class="kontakt-element">
+              <!-- mail -->
+              <a href="mailto:rygestop@herning.dk" class="kontakt-link"
+                ><img
+                  src="mailfooter.svg"
+                  alt=""
+                  class="kontakt-ikon"
+                  aria-hidden="true"
+                />
+                <span class="kontakt-tekst">rygestop@herning.dk</span></a
+              >
+              <!-- mail-link -->
+            </li>
+            <li class="kontakt-element">
+              <!-- adresse/link til kort -->
+              <a
+                href="https://www.google.com/maps?q=Vejlevej+1,+7400+Herning"
+                class="kontakt-link"
+                ><img
+                  src="lokationfooter.svg"
+                  alt=""
+                  class="kontakt-ikon"
+                  aria-hidden="true"
+                />
+                <span class="kontakt-tekst">Sundhedscenter Herning</span></a
+              >
+            </li>
+          </ul>
+          <!-- /kontakt-liste -->
+        </div>
+        <!-- /fod-kontakt -->
+
+        <!-- KOLONNE 3: Hurtige links -->
+        <div class="fod-kolonne fod-links">
+          <!-- fod-links: hurtige navigation links -->
+          <div class="fod-overskrift">Hurtige links</div>
+          <!-- titel -->
+          <ul class="hurtig-links">
+            <!-- hurtig-links: liste -->
+            <li><a href="dinemuligheder.html">Dine muligheder</a></li>
+            <!-- link -->
+            <li><a href="ungefortæller.html">Unge fortæller</a></li>
+            <!-- link -->
+            <li><a href="nikoberegneren.html">Nikoberegneren</a></li>
+            <!-- link -->
+            <li><a href="chatogkontakt.html">Chat &amp; kontakt</a></li>
+            <!-- link -->
+            <li><a href="omnikotin.html">Om nikotin</a></li>
+            <!-- link -->
+          </ul>
+          <!-- /hurtig-links -->
+        </div>
+        <!-- /fod-links -->
+      </div>
+      <!-- /footer-indhold container -->
+
+      <!-- BUNDLINJE: copyright / note -->
+      <div class="fod-bund" role="note" aria-label="Copyright">
+        <!-- dekorativt hjerte: aria-hidden fordi det er pynt -->
+        <p class="fod-copyright">
+          Lavet med
+          <img
+            src="hjerte.svg"
+            alt="hjerte ikon"
+            class="hjerte-ikon"
+            aria-hidden="true"
+          />
+          af Herning Kommune &middot; 2025
+        </p>
+      </div>
+    </footer>
+    <!-- her slutter footeren -->
+  </body>
+</html>
