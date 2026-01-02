@@ -38,6 +38,11 @@
           <!-- /brand -->
         </div>
         <!-- /wrapper -->
+        <!-- nav-toggle: skjult checkbox som bruges som 'state' for mobilmenu -->
+        <!-- id="nav-toggle": refereres af <label for="nav-toggle"> så klik på hamburger toggler checkbox -->
+        <!-- class="nav-toggle": CSS-target for at skjule checkbox visuelt og bruge :checked i stylesheet -->
+        <!-- type="checkbox": tillader to tilstande (åben/lukket) uden JavaScript -->
+        <!-- aria-hidden="true": skjuler kontrollen fra skærmlæsere (menuen håndteres via ARIA på nav/label) -->
         <input
           id="nav-toggle"
           class="nav-toggle"
@@ -798,6 +803,7 @@
           <!-- Sociale links (ikonbilleder er dekorative => alt="") -->
           <ul class="social-liste" aria-label="Følg os">
             <!-- social-liste: sociale medier links -->
+            <!-- social-item: Facebook - åbnes i ny fane (ekstern link) -->
             <li>
               <a
                 href="https://www.facebook.com/herningkommune/?locale=da_DK"
@@ -811,6 +817,7 @@
               /></a>
             </li>
             <!-- facebook -->
+            <!-- social-item: Instagram - officiel profil -->
             <li>
               <a
                 href="https://www.instagram.com/herningkommune/"
@@ -824,6 +831,7 @@
               /></a>
             </li>
             <!-- instagram -->
+            <!-- social-item: Twitter - officiel profil -->
             <li>
               <a
                 href="https://twitter.com/herningkommune"
@@ -849,6 +857,7 @@
           <!-- fod-overskrift: titel for kolonnen -->
           <ul class="kontakt-liste">
             <!-- kontakt-liste: liste over kontaktlinks -->
+            <!-- kontakt-element: telefon - klikbar, starter opkald på mobile enheder -->
             <li class="kontakt-element">
               <!-- kontakt-element: telefon -->
               <a href="tel:96284091" class="kontakt-link"
@@ -864,6 +873,7 @@
             </li>
             <li class="kontakt-element">
               <!-- mail -->
+              <!-- mail-link: åbner brugerens mailklient med adressen udfyldt -->
               <a href="mailto:rygestop@herning.dk" class="kontakt-link"
                 ><img
                   src="mailfooter.svg"
@@ -877,6 +887,7 @@
             </li>
             <li class="kontakt-element">
               <!-- adresse/link til kort -->
+              <!-- kort-link: fører til Google Maps med adresse som søge-parameter -->
               <a
                 href="https://www.google.com/maps?q=Vejlevej+1,+7400+Herning"
                 class="kontakt-link"
@@ -900,17 +911,18 @@
           <div class="fod-overskrift">Hurtige links</div>
           <!-- titel -->
           <ul class="hurtig-links">
-            <!-- hurtig-links: liste -->
+            <!-- hurtig-links: liste over ofte brugte undersider - opdater links efter behov -->
+            <!-- Tip: brug relative paths (fx komunitet.html) så links virker lokalt og i produktion -->
             <li><a href="dinemuligheder.html">Dine muligheder</a></li>
-            <!-- link -->
+            <!-- link: genvej til sektion med tilbud -->
             <li><a href="ungefortæller.html">Unge fortæller</a></li>
-            <!-- link -->
+            <!-- link: historier fra brugere -->
             <li><a href="nikoberegneren.html">Nikoberegneren</a></li>
-            <!-- link -->
+            <!-- link: værktøj til at regne nikotinforbrug ud -->
             <li><a href="chatogkontakt.html">Chat &amp; kontakt</a></li>
-            <!-- link -->
+            <!-- link: kontaktmuligheder -->
             <li><a href="omnikotin.html">Om nikotin</a></li>
-            <!-- link -->
+            <!-- link: fakta om nikotin og produkter -->
           </ul>
           <!-- /hurtig-links -->
         </div>
