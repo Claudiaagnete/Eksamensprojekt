@@ -105,8 +105,9 @@
           <!-- /nav-list -->
         </nav>
         <!-- /main-nav -->
+
         <label for="nav-toggle" class="nav-overlay"></label>
-        <!-- nav-overlay: klikbar overlay på mobil -->
+        <!-- nav-overlay: klikbar overlay på mobil når hamburgermenuen åbnes -->
       </div>
       <!-- /container header-inner -->
     </header>
@@ -140,7 +141,7 @@
         <!-- /cta -->
 
         <h4>100% gratis &middot; Vi dømmer ikke &middot; Lokalt i Herning</h4>
-        <!-- h4: kort meta-tekst under hero -->
+        <!-- h4: kort meta-tekst under hero &middot; er de små prikker-->
       </div>
       <!-- /container hero -->
     </section>
@@ -157,10 +158,14 @@
       <!-- /container forside -->
     </section>
     <div class="bokse-section">
-      <!-- bokse-section: wrapper for kort-sektionen -->
+      <!-- bokse-section: wrapper for kort-sektionen 
+      Formål: sektionens overordnede wrapper. Den beskriver en logisk sektion i layoutet
+      (her: området med kort). Den kan bruges til at sætte baggrund, padding eller andre styles,
+      der gælder for hele sektionen.-->
       <!-- bokse-section: holder et grid af korte kort (kortene er indholdselementer) -->
       <div class="container bokse">
-        <!-- container.bokse: centrerer sektionen og sætter max-bredde -->
+        <!-- container.bokse: centrerer sektionen og sætter max-bredde 
+         Formål: en indre container, ofte brugt til at begrænse indholdets bredde og centrere det på store skærme -->
         <ul class="card-grid">
           <!-- card-grid: CSS-grid der fordeler kort i kolonner -->
           <!-- grid-notes: brug CSS for at ændre antal kolonner på forskellige skærmstørrelser -->
@@ -169,11 +174,12 @@
             <!-- card-cigaretter: li for cigaret-kort -->
             <div class="card" role="group" aria-label="Cigaretter">
               <!-- card: kort-beholder, role=group for assistive tech -->
-              <!-- Bemærk: brug alt-tekst på billedet så skærmlæsere forstår ikonet -->
+              <!-- Bemærk: brug alt-tekst på billedet så skærmlæsere forstår ikonet. Det er her selve kortet for sit udseende -->
               <img src="cigaret.svg" alt="Cigaretter" />
               <!-- img: ikon for cigaretter, alt beskriver billedet -->
               <span class="card-title">Cigaretter</span>
-              <!-- card-title: kortets synlige titel -->
+              <!-- card-title: kortets synlige titel <span> for at undgå at påvirke dokumentets overskriftsstruktur
+                fordi den kun bruges her -->
             </div>
             <!-- /card -->
           </li>
