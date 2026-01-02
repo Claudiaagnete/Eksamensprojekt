@@ -919,7 +919,8 @@ html, body { overflow-x: hidden; }
   font-size: 13px;
 }
 
-/* Vis et kalender-ikon foran den øverste meta-linje i hvert kort */
+/* Vis et kalender-ikon foran den øverste meta-linje i hvert kort 
+:first-child begrænser det til det første <li> i den liste.*/
 .forside-3--meta li:first-child::before{
   content: ""; /* pseudo-element kræver content for at blive vist */
   display: inline-block;
@@ -933,6 +934,7 @@ html, body { overflow-x: hidden; }
 }
 
 /* Vis et lokations-ikon foran den nederste meta-linje i hvert kort */
+/*:first-child begrænser det til det sidste <li> i den liste.*/
 .forside-3--meta li:last-child::before{
   content: "";
   display: inline-block;

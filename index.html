@@ -505,7 +505,8 @@
       -->
           <!-- VENSTRE KOLONNE - direkte kontaktmetoder og info -->
           <aside class="kontakt-venstre" aria-label="Kontakt os direkte">
-            <!-- kontakt-venstre: liste over kontaktmetoder (telefon, mail, chat) -->
+            <!-- kontakt-venstre: liste over kontaktmetoder (telefon, mail, chat)  
+             Aside betyder at det stadigvæk hører sammen men bare står på et andet sted på siden-->
             <!--
           .kontakt-venstre: Wrapper for kontaktkort. Indeholder .kontakt-kort
           elementer (telefon, mail, chat) som er links med ikon og tekst.
@@ -518,7 +519,10 @@
             <!-- vi har lavet en ugrupperet liste for at vise kontaktmulighederne, telefonnummer er klikbar -->
             <ul class="kontakt-metoder">
               <li class="kontakt-item">
-                <!-- kontakt-item: enkelt kontaktkort i listen -->
+                <!-- kontakt-item: enkelt kontaktkort i listen Kontaktmetoder 
+                 (Ring, Send mail, Chat) er naturligt en liste af valgmuligheder. 
+                 Ved at bruge <ul> + <li> fortæller du browseren og hjælpeværktøjer (fx skærmlæsere), 
+                  at disse elementer hører sammen som en gruppe. -->
                 <a
                   href="tel:96284091"
                   class="kontakt-kort"
@@ -540,7 +544,8 @@
                     <span class="kontakt-meta">Ring til os</span>
                     <!-- kontakt-meta: kort instruktion -->
                     <strong class="kontakt-primær">96 28 40 91</strong>
-                    <!-- kontakt-primær: selve telefonnummeret -->
+                    <!-- kontakt-primær: selve telefonnummeretet semantisk element der markerer vigtig/ fremhævet tekst — skærmlæsere 
+                     lægger vægt på det, og browseren viser som regel fed tekst. -->
                   </div>
                   <!-- /kontakt-tekst -->
                 </a>
@@ -650,8 +655,6 @@
         .contact-form: Formular-styling (felter, labels, knap) er defineret i
         stylesheet.CSS under kontakt-sektionen. Feltstørrelser og font-størrelser
         er sat relativt store for bedre læsbarhed.
-        - Hvis du vil tilføje validering, kan det ske via JavaScript, men
-          HTML-attributter som required og type="email" hjælper allerede.
       -->
           <form
             class="contact-form"
@@ -664,7 +667,9 @@
             <!-- FORMROW: hver række indeholder label + input. Labels er vigtige for tilgængelighed. -->
 
             <div class="form-row">
-              <!-- form-row: label + input par -->
+              <!-- form-row: En række i formularen, der grupperer et <label> og det tilknyttede <input>.
+                   Sørg for at label har for="input-id" som matcher input'ets id, så klik på label fokuserer
+                   feltet og skærmlæsere forstår sammenhængen. -->
               <label for="cf-name">Dit navn</label>
               <!-- label: fortæller brugeren hvad feltet er -->
               <input
@@ -930,7 +935,8 @@
             <li><a href="nikoberegneren.html">Nikoberegneren</a></li>
             <!-- link: værktøj til at regne nikotinforbrug ud -->
             <li><a href="chatogkontakt.html">Chat &amp; kontakt</a></li>
-            <!-- link: kontaktmuligheder -->
+            <!-- link: kontaktmuligheder 
+             & For at sikre korrekt visning af specialtegn i kildeteksten og undgå valideringsfejl. -->
             <li><a href="omnikotin.html">Om nikotin</a></li>
             <!-- link: fakta om nikotin og produkter -->
           </ul>
@@ -954,6 +960,7 @@
           af Herning Kommune &middot; 2025
         </p>
       </div>
+      <h4>Kun til undervisningsbrug</h4>
     </footer>
     <!-- her slutter footeren -->
   </body>
